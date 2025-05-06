@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 4fc25a854e177c04e97922d2301fd7cc
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 165180
+  packageName: MapMagic 2
+  packageVersion: 2.1.17
+  assetPath: Assets/MapMagic/Demo/Compatibility/CTS/CTS_Scene.unity
+  uploadId: 683300

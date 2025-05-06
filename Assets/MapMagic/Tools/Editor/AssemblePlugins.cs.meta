@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: aff51945495ce7740b1f5e9b8c60d380
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 165180
+  packageName: MapMagic 2
+  packageVersion: 2.1.17
+  assetPath: Assets/MapMagic/Tools/Editor/AssemblePlugins.cs
+  uploadId: 683300
