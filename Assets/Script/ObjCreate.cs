@@ -22,7 +22,8 @@ public class ObjCreate : MonoBehaviour
         mat=GetComponent<MeshRenderer>().material;
         col = GetComponent<MeshCollider>();
         col.isTrigger = true;
-       
+        
+
 
     }
 
@@ -33,7 +34,7 @@ public class ObjCreate : MonoBehaviour
         FindMouse();
         pos = gameObject.transform.position;
         pos.x = Mathf.Round(pos.x / 1f);
-       // pos.y = Mathf.Round(pos.y / 1f);
+       
         pos.z = Mathf.Round(pos.z / 1f);
         gameObject.transform.position = pos;
 
@@ -46,32 +47,20 @@ public class ObjCreate : MonoBehaviour
         Debug.DrawRay(ray.origin, ray.direction * camcontroller._distance, Color.red);    //Debug—p************
         if (Physics.Raycast(ray, out hit, 10f,layerMask))
         {
+            
+            gameObject.transform.position = new Vector3(hit.point.x + sizex, hit.point.y + sizey, hit.point.z + sizez);
 
-            gameObject.transform.position = new Vector3(hit.point.x + sizex, hit.point.y +sizey, hit.point.z + sizez);
-
-            if (Input.GetMouseButtonDown(0)&&iscreate)
+            if (Input.GetMouseButtonDown(0))
             {
                 GetComponent<MeshRenderer>().material = defaultmat;
-                col.isTrigger = false;
+                gameObject.layer = LayerMask.NameToLayer("Ground");
                 isfinish = true;
-
             }
         }
+        else mat.color = Color.red;
+    }
       
 
-    }
-    void OnTriggerEnter(Collider other)
-    {
-        Debug.Log(other.gameObject.tag);
-        if (other.gameObject.tag == "GameObj")
-        {
-            mat.color = Color.red;
-            iscreate = false;
-        }
-        else
-        {
-            mat.color = Color.green;
-            iscreate = true;
-        }
-        }
+    
+    
 }
