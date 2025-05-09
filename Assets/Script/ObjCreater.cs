@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ObjCreate : MonoBehaviour
+public class ObjCreater : MonoBehaviour
 {
     [SerializeField] Material defaultmat;
     
@@ -54,6 +54,7 @@ public class ObjCreate : MonoBehaviour
             {
                 GetComponent<MeshRenderer>().material = defaultmat;
                 gameObject.layer = LayerMask.NameToLayer("Ground");
+                gameObject.tag = "GameObj";
                 isfinish = true;
             }
         }

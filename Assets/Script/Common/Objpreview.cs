@@ -2,15 +2,11 @@ using UnityEngine;
 
 public class Objpreview : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    
+    public void prefebpreview(GameObject target,Material mat)
     {
+        GetComponent<MeshRenderer>().material = mat;
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
