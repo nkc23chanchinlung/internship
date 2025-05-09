@@ -1,20 +1,14 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    ObjAnimetor playerAnimetor;
     float movex, movez;
+
+    
     private bool IsRun, IsJumping, InGround, IsWalking,IsWalkBack;
-    public bool _inGround
-    {
-        get
-        {
-            return InGround;
-        }
-    }
-    public bool _iswalkback { get {
-            return IsWalkBack;
-        }
-    }
+    [Header("Player")]
     [SerializeField] private int MaxSpeed, JumpForce;
     private float speed;
     [SerializeField] float rayy, raydis;
@@ -38,11 +32,16 @@ public class PlayerController : MonoBehaviour
     }
 
 
-
+    private void Awake()
+    {
+        playerAnimetor = new ObjAnimetor(1f,gameObject); 
+       
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         cam = Camera.main;
+       
     }
 
     // Update is called once per frame
@@ -52,6 +51,7 @@ public class PlayerController : MonoBehaviour
         Jump();
         CheakGround();
         Cameramethod();
+        playerAnimetor.Animetor(IsWalkBack, speed, InGround);
     }
     void movement()
     {
