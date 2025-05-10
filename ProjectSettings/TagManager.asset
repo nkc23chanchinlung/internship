@@ -8,6 +8,7 @@ TagManager:
   - GameObj
   - Enemy
   - House
+  - CreateMenuButton
   layers:
   - Default
   - TransparentFX
