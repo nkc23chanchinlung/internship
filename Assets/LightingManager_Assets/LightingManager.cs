@@ -70,6 +70,7 @@ public class LightingManager : MonoBehaviour
             //but you can experiment and try it yourself. This is only to prevent the script skiping the event because it didn't exactly get to 6pm or whatever the time of the event was. 
         [SerializeField] private float eventsTolerance = 0.2f;
         [SerializeField][Range(0f, 24f)] private float ResetEventsTime = 0.1f;
+        [SerializeField]EventManager eventManager;
         private bool DayCycleCompleted;
 
     #endregion
@@ -140,7 +141,7 @@ public class LightingManager : MonoBehaviour
                 {
                     DayCycleCompleted = true;
                     ResetEvents();
-                    
+                    eventManager.Day++;
                     Debug.Log("Day completed + reset");
                 }
                 else if(TimeOfDay > ResetEventsTime)

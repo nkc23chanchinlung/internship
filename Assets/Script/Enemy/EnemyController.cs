@@ -3,8 +3,8 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
 
-    enum State { Idle, Doubt, Hostile, num };//“G‚Ìó‘Ô
-    State state = State.Idle;
+    enum Status { Idle, Doubt, Hostile,Attack, num };//“G‚Ìó‘Ô
+    Status status = Status.Hostile;
     [Header("õ“G”ÍˆÍ")]
     [Tooltip("“G‚Ìõ“G”ÍˆÍ")]
     [Range(1, 10)] //Inspectorã‚Å‚Ì•\¦
@@ -19,6 +19,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField]public int Hp { get; set; } = 100; //“G‚ÌHP   
     [SerializeField] int Attack;
     [SerializeField] public int MaxHp { get; private set; } = 100; //“G‚ÌHP
+    float dinstance;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -52,13 +53,13 @@ public class EnemyController : MonoBehaviour
                     if (hit.collider.tag == "Player")
                     {
                         target = hit.collider.transform;
-                        Debug.Log("“G‚Ìó‘Ô" + state);
+                        Debug.Log("“G‚Ìó‘Ô" + status);
                         break;
                     }
                     else
                     {
-                        state = State.Idle;
-                        Debug.Log("“G‚Ìó‘Ô" + state);
+                        status = Status.Idle;
+                        Debug.Log("“G‚Ìó‘Ô" + status);
                     }
                 }
                 Debug.DrawRay(transform.position, (transform.forward+new Vector3(intervalX * j, intervalY*i, 0))* leagth, Color.red);
@@ -69,6 +70,18 @@ public class EnemyController : MonoBehaviour
     }
     void movement()
     {
-        transform.position+=transform.forward * Time.deltaTime*speed;
+        dinstance = Vector3.Distance(target.position, transform.position);
+        if (dinstance < 3f)
+        {
+            status = Status.Attack;
+            Debug.Log("Attack");
+        }
+        else
+        {
+            status = Status.Hostile;
+            Debug.Log("Hostile");
+        }
+        if (status == Status.Hostile)
+            transform.position += transform.forward * Time.deltaTime * speed;
     }
 }
