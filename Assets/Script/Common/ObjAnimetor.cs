@@ -27,12 +27,13 @@ public class ObjAnimetor : MonoBehaviour
     /// <param name="iswalkback"></param>
     /// <param name="speed"></param>
     /// <param name="inGround"></param>
-    public void Animetor(bool iswalkback,float speed,bool inGround)
+    public void Animetor(bool iswalkback, float speed, bool inGround, bool Shooting)
     {
         
         anim.SetBool("WalkBack", iswalkback);
         anim.SetFloat("speed", speed / 5);
         anim.SetBool("Jump", !inGround);
+        anim.SetBool("Shooting",Shooting );
         anim.speed = animSpeed;
     }
 }

@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Camera cam;
     Plane plane = new Plane();
     float distance = 0;
+    bool IsShooting = false;
     public float _speed
     {
         get
@@ -51,7 +52,7 @@ public class PlayerController : MonoBehaviour
         Jump();
         CheakGround();
         Cameramethod();
-        playerAnimetor.Animetor(IsWalkBack, speed, InGround);
+        playerAnimetor.Animetor(IsWalkBack, speed, InGround,IsShooting);
     }
     void movement()
     {
@@ -91,6 +92,7 @@ public class PlayerController : MonoBehaviour
             IsWalking = false;
         }
 #endif
+        IsShooting = Input.GetMouseButton(0) ? true : false;
         float movex = Input.GetAxis("Horizontal");
         float movez = Input.GetAxis("Vertical");
         moveDirection = new Vector3(movex, 0, movez).normalized;
