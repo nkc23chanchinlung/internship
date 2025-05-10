@@ -14,6 +14,12 @@ public class EnemyController : MonoBehaviour
     private const float intervalX=0.1f;
     private const float intervalY=0.1f;
     [SerializeField] Transform target;
+
+    [Header("ìGÇÃÉXÉeÅ[É^ÉX")]
+    [SerializeField]public int Hp { get; set; } = 100; //ìGÇÃHP   
+    [SerializeField] int Attack;
+    [SerializeField] public int MaxHp { get; private set; } = 100; //ìGÇÃHP
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -26,6 +32,10 @@ public class EnemyController : MonoBehaviour
         visibility();
         movement();
         transform.LookAt(target);
+        if(Hp <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
     void visibility()
     {
@@ -38,7 +48,7 @@ public class EnemyController : MonoBehaviour
                 Physics.Raycast(transform.position, (transform.forward + new Vector3(intervalX * i, 0, 0)), out hit, leagth);
                 if (hit.collider != null)
                 {
-                    Debug.Log(hit.collider.gameObject.name);
+                    
                     if (hit.collider.tag == "Player")
                     {
                         target = hit.collider.transform;

@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class bullet : MonoBehaviour
 {
-    int speed=10;
+    int speed=20;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
    
     void Start()
     {
-        
+        Destroy(gameObject, 3f);
     }
 
     // Update is called once per frame
@@ -23,8 +23,8 @@ public class bullet : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            Destroy(collision.gameObject);
             Destroy(gameObject);
+            collision.gameObject.GetComponent<EnemyController>().Hp -= 10;
         }
     }
 }

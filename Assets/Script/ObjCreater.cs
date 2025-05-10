@@ -55,6 +55,7 @@ public class ObjCreater : MonoBehaviour
                 GetComponent<MeshRenderer>().material = defaultmat;
                 gameObject.layer = LayerMask.NameToLayer("Ground");
                 gameObject.tag = "GameObj";
+                col.isTrigger = false;
                 isfinish = true;
             }
         }
