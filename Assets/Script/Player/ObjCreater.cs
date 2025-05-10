@@ -49,7 +49,10 @@ public class ObjCreater : MonoBehaviour
         {
             
             gameObject.transform.position = new Vector3(hit.point.x + sizex, hit.point.y + sizey, hit.point.z + sizez);
-
+            if(Input.GetKeyDown(KeyCode.Q))
+            {
+                gameObject.transform.Rotate(0, 90, 0);
+            }
             if (Input.GetMouseButtonDown(0))
             {
                 GetComponent<MeshRenderer>().material = defaultmat;

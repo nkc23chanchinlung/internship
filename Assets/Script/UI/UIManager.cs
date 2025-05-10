@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] GameObject StorePanel;
+    [SerializeField] GameObject WeaponPanel;
     Text Magazine_Text;
     Image Magazine_Image;
 
@@ -21,8 +22,18 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.B)) Panel_Open(StorePanel);
-    }
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            
+            Panel_Open(StorePanel);
+
+            if(WeaponPanel.activeSelf)
+            {
+                WeaponPanel.SetActive(false);
+            }
+        }
+
+        }
    
     /// <summary>
     /// ÉpÉlÉãÇäJÇ≠Ç∆è¡Ç∑
