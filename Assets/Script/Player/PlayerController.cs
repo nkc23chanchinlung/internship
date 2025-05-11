@@ -1,4 +1,4 @@
-using Unity.VisualScripting;
+
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -6,7 +6,8 @@ public class PlayerController : MonoBehaviour
     ObjAnimetor playerAnimetor;
     float movex, movez;
 
-    
+    public bool IsCreate { get; set; }
+
     private bool IsRun, IsJumping, InGround, IsWalking,IsWalkBack;
     [Header("Player")]
     [SerializeField] private int MaxSpeed, JumpForce;
@@ -92,7 +93,7 @@ public class PlayerController : MonoBehaviour
             IsWalking = false;
         }
 #endif
-        IsShooting = Input.GetMouseButton(0) ? true : false;
+        IsShooting = Input.GetMouseButton(0)&&!IsCreate ? true : false;
         float movex = Input.GetAxis("Horizontal");
         float movez = Input.GetAxis("Vertical");
         moveDirection = new Vector3(movex, 0, movez).normalized;

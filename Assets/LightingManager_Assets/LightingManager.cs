@@ -71,13 +71,15 @@ public class LightingManager : MonoBehaviour
         [SerializeField] private float eventsTolerance = 0.2f;
         [SerializeField][Range(0f, 24f)] private float ResetEventsTime = 0.1f;
         [SerializeField]EventManager eventManager;
+        [SerializeField]EnemyRespon enemyRespon;
         private bool DayCycleCompleted;
 
     #endregion
 
         private void Start()
         {
-            if(IsDayCycleOn)
+            
+            if (IsDayCycleOn)
             {
                 if(RandomStartTime)
                 {
@@ -139,8 +141,11 @@ public class LightingManager : MonoBehaviour
 
                 if (!DayCycleCompleted && TimeOfDay < ResetEventsTime)
                 {
+                    
                     DayCycleCompleted = true;
+                   
                     ResetEvents();
+                    enemyRespon.dayupdate = true;
                     eventManager.Day++;
                     Debug.Log("Day completed + reset");
                 }

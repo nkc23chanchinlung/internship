@@ -23,8 +23,11 @@ public class bullet : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
+            EnemyController enemy = collision.gameObject.GetComponent<EnemyController>();
             Destroy(gameObject);
-            collision.gameObject.GetComponent<EnemyController>().Hp -= 10;
+            enemy.Hp -= 10;
+            enemy.GetDamage();
+            
         }
     }
 }

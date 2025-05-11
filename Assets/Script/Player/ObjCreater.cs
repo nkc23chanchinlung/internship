@@ -31,7 +31,7 @@ public class ObjCreater : MonoBehaviour
     void Update()
     {
         if (isfinish) return;
-        FindMouse();
+        MouseRay();
         pos = gameObject.transform.position;
         pos.x = Mathf.Round(pos.x / 1f);
        
@@ -40,7 +40,7 @@ public class ObjCreater : MonoBehaviour
 
 
     }
-    void FindMouse()
+    void MouseRay()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;

@@ -19,6 +19,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField]public int Hp { get; set; } = 100; //“G‚ÌHP   
     [SerializeField] int Attack;
     [SerializeField] public int MaxHp { get; private set; } = 100; //“G‚ÌHP
+    float angervalue;//“G‚Ì“{‚è’l
     float dinstance;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -83,5 +84,10 @@ public class EnemyController : MonoBehaviour
         }
         if (status == Status.Hostile)
             transform.position += transform.forward * Time.deltaTime * speed;
+    }
+    public void GetDamage()
+    {
+        target = GameObject.FindGameObjectWithTag("Player").transform;
+        Debug.Log("getdamage"); 
     }
 }

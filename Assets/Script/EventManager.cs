@@ -1,11 +1,11 @@
-using Sydewa;
+
 using UnityEngine;
 using UnityEngine.UI;
 
 public class EventManager : MonoBehaviour
 {
     float Gametime;
-    public int Day { get; set; } = 1;
+    public int Day { get; set; } = 0;
     [SerializeField]Text Day_Text;
     [SerializeField] Text DayMessage_Text;
     int CurrentDay;

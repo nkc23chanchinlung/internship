@@ -3,6 +3,7 @@ using UnityEngine;
 public class AK47 : MonoBehaviour
 {
     [SerializeField] GameObject bulletprefab;
+    PlayerController playerController;
     UIManager uiManager;
     float cooldown = 0.2f;
     int Magazine = 30;
@@ -12,6 +13,8 @@ public class AK47 : MonoBehaviour
     private void Awake()
     {
         uiManager = new UIManager();
+        uiManager.SearchMagazine();
+        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 
     void Start()
@@ -22,9 +25,9 @@ public class AK47 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        uiManager.Magazine_UI(Magazine, MaxMagazine);
+        uiManager.SetMagazine(Magazine, MaxMagazine);
         cooldown -= Time.deltaTime;
-        if (Input.GetMouseButton(0)&&cooldown<=0&&Magazine>0)
+        if (Input.GetMouseButton(0)&&cooldown<=0&&Magazine>0&&!playerController.IsCreate)
         {
            
             Instantiate(bulletprefab,transform.position+(-transform.forward), transform.rotation*Quaternion.Euler(0,180,0));
