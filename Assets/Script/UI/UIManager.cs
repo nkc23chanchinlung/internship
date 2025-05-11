@@ -5,6 +5,8 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] GameObject StorePanel;
     [SerializeField] GameObject WeaponPanel;
+    [SerializeField] GameObject StoryPanel;
+    [SerializeField] Image Lifebar;
     Text Magazine_Text;
     Image Magazine_Image;
     PlayerController playerController;
@@ -22,6 +24,7 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       
         playerController.IsCreate = PanelOpen;
 
         if (Input.GetKeyDown(KeyCode.B)&&!PanelOpen)
@@ -44,7 +47,9 @@ public class UIManager : MonoBehaviour
             PanelOpen = true;
         }
         else PanelOpen = false;
-        
+        Hpbar();
+
+
     }
    public void SearchMagazine()
     {
@@ -64,5 +69,13 @@ public class UIManager : MonoBehaviour
        Magazine_Text.text=Magazine.ToString() + "/" + MaxMagazine.ToString();
         Magazine_Image = GameObject.Find("magazinebar").GetComponent<Image>();
         Magazine_Image.fillAmount = (float)Magazine / (float)MaxMagazine;
+    }
+    public void memo()
+    {
+        StorePanel.SetActive(true);
+    }
+    void Hpbar()
+    {
+        Lifebar.fillAmount = (float)playerController.Hp / (float)playerController.MaxHp;
     }
 }

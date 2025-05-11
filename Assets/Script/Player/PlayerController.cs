@@ -1,5 +1,7 @@
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using static UnityEngine.GraphicsBuffer;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,6 +14,8 @@ public class PlayerController : MonoBehaviour
     [Header("Player")]
     [SerializeField] private int MaxSpeed, JumpForce;
     private float speed;
+    [SerializeField]public int MaxHp { get; private set; } = 100; //“G‚ÌHP
+    [SerializeField]public int Hp { get; set; } = 100;
     [SerializeField] float rayy, raydis;
     Vector3 moveDirection;
     Vector3 lastMoveDirection;
@@ -49,7 +53,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-     if(InGround) movement();
+        GameOver();
+     if (InGround) movement();
         Jump();
         CheakGround();
         Cameramethod();
@@ -167,6 +172,19 @@ public class PlayerController : MonoBehaviour
             transform.LookAt(lookPoint);
 
 
+        }
+    }
+    public void GetDamage()
+    {
+        Hp -= 10;
+       
+
+    }
+    void GameOver()
+    {
+        if (Hp <= 0)
+        {
+            SceneManager.LoadScene("TitleScene");
         }
     }
 }

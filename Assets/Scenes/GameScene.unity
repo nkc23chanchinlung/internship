@@ -6206,6 +6206,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StorePanel: {fileID: 866662881}
   WeaponPanel: {fileID: 953148201}
+  StoryPanel: {fileID: 1431523945}
+  Lifebar: {fileID: 1934949631}
 --- !u!1001 &1171378375
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9561,9 +9563,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 866662883}
-        m_TargetAssemblyTypeName: CreateMenuManager, Assembly-CSharp
-        m_MethodName: weapon
+      - m_Target: {fileID: 1170817730}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: memo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10413,6 +10415,7 @@ MonoBehaviour:
   leagth: 0
   target: {fileID: 0}
   Attack: 0
+  bulletprefab: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

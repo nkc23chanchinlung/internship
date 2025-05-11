@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class bullet : MonoBehaviour
+public class emenybullet : MonoBehaviour
 {
     int speed=20;
     
-    EnemyController enemy;
-    PlayerController player;
+    
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     void Start()
@@ -26,12 +26,12 @@ public class bullet : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Player")
         {
-            EnemyController enemy = collision.gameObject.GetComponent<EnemyController>();
+            PlayerController player = collision.gameObject.GetComponent<PlayerController>();
             Destroy(gameObject);
-            enemy.Hp -= 10;
-            enemy.GetDamage();
+            
+            player.GetDamage();
             
         }
        

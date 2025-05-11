@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-
+    public int objnum { get; set; } = 1; //“G‚ÌƒIƒuƒWƒFƒNƒg”Ô†
     enum Status { Idle, Doubt, Hostile,Attack, num };//“G‚Ìó‘Ô
     Status status = Status.Hostile;
     [Header("õ“G”ÍˆÍ")]
@@ -21,6 +21,8 @@ public class EnemyController : MonoBehaviour
     [SerializeField] public int MaxHp { get; private set; } = 100; //“G‚ÌHP
     float angervalue;//“G‚Ì“{‚è’l
     float dinstance;
+    [SerializeField] GameObject bulletprefab;
+    float cooldown = 3f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -71,6 +73,7 @@ public class EnemyController : MonoBehaviour
     }
     void movement()
     {
+        cooldown -= Time.deltaTime;
         dinstance = Vector3.Distance(target.position, transform.position);
         if (dinstance < 3f)
         {
@@ -84,6 +87,13 @@ public class EnemyController : MonoBehaviour
         }
         if (status == Status.Hostile)
             transform.position += transform.forward * Time.deltaTime * speed;
+
+        if (status == Status.Attack&&cooldown<=0)
+        {
+            Instantiate(bulletprefab, transform.position + (transform.forward), transform.rotation * Quaternion.Euler(0, 0, 0));
+           
+            cooldown = 3f;
+        }
     }
     public void GetDamage()
     {

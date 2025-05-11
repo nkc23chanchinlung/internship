@@ -128,7 +128,7 @@ MonoBehaviour:
   leagth: 10
   target: {fileID: 0}
   Attack: 0
-  MaxHp: 3
+  bulletprefab: {fileID: 813729092485830864, guid: 5c75337c9733f5042874c3a06bef9254, type: 3}
 --- !u!54 &-107805846994527690
 Rigidbody:
   m_ObjectHideFlags: 0
