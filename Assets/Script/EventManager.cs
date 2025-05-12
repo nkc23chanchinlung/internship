@@ -40,11 +40,15 @@ public class EventManager : MonoBehaviour
         Day_Text.text = "Day" + Day.ToString();
         tutorial();
         ShowDayMessage();
-        if (Gametime >= 2f && onlyonce)
+        if ((int)Gametime%10==0&&layer<=5&&onlyonce)
         {
-            layer = 1;
+            layer ++;
             onlyonce = false;
+
         }
+        else if ((int)Gametime % 10 != 0)
+        
+            onlyonce = true;
 
 
 
@@ -94,6 +98,8 @@ public class EventManager : MonoBehaviour
                 }
                 break;
             case 2:
+                Tr_move.gameObject.SetActive(false);
+                Tr_move_text.gameObject.SetActive(false);
                 Tr_shoot.gameObject.SetActive(true);
                 Tr_shoot_text.gameObject.SetActive(true);
                 Tr_shoot.color = new Color(1, 1, 1, Mathf.PingPong(Time.time, 1));
@@ -106,6 +112,8 @@ public class EventManager : MonoBehaviour
                 }
                 break;
             case 3:
+                Tr_shoot.gameObject.SetActive(false);
+                Tr_shoot_text.gameObject.SetActive(false);
                 Tr_reload.gameObject.SetActive(true);
                 Tr_reload_text.gameObject.SetActive(true);
                 Tr_reload.color = new Color(1, 1, 1, Mathf.PingPong(Time.time, 1));
@@ -118,6 +126,8 @@ public class EventManager : MonoBehaviour
                 }
                 break;
             case 4:
+                Tr_reload.gameObject.SetActive(false);
+                Tr_reload_text.gameObject.SetActive(false);
                 Tr_create.gameObject.SetActive(true);
                 Tr_create_text.gameObject.SetActive(true);
                 Tr_create.color = new Color(1, 1, 1, Mathf.PingPong(Time.time, 1));
@@ -128,6 +138,10 @@ public class EventManager : MonoBehaviour
                     Tr_create_text.gameObject.SetActive(false);
                     layer = 5;
                 }
+                break;
+                case 5:
+                Tr_create.gameObject.SetActive(false);
+                Tr_create_text.gameObject.SetActive(false);
                 break;
         }
         

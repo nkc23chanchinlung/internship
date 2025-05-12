@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
     }
     void movement()
     {
-#if true
+
         IsShooting = Input.GetMouseButton(0) && !IsCreate ? true : false;
         float movex = Input.GetAxis("Horizontal");
         float movez = Input.GetAxis("Vertical");
@@ -75,43 +75,21 @@ public class PlayerController : MonoBehaviour
         // 入力方向を取得
         Vector3 moveDirection = new Vector3(movex, 0, movez).normalized;
         acceleration = Mathf.Clamp(acceleration, 0, MaxSpeed);
-        if(vec<maxvec)
+        if(vec<maxvec)//移動速度制限
         rigidbody.AddForce(moveDirection * acceleration, ForceMode.VelocityChange);
         
+        if(rigidbody.linearVelocity.magnitude<0.1f)rigidbody.linearVelocity = Vector3.zero;//誤アニメーション防止
+
+        vec = rigidbody.linearVelocity.magnitude;
+        Vector3 vetorvec = rigidbody.linearVelocity;
         
-         vec = rigidbody.linearVelocity.magnitude;
-        Debug.Log(vec);
+         
 
 
-#endif
-
-        //float movex = Input.GetAxis("Horizontal");
-        //float movez = Input.GetAxis("Vertical");
-        //moveDirection = new Vector3(movex, 0, movez).normalized;
 
 
-        //if (moveDirection.magnitude > 0)
-        //{
-        //    lastMoveDirection = transform.forward * moveDirection.z;
-        //    lastMoveDirection += transform.right * moveDirection.x;
-        //}
-        //transform.localPosition += lastMoveDirection * speed * Time.deltaTime;
-        //// 速度の制限
-        //speed = Mathf.Clamp(speed, 0, MaxSpeed);
-        //if (speed < 0.1f) speed = 0;
 
-        //if (movex != 0 || movez != 0)
-        //{
-        //    speed += 0.1f;
-        //    IsWalking = true;
-        //}
-        //else
-        //{
-        //    // 徐々に減速（滑らかに止まる）
-        //    speed *= 0.87f;
-        //    IsWalking = false;
-        //}
-        //IsWalkBack = movez < 0 ? true:false;
+
 
     }
     void Jump()
