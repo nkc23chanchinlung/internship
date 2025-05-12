@@ -22,8 +22,7 @@ public class PlayerController : MonoBehaviour
     Vector3 roteuler;
     [SerializeField] float MouseSpeedX;
     [SerializeField] float MouseSpeedY;
-    private float Mincam = -30f;
-    private float Maxcam = 60f;
+   
     [SerializeField] Camera cam;
     Plane plane = new Plane();
     float distance = 0;

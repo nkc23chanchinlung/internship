@@ -21,6 +21,8 @@ public class EventManager : MonoBehaviour
     [SerializeField] Text Tr_shoot_text;
     [SerializeField] Text Tr_reload_text;
     [SerializeField] Text Tr_create_text;
+    [SerializeField] Image Tr_change;
+    [SerializeField] Text Tr_change_text;
     bool onlyonce = true;
     int layer = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -40,7 +42,7 @@ public class EventManager : MonoBehaviour
         Day_Text.text = "Day" + Day.ToString();
         tutorial();
         ShowDayMessage();
-        if ((int)Gametime%10==0&&layer<=5&&onlyonce)
+        if ((int)Gametime%10==0&&layer<=6&&onlyonce)
         {
             layer ++;
             onlyonce = false;
@@ -112,6 +114,18 @@ public class EventManager : MonoBehaviour
                 }
                 break;
             case 3:
+                Tr_change.gameObject.SetActive(true);
+                Tr_change_text.gameObject.SetActive(true);
+                Tr_change.color = new Color(1, 1, 1, Mathf.PingPong(Time.time, 1));
+                Tr_change_text.color = new Color(1, 1, 1, Mathf.PingPong(Time.time, 1));
+                if (Input.GetKeyDown(KeyCode.Q))
+                {
+                    Tr_change.gameObject.SetActive(false);
+                    Tr_change_text.gameObject.SetActive(false);
+                    layer = 4;
+                }
+                break;
+            case 4:
                 Tr_shoot.gameObject.SetActive(false);
                 Tr_shoot_text.gameObject.SetActive(false);
                 Tr_reload.gameObject.SetActive(true);
@@ -122,10 +136,10 @@ public class EventManager : MonoBehaviour
                 {
                     Tr_reload.gameObject.SetActive(false);
                     Tr_reload_text.gameObject.SetActive(false);
-                    layer = 4;
+                    layer = 5;
                 }
                 break;
-            case 4:
+            case 5:
                 Tr_reload.gameObject.SetActive(false);
                 Tr_reload_text.gameObject.SetActive(false);
                 Tr_create.gameObject.SetActive(true);
@@ -136,13 +150,16 @@ public class EventManager : MonoBehaviour
                 {
                     Tr_create.gameObject.SetActive(false);
                     Tr_create_text.gameObject.SetActive(false);
-                    layer = 5;
+                    layer = 6;
                 }
                 break;
-                case 5:
+                case 6:
                 Tr_create.gameObject.SetActive(false);
                 Tr_create_text.gameObject.SetActive(false);
+                layer = 7;
                 break;
+           
+
         }
         
 

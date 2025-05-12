@@ -23,8 +23,6 @@ public class ObjCreater : MonoBehaviour
         col = GetComponent<MeshCollider>();
         col.isTrigger = true;
         
-
-
     }
 
     // Update is called once per frame
