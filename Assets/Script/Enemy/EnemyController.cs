@@ -56,13 +56,13 @@ public class EnemyController : MonoBehaviour
                     if (hit.collider.tag == "Player")
                     {
                         target = hit.collider.transform;
-                        Debug.Log("“G‚Ìó‘Ô" + status);
+                       
                         break;
                     }
                     else
                     {
                         status = Status.Idle;
-                        Debug.Log("“G‚Ìó‘Ô" + status);
+
                     }
                 }
                 Debug.DrawRay(transform.position, (transform.forward+new Vector3(intervalX * j, intervalY*i, 0))* leagth, Color.red);
@@ -78,12 +78,12 @@ public class EnemyController : MonoBehaviour
         if (dinstance < 3f)
         {
             status = Status.Attack;
-            Debug.Log("Attack");
+           
         }
         else
         {
             status = Status.Hostile;
-            Debug.Log("Hostile");
+           
         }
         if (status == Status.Hostile)
             transform.position += transform.forward * Time.deltaTime * speed;
@@ -98,6 +98,6 @@ public class EnemyController : MonoBehaviour
     public void GetDamage()
     {
         target = GameObject.FindGameObjectWithTag("Player").transform;
-        Debug.Log("getdamage"); 
+        
     }
 }

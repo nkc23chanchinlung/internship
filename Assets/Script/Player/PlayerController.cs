@@ -13,8 +13,8 @@ public class PlayerController : MonoBehaviour
     private bool IsRun, IsJumping, InGround, IsWalking,IsWalkBack;
     [Header("Player")]
     [SerializeField] private int MaxSpeed, JumpForce;
-    private float speed;
-    [SerializeField]public int MaxHp { get; private set; } = 100; //“G‚ÌHP
+    [SerializeField]private float acceleration;
+    [SerializeField]public int MaxHp { get; private set; } = 100; //æ•µã®HP
     [SerializeField]public int Hp { get; set; } = 100;
     [SerializeField] float rayy, raydis;
     Vector3 moveDirection;
@@ -28,11 +28,15 @@ public class PlayerController : MonoBehaviour
     Plane plane = new Plane();
     float distance = 0;
     bool IsShooting = false;
+    Rigidbody rigidbody;
+    float vec;
+    float maxvec = 5f;
+    public float friction = 0.5f;
     public float _speed
     {
         get
         {
-            return speed;
+            return acceleration;
         }
 
     }
@@ -40,8 +44,9 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        playerAnimetor = new ObjAnimetor(1f,gameObject); 
-       
+        playerAnimetor = new ObjAnimetor(1f,gameObject);
+        rigidbody = GetComponent<Rigidbody>();
+
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -58,74 +63,55 @@ public class PlayerController : MonoBehaviour
         Jump();
         CheakGround();
         Cameramethod();
-        playerAnimetor.Animetor(IsWalkBack, speed, InGround,IsShooting);
+        playerAnimetor.Animetor(IsWalkBack, vec, InGround,IsShooting);
     }
     void movement()
     {
-#if false
+#if true
+        IsShooting = Input.GetMouseButton(0) && !IsCreate ? true : false;
         float movex = Input.GetAxis("Horizontal");
         float movez = Input.GetAxis("Vertical");
 
-        // “ü—Í•ûŒü‚ğæ“¾
+        // å…¥åŠ›æ–¹å‘ã‚’å–å¾—
         Vector3 moveDirection = new Vector3(movex, 0, movez).normalized;
-
-        // ƒL[‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é‚È‚çA‚»‚Ì•ûŒü‚ğ•Û‘¶
-        if (moveDirection.magnitude > 0)
-        {
-            lastMoveDirection = moveDirection;
-        }
-
-        // ‘¬“x‚Ì§ŒÀ
-        speed = Mathf.Clamp(speed, 0, MaxSpeed);
-        if (speed < 0.1f) speed = 0;
+        acceleration = Mathf.Clamp(acceleration, 0, MaxSpeed);
+        if(vec<maxvec)
+        rigidbody.AddForce(moveDirection * acceleration, ForceMode.VelocityChange);
+        
+        
+         vec = rigidbody.linearVelocity.magnitude;
+        Debug.Log(vec);
 
 
-
-
-        // ˆÊ’u‚ğXViƒL[‚ğ—£‚µ‚Ä‚à lastMoveDirection ‚Å“®‚«‘±‚¯‚éj
-        transform.localPosition += lastMoveDirection * speed * Time.deltaTime;
-
-        // ˆÚ“®‚ª‚ ‚éê‡A‰Á‘¬
-        if (movex != 0 || movez != 0)
-        {
-            speed += 0.1f;
-            IsWalking = true;
-        }
-        else
-        {
-            // ™X‚ÉŒ¸‘¬iŠŠ‚ç‚©‚É~‚Ü‚éj
-            speed *= 0.87f;
-            IsWalking = false;
-        }
 #endif
-        IsShooting = Input.GetMouseButton(0)&&!IsCreate ? true : false;
-        float movex = Input.GetAxis("Horizontal");
-        float movez = Input.GetAxis("Vertical");
-        moveDirection = new Vector3(movex, 0, movez).normalized;
-        
-        
-        if (moveDirection.magnitude > 0)
-        {
-            lastMoveDirection = transform.forward * moveDirection.z;
-            lastMoveDirection += transform.right * moveDirection.x;
-        }
-        transform.localPosition += lastMoveDirection * speed * Time.deltaTime;
-        // ‘¬“x‚Ì§ŒÀ
-        speed = Mathf.Clamp(speed, 0, MaxSpeed);
-        if (speed < 0.1f) speed = 0;
 
-        if (movex != 0 || movez != 0)
-        {
-            speed += 0.1f;
-            IsWalking = true;
-        }
-        else
-        {
-            // ™X‚ÉŒ¸‘¬iŠŠ‚ç‚©‚É~‚Ü‚éj
-            speed *= 0.87f;
-            IsWalking = false;
-        }
-        IsWalkBack = movez < 0 ? true:false;
+        //float movex = Input.GetAxis("Horizontal");
+        //float movez = Input.GetAxis("Vertical");
+        //moveDirection = new Vector3(movex, 0, movez).normalized;
+
+
+        //if (moveDirection.magnitude > 0)
+        //{
+        //    lastMoveDirection = transform.forward * moveDirection.z;
+        //    lastMoveDirection += transform.right * moveDirection.x;
+        //}
+        //transform.localPosition += lastMoveDirection * speed * Time.deltaTime;
+        //// é€Ÿåº¦ã®åˆ¶é™
+        //speed = Mathf.Clamp(speed, 0, MaxSpeed);
+        //if (speed < 0.1f) speed = 0;
+
+        //if (movex != 0 || movez != 0)
+        //{
+        //    speed += 0.1f;
+        //    IsWalking = true;
+        //}
+        //else
+        //{
+        //    // å¾ã€…ã«æ¸›é€Ÿï¼ˆæ»‘ã‚‰ã‹ã«æ­¢ã¾ã‚‹ï¼‰
+        //    speed *= 0.87f;
+        //    IsWalking = false;
+        //}
+        //IsWalkBack = movez < 0 ? true:false;
 
     }
     void Jump()
@@ -139,7 +125,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && InGround)
         {
             GetComponent<Rigidbody>().AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
-            GetComponent<Rigidbody>().AddForce(lastMoveDirection * speed, ForceMode.Impulse);
+            GetComponent<Rigidbody>().AddForce(lastMoveDirection * acceleration, ForceMode.Impulse);
             InGround = false;
         }
     }
@@ -159,15 +145,15 @@ public class PlayerController : MonoBehaviour
     }
     void Cameramethod()
     {
-        // ƒJƒƒ‰‚Æƒ}ƒEƒX‚ÌˆÊ’u‚ğŒ³‚ÉRay‚ğ€”õ
+        // ã‚«ãƒ¡ãƒ©ã¨ãƒã‚¦ã‚¹ã®ä½ç½®ã‚’å…ƒã«Rayã‚’æº–å‚™
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        // ƒvƒŒƒCƒ„[‚Ì‚‚³‚ÉPlane‚ğXV‚µ‚ÄAƒJƒƒ‰‚Ìî•ñ‚ğŒ³‚É’n–Ê”»’è‚µ‚Ä‹——£‚ğæ“¾
+        // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®é«˜ã•ã«Planeã‚’æ›´æ–°ã—ã¦ã€ã‚«ãƒ¡ãƒ©ã®æƒ…å ±ã‚’å…ƒã«åœ°é¢åˆ¤å®šã—ã¦è·é›¢ã‚’å–å¾—
         plane.SetNormalAndPosition(Vector3.up, transform.localPosition);
         if (plane.Raycast(ray, out distance))
         {
 
-            // ‹——£‚ğŒ³‚ÉŒğ“_‚ğZo‚µ‚ÄAŒğ“_‚Ì•û‚ğŒü‚­
+            // è·é›¢ã‚’å…ƒã«äº¤ç‚¹ã‚’ç®—å‡ºã—ã¦ã€äº¤ç‚¹ã®æ–¹ã‚’å‘ã
             var lookPoint = ray.GetPoint(distance);
             transform.LookAt(lookPoint);
 

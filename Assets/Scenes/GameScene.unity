@@ -7293,11 +7293,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxSpeed: 5
   JumpForce: 5
+  acceleration: 0.5
   rayy: 0.5
   raydis: 0.55
   MouseSpeedX: 100
   MouseSpeedY: 100
   cam: {fileID: 0}
+  friction: 0.5
 --- !u!95 &1330795637
 Animator:
   serializedVersion: 7
