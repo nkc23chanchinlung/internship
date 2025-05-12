@@ -14,6 +14,6 @@ public class Debugparameters : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        text[0].text = "Speed: " + playerController._speed;
+        
     }
 }

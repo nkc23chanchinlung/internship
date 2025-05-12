@@ -32,15 +32,8 @@ public class PlayerController : MonoBehaviour
     float vec;
     float maxvec = 5f;
     public float friction = 0.5f;
-    public float _speed
-    {
-        get
-        {
-            return acceleration;
-        }
-
-    }
-
+    
+   
 
     private void Awake()
     {
