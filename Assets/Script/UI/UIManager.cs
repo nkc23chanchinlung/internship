@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,6 +7,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject StorePanel;
     [SerializeField] GameObject WeaponPanel;
     [SerializeField] GameObject StoryPanel;
+    [SerializeField] GameObject Lead;
     [SerializeField] Image Lifebar;
     Text Magazine_Text;
     Image Magazine_Image;
@@ -48,6 +50,17 @@ public class UIManager : MonoBehaviour
         }
         else PanelOpen = false;
         Hpbar();
+        if(Lead.activeSelf&&Input.GetKeyDown(KeyCode.T))
+        {
+            Lead.SetActive(false);
+        }
+        else if (!Lead.activeSelf && Input.GetKeyDown(KeyCode.T))
+        {
+            Lead.SetActive(true);
+        }
+
+
+
 
 
     }

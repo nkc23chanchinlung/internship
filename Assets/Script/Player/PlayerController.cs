@@ -74,14 +74,6 @@ public class PlayerController : MonoBehaviour
 
         vec = rigidbody.linearVelocity.magnitude;
         Vector3 vetorvec = rigidbody.linearVelocity;
-        
-         
-
-
-
-
-
-
 
     }
     void Jump()
