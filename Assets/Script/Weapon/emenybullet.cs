@@ -34,6 +34,13 @@ public class emenybullet : MonoBehaviour
             player.GetDamage();
             
         }
+        else if (collision.gameObject.tag == "GameObj")
+        {
+            House house = collision.gameObject.GetComponent<House>();
+            Destroy(gameObject);
+            house.GetDamage(10);
+        }
        
+
     }
 }

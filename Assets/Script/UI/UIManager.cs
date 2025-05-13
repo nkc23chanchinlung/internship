@@ -9,9 +9,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject StoryPanel;
     [SerializeField] GameObject Lead;
     [SerializeField] Image Lifebar;
+    [SerializeField] Image House_Hpbar;
     Text Magazine_Text;
     Image Magazine_Image;
     PlayerController playerController;
+    House house;
     bool PanelOpen = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -19,6 +21,7 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        house=GameObject.Find("House").GetComponent<House>();
         StorePanel.SetActive(false);
         
     }
@@ -50,7 +53,8 @@ public class UIManager : MonoBehaviour
         }
         else PanelOpen = false;
         Hpbar();
-        if(Lead.activeSelf&&Input.GetKeyDown(KeyCode.T))
+        HouseHpbar();
+        if (Lead.activeSelf&&Input.GetKeyDown(KeyCode.T))
         {
             Lead.SetActive(false);
         }
@@ -90,5 +94,9 @@ public class UIManager : MonoBehaviour
     void Hpbar()
     {
         Lifebar.fillAmount = (float)playerController.Hp / (float)playerController.MaxHp;
+    }
+    void HouseHpbar()
+    {
+       House_Hpbar.fillAmount = (float)house.Hp / (float)house.MaxHp;
     }
 }

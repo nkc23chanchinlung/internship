@@ -1,9 +1,10 @@
 using UnityEngine;
 
+
 public class EnemyController : MonoBehaviour
 {
     public int objnum { get; set; } = 1; //“G‚ÌƒIƒuƒWƒFƒNƒg”Ô†
-    enum Status { Idle, Doubt, Hostile,Attack, num };//“G‚Ìó‘Ô
+    enum Status { Idle, Doubt, Hostile,Attack,Attackbuld, num };//“G‚Ìó‘Ô
     Status status = Status.Hostile;
     [Header("õ“G”ÍˆÍ")]
     [Tooltip("“G‚Ìõ“G”ÍˆÍ")]
@@ -52,12 +53,18 @@ public class EnemyController : MonoBehaviour
                 Physics.Raycast(transform.position, (transform.forward + new Vector3(intervalX * i, 0, 0)), out hit, leagth);
                 if (hit.collider != null)
                 {
-                    
+                    Debug.Log(hit.collider);
                     if (hit.collider.tag == "Player")
                     {
                         target = hit.collider.transform;
-                       
+
                         break;
+                    }
+                    else if (hit.collider.tag == "GameObj")
+                    {
+                       
+                       
+                        status = Status.Attackbuld;
                     }
                     else
                     {
@@ -75,6 +82,7 @@ public class EnemyController : MonoBehaviour
     {
         cooldown -= Time.deltaTime;
         dinstance = Vector3.Distance(target.position, transform.position);
+        Debug.Log(status);
         if (dinstance < 3f)
         {
             status = Status.Attack;
@@ -88,11 +96,17 @@ public class EnemyController : MonoBehaviour
         if (status == Status.Hostile)
             transform.position += transform.forward * Time.deltaTime * speed;
 
-        if (status == Status.Attack&&cooldown<=0)
+        else if (status == Status.Attack&&cooldown<=0)
         {
             Instantiate(bulletprefab, transform.position + (transform.forward), transform.rotation * Quaternion.Euler(0, 0, 0));
            
             cooldown = 3f;
+        }
+       else if(status == Status.Attackbuld && cooldown <= 0)
+        {
+            Debug.Log("attack bulid");
+            Instantiate(bulletprefab, transform.position + (transform.forward), transform.rotation * Quaternion.Euler(0, 0, 0));
+            cooldown = 2f;
         }
     }
     public void GetDamage()
