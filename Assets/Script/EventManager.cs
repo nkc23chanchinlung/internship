@@ -9,7 +9,7 @@ public class EventManager : MonoBehaviour
     [SerializeField]Text Day_Text;
     [SerializeField] Text DayMessage_Text;
     int CurrentDay;
-    [SerializeField] GameObject DayMessage;
+    [SerializeField] UnityEngine.GameObject DayMessage;
     Color color;
     float Timer= 0f;
     //チュートリアル

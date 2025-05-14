@@ -11,7 +11,7 @@ public class LeadController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Playerpos=GameObject.FindGameObjectWithTag("Player").transform;
+        Playerpos = UnityEngine.GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // Update is called once per frame

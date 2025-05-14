@@ -9,7 +9,7 @@ public class Accapt : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        playerpos = GameObject.FindGameObjectWithTag("Player").transform;
+        playerpos = UnityEngine.GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // Update is called once per frame

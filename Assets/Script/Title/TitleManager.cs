@@ -6,7 +6,7 @@ public class TitleManager : MonoBehaviour
 {
 
     [SerializeField]Image titleframe;
-    GameObject titleframe_Obj;
+    UnityEngine.GameObject titleframe_Obj;
     [Header("Alpha")]
     [Tooltip("0-100")]
     [Range(0, 100)]

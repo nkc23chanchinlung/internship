@@ -307,7 +307,7 @@ public class LightingManager : MonoBehaviour
             //Search scene for light that fits criteria (directional)
             else
             {
-                Light[] lights = GameObject.FindObjectsOfType<Light>();
+                Light[] lights = UnityEngine.GameObject.FindObjectsOfType<Light>();
                 foreach (Light light in lights)
                 {
                     if (light.type == LightType.Directional)

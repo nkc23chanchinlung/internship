@@ -15,7 +15,7 @@ public class ObjAnimetor : MonoBehaviour
     /// </summary>
     /// <param name="animspeed">アニメーション再生速度</param>
     /// <param name="Obj">アニメーション実行オブジェクト</param>
-   public ObjAnimetor(float animspeed,GameObject Obj)
+   public ObjAnimetor(float animspeed, UnityEngine.GameObject Obj)
     {
         animSpeed = animspeed;
         anim =Obj.GetComponent<Animator>();

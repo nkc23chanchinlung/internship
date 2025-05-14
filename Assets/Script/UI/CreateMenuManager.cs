@@ -7,8 +7,8 @@ using UnityEngine.UI;
 
 public class CreateMenuManager : MonoBehaviour
 {
-    [SerializeField] GameObject weaponpanel;
-    [SerializeField] GameObject[] obj;
+    [SerializeField] UnityEngine.GameObject weaponpanel;
+    [SerializeField] UnityEngine.GameObject[] obj;
     
 
    public void weapon()

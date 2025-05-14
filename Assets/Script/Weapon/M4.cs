@@ -17,7 +17,7 @@ public class M4 : Gun
         cooldown = 1f;
         Magazine = 8;
         MaxMagazine = 8;
-        bulletprefab = Resources.Load("bullet") as GameObject;
+        bulletprefab = Resources.Load("bullet") as UnityEngine.GameObject;
        
     }
 

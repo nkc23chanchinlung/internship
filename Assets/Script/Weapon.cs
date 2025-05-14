@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-     List<GameObject> weapons = new List<GameObject>();
+     List<UnityEngine.GameObject> weapons = new List<UnityEngine.GameObject>();
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

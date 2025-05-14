@@ -10,7 +10,7 @@ public class AK47 : Gun
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {
-        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        playerController = UnityEngine.GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 
     }
 

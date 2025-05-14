@@ -13,7 +13,7 @@ public class ProximityActivate : MonoBehaviour
     public CanvasGroup target;
     public bool lookAtCamera = true;
     public bool enableInfoPanel = false;
-    public GameObject infoIcon;
+    public UnityEngine.GameObject infoIcon;
 
     float alpha;
     public CanvasGroup infoPanel;

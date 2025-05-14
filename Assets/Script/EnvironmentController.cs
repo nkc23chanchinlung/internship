@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class EnvironmentController : MonoBehaviour
 {
-    [SerializeField] GameObject Water;
+    [SerializeField] UnityEngine.GameObject Water;
     Vector3 WaterPos;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()

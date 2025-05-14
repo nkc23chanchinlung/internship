@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class ItemListController : MonoBehaviour
 {
     [SerializeField] Image[] itemList;
-    [SerializeField] GameObject[] itembock;
+    [SerializeField] UnityEngine.GameObject[] itembock;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

@@ -23,7 +23,7 @@ public class CamController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        _target = GameObject.FindWithTag("Player").transform;
+        _target = UnityEngine.GameObject.FindWithTag("Player").transform;
         y = transform.eulerAngles.y;
     }
 

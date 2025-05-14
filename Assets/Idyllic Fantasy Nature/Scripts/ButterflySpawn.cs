@@ -5,7 +5,7 @@ namespace IdyllicFantasyNature
     public class ButterflySpawn : MonoBehaviour
     {
         [Tooltip("child with the mesh renderer to make the butterfly invisible when the animation is not running")]
-        [SerializeField] private GameObject _butterflyChild;
+        [SerializeField] private UnityEngine.GameObject _butterflyChild;
         // the spawn area script to get the data from the set range and cooldown
         private ButterflySpawnArea _area;
         // the cooldown to respawn the butterfly

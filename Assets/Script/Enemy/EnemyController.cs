@@ -22,7 +22,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] public int MaxHp { get; private set; } = 100; //“G‚ÌHP
     float angervalue;//“G‚Ì“{‚è’l
     float dinstance;
-    [SerializeField] GameObject bulletprefab;
+    [SerializeField] UnityEngine.GameObject bulletprefab;
     float cooldown = 3f;
     BoxCollider targetcol;
     Vector3 targetsize;
@@ -31,7 +31,7 @@ public class EnemyController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        target = GameObject.Find("House").transform;
+        target = UnityEngine.GameObject.Find("House").transform;
     }
 
     // Update is called once per frame
@@ -127,7 +127,7 @@ public class EnemyController : MonoBehaviour
     }
     public void GetDamage()
     {
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+        target = UnityEngine.GameObject.FindGameObjectWithTag("Player").transform;
         
     }
 }

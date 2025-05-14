@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 class Door : MonoBehaviour
 {
-    [SerializeField] GameObject accapt;
+    [SerializeField] UnityEngine.GameObject accapt;
     [SerializeField] Text accapt_text;
     Accapt accaptscript;
     // Start is called once before the first execution of Update after the MonoBehaviour is created

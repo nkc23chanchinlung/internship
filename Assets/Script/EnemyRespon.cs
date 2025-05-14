@@ -10,13 +10,13 @@ public class EnemyRespon : MonoBehaviour
     
     public int maxEnemies = 10;
     public int size = 50;
-    [SerializeField]GameObject[] Enemyprefeb;
-    [SerializeField]GameObject Target;
+    [SerializeField] UnityEngine.GameObject[] Enemyprefeb;
+    [SerializeField] UnityEngine.GameObject Target;
     public bool dayupdate { get; set; } = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Enemyprefeb= Resources.LoadAll<GameObject>("Enemy");
+        Enemyprefeb = Resources.LoadAll<UnityEngine.GameObject>("Enemy");
        
     }
 
@@ -31,7 +31,7 @@ public class EnemyRespon : MonoBehaviour
 
         }   
     }
-    public void Respon(GameObject Target)
+    public void Respon(UnityEngine.GameObject Target)
     {
         for (int x = -this.x; x < this.x; x++)
         {

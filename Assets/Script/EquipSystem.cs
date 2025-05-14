@@ -4,8 +4,8 @@ using System.Collections.Generic;
 
 public class EquipSystem : MonoBehaviour
 {
-   [SerializeField] GameObject[] weaponsPrefabs;
-    List<GameObject> equippedweapons = new List<GameObject>();
+   [SerializeField] UnityEngine.GameObject[] weaponsPrefabs;
+    List<UnityEngine.GameObject> equippedweapons = new List<UnityEngine.GameObject>();
     int eqyuippedIndex = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
