@@ -1,7 +1,7 @@
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static UnityEngine.GraphicsBuffer;
+
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,20 +10,20 @@ public class PlayerController : MonoBehaviour
 
     public bool IsCreate { get; set; }
 
-    private bool IsRun, IsJumping, InGround, IsWalking,IsWalkBack;
+    private bool IsRun, IsJumping, InGround, IsWalking,IsWalkBack;//状態構造体
     [Header("Player")]
     [SerializeField] private int MaxSpeed, JumpForce;
     [SerializeField]private float acceleration;
-    [SerializeField]public int MaxHp { get; private set; } = 100; //敵のHP
-    [SerializeField]public int Hp { get; set; } = 100;
-    [SerializeField] float rayy, raydis;
+    [SerializeField]public int MaxHp { get; private set; } = 100; //敵最大のHP
+    [SerializeField]public int Hp { get; set; } = 100;//敵のHP
+    [SerializeField] float rayy, raydis;  //Rayの長さ
     Vector3 moveDirection;
     Vector3 lastMoveDirection;
     Vector3 roteuler;
     [SerializeField] float MouseSpeedX;
     [SerializeField] float MouseSpeedY;
    
-    [SerializeField] Camera cam;
+    
     Plane plane = new Plane();
     float distance = 0;
     bool IsShooting = false;
@@ -36,27 +36,29 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        playerAnimetor = new ObjAnimetor(1f,gameObject);
-        rigidbody = GetComponent<Rigidbody>();
+     playerAnimetor = new ObjAnimetor(1f,gameObject);
+     rigidbody = GetComponent<Rigidbody>();
 
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        cam = Camera.main;
+       
        
     }
 
     // Update is called once per frame
     void Update()
     {
-        GameOver();
+     GameOver();
+
      if (InGround) movement();
-        Jump();
-        CheakGround();
-        Cameramethod();
-        playerAnimetor.Animetor(IsWalkBack, vec, InGround,IsShooting);
+     Jump();
+     CheakGround();
+     Cameramethod();
+     playerAnimetor.Animetor(IsWalkBack, vec, InGround,IsShooting);
     }
+    //行動
     void movement()
     {
 
@@ -80,15 +82,15 @@ public class PlayerController : MonoBehaviour
     {
         if (moveDirection.magnitude > 0)
         {
-            lastMoveDirection =transform.forward* moveDirection.z;
-            lastMoveDirection += transform.right * moveDirection.x;
+          lastMoveDirection =transform.forward* moveDirection.z;
+          lastMoveDirection += transform.right * moveDirection.x;
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && InGround)
         {
-            GetComponent<Rigidbody>().AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
-            GetComponent<Rigidbody>().AddForce(lastMoveDirection * acceleration, ForceMode.Impulse);
-            InGround = false;
+          GetComponent<Rigidbody>().AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
+          GetComponent<Rigidbody>().AddForce(lastMoveDirection * acceleration, ForceMode.Impulse);
+          InGround = false;
         }
     }
     void CheakGround()
@@ -96,11 +98,11 @@ public class PlayerController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position + new Vector3(0, rayy, 0), Vector3.down, out hit, raydis))
         {
-            InGround = true;
+          InGround = true;
         }
         else
         {
-            InGround = false;
+          InGround = false;
         }
         Debug.DrawRay(transform.position + new Vector3(0, rayy, 0), Vector3.down * raydis, Color.red);
 
@@ -126,7 +128,6 @@ public class PlayerController : MonoBehaviour
     {
         Hp -= 10;
        
-
     }
     void GameOver()
     {

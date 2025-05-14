@@ -1,10 +1,13 @@
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.UI;
+
 
 
 public class EnemyController : MonoBehaviour
 {
     public int objnum { get; set; } = 1; //“G‚ÌƒIƒuƒWƒFƒNƒg”Ô†
-    enum Status { Idle, Doubt, Hostile,Attack,Attackbuld, num };//“G‚Ìó‘Ô
+    enum Status { Idle, Doubt, Hostile,Attack, num };//“G‚Ìó‘Ô
     Status status = Status.Hostile;
     [Header("õ“G”ÍˆÍ")]
     [Tooltip("“G‚Ìõ“G”ÍˆÍ")]
@@ -12,39 +15,75 @@ public class EnemyController : MonoBehaviour
     [SerializeField] int Enemies;
     [SerializeField] int speed;
     [SerializeField] int leagth;
-    private const float intervalX=0.1f;
-    private const float intervalY=0.1f;
+   
     [SerializeField] Transform target;
 
     [Header("“G‚ÌƒXƒe[ƒ^ƒX")]
+    [SerializeField] public int MaxHp { get; private set; } = 100; //“G‚ÌHP
     [SerializeField]public int Hp { get; set; } = 100; //“G‚ÌHP   
     [SerializeField] int Attack;
-    [SerializeField] public int MaxHp { get; private set; } = 100; //“G‚ÌHP
+    
+
+    private const float intervalX = 0.1f;
+    private const float intervalY = 0.1f;
+    float cooldown = 3f;
     float angervalue;//“G‚Ì“{‚è’l
     float dinstance;
-    [SerializeField] UnityEngine.GameObject bulletprefab;
-    float cooldown = 3f;
-    BoxCollider targetcol;
-    Vector3 targetsize;
     float targetedge;
+    NavMeshAgent agent;
+    [SerializeField] UnityEngine.GameObject bulletprefab;
+   
+    Collider targetcol;
+    Vector3 targetsize;//–Ú•W‚Ì‘å‚«‚³
+
+    [SerializeField] Text Debug_Status;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         target = UnityEngine.GameObject.Find("House").transform;
+        agent = GetComponent<NavMeshAgent>();
+        agent.stoppingDistance = 3f;
+
+        try
+        {
+            Debug_Status = GetComponentInChildren<Text>();
+        }
+        catch 
+        {
+            Debug_Status = null;
+            Debug.LogError("Debug_Status is not assigned in the inspector.");
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(Debug_Status != null) Debug_text();
+
+
+
         visibility();
         movement();
-        transform.LookAt(target);
+       
         if(Hp <= 0)
         {
             Destroy(gameObject);
         }
     }
+    void Debug_text()
+    {
+        Debug_Status.text = "Status:" + status.ToString() + "\n" +
+            "Hp:" + Hp.ToString() + "\n" +
+            "Dinstance:" + dinstance.ToString() + "\n" +
+            "Target:" + target.ToString() + "\n" +
+            "TargetEdge:" + targetedge.ToString() + "\n" +
+            "AngerValue:" + angervalue.ToString();
+    }
+    /// <summary>
+    /// õ“G‚ÌŠÖ”
+    /// </summary>
     void visibility()
     {
         for (int i=-Enemies; i< Enemies; i++)
@@ -59,75 +98,113 @@ public class EnemyController : MonoBehaviour
                    
                     if (hit.collider.tag == "Player")
                     {
-                        target = hit.collider.transform;
-
-                        break;
+                       Hostile(hit);
                     }
                     else if (hit.collider.tag == "GameObj")
                     {
-                       
-                        target = hit.collider.transform;
-                        targetcol = hit.collider.GetComponent<BoxCollider>();
-                        targetsize  = targetcol.size;
-                        targetedge = targetsize.magnitude/2;
-                        
-                    }
-                    else 
-                    {
-                        status = Status.Idle;
+                        Hostile(hit);
 
                     }
+                    
                 }
+                
                 Debug.DrawRay(transform.position, (transform.forward+new Vector3(intervalX * j, intervalY*i, 0))* leagth, Color.red);
                
             }
         }
 
     }
+    /// <summary>
+    /// s“®‚ÌŠÖ”
+    /// </summary>
     void movement()
     {
+
         //ó‘ÔØ‚è‘Ö‚¦
         dinstance = Vector3.Distance(target.position, transform.position);
+
+        if(dinstance<=targetedge+2) status = Status.Attack;
         
-        if (dinstance < 3f)
+        if (agent == null || !agent.isOnNavMesh)
         {
-            status = Status.Attack;
-
-        }
-        else if (dinstance <= targetedge)
-        {
-            status = Status.Attackbuld;
-        }
-        else
-        {
-            status = Status.Hostile;
-
-        }
-        //ó‘Ô‚É‰‚¶‚½s“®
-        cooldown -= Time.deltaTime;
-        if (status == Status.Hostile)
-        {
-            transform.position += transform.forward * Time.deltaTime * speed;
-            
+            Debug.LogWarning("Agent is not on NavMesh or is missing.");
+            return;
         }
 
-        else if (status == Status.Attack && cooldown <= 0)
+        switch (status)
         {
-            
-            Instantiate(bulletprefab, transform.position + (transform.forward), transform.rotation * Quaternion.Euler(0, 0, 0));
+            case Status.Hostile:
+                if (target != null)
+                {
+                    agent.isStopped = false;
+                    agent.SetDestination(target.position);
+                }
+                else
+                {
+                    agent.isStopped = true;
+                }
+                break;
 
-            cooldown = 3f;
+            case Status.Attack:
+                transform.LookAt(target);
+                if (cooldown <= 0)
+                {
+                    agent.isStopped = true;
+                    Shoot();
+                cooldown = 3f;
+                }
+                break;
+          
         }
-        else if (status == Status.Attackbuld && cooldown <= 0)
+
+        // ƒN[ƒ‹ƒ_ƒEƒ“‚ÌŠÔ‚ğŒ¸‚ç‚·
+        if (cooldown > 0)
         {
-            
-            Instantiate(bulletprefab, transform.position + (transform.forward), transform.rotation * Quaternion.Euler(0, 0, 0));
-            cooldown = 2f;
+            cooldown -= Time.deltaTime;
         }
     }
+
+    // ’e‚Ì¶¬‚ğ‚Ü‚Æ‚ß‚½ŠÖ”
+    void Shoot()
+    {
+        
+        Instantiate(
+            bulletprefab,
+            transform.position + transform.forward,
+            transform.rotation
+        );
+    }
+    //Hostileó‘Ô‚Ìˆ—
+    void Hostile(RaycastHit hit)
+    {
+        target = hit.collider.transform;
+        status = Status.Hostile;
+        if (hit.collider.tag == "Player")
+        {
+            targetcol = hit.collider.GetComponent<CapsuleCollider>();
+        }
+        else if (hit.collider.tag == "GameObj")
+        {
+            targetcol = hit.collider.GetComponent<BoxCollider>();
+        }
+      
+        targetsize = targetcol.bounds.size;
+      
+        targetedge = targetsize.magnitude;
+    }
+
     public void GetDamage()
     {
         target = UnityEngine.GameObject.FindGameObjectWithTag("Player").transform;
-        
+        Debug.Log("GetDamage");
+
     }
 }
+    
+
+
+
+
+    
+
+   

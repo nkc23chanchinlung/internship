@@ -4748,6 +4748,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9cda9d164a32e2458d19e320c304ecb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collapsed: 0
+  tileOptions: []
 --- !u!4 &779154504
 Transform:
   m_ObjectHideFlags: 0
@@ -6080,6 +6082,10 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: c3d67df85cdf2904db4b914ddd22ad38, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: c3d67df85cdf2904db4b914ddd22ad38, type: 3}
       propertyPath: m_TagString
       value: GameObj
       objectReference: {fileID: 0}
@@ -7154,7 +7160,6 @@ MonoBehaviour:
   raydis: 0.55
   MouseSpeedX: 100
   MouseSpeedY: 100
-  cam: {fileID: 0}
   friction: 0.5
 --- !u!95 &1330795637
 Animator:
@@ -10572,7 +10577,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SerializedVersion: 0
   m_AgentTypeID: 0
-  m_CollectObjects: 0
+  m_CollectObjects: 2
   m_Size: {x: 10, y: 10, z: 10}
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
@@ -10588,7 +10593,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: fc6e41c3353b6cb4ea368085ecdfc531, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: a32b18ca908ad084b877dcf3807d726b, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &34254548178610796 stripped
 GameObject:
@@ -21287,6 +21292,7 @@ MonoBehaviour:
   target: {fileID: 0}
   Attack: 0
   bulletprefab: {fileID: 0}
+  Debug_Status: {fileID: 0}
 --- !u!1 &8961072416434555452
 GameObject:
   m_ObjectHideFlags: 0

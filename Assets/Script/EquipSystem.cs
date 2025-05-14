@@ -14,6 +14,7 @@ public class EquipSystem : MonoBehaviour
         {
             equippedweapons.Add(weaponsPrefabs[i]);
         }
+
         equippedweapons[0].SetActive(true);
 
     }

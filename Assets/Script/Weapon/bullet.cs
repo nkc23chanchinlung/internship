@@ -4,8 +4,6 @@ public class bullet : MonoBehaviour
 {
     int speed=20;
     
-    EnemyController enemy;
-    PlayerController player;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     void Start()
@@ -18,11 +16,11 @@ public class bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Shoot();
+            Shoot();
     }
     public void Shoot()
     {
-        transform.position += transform.forward * speed * Time.deltaTime;
+            transform.position += transform.forward * speed * Time.deltaTime;
     }
     private void OnCollisionEnter(Collision collision)
     {
