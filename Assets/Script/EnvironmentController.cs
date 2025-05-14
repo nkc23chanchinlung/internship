@@ -9,7 +9,7 @@ public class EnvironmentController : MonoBehaviour
     private void Awake()
     {
         WaterPos = Water.transform.position;
-        Debug.Log(WaterPos);
+        
     }
     void Start()
     {
@@ -28,5 +28,9 @@ public class EnvironmentController : MonoBehaviour
         Water. transform.DOLocalMove(new Vector3(7, 84.5f, -440), 5f)
      .SetLoops(-1, LoopType.Yoyo)
         .SetEase(Ease.InOutQuart);
+    }
+    void Tree()
+    {
+
     }
 }

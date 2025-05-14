@@ -24,6 +24,9 @@ public class EnemyController : MonoBehaviour
     float dinstance;
     [SerializeField] GameObject bulletprefab;
     float cooldown = 3f;
+    BoxCollider targetcol;
+    Vector3 targetsize;
+    float targetedge;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -53,7 +56,7 @@ public class EnemyController : MonoBehaviour
                 Physics.Raycast(transform.position, (transform.forward + new Vector3(intervalX * i, 0, 0)), out hit, leagth);
                 if (hit.collider != null)
                 {
-                    Debug.Log(hit.collider);
+                   
                     if (hit.collider.tag == "Player")
                     {
                         target = hit.collider.transform;
@@ -63,10 +66,13 @@ public class EnemyController : MonoBehaviour
                     else if (hit.collider.tag == "GameObj")
                     {
                        
-                       
-                        status = Status.Attackbuld;
+                        target = hit.collider.transform;
+                        targetcol = hit.collider.GetComponent<BoxCollider>();
+                        targetsize  = targetcol.size;
+                        targetedge = targetsize.magnitude/2;
+                        
                     }
-                    else
+                    else 
                     {
                         status = Status.Idle;
 
@@ -80,31 +86,41 @@ public class EnemyController : MonoBehaviour
     }
     void movement()
     {
-        cooldown -= Time.deltaTime;
+        //èÛë‘êÿÇËë÷Ç¶
         dinstance = Vector3.Distance(target.position, transform.position);
-        Debug.Log(status);
+        
         if (dinstance < 3f)
         {
             status = Status.Attack;
-           
+
+        }
+        else if (dinstance <= targetedge)
+        {
+            status = Status.Attackbuld;
         }
         else
         {
             status = Status.Hostile;
-           
-        }
-        if (status == Status.Hostile)
-            transform.position += transform.forward * Time.deltaTime * speed;
 
-        else if (status == Status.Attack&&cooldown<=0)
+        }
+        //èÛë‘Ç…âûÇ∂ÇΩçsìÆ
+        cooldown -= Time.deltaTime;
+        if (status == Status.Hostile)
         {
+            transform.position += transform.forward * Time.deltaTime * speed;
+            
+        }
+
+        else if (status == Status.Attack && cooldown <= 0)
+        {
+            
             Instantiate(bulletprefab, transform.position + (transform.forward), transform.rotation * Quaternion.Euler(0, 0, 0));
-           
+
             cooldown = 3f;
         }
-       else if(status == Status.Attackbuld && cooldown <= 0)
+        else if (status == Status.Attackbuld && cooldown <= 0)
         {
-            Debug.Log("attack bulid");
+            
             Instantiate(bulletprefab, transform.position + (transform.forward), transform.rotation * Quaternion.Euler(0, 0, 0));
             cooldown = 2f;
         }

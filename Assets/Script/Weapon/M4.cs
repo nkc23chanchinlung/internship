@@ -35,7 +35,7 @@ public class M4 : Gun
 
         if (Input.GetMouseButton(0) && cooldown <= 0 && Magazine > 0 && !playerController.IsCreate)
         {
-            Debug.Log("M4");
+           
             for (int i = -range; i < range; i++)
             {
                 

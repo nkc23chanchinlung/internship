@@ -23,8 +23,8 @@ public class CreateMenuManager : MonoBehaviour
     }
     public void CT_Obj(int num)
     {
-       ;
-        Debug.Log(num);
+       
+        
         gameObject.SetActive(false);
 
         Instantiate(obj[num]);

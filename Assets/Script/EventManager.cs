@@ -64,7 +64,7 @@ public class EventManager : MonoBehaviour
             DayMessage_Text.text = "Day" + Day.ToString();
             DayMessage.SetActive(true);
             Timer += Time.deltaTime;
-            Debug.Log(Timer);
+            
             color.a += 0.1f;
             if (Timer >= 2f)
             {

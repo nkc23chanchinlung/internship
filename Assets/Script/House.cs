@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class House : MonoBehaviour
 {
-    public int MaxHp { get; } = 100; //â∆ÇÃHPÇÃç≈ëÂíl
+    public int MaxHp { get; } = 1000; //â∆ÇÃHPÇÃç≈ëÂíl
     public int Hp { get; set; } //â∆ÇÃHP
    
          // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -15,7 +15,7 @@ void Start()
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("House HP: " + Hp);
+       
     }
     void GameOver()
     {
