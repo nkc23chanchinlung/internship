@@ -1,4 +1,7 @@
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,10 +12,16 @@ public class EventManager : MonoBehaviour
     [SerializeField]Text Day_Text;
     [SerializeField] Text DayMessage_Text;
     int CurrentDay;
-    [SerializeField] UnityEngine.GameObject DayMessage;
+    [SerializeField] GameObject DayMessage;
     Color color;
     float Timer= 0f;
     //チュートリアル
+    [SerializeField]
+    Dictionary<Text, Image> image_dic = new Dictionary<Text,Image>();
+    [SerializeField]
+    Image[] Tr_Imagesarray;
+    [SerializeField]
+    Text[] Tr_Textarray;
     [SerializeField] Image Tr_move;
     [SerializeField] Image Tr_shoot;
     [SerializeField] Image Tr_reload;
@@ -32,7 +41,16 @@ public class EventManager : MonoBehaviour
         color = DayMessage_Text.color;
 
         color.a = 0f;
-        
+
+     foreach(Image image in Tr_Imagesarray){
+       
+           
+        }
+     
+      
+      
+       
+
     }
 
     // Update is called once per frame
@@ -84,15 +102,21 @@ public class EventManager : MonoBehaviour
     }
     void tutorial()
     {
-        
+
         switch (layer)
         {
+
+
+        
             case 1:
                 Tr_move.gameObject.SetActive(true);
                 Tr_move_text.gameObject.SetActive(true);
                 Tr_move.color = new Color(1, 1, 1, Mathf.PingPong(Time.time, 1));
                 Tr_move_text.color = new Color(1, 1, 1, Mathf.PingPong(Time.time, 1));
-                if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
+                if (Input.GetKeyDown(KeyCode.W) || 
+                    Input.GetKeyDown(KeyCode.A) ||
+                    Input.GetKeyDown(KeyCode.S) || 
+                    Input.GetKeyDown(KeyCode.D))
                 {
                     Tr_move.gameObject.SetActive(false);
                     Tr_move_text.gameObject.SetActive(false);
@@ -114,6 +138,8 @@ public class EventManager : MonoBehaviour
                 }
                 break;
             case 3:
+                Tr_shoot.gameObject.SetActive(false);
+                Tr_shoot_text.gameObject.SetActive(false);
                 Tr_change.gameObject.SetActive(true);
                 Tr_change_text.gameObject.SetActive(true);
                 Tr_change.color = new Color(1, 1, 1, Mathf.PingPong(Time.time, 1));
@@ -126,8 +152,8 @@ public class EventManager : MonoBehaviour
                 }
                 break;
             case 4:
-                Tr_shoot.gameObject.SetActive(false);
-                Tr_shoot_text.gameObject.SetActive(false);
+                Tr_change.gameObject.SetActive(false);
+                Tr_change_text.gameObject.SetActive(false);
                 Tr_reload.gameObject.SetActive(true);
                 Tr_reload_text.gameObject.SetActive(true);
                 Tr_reload.color = new Color(1, 1, 1, Mathf.PingPong(Time.time, 1));
@@ -153,16 +179,28 @@ public class EventManager : MonoBehaviour
                     layer = 6;
                 }
                 break;
-                case 6:
+            case 6:
                 Tr_create.gameObject.SetActive(false);
                 Tr_create_text.gameObject.SetActive(false);
                 layer = 7;
                 break;
-           
 
+
+            }
         }
-        
-
+    void tutorialshow(Image image, Text text)
+    {
+        image.gameObject.SetActive(true);
+        Tr_move_text.gameObject.SetActive(true);
+        Tr_move.color = new Color(1, 1, 1, Mathf.PingPong(Time.time, 1));
+        Tr_move_text.color = new Color(1, 1, 1, Mathf.PingPong(Time.time, 1));
 
     }
 }
+
+          
+
+
+
+    
+

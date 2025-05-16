@@ -39,7 +39,9 @@ public class M4 : Gun
             for (int i = -range; i < range; i++)
             {
                 
-                Instantiate(bulletprefab, transform.position + (-transform.forward)+transform.right*(i*0.2f), transform.rotation * Quaternion.Euler(0, 180-(15*i), 0));
+                Instantiate(bulletprefab, 
+                    transform.position + (-transform.forward)+transform.right*(i*0.2f),
+                    transform.rotation * Quaternion.Euler(0, 180-(15*i), 0));
                 
             }
             Magazine--;

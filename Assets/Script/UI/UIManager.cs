@@ -1,13 +1,12 @@
-using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] UnityEngine.GameObject StorePanel;
-    [SerializeField] UnityEngine.GameObject WeaponPanel;
-    [SerializeField] UnityEngine.GameObject StoryPanel;
-    [SerializeField] UnityEngine.GameObject Lead;
+    [SerializeField]GameObject StorePanel;
+    [SerializeField] GameObject WeaponPanel;
+    [SerializeField] GameObject StoryPanel;
+    [SerializeField] GameObject Lead;
     [SerializeField] Image Lifebar;
     [SerializeField] Image House_Hpbar;
     Text Magazine_Text;
@@ -20,8 +19,8 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
-        playerController = UnityEngine.GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        house = UnityEngine.GameObject.Find("House").GetComponent<House>();
+        playerController =GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        house =GameObject.Find("House").GetComponent<House>();
         StorePanel.SetActive(false);
         
     }

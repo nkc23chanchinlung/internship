@@ -38,8 +38,13 @@ public class EnemyRespon : MonoBehaviour
             for (int z = -this.z; z < this.z; z++)
             {
                 if(Target!=null)
-                Instantiate(Enemyprefeb[Random.Range(0, Enemyprefeb.Length)], new Vector3(x * Random.Range(Mindistance, Maxdistance), 0, z * Random.Range(Mindistance, Maxdistance)) + Target.transform.position, Quaternion.identity);
-                else Instantiate(Enemyprefeb[Random.Range(0, Enemyprefeb.Length)], new Vector3(x * Random.Range(Mindistance, Maxdistance), 0, z * Random.Range(Mindistance, Maxdistance)), Quaternion.identity);
+                Instantiate(Enemyprefeb[Random.Range(0, Enemyprefeb.Length)], 
+                    new Vector3(x * Random.Range(Mindistance, Maxdistance),
+                    0, z * Random.Range(Mindistance, Maxdistance)) + Target.transform.position, Quaternion.identity);
+                else Instantiate(Enemyprefeb[Random.Range(0, Enemyprefeb.Length)], 
+                    new Vector3(x * Random.Range(Mindistance, Maxdistance),
+                    0, 
+                    z * Random.Range(Mindistance, Maxdistance)), Quaternion.identity);
             }
         }
         //for (int i = 0; i < maxEnemies; i++)

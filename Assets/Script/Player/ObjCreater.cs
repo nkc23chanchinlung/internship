@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class ObjCreater : MonoBehaviour
@@ -62,6 +63,7 @@ public class ObjCreater : MonoBehaviour
         }
         else mat.color = Color.red;
     }
+    
       
 
     

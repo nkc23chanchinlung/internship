@@ -15,7 +15,7 @@ class Door : MonoBehaviour
         {
             accapt.SetActive(true);
            accaptscript.isIndoor = true;
-            accapt_text.text = "“ü‚é(E)";
+            accapt_text.text = "“ü‚é";
 
 
         }

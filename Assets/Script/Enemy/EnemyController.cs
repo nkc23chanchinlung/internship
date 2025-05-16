@@ -1,3 +1,5 @@
+using Unity.VisualScripting;
+using UnityEditorInternal.VersionControl;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -17,6 +19,8 @@ public class EnemyController : MonoBehaviour
     [SerializeField] int leagth;
    
     [SerializeField] Transform target;
+    Transform Player;
+    Transform House;
 
     [Header("敵のステータス")]
     [SerializeField] public int MaxHp { get; private set; } = 100; //敵のHP
@@ -26,26 +30,33 @@ public class EnemyController : MonoBehaviour
 
     private const float intervalX = 0.1f;
     private const float intervalY = 0.1f;
-    float cooldown = 3f;
-    float angervalue;//敵の怒り値
-    float dinstance;
-    float targetedge;
+    private float cooldown = 3f;
+    private float angervalue;//敵の怒り値
+    private float dinstance;
+    private float targetedge;
     NavMeshAgent agent;
-    [SerializeField] UnityEngine.GameObject bulletprefab;
+    [SerializeField]GameObject bulletprefab;
    
     Collider targetcol;
     Vector3 targetsize;//目標の大きさ
+   
 
     [SerializeField] Text Debug_Status;
 
 
+    private void Awake()
+    {
+        Player = GameObject.FindGameObjectWithTag("Player").transform;
+        House = GameObject.Find("House").transform;
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        target = UnityEngine.GameObject.Find("House").transform;
+        target = House;
         agent = GetComponent<NavMeshAgent>();
         agent.stoppingDistance = 3f;
 
+        //debug用のテキスト表示
         try
         {
             Debug_Status = GetComponentInChildren<Text>();
@@ -62,8 +73,7 @@ public class EnemyController : MonoBehaviour
     {
         if(Debug_Status != null) Debug_text();
 
-
-
+        angerprocess();
         visibility();
         movement();
        
@@ -72,14 +82,17 @@ public class EnemyController : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    void Debug_text()
+    private void Debug_text()
     {
         Debug_Status.text = "Status:" + status.ToString() + "\n" +
-            "Hp:" + Hp.ToString() + "\n" +
-            "Dinstance:" + dinstance.ToString() + "\n" +
-            "Target:" + target.ToString() + "\n" +
-            "TargetEdge:" + targetedge.ToString() + "\n" +
-            "AngerValue:" + angervalue.ToString();
+            "target:" + target.gameObject.name.ToString() + "\n" +
+            "anger:" + angervalue.ToString() + "\n";
+    }
+    void angerprocess()
+    {
+        if (angervalue == 100) target = Player;
+        else if(angervalue == 0) target = House; //怒り値が0の時は家をターゲットにする
+        
     }
     /// <summary>
     /// 索敵の関数
@@ -117,13 +130,15 @@ public class EnemyController : MonoBehaviour
     /// <summary>
     /// 行動の関数
     /// </summary>
-    void movement()
+    private void movement()
     {
 
         //状態切り替え
         dinstance = Vector3.Distance(target.position, transform.position);
+        if (dinstance >= 5) angervalue--;
+        angervalue = Mathf.Clamp(angervalue, 0, 100);
 
-        if(dinstance<=targetedge+2) status = Status.Attack;
+        if (dinstance<=targetedge+2) status = Status.Attack;
         
         if (agent == null || !agent.isOnNavMesh)
         {
@@ -174,7 +189,7 @@ public class EnemyController : MonoBehaviour
             transform.rotation
         );
     }
-    //Hostile状態の処理
+    //敵対の状態の処理
     void Hostile(RaycastHit hit)
     {
         target = hit.collider.transform;
@@ -182,6 +197,7 @@ public class EnemyController : MonoBehaviour
         if (hit.collider.tag == "Player")
         {
             targetcol = hit.collider.GetComponent<CapsuleCollider>();
+            angervalue += 5;
         }
         else if (hit.collider.tag == "GameObj")
         {
@@ -195,7 +211,8 @@ public class EnemyController : MonoBehaviour
 
     public void GetDamage()
     {
-        target = UnityEngine.GameObject.FindGameObjectWithTag("Player").transform;
+        
+        angervalue += 60;
         Debug.Log("GetDamage");
 
     }

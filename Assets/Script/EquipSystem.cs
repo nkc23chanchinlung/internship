@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class EquipSystem : MonoBehaviour
 {
-   [SerializeField] UnityEngine.GameObject[] weaponsPrefabs;
+   [SerializeField] GameObject[] weaponsPrefabs;
     List<UnityEngine.GameObject> equippedweapons = new List<UnityEngine.GameObject>();
     int eqyuippedIndex = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -27,8 +27,10 @@ public class EquipSystem : MonoBehaviour
     }
     void WeaponChange()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && eqyuippedIndex == 0) eqyuippedIndex = 1;
-        else if (Input.GetKeyDown(KeyCode.Q) && eqyuippedIndex == 1) eqyuippedIndex = 0;
+        if (Input.GetKeyDown(KeyCode.Q) && eqyuippedIndex == 0)
+            eqyuippedIndex = 1;
+        else if (Input.GetKeyDown(KeyCode.Q) && eqyuippedIndex == 1)
+            eqyuippedIndex = 0;
        
         if (eqyuippedIndex == 0)
         {

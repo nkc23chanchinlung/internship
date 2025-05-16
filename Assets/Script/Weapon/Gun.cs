@@ -1,8 +1,8 @@
 using UnityEngine;
 
 public class Gun : MonoBehaviour
-{
-    public UnityEngine.GameObject bulletprefab;
+{   
+    public GameObject bulletprefab;
     public PlayerController playerController;
     public UIManager uiManager;
     public float cooldown;
