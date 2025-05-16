@@ -69,21 +69,21 @@ public class UIManager : MonoBehaviour
     }
    public void SearchMagazine()
     {
-        Magazine_Text = UnityEngine.GameObject.Find("magazine").GetComponent<Text>();
+        Magazine_Text = GameObject.Find("magazine").GetComponent<Text>();
     }
    
     /// <summary>
     /// パネルを開くと消す
     /// </summary>
     /// <param name="panel">パネル</param>
-    public void Panel_Open(UnityEngine.GameObject panel)
+    public void Panel_Open(GameObject panel)
     {
         panel.SetActive(!panel.activeSelf);
     }
     public void SetMagazine(int Magazine,int MaxMagazine)
     {
        Magazine_Text.text=Magazine.ToString() + "/" + MaxMagazine.ToString();
-        Magazine_Image = UnityEngine.GameObject.Find("magazinebar").GetComponent<Image>();
+        Magazine_Image = GameObject.Find("magazinebar").GetComponent<Image>();
         Magazine_Image.fillAmount = (float)Magazine / (float)MaxMagazine;
     }
     public void memo()
