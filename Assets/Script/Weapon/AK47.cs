@@ -10,7 +10,7 @@ public class AK47 : Gun
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {
-        playerController = UnityEngine.GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        playerController =GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 
     }
 
@@ -20,6 +20,8 @@ public class AK47 : Gun
         Magazine = 30;
         MaxMagazine = 30;
         MaxCooldown = 0.2f;
+        IsReloading = false;
+        ReloadTime = 1f;
     }
 
     // Update is called once per frame
@@ -28,16 +30,24 @@ public class AK47 : Gun
         
         uiManager.SetMagazine(Magazine, MaxMagazine);
         Shoot();
-        Reload();
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            StartCoroutine(Reload(ReloadTime));
+        }
     }
-    public override void Shoot()
+    public override void Shoot() //éÀåÇ
     {
         cooldown -= Time.deltaTime;
 
-        if (Input.GetMouseButton(0) && cooldown <= 0 && Magazine > 0 && !playerController.IsCreate)
+        if (Input.GetMouseButton(0) &&
+            cooldown <= 0 &&
+            Magazine > 0 && 
+            !playerController.IsCreate)
         {
-
-            Instantiate(bulletprefab, transform.position + (-transform.forward), transform.rotation * Quaternion.Euler(0, 180, 0));
+            //èàóù
+            Instantiate(bulletprefab, 
+                transform.position + (-transform.forward), 
+                transform.rotation * Quaternion.Euler(0, 180, 0));
             Magazine--;
             cooldown = MaxCooldown;
 

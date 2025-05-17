@@ -1,12 +1,11 @@
-using Unity.VisualScripting;
-using UnityEditorInternal.VersionControl;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
 
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : EnemyAttackSkill
 {
     public int objnum { get; set; } = 1; //敵のオブジェクト番号
     enum Status { Idle, Doubt, Hostile,Attack, num };//敵の状態
@@ -30,7 +29,7 @@ public class EnemyController : MonoBehaviour
 
     private const float intervalX = 0.1f;
     private const float intervalY = 0.1f;
-    private float cooldown = 3f;
+   
     private float angervalue;//敵の怒り値
     private float dinstance;
     private float targetedge;
@@ -162,33 +161,20 @@ public class EnemyController : MonoBehaviour
 
             case Status.Attack:
                 transform.LookAt(target);
-                if (cooldown <= 0)
+                if (!cooldown)
                 {
                     agent.isStopped = true;
-                    Shoot();
-                cooldown = 3f;
+                StartCoroutine(Shoot(1,bulletprefab));
                 }
                 break;
           
         }
 
-        // クールダウンの時間を減らす
-        if (cooldown > 0)
-        {
-            cooldown -= Time.deltaTime;
-        }
+      
     }
 
     // 弾の生成をまとめた関数
-    void Shoot()
-    {
-        
-        Instantiate(
-            bulletprefab,
-            transform.position + transform.forward,
-            transform.rotation
-        );
-    }
+   
     //敵対の状態の処理
     void Hostile(RaycastHit hit)
     {

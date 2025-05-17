@@ -46,13 +46,16 @@ public class UIManager : MonoBehaviour
             StorePanel.SetActive(false);
             WeaponPanel.SetActive(false);
         }
+
         if (WeaponPanel.activeSelf||StorePanel.activeSelf) //ƒpƒlƒ‹‚ªŠJ‚¢‚Ä‚¢‚é‚©
         {
             PanelOpen = true;
         }
         else PanelOpen = false;
+
         Hpbar();
         HouseHpbar();
+
         if (Lead.activeSelf&&Input.GetKeyDown(KeyCode.T))
         {
             Lead.SetActive(false);

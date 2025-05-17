@@ -5,7 +5,7 @@ using System.IO;
 public class PreviewImageExporter : EditorWindow
 {
     private Object targetObject;
-    private string savePath = "Assets/PreviewImages";
+    private string savePath = "Assets/Image/PreviewImages";
 
     [MenuItem("Tools/Preview Image Exporter")]
     public static void ShowWindow()

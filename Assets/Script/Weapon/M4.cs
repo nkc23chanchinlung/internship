@@ -17,6 +17,7 @@ public class M4 : Gun
         cooldown = 1f;
         Magazine = 8;
         MaxMagazine = 8;
+        ReloadTime = 1f;
         bulletprefab = Resources.Load("bullet") as UnityEngine.GameObject;
        
     }
@@ -25,17 +26,23 @@ public class M4 : Gun
     void Update()
     {
         Shoot();
-        Reload();
-        
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            StartCoroutine(Reload(ReloadTime));
+        }
+
     }
-    public override void Shoot()
+    public override void Shoot()//éÀåÇ
     {
         uiManager.SetMagazine(Magazine, MaxMagazine);
         cooldown -= Time.deltaTime;
 
-        if (Input.GetMouseButton(0) && cooldown <= 0 && Magazine > 0 && !playerController.IsCreate)
+        if (Input.GetMouseButton(0) && 
+            cooldown <= 0 && 
+            Magazine > 0 &&
+            !playerController.IsCreate)
         {
-           
+            //èàóù  
             for (int i = -range; i < range; i++)
             {
                 

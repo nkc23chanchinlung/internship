@@ -1,7 +1,8 @@
+using System.Collections;
 using UnityEngine;
 
 public class Gun : MonoBehaviour
-{   
+{
     public GameObject bulletprefab;
     public PlayerController playerController;
     public UIManager uiManager;
@@ -9,19 +10,21 @@ public class Gun : MonoBehaviour
     public int Magazine;
     public int MaxMagazine;
     public float MaxCooldown;
+    public bool IsReloading;
+    public float ReloadTime;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     public virtual void Shoot() { }
-
-    
-    public virtual void Reload()
+   
+    public IEnumerator Reload(float ReloadTime)
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        
+        if (!IsReloading)
         {
-            if (Magazine < MaxMagazine)
-            {
-                Magazine = MaxMagazine;
-            }
+            IsReloading = true;
+            yield return new WaitForSeconds(ReloadTime);
+            Magazine = MaxMagazine;
+            IsReloading = false;
         }
     }
 }

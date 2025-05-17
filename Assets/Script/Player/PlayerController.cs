@@ -52,7 +52,9 @@ public class PlayerController : MonoBehaviour
     {
      GameOver();
 
-     if (InGround) movement();
+     if (InGround) 
+     movement();
+
      Jump();
      CheakGround();
      Cameramethod();
@@ -72,7 +74,8 @@ public class PlayerController : MonoBehaviour
         if(vec<maxvec)//移動速度制限
         rigidbody.AddForce(moveDirection * acceleration, ForceMode.VelocityChange);
         
-        if(rigidbody.linearVelocity.magnitude<0.1f)rigidbody.linearVelocity = Vector3.zero;//誤アニメーション防止
+        if(rigidbody.linearVelocity.magnitude<0.1f)
+            rigidbody.linearVelocity = Vector3.zero;//誤アニメーション防止
 
         vec = rigidbody.linearVelocity.magnitude;
         Vector3 vetorvec = rigidbody.linearVelocity;
@@ -96,7 +99,10 @@ public class PlayerController : MonoBehaviour
     void CheakGround()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position + new Vector3(0, rayy, 0), Vector3.down, out hit, raydis))
+        if (Physics.Raycast(transform.position +
+            new Vector3(0, rayy, 0), 
+            Vector3.down, 
+            out hit, raydis))
         {
           InGround = true;
         }
@@ -104,7 +110,10 @@ public class PlayerController : MonoBehaviour
         {
           InGround = false;
         }
-        Debug.DrawRay(transform.position + new Vector3(0, rayy, 0), Vector3.down * raydis, Color.red);
+        Debug.DrawRay(transform.position +
+            new Vector3(0, rayy, 0), 
+            Vector3.down * raydis,
+            Color.red);
 
     }
     void Cameramethod()
