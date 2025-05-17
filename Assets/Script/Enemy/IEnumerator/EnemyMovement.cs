@@ -1,8 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
-public class EnemyAttackSkill : MonoBehaviour
+public class EnemyMovement : MonoBehaviour
 {
+    //“G‚Ìs“®ŠÖ‚·‚éŠî’êƒNƒ‰ƒX
     public bool cooldown = false;
 
     /// <summary>
@@ -22,4 +23,8 @@ public class EnemyAttackSkill : MonoBehaviour
         yield return new WaitForSeconds(cooldowntime);
         cooldown = false;
     }
+}
+public interface IEnemyMovement
+{
+    void GetDamage(int damage);
 }

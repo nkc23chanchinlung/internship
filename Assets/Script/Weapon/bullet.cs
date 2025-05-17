@@ -28,8 +28,7 @@ public class bullet : MonoBehaviour
         {
             EnemyController enemy = collision.gameObject.GetComponent<EnemyController>();
             Destroy(gameObject);
-            enemy.Hp -= 10;
-            enemy.GetDamage();
+            enemy.GetDamage(10);
             
         }
        

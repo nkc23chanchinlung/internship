@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 
 
-public class EnemyController : EnemyAttackSkill
+
+public class EnemyController : EnemyMovement, IEnemyMovement
 {
     public int objnum { get; set; } = 1; //敵のオブジェクト番号
     enum Status { Idle, Doubt, Hostile,Attack, num };//敵の状態
@@ -51,6 +52,7 @@ public class EnemyController : EnemyAttackSkill
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+       
         target = House;
         agent = GetComponent<NavMeshAgent>();
         agent.stoppingDistance = 3f;
@@ -195,11 +197,13 @@ public class EnemyController : EnemyAttackSkill
         targetedge = targetsize.magnitude;
     }
 
-    public void GetDamage()
+    public void GetDamage(int damage)
     {
         
         angervalue += 60;
-        Debug.Log("GetDamage");
+        Hp -= damage;
+        
+        
 
     }
 }
