@@ -19,6 +19,7 @@ public class M4 : Gun
         MaxMagazine = 8;
         ReloadTime = 1f;
         bulletprefab = Resources.Load("bullet") as UnityEngine.GameObject;
+        Damage = 25;
        
     }
 
@@ -37,7 +38,8 @@ public class M4 : Gun
         uiManager.SetMagazine(Magazine, MaxMagazine);
         cooldown -= Time.deltaTime;
 
-        if (Input.GetMouseButton(0) && 
+        if (Input.GetMouseButton(0) &&
+            !IsReloading &&
             cooldown <= 0 && 
             Magazine > 0 &&
             !playerController.IsCreate)
@@ -45,11 +47,14 @@ public class M4 : Gun
             //èàóù  
             for (int i = -range; i < range; i++)
             {
-                
-                Instantiate(bulletprefab, 
+
+                GameObject bullet = Instantiate(bulletprefab, 
                     transform.position + (-transform.forward)+transform.right*(i*0.2f),
                     transform.rotation * Quaternion.Euler(0, 180-(15*i), 0));
-                
+
+                Bullet M4bullet = bullet.GetComponent<Bullet>();
+                M4bullet.damage = Damage;
+                bullet.tag = "PlayerBullet";
             }
             Magazine--;
             cooldown = MaxCooldown;

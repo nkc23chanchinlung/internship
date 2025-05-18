@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -177,9 +176,9 @@ public class EnemyController : EnemyMovement, IEnemyMovement
 
       
     }
-
-    // ’e‚Ì¶¬‚ğ‚Ü‚Æ‚ß‚½ŠÖ”
    
+    // ’e‚Ì¶¬‚ğ‚Ü‚Æ‚ß‚½ŠÖ”
+
     //“G‘Î‚Ìó‘Ô‚Ìˆ—
     void Hostile(RaycastHit hit)
     {
@@ -210,6 +209,19 @@ public class EnemyController : EnemyMovement, IEnemyMovement
         
 
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "PlayerBullet")
+        {
+            Bullet playerbullet = collision.gameObject.GetComponent<Bullet>();
+            Destroy(collision.gameObject);
+            int damage = playerbullet.damage;
+            GetDamage(damage);
+
+        }
+
+    }
+
 }
     
 

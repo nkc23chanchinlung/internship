@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// e‚ÌŠî’êƒNƒ‰ƒX
 /// </summary>
-public class Gun : MonoBehaviour
+public class Gun : Bullet
 {
     public GameObject bulletprefab;
     public PlayerController playerController;
@@ -15,6 +15,7 @@ public class Gun : MonoBehaviour
     public float MaxCooldown;
     public bool IsReloading;
     public float ReloadTime;
+    public int Damage;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     public virtual void Shoot() { }

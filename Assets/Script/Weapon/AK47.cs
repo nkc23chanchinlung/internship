@@ -22,6 +22,7 @@ public class AK47 : Gun
         MaxCooldown = 0.2f;
         IsReloading = false;
         ReloadTime = 1f;
+        Damage=10;
     }
 
     // Update is called once per frame
@@ -40,6 +41,7 @@ public class AK47 : Gun
         cooldown -= Time.deltaTime;
 
         if (Input.GetMouseButton(0) &&
+            !IsReloading &&
             cooldown <= 0 &&
             Magazine > 0 && 
             !playerController.IsCreate)
@@ -48,8 +50,12 @@ public class AK47 : Gun
             GameObject bullet= Instantiate(bulletprefab, 
                 transform.position + (-transform.forward), 
                 transform.rotation * Quaternion.Euler(0, 180, 0));
-            Magazine--;
+           
+
+            Bullet ak47bullet = bullet.GetComponent<Bullet>();
+            ak47bullet.damage = Damage;
             bullet.tag = "PlayerBullet";
+            Magazine--;
             cooldown = MaxCooldown;
 
         }
