@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - House
   - CreateMenuButton
+  - PlayerBullet
   layers:
   - Default
   - TransparentFX

@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class EnemyController : EnemyMovement, IEnemyMovement
 {
     public int objnum { get; set; } = 1; //敵のオブジェクト番号
+    [SerializeField]UIManager uimanager;
     enum Status { Idle, Doubt, Hostile,Attack, num };//敵の状態
     Status status = Status.Hostile;
     [Header("索敵範囲")]
@@ -36,6 +37,7 @@ public class EnemyController : EnemyMovement, IEnemyMovement
     private float targetedge;
     NavMeshAgent agent;
     [SerializeField]GameObject bulletprefab;
+    [SerializeField] GameObject Damageprefeb;
    
     Collider targetcol;
     Vector3 targetsize;//目標の大きさ
@@ -46,13 +48,14 @@ public class EnemyController : EnemyMovement, IEnemyMovement
 
     private void Awake()
     {
+        uimanager = GameObject.Find("-----UI-----").GetComponent<UIManager>();
         Player = GameObject.FindGameObjectWithTag("Player").transform;
         House = GameObject.Find("House").transform;
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-       
+        
         target = House;
         agent = GetComponent<NavMeshAgent>();
         agent.stoppingDistance = 3f;
@@ -201,6 +204,7 @@ public class EnemyController : EnemyMovement, IEnemyMovement
     {
         
         angervalue += 60;
+        uimanager.Damagevalue(transform, damage);
         Hp -= damage;
         
         

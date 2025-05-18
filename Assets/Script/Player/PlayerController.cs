@@ -2,7 +2,9 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
+/// <summary>
+/// Playerの行動を管理するクラス
+/// </summary>
 public class PlayerController : MonoBehaviour
 {
     ObjAnimetor playerAnimetor;
@@ -60,7 +62,9 @@ public class PlayerController : MonoBehaviour
      Cameramethod();
      playerAnimetor.Animetor(IsWalkBack, vec, InGround,IsShooting);
     }
-    //行動
+    /// <summary>
+    /// 行動処理
+    /// </summary>
     void movement()
     {
 

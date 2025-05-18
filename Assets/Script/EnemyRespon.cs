@@ -47,11 +47,6 @@ public class EnemyRespon : MonoBehaviour
                     z * Random.Range(Mindistance, Maxdistance)), Quaternion.identity);
             }
         }
-        //for (int i = 0; i < maxEnemies; i++)
-        //{
-        //    float posx = Mathf.Sin(Mathf.PI * 2 * i / maxEnemies) * size;
-        //    float posz = Mathf.Cos(Mathf.PI * 2 * i / maxEnemies) * size;
-        //    Instantiate(Enemyprefeb[Random.Range(0, Enemyprefeb.Length)], new Vector3(posx, 0, posz) + Target.transform.position, Quaternion.identity);
-        //}
+       
     }
 }

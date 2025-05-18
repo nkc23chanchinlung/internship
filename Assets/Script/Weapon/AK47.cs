@@ -45,10 +45,11 @@ public class AK47 : Gun
             !playerController.IsCreate)
         {
             //èàóù
-            Instantiate(bulletprefab, 
+            GameObject bullet= Instantiate(bulletprefab, 
                 transform.position + (-transform.forward), 
                 transform.rotation * Quaternion.Euler(0, 180, 0));
             Magazine--;
+            bullet.tag = "PlayerBullet";
             cooldown = MaxCooldown;
 
         }

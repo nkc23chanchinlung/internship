@@ -124,6 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7a73373afc702f418376f209e189d39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cooldown: 0
   Enemies: 2
   speed: 2
   leagth: 10
@@ -360,7 +361,7 @@ GameObject:
   - component: {fileID: 8855281535576853312}
   - component: {fileID: 8874027286866542703}
   m_Layer: 5
-  m_Name: HpCanvas
+  m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

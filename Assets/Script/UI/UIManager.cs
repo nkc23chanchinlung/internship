@@ -1,14 +1,21 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+/// <summary>
+/// UIを管理するクラス
+/// </summary>
+[System.Serializable]
+public class UIManager :UIEffect
 {
-    [SerializeField]GameObject StorePanel;
+    [SerializeField] GameObject GameCanvas;
+    [SerializeField] GameObject StorePanel;
     [SerializeField] GameObject WeaponPanel;
     [SerializeField] GameObject StoryPanel;
     [SerializeField] GameObject Lead;
+    [SerializeField] GameObject Damagevalueprefeb;
     [SerializeField] Image Lifebar;
     [SerializeField] Image House_Hpbar;
+    
     Text Magazine_Text;
     Image Magazine_Image;
     PlayerController playerController;
@@ -23,6 +30,7 @@ public class UIManager : MonoBehaviour
         house =GameObject.Find("House").GetComponent<House>();
         StorePanel.SetActive(false);
         
+
     }
 
     // Update is called once per frame
@@ -47,7 +55,7 @@ public class UIManager : MonoBehaviour
             WeaponPanel.SetActive(false);
         }
 
-        if (WeaponPanel.activeSelf||StorePanel.activeSelf) //パネルが開いているか
+        if (WeaponPanel.activeSelf||StorePanel.activeSelf)　　　　　　　　　　　　　　　　　　　　 //パネルが開いているか
         {
             PanelOpen = true;
         }
@@ -100,5 +108,22 @@ public class UIManager : MonoBehaviour
     void HouseHpbar()
     {
        House_Hpbar.fillAmount = (float)house.Hp / (float)house.MaxHp;
+    }
+    public void Damagevalue( Transform obj,int damage)　　　　　　　　　　　　　　　　　　　　//ダメージ表記
+    {
+        Text Damage_text = Damagevalueprefeb.GetComponent<Text>();
+        Damage_text.text = damage.ToString();
+        var center = 0.5f * new Vector3(Screen.width, Screen.height);
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(obj.position)-center;
+
+        GameObject damageInstance = Instantiate(
+        Damagevalueprefeb,
+        screenPos,
+        Quaternion.identity
+        );
+       
+        damageInstance.transform.SetParent(GameCanvas.transform, false);
+        DamageEffect(damageInstance);
+        Destroy(damageInstance, 1f);
     }
 }
