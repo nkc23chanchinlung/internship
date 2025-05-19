@@ -124,6 +124,6 @@ public class UIManager :UIEffect
        
         damageInstance.transform.SetParent(GameCanvas.transform, false);
         DamageEffect(damageInstance);
-        Destroy(damageInstance, 1f);
+        
     }
 }
