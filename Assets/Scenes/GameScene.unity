@@ -511,7 +511,7 @@ Terrain:
   m_GameObject: {fileID: 110866640}
   m_Enabled: 1
   serializedVersion: 6
-  m_TerrainData: {fileID: 15600000, guid: 0794d1b85eb67ed408771a351293492c, type: 2}
+  m_TerrainData: {fileID: 0}
   m_TreeDistance: 5000
   m_TreeBillboardDistance: 50
   m_TreeCrossFadeLength: 5
@@ -756,6 +756,7 @@ MonoBehaviour:
   MaxCooldown: 0
   IsReloading: 0
   ReloadTime: 0
+  Damage: 0
   range: 2
 --- !u!1 &198966607
 GameObject:
@@ -1784,9 +1785,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edcee10cfdb946343bac3487ab134275, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 1330795636}
-  text:
-  - {fileID: 263541587}
 --- !u!114 &305471379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2155,6 +2153,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   x: -2.39
   distance: 4
+  camy: 1.5
+  camsize: 0.8
+  playerpos: {fileID: 1327674205561883352}
 --- !u!1 &341824886
 GameObject:
   m_ObjectHideFlags: 0
@@ -2360,7 +2361,7 @@ Terrain:
   m_GameObject: {fileID: 398945257}
   m_Enabled: 1
   serializedVersion: 6
-  m_TerrainData: {fileID: 15600000, guid: a0b18e773c9a5474c811519a625e37b0, type: 2}
+  m_TerrainData: {fileID: 0}
   m_TreeDistance: 5000
   m_TreeBillboardDistance: 50
   m_TreeCrossFadeLength: 5
@@ -4106,8 +4107,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Maxdistance: 10
   Mindistance: 40
-  x: 4
-  z: 4
+  x: 1
+  z: 1
   maxEnemies: 10
   size: 50
   Enemyprefeb: []
@@ -4601,7 +4602,7 @@ Terrain:
   m_GameObject: {fileID: 713874434}
   m_Enabled: 1
   serializedVersion: 6
-  m_TerrainData: {fileID: 15600000, guid: 0b877e4b3f5de5949951e58b3eae617a, type: 2}
+  m_TerrainData: {fileID: 0}
   m_TreeDistance: 5000
   m_TreeBillboardDistance: 50
   m_TreeCrossFadeLength: 5
@@ -9867,6 +9868,7 @@ MonoBehaviour:
   MaxCooldown: 0
   IsReloading: 0
   ReloadTime: 0
+  Damage: 0
 --- !u!1 &1959110317
 GameObject:
   m_ObjectHideFlags: 0

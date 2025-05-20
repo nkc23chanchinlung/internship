@@ -7,13 +7,13 @@ using UnityEngine.UI;
 
 public class EnemyController : EnemyMovement, IEnemyMovement
 {
-    public int objnum { get; set; } = 1; //“G‚ÌƒIƒuƒWƒFƒNƒg”Ô†
+    public int objnum { get; set; } = 1;                         //“G‚ÌƒIƒuƒWƒFƒNƒg”Ô†
     [SerializeField]UIManager uimanager;
-    enum Status { Idle, Doubt, Hostile,Attack, num };//“G‚Ìó‘Ô
+    enum Status { Idle, Doubt, Hostile,Attack, num };            //“G‚Ìó‘Ô
     Status status = Status.Hostile;
     [Header("õ“G”ÍˆÍ")]
     [Tooltip("“G‚Ìõ“G”ÍˆÍ")]
-    [Range(1, 10)] //Inspectorã‚Å‚Ì•\Ž¦
+    [Range(1, 10)]                                                //Inspectorã‚Å‚Ì•\Ž¦
     [SerializeField] int Enemies;
     [SerializeField] int speed;
     [SerializeField] int leagth;
@@ -23,15 +23,15 @@ public class EnemyController : EnemyMovement, IEnemyMovement
     Transform House;
 
     [Header("“G‚ÌƒXƒe[ƒ^ƒX")]
-    [SerializeField] public int MaxHp { get; private set; } = 100; //“G‚ÌHP
-    [SerializeField]public int Hp { get; set; } = 100; //“G‚ÌHP   
+    [SerializeField] public int MaxHp { get; private set; } = 100; //“G‚ÌÅ‘åHP
+    [SerializeField]public int Hp { get; set; } = 100;              //“G‚ÌHP   
     [SerializeField] int Attack;
     
 
     private const float intervalX = 0.1f;
     private const float intervalY = 0.1f;
    
-    private float angervalue;//“G‚Ì“{‚è’l
+    private float angervalue;                                       //“G‚Ì“{‚è’l
     private float dinstance;
     private float targetedge;
     NavMeshAgent agent;
@@ -39,7 +39,7 @@ public class EnemyController : EnemyMovement, IEnemyMovement
     [SerializeField] GameObject Damageprefeb;
    
     Collider targetcol;
-    Vector3 targetsize;//–Ú•W‚Ì‘å‚«‚³
+    Vector3 targetsize;                                              //–Ú•W‚Ì‘å‚«‚³
    
 
     [SerializeField] Text Debug_Status;
@@ -93,8 +93,8 @@ public class EnemyController : EnemyMovement, IEnemyMovement
     }
     void angerprocess()
     {
-        if (angervalue == 100) target = Player;
-        else if(angervalue == 0) target = House; //“{‚è’l‚ª0‚ÌŽž‚Í‰Æ‚ðƒ^[ƒQƒbƒg‚É‚·‚é
+        if (angervalue >= 90) target = Player;
+        else if(angervalue <= 0) target = House; //“{‚è’l‚ª0‚ÌŽž‚Í‰Æ‚ðƒ^[ƒQƒbƒg‚É‚·‚é
         
     }
     /// <summary>
