@@ -6,6 +6,7 @@ public class EquipSystem : MonoBehaviour
 {
    [SerializeField] GameObject[] weaponsPrefabs;
     List<UnityEngine.GameObject> equippedweapons = new List<UnityEngine.GameObject>();
+    Gun gun;
     int eqyuippedIndex = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -16,6 +17,8 @@ public class EquipSystem : MonoBehaviour
         }
 
         equippedweapons[0].SetActive(true);
+        
+       gun = equippedweapons[0].GetComponent(typeof(Gun)) as Gun;
 
     }
 
@@ -23,24 +26,38 @@ public class EquipSystem : MonoBehaviour
     void Update()
     {
         WeaponChange();
-      
+        
+
     }
     void WeaponChange()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && eqyuippedIndex == 0)
-            eqyuippedIndex = 1;
-        else if (Input.GetKeyDown(KeyCode.Q) && eqyuippedIndex == 1)
-            eqyuippedIndex = 0;
-       
-        if (eqyuippedIndex == 0)
+        if (!gun.IsReloading)
         {
-            equippedweapons[0].SetActive(true);
-            equippedweapons[1].SetActive(false);
-        }
-        else if (eqyuippedIndex == 1)
-        {
-            equippedweapons[0].SetActive(false);
-            equippedweapons[1].SetActive(true);
+            if (Input.GetKeyDown(KeyCode.Q) && eqyuippedIndex == 0)
+            {
+                eqyuippedIndex = 1;
+                gun = equippedweapons[1].GetComponent(typeof(Gun)) as Gun;         //•ŠíØ‚è‘Ö‚¦‚é‚Æ‚«î•ñæ“¾
+
+            }
+
+            else if (Input.GetKeyDown(KeyCode.Q) && eqyuippedIndex == 1)
+            {
+                eqyuippedIndex = 0;
+                gun = equippedweapons[0].GetComponent(typeof(Gun)) as Gun;         //•ŠíØ‚è‘Ö‚¦‚é‚Æ‚«î•ñæ“¾
+
+
+            }
+
+            if (eqyuippedIndex == 0)
+            {
+                equippedweapons[0].SetActive(true);
+                equippedweapons[1].SetActive(false);
+            }
+            else if (eqyuippedIndex == 1)
+            {
+                equippedweapons[0].SetActive(false);
+                equippedweapons[1].SetActive(true);
+            }
         }
     }
 }
