@@ -16,7 +16,7 @@ public class EnemyRespon : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Enemyprefeb = Resources.LoadAll<UnityEngine.GameObject>("Enemy");
+        Enemyprefeb = Resources.LoadAll<GameObject>("Enemy");
        
     }
 

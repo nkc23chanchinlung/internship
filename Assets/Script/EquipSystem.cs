@@ -8,6 +8,7 @@ public class EquipSystem : MonoBehaviour
     List<UnityEngine.GameObject> equippedweapons = new List<UnityEngine.GameObject>();
     Gun gun;
     int eqyuippedIndex = 0;
+    public bool IsReloading { get; private set; } = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -26,7 +27,8 @@ public class EquipSystem : MonoBehaviour
     void Update()
     {
         WeaponChange();
-        
+        IsReloading = gun.IsReloading;
+
 
     }
     void WeaponChange()

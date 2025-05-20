@@ -47,7 +47,7 @@ public class EnemyController : EnemyMovement, IEnemyMovement
 
     private void Awake()
     {
-        uimanager = GameObject.Find("-----UI-----").GetComponent<UIManager>();
+        uimanager = GameObject.Find("-----UIManager-----").GetComponent<UIManager>();
         Player = GameObject.FindGameObjectWithTag("Player").transform;
         House = GameObject.Find("House").transform;
     }

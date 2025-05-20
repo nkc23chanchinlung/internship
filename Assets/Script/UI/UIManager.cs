@@ -7,20 +7,27 @@ using UnityEngine.UI;
 [System.Serializable]
 public class UIManager :UIEffect
 {
+    [Header("UI")]
+    [Header("GameObject")]
     [SerializeField] GameObject GameCanvas;
     [SerializeField] GameObject StorePanel;
     [SerializeField] GameObject WeaponPanel;
     [SerializeField] GameObject StoryPanel;
     [SerializeField] GameObject Lead;
     [SerializeField] GameObject Damagevalueprefeb;
+    [Header("Image")]
     [SerializeField] Image Lifebar;
     [SerializeField] Image House_Hpbar;
-    
+
+    [Header("Text")]
+    [SerializeField] Text Reloading_text;
+    [SerializeField] EquipSystem equipSystem;
     Text Magazine_Text;
     Image Magazine_Image;
     PlayerController playerController;
     House house;
     bool PanelOpen = false;
+   
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
@@ -29,7 +36,8 @@ public class UIManager :UIEffect
         playerController =GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         house =GameObject.Find("House").GetComponent<House>();
         StorePanel.SetActive(false);
-        
+        blinkinge_effect(Reloading_text);
+
 
     }
 
@@ -72,6 +80,16 @@ public class UIManager :UIEffect
         {
             Lead.SetActive(true);
         }
+        if (equipSystem.IsReloading)
+        {
+            Show_Reloading_text();
+        }
+        else
+        {
+            Reloading_text.gameObject.SetActive(false);
+            
+        }
+       
 
 
 
@@ -108,6 +126,12 @@ public class UIManager :UIEffect
     void HouseHpbar()
     {
        House_Hpbar.fillAmount = (float)house.Hp / (float)house.MaxHp;
+    }
+    void Show_Reloading_text()
+    {
+        Reloading_text.gameObject.SetActive(true);
+        Reloading_text.text = "Reloading...";
+        
     }
     public void Damagevalue( Transform obj,int damage)　　　　　　　　　　　　　　　　　　　　//ダメージ表記
     {
