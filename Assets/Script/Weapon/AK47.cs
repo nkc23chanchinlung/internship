@@ -2,15 +2,24 @@ using UnityEngine;
 
 public class AK47 : Gun
 {
-
+    DataManager ak47data;
     private void OnEnable()
     {
-        uiManager.SearchMagazine();
+        if (playerController != null)
+            uiManager.SearchMagazine();
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {
-        playerController =GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        try
+        {
+            playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        }
+        catch
+        {
+            Debug.LogError("PlayerController not found");
+        }
+        ak47data =new DataManager();
 
     }
 
@@ -23,17 +32,21 @@ public class AK47 : Gun
         IsReloading = false;
         ReloadTime = 1f;
         Damage=10;
+        Pow = 2;
+        Repair = 1;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        uiManager.SetMagazine(Magazine, MaxMagazine);
-        Shoot();
-        if (Input.GetKeyDown(KeyCode.R))
+        if (playerController != null)
         {
-            StartCoroutine(Reload(ReloadTime));
+            uiManager.SetMagazine(Magazine, MaxMagazine);
+            Shoot();
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                StartCoroutine(Reload(ReloadTime));
+            }
         }
     }
     public override void Shoot() //ŽËŒ‚

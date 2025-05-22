@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class EquipSystem : MonoBehaviour
 {
    [SerializeField] GameObject[] weaponsPrefabs;
-    List<UnityEngine.GameObject> equippedweapons = new List<UnityEngine.GameObject>();
+    List<GameObject> equippedweapons = new List<GameObject>();
     Gun gun;
     int eqyuippedIndex = 0;
     public bool IsReloading { get; private set; } = false;

@@ -12,6 +12,7 @@ TagManager:
   - PlayerBullet
   - Tree
   - Weapon
+  - Powgague
   layers:
   - Default
   - TransparentFX

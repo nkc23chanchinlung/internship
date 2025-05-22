@@ -16,6 +16,9 @@ public class Gun : Bullet
     public bool IsReloading;
     public float ReloadTime;
     public int Damage;
+    public int Pow;
+    public int Repair;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     public virtual void Shoot() { }

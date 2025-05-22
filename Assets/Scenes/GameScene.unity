@@ -757,6 +757,8 @@ MonoBehaviour:
   IsReloading: 0
   ReloadTime: 0
   Damage: 0
+  Pow: 0
+  Repair: 0
   range: 2
 --- !u!1 &198966607
 GameObject:
@@ -5268,7 +5270,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &950524276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9950,6 +9952,8 @@ MonoBehaviour:
   IsReloading: 0
   ReloadTime: 0
   Damage: 0
+  Pow: 0
+  Repair: 0
 --- !u!1 &1959110317
 GameObject:
   m_ObjectHideFlags: 0

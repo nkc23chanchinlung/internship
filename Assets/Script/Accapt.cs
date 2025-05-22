@@ -26,7 +26,7 @@ public class Accapt : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            SceneManager.LoadScene("InHouse");
+            SceneManager.LoadScene("InHouse",LoadSceneMode.Single);
         }
     }
     

@@ -6,8 +6,11 @@ public class M4 : Gun
 
     void OnEnable()
     {
-        uiManager.SearchMagazine();
-        uiManager.SetMagazine(Magazine, MaxMagazine);
+        if (playerController != null)
+        {
+            uiManager.SearchMagazine();
+            uiManager.SetMagazine(Magazine, MaxMagazine);
+        }
     }
     
     void Start()
@@ -20,16 +23,21 @@ public class M4 : Gun
         ReloadTime = 1f;
         bulletprefab = Resources.Load("bullet") as UnityEngine.GameObject;
         Damage = 25;
-       
+        Pow = 5;
+        Repair = 1;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        Shoot();
-        if (Input.GetKeyDown(KeyCode.R))
+        if (playerController != null)
         {
-            StartCoroutine(Reload(ReloadTime));
+            Shoot();
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                StartCoroutine(Reload(ReloadTime));
+            }
         }
 
     }
