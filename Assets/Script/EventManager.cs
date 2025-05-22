@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class EventManager : MonoBehaviour
 {
     float Gametime;
-    public int Day { get; set; } = 0;
+    GameManager gameManager;
+    int Day;
     [SerializeField]Text Day_Text;
     [SerializeField] Text DayMessage_Text;
     int CurrentDay;
@@ -33,6 +34,17 @@ public class EventManager : MonoBehaviour
     bool onlyonce = true;
     int layer = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private void Awake()
+    {
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        Day = gameManager.Day;
+        DayMessage.SetActive(false);
+        foreach (Image image in Tr_Imagesarray)
+        {
+            image_dic.Add(Tr_Textarray[0], image);
+        }
+        Debug.Log("wake");
+    }
     void Start()
     {
         CurrentDay = Day;

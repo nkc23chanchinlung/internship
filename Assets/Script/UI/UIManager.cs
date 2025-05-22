@@ -15,9 +15,12 @@ public class UIManager :UIEffect
     [SerializeField] GameObject StoryPanel;
     [SerializeField] GameObject Lead;
     [SerializeField] GameObject Damagevalueprefeb;
+    
     [Header("Image")]
     [SerializeField] Image Lifebar;
     [SerializeField] Image House_Hpbar;
+    [SerializeField] Image Fade;
+
 
     [Header("Text")]
     [SerializeField] Text Reloading_text;
@@ -37,6 +40,7 @@ public class UIManager :UIEffect
         house =GameObject.Find("House").GetComponent<House>();
         StorePanel.SetActive(false);
         blinkinge_effect(Reloading_text);
+       
 
 
     }
@@ -149,5 +153,9 @@ public class UIManager :UIEffect
         damageInstance.transform.SetParent(GameCanvas.transform, false);
         DamageEffect(damageInstance);
         
+    }
+    public void FadeControl(string nextscene)
+    {
+        turnblack(Fade,nextscene);
     }
 }

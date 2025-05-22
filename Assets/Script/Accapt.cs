@@ -6,10 +6,12 @@ public class Accapt : MonoBehaviour
 {
     Transform playerpos;
     public bool isIndoor = false;
+    [SerializeField]UIManager uIManager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         playerpos = UnityEngine.GameObject.FindGameObjectWithTag("Player").transform;
+        
     }
 
     // Update is called once per frame
@@ -26,8 +28,14 @@ public class Accapt : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            SceneManager.LoadScene("InHouse",LoadSceneMode.Single);
+            uIManager.FadeControl("InHouse");
+            
         }
     }
     
+
+
+
+   
 }
+

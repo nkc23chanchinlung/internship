@@ -70,7 +70,7 @@ public class LightingManager : MonoBehaviour
             //but you can experiment and try it yourself. This is only to prevent the script skiping the event because it didn't exactly get to 6pm or whatever the time of the event was. 
         [SerializeField] private float eventsTolerance = 0.2f;
         [SerializeField][Range(0f, 24f)] private float ResetEventsTime = 0.1f;
-        [SerializeField]EventManager eventManager;
+        GameManager gamemanager;
         [SerializeField]EnemyRespon enemyRespon;
         private bool DayCycleCompleted;
 
@@ -78,7 +78,7 @@ public class LightingManager : MonoBehaviour
 
         private void Start()
         {
-            
+            gamemanager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
             if (IsDayCycleOn)
             {
                 if(RandomStartTime)
@@ -146,7 +146,7 @@ public class LightingManager : MonoBehaviour
                    
                     ResetEvents();
                     enemyRespon.dayupdate = true;
-                    eventManager.Day++;
+                    gamemanager.Day++;
                     Debug.Log("Day completed + reset");
                 }
                 else if(TimeOfDay > ResetEventsTime)

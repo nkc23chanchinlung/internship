@@ -13,6 +13,7 @@ TagManager:
   - Tree
   - Weapon
   - Powgague
+  - GameManager
   layers:
   - Default
   - TransparentFX
@@ -25,7 +26,7 @@ TagManager:
   - GameObj
   - Player
   - Gun
-  - 
+  - PostProcessing
   - 
   - 
   - 

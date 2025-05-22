@@ -27,8 +27,8 @@ Material:
   stringTagMap:
     RenderType: TransparentCutout
   disabledShaderPasses:
-  - SHADOWCASTER
   - MOTIONVECTORS
+  - SHADOWCASTER
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
