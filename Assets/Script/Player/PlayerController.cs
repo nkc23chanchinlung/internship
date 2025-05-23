@@ -1,4 +1,5 @@
 
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,15 +13,15 @@ public class PlayerController : MonoBehaviour
 
     public bool IsCreate { get; set; }
 
-    private bool IsRun, IsJumping, InGround, IsWalking,IsWalkBack;//状態構造体
+    private bool IsRun, IsJumping, InGround, IsWalking,IsWalkBack,IsRoll;//状態構造体
     [Header("Player")]
     [SerializeField] private int MaxSpeed, JumpForce;
-    [SerializeField]private float acceleration;
+    [SerializeField]private float acceleration;      //加速度
     [SerializeField]public int MaxHp { get; private set; } = 100; //敵最大のHP
     [SerializeField]public int Hp { get; set; } = 100;//敵のHP
     [SerializeField] float rayy, raydis;  //Rayの長さ
     Vector3 moveDirection;
-    Vector3 lastMoveDirection;
+    Vector3 lastMoveDirection;  
     Vector3 roteuler;
     [SerializeField] float MouseSpeedX;
     [SerializeField] float MouseSpeedY;
@@ -54,13 +55,13 @@ public class PlayerController : MonoBehaviour
     {
     // GameOver();
 
-     if (InGround) 
+     if (InGround&&!IsRoll) 
      movement();
 
      Jump();
      CheakGround();
      Cameramethod();
-     playerAnimetor.Animetor(IsWalkBack, vec, InGround,IsShooting);
+     playerAnimetor.Animetor(IsWalkBack, vec, InGround,IsShooting,IsRoll);
     }
     /// <summary>
     /// 行動処理
@@ -99,6 +100,13 @@ public class PlayerController : MonoBehaviour
           GetComponent<Rigidbody>().AddForce(lastMoveDirection * acceleration, ForceMode.Impulse);
           InGround = false;
         }
+        if(Input.GetKeyDown(KeyCode.LeftShift) && InGround&&!IsRoll)
+        {
+           StartCoroutine(Roll());
+
+
+        }
+       
     }
     void CheakGround()
     {
@@ -148,5 +156,12 @@ public class PlayerController : MonoBehaviour
         {
             SceneManager.LoadScene("TitleScene");
         }
+    }
+    IEnumerator Roll()
+    {
+        IsRoll = true;
+        GetComponent<Rigidbody>().AddForce(lastMoveDirection, ForceMode.Impulse);
+        yield return new WaitForSeconds(0.5f);
+        IsRoll = false;
     }
 }
