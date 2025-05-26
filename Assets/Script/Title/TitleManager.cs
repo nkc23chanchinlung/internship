@@ -12,6 +12,8 @@ public class TitleManager : MonoBehaviour
     [Range(0, 100)]
     [SerializeField]float alpha = 0;
     public bool isStart { get; set; } = false;
+    [SerializeField]Loading loadingScript;
+    bool once = false;  
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -37,7 +39,10 @@ public class TitleManager : MonoBehaviour
         alpha++;
         if (alpha >= 100)
         {
-            SceneManager.LoadScene("GameScene");
+            if (!once) { 
+            loadingScript.NextScene();
+            once = true;
+        }
         }
     }
 }
