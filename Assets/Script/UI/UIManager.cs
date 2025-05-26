@@ -156,6 +156,6 @@ public class UIManager :UIEffect
     }
     public void FadeControl(string nextscene)
     {
-        turnblack(Fade,nextscene);
+        displayeffect(Fade,nextscene,0.5f);
     }
 }

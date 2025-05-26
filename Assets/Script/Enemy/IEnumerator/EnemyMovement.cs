@@ -26,5 +26,5 @@ public class EnemyMovement : MonoBehaviour
 }
 public interface IEnemyMovement
 {
-    void GetDamage(int damage);
+    void GetDamage(int damage,float hidetime);
 }

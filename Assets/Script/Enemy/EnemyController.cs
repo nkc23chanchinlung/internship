@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -34,6 +35,8 @@ public class EnemyController : EnemyMovement, IEnemyMovement
     private float angervalue;                                       //敵の怒り値
     private float dinstance;
     private float targetedge;
+
+    [SerializeField]GameObject lifebar;
     NavMeshAgent agent;
     [SerializeField]GameObject bulletprefab;
     [SerializeField] GameObject Damageprefeb;
@@ -50,11 +53,12 @@ public class EnemyController : EnemyMovement, IEnemyMovement
         uimanager = GameObject.Find("-----UIManager-----").GetComponent<UIManager>();
         Player = GameObject.FindGameObjectWithTag("Player").transform;
         House = GameObject.Find("House").transform;
+        lifebar=GetComponentInChildren<Lifebar>().gameObject;
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        lifebar.SetActive(false);
         target = House;
         agent = GetComponent<NavMeshAgent>();
         agent.stoppingDistance = 3f;
@@ -199,16 +203,22 @@ public class EnemyController : EnemyMovement, IEnemyMovement
         targetedge = targetsize.magnitude;
     }
 
-    public void GetDamage(int damage)
+    public void GetDamage(int damage,float hidetime)    //敵がダメージを受ける関数
     {
-        
+        lifebar.SetActive(true);
         angervalue += 60;
         uimanager.Damagevalue(transform, damage);
         Hp -= damage;
-        
-        
-
+        uimanager.displayeffect(lifebar.GetComponent<Image>(), null, 1.0f);
+        Invoke("hidelifebar", hidetime);
     }
+
+        IEnumerator hidelifebar()     //ライフバーを非表示にするコルーチン
+    {
+        uimanager.hideeffect(lifebar.GetComponent<Image>(), 1.0f);
+        return null;
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "PlayerBullet")
@@ -216,7 +226,7 @@ public class EnemyController : EnemyMovement, IEnemyMovement
             Bullet playerbullet = collision.gameObject.GetComponent<Bullet>();
             Destroy(collision.gameObject);
             int damage = playerbullet.damage;
-            GetDamage(damage);
+            GetDamage(damage,2.0f);
 
         }
 

@@ -125,12 +125,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
+  uimanager: {fileID: 0}
   Enemies: 2
   speed: 2
   leagth: 10
   target: {fileID: 0}
   Attack: 0
+  lifebar: {fileID: 0}
   bulletprefab: {fileID: 813729092485830864, guid: 5c75337c9733f5042874c3a06bef9254, type: 3}
+  Damageprefeb: {fileID: 0}
   Debug_Status: {fileID: 0}
 --- !u!54 &-107805846994527690
 Rigidbody:
@@ -319,7 +322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

@@ -33,23 +33,31 @@ public class UIEffect : MonoBehaviour
     }
 
     /// <summary>
-    /// 少しずつ黒くするエフェクト
+    /// 表示するエフェクト
     /// </summary>
     /// <param name="obj">色を変わる対象</param>
     /// <param name="nextscene">シーンの名前</param>
-    public void turnblack(Image obj, string nextscene)  
+    public void displayeffect(Image obj, string nextscene,float displaytimer)  
     {
         obj.gameObject.SetActive(true);
-        obj.DOFade(1, 0.5f).OnComplete(() =>
+        obj.DOFade(1, displaytimer).OnComplete(() =>
         {
-            obj.color = new Color(0, 0, 0, 0);
-            
+            //obj.color = new Color(0, 0, 0, 0);
+            if(nextscene!=null)
             SceneManager.LoadScene(nextscene, LoadSceneMode.Single);
-            obj.gameObject.SetActive(false);
+            //obj.gameObject.SetActive(false);
 
         });
     }  
-    
+    public void hideeffect(Image obj,float hidetimer)
+         //非表示するエフェクト
+    {
+        obj.DOFade(0, hidetimer).OnComplete(() =>
+        {
+            obj.gameObject.SetActive(false);
+        });
+    }
+
 
 
 }
