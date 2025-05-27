@@ -38,7 +38,7 @@ public class CamController : MonoBehaviour
     void Update()
     {
         Cam(_target);
-        obestcam();
+        //obestcam();
       
     }
     public void Cam(Transform target)
