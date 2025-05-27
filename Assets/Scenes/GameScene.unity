@@ -21357,7 +21357,7 @@ GameObject:
   - component: {fileID: 2009026493}
   - component: {fileID: 2009026494}
   m_Layer: 0
-  m_Name: Circle
+  m_Name: cutout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21373,8 +21373,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.016, y: -0.013, z: 0.347}
-  m_LocalScale: {x: 0.45020458, y: 0.45020458, z: 0.45020458}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 330585546}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -23287,7 +23287,7 @@ Transform:
   m_GameObject: {fileID: 2350652681782170776}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 189, y: 5.58, z: 192.7}
+  m_LocalPosition: {x: 190.35, y: 5.58, z: 192.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -25280,6 +25280,7 @@ GameObject:
   - component: {fileID: 1330795633}
   - component: {fileID: 1330795635}
   - component: {fileID: 1330795637}
+  - component: {fileID: 2350652681782170777}
   m_Layer: 9
   m_Name: PicoChan
   m_TagString: Player
@@ -25287,6 +25288,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!320 &2350652681782170777
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2350652681782170776}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: 4f999c229c6e3a048857feb03648a4a6, type: 2}
+  m_InitialState: 1
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: 1636751395882859184, guid: 4f999c229c6e3a048857feb03648a4a6, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 7789877955323428805, guid: 4f999c229c6e3a048857feb03648a4a6, type: 2}
+    value: {fileID: 0}
+  m_ExposedReferences:
+    m_References: []
 --- !u!1 &2360930408141793185
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,7 +1,9 @@
 
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Threading.Tasks;
 
 /// <summary>
 /// Playerの行動を管理するクラス
@@ -151,14 +153,20 @@ public class PlayerController : MonoBehaviour
 
             overridesources.transform.LookAt(lookPoint);
            
-            
+            _=WaitForAsync(0.1f,()=>transform.LookAt(lookPoint)); // 0.1秒後にプレイヤーの向きを更新する
             //Invoke("body", 0.1f); // 0.1秒後にbodyコルーチンを呼び出す
-            StartCoroutine(body(lookPoint));
+            //StartCoroutine(body(lookPoint));
 
             
 
 
         }
+    }
+    
+          private async Task WaitForAsync(float seconds, Action action)
+    {
+        await Task.Delay(TimeSpan.FromSeconds(seconds));
+        action();
     }
     IEnumerator body(Vector3 lookpoint)    // プレイヤーの向きを更新するコルーチン
     {
