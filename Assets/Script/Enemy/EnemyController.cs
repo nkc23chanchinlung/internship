@@ -5,10 +5,21 @@ using UnityEngine.UI;
 
 
 
+public enum enemylist
+{
+    shooter,
+    swordman,
+    secrordboss,
+    boss,
+    num,
+    
+}
+
 
 public class EnemyController : EnemyMovement, IEnemyMovement
 {
-    public int objnum { get; set; } = 1;                         //敵のオブジェクト番号
+    [SerializeField]
+    enemylist enemylist; //敵の種類を列挙型で定義
     [SerializeField]UIManager uimanager;
     enum Status { Idle, Doubt, Hostile,Attack, num };            //敵の状態
     Status status = Status.Hostile;
@@ -54,6 +65,8 @@ public class EnemyController : EnemyMovement, IEnemyMovement
         Player = GameObject.FindGameObjectWithTag("Player").transform;
         House = GameObject.Find("House").transform;
         lifebar=GetComponentInChildren<Lifebar>().gameObject;
+       
+        
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

@@ -43,7 +43,7 @@ public class EventManager : MonoBehaviour
         {
             image_dic.Add(Tr_Textarray[0], image);
         }
-        Debug.Log("wake");
+        
     }
     void Start()
     {

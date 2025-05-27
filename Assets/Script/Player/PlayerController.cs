@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(invincible);
+       
     // GameOver();
 
      if (InGround&&!IsRoll) 
@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
      Jump();
      CheakGround();
      Cameramethod();
-     playerAnimetor.Animetor(IsWalkBack, vec, InGround,IsShooting,IsRoll);
+     playerAnimetor.Animetor(IsWalkBack, vec, InGround,IsShooting,IsRoll,false);
     }
     /// <summary>
     /// 行動処理
