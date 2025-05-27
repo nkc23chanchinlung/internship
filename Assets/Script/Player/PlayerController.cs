@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     Vector3 roteuler;
     [SerializeField] float MouseSpeedX;
     [SerializeField] float MouseSpeedY;
+    [SerializeField] GameObject overridesources;
    
     
     Plane plane = new Plane();
@@ -34,8 +35,12 @@ public class PlayerController : MonoBehaviour
     float vec;
     float maxvec = 5f;
     public float friction = 0.5f;
-    
-   
+    bool invincible;
+
+
+
+
+
 
     private void Awake()
     {
@@ -53,6 +58,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(invincible);
     // GameOver();
 
      if (InGround&&!IsRoll) 
@@ -137,16 +143,33 @@ public class PlayerController : MonoBehaviour
         plane.SetNormalAndPosition(Vector3.up, transform.localPosition);
         if (plane.Raycast(ray, out distance))
         {
-
+           
             // 距離を元に交点を算出して、交点の方を向く
             var lookPoint = ray.GetPoint(distance);
-            transform.LookAt(lookPoint);
+            var absrot = overridesources.transform.rotation.y - transform.rotation.y;
+          
+
+            overridesources.transform.LookAt(lookPoint);
+           
+            
+            //Invoke("body", 0.1f); // 0.1秒後にbodyコルーチンを呼び出す
+            StartCoroutine(body(lookPoint));
+
+            
 
 
         }
     }
+    IEnumerator body(Vector3 lookpoint)    // プレイヤーの向きを更新するコルーチン
+    {
+        yield return new WaitForSeconds(0.1f);
+        transform.LookAt(lookpoint);
+        
+
+    }
     public void GetDamage()
     {
+        if (invincible) return; // 無敵状態ならダメージを受けない
         Hp -= 10;
        
     }
@@ -160,8 +183,10 @@ public class PlayerController : MonoBehaviour
     IEnumerator Roll()
     {
         IsRoll = true;
+        invincible = true;
         GetComponent<Rigidbody>().AddForce(lastMoveDirection, ForceMode.Impulse);
         yield return new WaitForSeconds(0.5f);
         IsRoll = false;
+        invincible = false;
     }
 }
