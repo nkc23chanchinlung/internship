@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     Plane plane = new Plane();
     float distance = 0;
     bool IsShooting = false;
+    [SerializeField] EquipSystem equipSystem;
     Rigidbody rigidbody;
     float vec;
     float maxvec = 5f;
@@ -69,7 +70,7 @@ public class PlayerController : MonoBehaviour
      Jump();
      CheakGround();
      Cameramethod();
-     playerAnimetor.Animetor(IsWalkBack, vec, InGround,IsShooting,IsRoll,false);
+     playerAnimetor.Animetor(IsWalkBack, vec, InGround,IsShooting,IsRoll,false,equipSystem.IsReloading);
     }
     /// <summary>
     /// 行動処理
@@ -148,10 +149,13 @@ public class PlayerController : MonoBehaviour
            
             // 距離を元に交点を算出して、交点の方を向く
             var lookPoint = ray.GetPoint(distance);
+            Debug.Log(distance);
             var absrot = overridesources.transform.rotation.y - transform.rotation.y;
-          
 
-            overridesources.transform.LookAt(lookPoint);
+            if (IsShooting) overridesources.transform.rotation = transform.rotation * Quaternion.Euler(0, 45, 0);  //射撃中マウスの向きに合わせる
+            
+            else  if (!IsShooting)
+                overridesources.transform.LookAt(lookPoint);
            
             _=WaitForAsync(0.1f,()=>transform.LookAt(lookPoint)); // 0.1秒後にプレイヤーの向きを更新する
             

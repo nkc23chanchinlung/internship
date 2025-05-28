@@ -43,7 +43,7 @@ public class AK47 : Gun
         {
             uiManager.SetMagazine(Magazine, MaxMagazine);
             Shoot();
-            if (Input.GetKeyDown(KeyCode.R))
+            if (Input.GetKeyDown(KeyCode.R)&&Magazine!=MaxMagazine)
             {
                 StartCoroutine(Reload(ReloadTime));
             }

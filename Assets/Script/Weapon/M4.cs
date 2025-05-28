@@ -34,7 +34,7 @@ public class M4 : Gun
         if (playerController != null)
         {
             Shoot();
-            if (Input.GetKeyDown(KeyCode.R))
+            if (Input.GetKeyDown(KeyCode.R) && Magazine != MaxMagazine)
             {
                 StartCoroutine(Reload(ReloadTime));
             }
