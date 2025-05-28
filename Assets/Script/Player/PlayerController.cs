@@ -154,8 +154,7 @@ public class PlayerController : MonoBehaviour
             overridesources.transform.LookAt(lookPoint);
            
             _=WaitForAsync(0.1f,()=>transform.LookAt(lookPoint)); // 0.1秒後にプレイヤーの向きを更新する
-            //Invoke("body", 0.1f); // 0.1秒後にbodyコルーチンを呼び出す
-            //StartCoroutine(body(lookPoint));
+            
 
             
 
@@ -163,17 +162,10 @@ public class PlayerController : MonoBehaviour
         }
     }
     
-          private async Task WaitForAsync(float seconds, Action action)
+     private async Task WaitForAsync(float seconds, Action action)
     {
         await Task.Delay(TimeSpan.FromSeconds(seconds));
         action();
-    }
-    IEnumerator body(Vector3 lookpoint)    // プレイヤーの向きを更新するコルーチン
-    {
-        yield return new WaitForSeconds(0.1f);
-        transform.LookAt(lookpoint);
-        
-
     }
     public void GetDamage()
     {
