@@ -25,6 +25,7 @@ public class M4 : Gun
         Damage = 25;
         Pow = 5;
         Repair = 1;
+        weaponnum = 1; //•Ší”Ô†
 
     }
 

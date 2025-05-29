@@ -34,6 +34,7 @@ public class AK47 : Gun
         Damage=10;
         Pow = 2;
         Repair = 1;
+        weaponnum = 0; //•Ší”Ô†
     }
 
     // Update is called once per frame

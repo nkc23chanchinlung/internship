@@ -18,6 +18,7 @@ public class Gun : Bullet
     public int Damage;
     public int Pow;
     public int Repair;
+    public int weaponnum;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 

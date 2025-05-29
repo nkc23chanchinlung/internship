@@ -1,27 +1,27 @@
-using System.Collections.Generic;
+
 using UnityEngine;
+using UnityEngine.UI;
 
 
 
-//未完成、配列のどころは変
+
 public class PreViewController : MonoBehaviour
 {
-    [SerializeField] GameObject[] PreViewObj;
+    [SerializeField] GameObject[] PreviewObj;
     int choosedweapon = 0;
     Vector3 rot = Vector3.zero;
-    Vector3 mousepos;
+   
     float mouseX,mouseY;
-    float speed;
-    public Dictionary<GameObject, int> previewobj_dic = new Dictionary<GameObject, int>();
-    GameObject choosedobj;
+    [SerializeField]int speed;
+    [SerializeField] GameObject PreviewPanel;
+    public bool IsPreviewing { get; private set; } = false;
+    [SerializeField]Text Weaponname;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
-   
+
     void Start()
     {
       
-        speed = 5f;
-       
     }
 
     // Update is called once per frame
@@ -31,7 +31,7 @@ public class PreViewController : MonoBehaviour
         
         mouseX *= 0.97f;
         mouseY *= 0.97f;
-        mousepos = Input.mousePosition;
+        
         if (Input.GetMouseButton(0))
         {
             mouseX += Input.GetAxis("Mouse X");
@@ -39,23 +39,25 @@ public class PreViewController : MonoBehaviour
             
 
         }
-        // rot += new Vector3(Input.GetAxis("Mouse Y"), -Input.GetAxis("Mouse X"), 0) * 2f * speed;
-        rot += new Vector3(mouseY, -mouseX, 0) * speed*Time.deltaTime;
-        PreViewObj[choosedweapon].transform.rotation = Quaternion.Euler(rot);
-    }
-    public void SetPreviewNum(GameObject gameObject)
-    {
-       
-        Showpreview(gameObject);
         
+        rot += new Vector3(mouseY, -mouseX, 0) * speed*Time.deltaTime;
+        if(PreviewPanel.activeSelf)
+        PreviewObj[choosedweapon].transform.rotation = Quaternion.Euler(rot+new Vector3(0,90,0));
+       
     }
-    void Showpreview(GameObject gameObject)
+
+    //武器のプレビューを表示する
+    public void Showpreview(int weaponnum,string name)
     {
-        for (int i = 0; i < PreViewObj.Length; i++)
+        Weaponname.text= name;
+        IsPreviewing = true;
+        PreviewPanel.SetActive(true);
+       
+        if (PreviewObj != null && PreviewObj.Length > 0)
         {
-            PreViewObj[i].SetActive(false);
+            PreviewObj[weaponnum].SetActive(true);
         }
-        Debug.Log(previewobj_dic[gameObject]);
-        PreViewObj[previewobj_dic[gameObject]].SetActive(true);
+        choosedweapon = weaponnum;
+
     }
 }

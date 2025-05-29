@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class Controller : PreViewController
+public class Controller : MonoBehaviour
 {
     [SerializeField]LayerMask layerMask;
     [SerializeField] GameObject[] Weapon;
@@ -13,6 +13,7 @@ public class Controller : PreViewController
     [SerializeField] Text Info;
     GameObject target;
     GameManager gameManager;
+    [SerializeField] PreViewController preViewController;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -27,10 +28,7 @@ public class Controller : PreViewController
         }
         Weapon =GameObject.FindGameObjectsWithTag("Weapon");
            // Powgague= GameObject.FindGameObjectsWithTag("Powgague");
-          for(int i=0;i<Weapon.Length; i++)
-        {
-            previewobj_dic.Add(Weapon[i], i);
-        }
+       
 
 
     }
@@ -45,13 +43,16 @@ public class Controller : PreViewController
             Powgague[i].SetActive(false);
         }
 
-
-        if (ItemChoose() != null)
+        if (!preViewController.IsPreviewing)
         {
-            ItemInfo(ItemChoose());
-            ItemInfoPanel.SetActive(true);
+            if (ItemChoose() != null)
+            {
+                ItemInfo(ItemChoose());
+                ItemInfoPanel.SetActive(true);
+            }
+            else ItemInfoPanel.SetActive(false);
         }
-        else ItemInfoPanel.SetActive(false);
+      
 
 
     }
@@ -77,7 +78,7 @@ public class Controller : PreViewController
            
             hit.collider.gameObject.GetComponent<Outline>().enabled = true;
             GetInfo(hit.collider.gameObject);
-            SetPreviewNum(hit.collider.gameObject);
+           
             return hit.collider.gameObject;
 
         }
@@ -91,9 +92,14 @@ public class Controller : PreViewController
         Gun Guninfo=target.GetComponent(typeof(Gun))as Gun;
        
         InfoValuegague(Guninfo.Pow,Guninfo.Repair);
+        if (Guninfo != null && Input.GetMouseButtonDown(0))
+        {
+          
+            preViewController.Showpreview(Guninfo.weaponnum,target.name);
+        }
 
     }
-    //ñ¢äÆê¨ÅAîzóÒÇÃÇ«Ç±ÇÎÇÕïœ
+    
     void InfoValuegague(int pow,int repair)
     {
         for(int i = 0; i < pow; i++)
