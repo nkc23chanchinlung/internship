@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class Controller : MonoBehaviour
+public class Controller : PreViewController
 {
     [SerializeField]LayerMask layerMask;
     [SerializeField] GameObject[] Weapon;
@@ -17,10 +17,20 @@ public class Controller : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        try
+        {
+            gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError("GameManager not found: " + e.Message);
+        }
         Weapon =GameObject.FindGameObjectsWithTag("Weapon");
            // Powgague= GameObject.FindGameObjectsWithTag("Powgague");
-          
+          for(int i=0;i<Weapon.Length; i++)
+        {
+            previewobj_dic.Add(Weapon[i], i);
+        }
 
 
     }
@@ -67,6 +77,7 @@ public class Controller : MonoBehaviour
            
             hit.collider.gameObject.GetComponent<Outline>().enabled = true;
             GetInfo(hit.collider.gameObject);
+            SetPreviewNum(hit.collider.gameObject);
             return hit.collider.gameObject;
 
         }
@@ -82,6 +93,7 @@ public class Controller : MonoBehaviour
         InfoValuegague(Guninfo.Pow,Guninfo.Repair);
 
     }
+    //ñ¢äÆê¨ÅAîzóÒÇÃÇ«Ç±ÇÎÇÕïœ
     void InfoValuegague(int pow,int repair)
     {
         for(int i = 0; i < pow; i++)
@@ -95,4 +107,5 @@ public class Controller : MonoBehaviour
     {
         SceneManager.LoadScene("GameScene");
     }
+   
 }
