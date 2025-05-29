@@ -60,4 +60,15 @@ public class PreViewController : MonoBehaviour
         choosedweapon = weaponnum;
 
     }
+    public void Quitpreview()
+    {
+        IsPreviewing = false;
+        PreviewPanel.SetActive(false);
+        
+            PreviewObj[choosedweapon].SetActive(false);
+        
+        rot = Vector3.zero;
+        mouseX = 0;
+        mouseY = 0;
+    }
 }

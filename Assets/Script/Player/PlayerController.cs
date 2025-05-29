@@ -149,7 +149,7 @@ public class PlayerController : MonoBehaviour
            
             // 距離を元に交点を算出して、交点の方を向く
             var lookPoint = ray.GetPoint(distance);
-            Debug.Log(distance);
+            
             var absrot = overridesources.transform.rotation.y - transform.rotation.y;
 
             if (IsShooting) overridesources.transform.rotation = transform.rotation * Quaternion.Euler(0, 45, 0);  //射撃中マウスの向きに合わせる
