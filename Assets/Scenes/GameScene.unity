@@ -16495,12 +16495,12 @@ Light:
   m_GameObject: {fileID: 1294154424}
   m_Enabled: 1
   serializedVersion: 11
-  m_Type: 2
+  m_Type: 0
   m_Color: {r: 1, g: 0.6458118, b: 0, a: 1}
-  m_Intensity: 5
+  m_Intensity: 21.11
   m_Range: 10
-  m_SpotAngle: 30
-  m_InnerSpotAngle: 21.80208
+  m_SpotAngle: 116.739136
+  m_InnerSpotAngle: 0
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -16559,13 +16559,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1294154424}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: -0.053, y: -1.235, z: 4.9608}
+  m_LocalRotation: {x: 0, y: -0.759199, z: 0.6508585, w: 0}
+  m_LocalPosition: {x: -0.052993774, y: -0.44, z: 4.9608}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2111201418}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 81.213, y: 180, z: 0}
 --- !u!1 &1298885739
 GameObject:
   m_ObjectHideFlags: 0
@@ -20997,6 +20997,10 @@ PrefabInstance:
     - target: {fileID: 7712989914733457495, guid: bbfc85054ff234e4f90bf024cbaa67fa, type: 3}
       propertyPath: m_Name
       value: PicoChan
+      objectReference: {fileID: 0}
+    - target: {fileID: 8906089659675472417, guid: bbfc85054ff234e4f90bf024cbaa67fa, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 14.03
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

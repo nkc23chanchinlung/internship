@@ -16,7 +16,7 @@ public enum enemylist
 }
 
 
-public class EnemyController : EnemyMovement, IEnemyMovement
+public class EnemyController : EnemyMovement
 {
     [SerializeField]
     enemylist enemylist; //敵の種類を列挙型で定義
@@ -58,6 +58,7 @@ public class EnemyController : EnemyMovement, IEnemyMovement
 
     [SerializeField] Text Debug_Status;
 
+    [SerializeField] GameObject Hand;
 
     private void Awake()
     {
@@ -102,7 +103,7 @@ public class EnemyController : EnemyMovement, IEnemyMovement
             Destroy(gameObject);
         }
     }
-    private void Debug_text()
+    private void Debug_text() //*****Debug用のテキスト表示関数*****
     {
         Debug_Status.text = "Status:" + status.ToString() + "\n" +
             "target:" + target.gameObject.name.ToString() + "\n" +
@@ -166,7 +167,7 @@ public class EnemyController : EnemyMovement, IEnemyMovement
             return;
         }
 
-        switch (status)
+        switch (status)                  //状態による行動の切り替え
         {
             case Status.Hostile:
                 if (target != null)
@@ -180,12 +181,20 @@ public class EnemyController : EnemyMovement, IEnemyMovement
                 }
                 break;
 
-            case Status.Attack:
+            case Status.Attack:            //攻撃制御
                 transform.LookAt(target);
                 if (!cooldown)
                 {
                     agent.isStopped = true;
-                StartCoroutine(Shoot(1,bulletprefab));
+                    if(enemylist == enemylist.shooter)
+                    {
+                        StartCoroutine(Shoot(bulletprefab, 0.5f));
+                    }
+                    else if (enemylist == enemylist.swordman)
+                    {
+                        Meleeattack(1.0f);
+                    }
+                    
                 }
                 break;
           
@@ -226,7 +235,7 @@ public class EnemyController : EnemyMovement, IEnemyMovement
         Invoke("hidelifebar", hidetime);
     }
 
-        IEnumerator hidelifebar()     //ライフバーを非表示にするコルーチン
+        IEnumerator hidelifebar()     　　　　　　　//ライフバーを非表示にするコルーチン
     {
         uimanager.hideeffect(lifebar.GetComponent<Image>(), 1.0f);
         return null;
@@ -242,6 +251,15 @@ public class EnemyController : EnemyMovement, IEnemyMovement
             GetDamage(damage,2.0f);
 
         }
+
+    }
+    public void Meleeattack(float cooldowntime)  　　　　　//アニメーションイベントから呼び出される攻撃関数
+    {
+        
+        BoxCollider col =Hand.GetComponentInChildren<BoxCollider>();
+        
+        StartCoroutine(meleeattack(col, cooldowntime));
+
 
     }
 

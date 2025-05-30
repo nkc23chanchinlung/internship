@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
@@ -12,7 +13,7 @@ public class EnemyMovement : MonoBehaviour
     /// <param name="cooldowntime">クールダウン</param>
     /// <param name="bullet">撃つオブジェクト</param>
     /// <returns></returns>
-    public IEnumerator Shoot(float cooldowntime,GameObject bullet)
+    public IEnumerator Shoot(GameObject bullet,float cooldowntime)
     {
         cooldown = true;
         Instantiate(
@@ -23,8 +24,19 @@ public class EnemyMovement : MonoBehaviour
         yield return new WaitForSeconds(cooldowntime);
         cooldown = false;
     }
+    /// <summary>
+    /// 近接攻撃のコルーチン
+    /// </summary>
+    /// <param name="col">攻撃判定</param>
+    /// <param name="cooldowntime">クールダウン</param>
+    /// <returns></returns>
+    public IEnumerator meleeattack(BoxCollider col,float cooldowntime)
+    {
+        cooldown = true;
+        col.enabled = true;
+        yield return new WaitForSeconds(cooldowntime);
+        col.enabled = false;
+
+    }
 }
-public interface IEnemyMovement
-{
-    void GetDamage(int damage,float hidetime);
-}
+

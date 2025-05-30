@@ -260,6 +260,7 @@ MonoBehaviour:
   bulletprefab: {fileID: 0}
   Damageprefeb: {fileID: 0}
   Debug_Status: {fileID: 0}
+  Hand: {fileID: 2680056497890171940}
 --- !u!195 &1946757761288841471
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -632,9 +633,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3103203058921620641}
+  - component: {fileID: 6862901968205868378}
   m_Layer: 0
   m_Name: mixamorig:LeftHand
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -654,6 +656,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3665638142781918635}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6862901968205868378
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2680056497890171940}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.7, y: 0.7, z: 0.7}
+  m_Center: {x: 0.12, y: 0.4, z: 0}
 --- !u!1 &2749218214520570015
 GameObject:
   m_ObjectHideFlags: 0

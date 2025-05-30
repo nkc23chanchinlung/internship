@@ -28,11 +28,7 @@ public class emenybullet : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            PlayerController player = collision.gameObject.GetComponent<PlayerController>();
             Destroy(gameObject);
-            
-            player.GetDamage();
-            
         }
         else if (collision.gameObject.tag == "GameObj")
         {

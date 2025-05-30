@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     [Header("Player")]
     [SerializeField] private int MaxSpeed, JumpForce;
     [SerializeField]private float acceleration;      //加速度
-    [SerializeField]public int MaxHp { get; private set; } = 100; //敵最大のHP
+    [SerializeField]public int MaxHp { get; private set; } = 100; //最大のHP
     [SerializeField]public int Hp { get; set; } = 100;//敵のHP
     [SerializeField] float rayy, raydis;  //Rayの長さ
     Vector3 moveDirection;
@@ -193,4 +193,12 @@ public class PlayerController : MonoBehaviour
         IsRoll = false;
         invincible = false;
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            GetDamage();
+        }
+    }
 }
+

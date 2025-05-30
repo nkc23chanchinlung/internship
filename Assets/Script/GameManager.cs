@@ -4,21 +4,24 @@ public class GameManager : MonoBehaviour
 {
    static bool GameManagerExist = false;
     bool IsStarted;
-    public int Day { get; set; } = 3;
+    public int Day { get; set; }
     int Enemyvalue;
     
     bool clear;
-   
-        
 
-    
+
+
+    private void Awake()
+    {
+        Application.targetFrameRate = 60;
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
 
         DontDestroyOnLoad(this.gameObject);
         CheakGameManagerExist();
-        Application.targetFrameRate = 60;
+        
 
     }
 
@@ -42,5 +45,9 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+    }
+    void Setdata(int day)
+    {
+        Day = day;
     }
 }
