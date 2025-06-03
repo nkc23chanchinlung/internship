@@ -1,29 +1,22 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
 
 
-public enum enemylist
+
+
+/// <summary>
+/// 敵の基底クラス
+/// </summary>
+public class Enemy : EnemyMovement
 {
-    shooter,
-    swordman,
-    secrordboss,
-    boss,
-    num,
+   
     
-}
-
-
-public class EnemyController : EnemyMovement
-{
-    [SerializeField]
-    enemylist enemylist; //敵の種類を列挙型で定義
     [SerializeField]UIManager uimanager;
-    enum Status { Idle, Doubt, Hostile,Attack, num };            //敵の状態
-    Status status = Status.Hostile;
+    protected enum Status { Idle, Doubt, Hostile,Attack, num };            //敵の状態
+    protected Status status = Status.Hostile;
     [Header("索敵範囲")]
     [Tooltip("敵の索敵範囲")]
     [Range(1, 10)]                                                //Inspector上での表示
@@ -33,12 +26,12 @@ public class EnemyController : EnemyMovement
    
 
    
-    [SerializeField] Transform target;
-    Transform Player;
+    protected Transform target;
+    protected Transform Player;
     Transform House;
 
     [Header("敵のステータス")]
-    protected int MaxHp;   //敵の最大HP
+    public int MaxHp;   //敵の最大HP
     public int Hp;      //敵のHP   
     public int Attack;  //攻撃力
     public int defense; //防御力
@@ -52,8 +45,8 @@ public class EnemyController : EnemyMovement
     private float dinstance;
     private float targetedge;
 
-    [SerializeField]GameObject lifebar;
-    NavMeshAgent agent;
+    [SerializeField]protected GameObject lifebar;
+    protected NavMeshAgent agent;
     [SerializeField]GameObject bulletprefab;
     [SerializeField] GameObject Damageprefeb;
    
@@ -66,15 +59,16 @@ public class EnemyController : EnemyMovement
     [SerializeField] GameObject Hand;
     Rigidbody rb;
 
-    ObjAnimetor enemyAnimetor; //敵のアニメーションを管理するクラス
+    public ObjAnimetor enemyAnimetor; //敵のアニメーションを管理するクラス
 
-    private void Awake()
+    protected virtual void Init()
     {
+        
         uimanager = GameObject.Find("-----UIManager-----").GetComponent<UIManager>();
         Player = GameObject.FindGameObjectWithTag("Player").transform;
         House = GameObject.Find("House").transform;
-        lifebar=GetComponentInChildren<Lifebar>().gameObject;
-        enemyAnimetor = new ObjAnimetor(1f, gameObject); //敵のアニメーションを管理するクラスの初期化
+        
+        
         rb = GetComponent<Rigidbody>();
 
     }
@@ -99,20 +93,20 @@ public class EnemyController : EnemyMovement
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if(Debug_Status != null) Debug_text();
+    //void Update()
+    //{
+    //    if(Debug_Status != null) Debug_text();
 
-        angerprocess();
-        visibility();
-        movement();
+    //    angerprocess();
+    //    visibility();
+    //    movement();
        
-        if(Hp <= 0)
-        {
-            Destroy(gameObject);
-        }
+    //    if(Hp <= 0)
+    //    {
+    //        Destroy(gameObject);
+    //    }
         
-    }
+    //}
     protected void Debug_text() //*****Debug用のテキスト表示関数*****
     {
         Debug_Status.text = "Status:" + status.ToString() + "\n" +
@@ -161,11 +155,10 @@ public class EnemyController : EnemyMovement
     /// <summary>
     /// 行動の関数
     /// </summary>
-    protected void movement()
+    protected  virtual void movement()
     {
-        
-        if(enemylist==enemylist.swordman)
-        enemyAnimetor.Animetor(false, agent.speed*5,false, false, false,atking, false); //アニメーションの実行
+
+      
         //状態切り替え
         dinstance = Vector3.Distance(target.position, transform.position);
         if (dinstance >= 5) angervalue--;
@@ -179,38 +172,38 @@ public class EnemyController : EnemyMovement
             return;
         }
 
-        switch (status)                  //状態による行動の切り替え
-        {
-            case Status.Hostile:
-                if (target != null)
-                {
-                    agent.isStopped = false;
-                    agent.SetDestination(target.position);
-                }
-                else
-                {
-                    agent.isStopped = true;
-                }
-                break;
+        //switch (status)                  //状態による行動の切り替え
+        //{
+        //    case Status.Hostile:
+        //        if (target != null)
+        //        {
+        //            agent.isStopped = false;
+        //            agent.SetDestination(target.position);
+        //        }
+        //        else
+        //        {
+        //            agent.isStopped = true;
+        //        }
+        //        break;
 
-            case Status.Attack:            //攻撃制御
-                transform.LookAt(target);
-                if (!atking)
-                {
-                    agent.isStopped = true;
-                    if(enemylist == enemylist.shooter)
-                    {
-                        StartCoroutine(Shoot(bulletprefab, 0.5f));
-                    }
-                    else if (enemylist == enemylist.swordman)
-                    {
-                        Meleeattack(1.0f);
-                    }
+        //    case Status.Attack:            //攻撃制御
+        //        transform.LookAt(target);
+        //        if (!atking)
+        //        {
+        //            agent.isStopped = true;
+        //            if(enemylist == enemylist.shooter)
+        //            {
+        //                StartCoroutine(Shoot(bulletprefab, 0.5f));
+        //            }
+        //            else if (enemylist == enemylist.swordman)
+        //            {
+        //                Meleeattack(1.0f);
+        //            }
                     
-                }
-                break;
+        //        }
+        //        break;
           
-        }
+        //}
 
       
     }
@@ -260,6 +253,12 @@ public class EnemyController : EnemyMovement
        
         StartCoroutine(meleeattack(col, cooldowntime));
 
+    }
+    protected void Setlifebar(GameObject bar,float Hp,float MaxHP)
+    {
+        Image hpbar = bar.GetComponent<Image>();
+        hpbar.fillAmount = Hp / MaxHp;
+        transform.rotation = Camera.main.transform.rotation;
     }
 
 }

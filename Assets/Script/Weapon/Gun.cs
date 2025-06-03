@@ -22,9 +22,14 @@ public class Gun : Bullet
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
-    public virtual void Shoot() { }
-   
-    public IEnumerator Reload(float ReloadTime)
+    protected virtual void Shoot()
+    {
+        uiManager.SetMagazine(Magazine, MaxMagazine);
+        cooldown -= Time.deltaTime;
+        
+        }
+
+    protected IEnumerator Reload(float ReloadTime)
     {
         
         if (!IsReloading)

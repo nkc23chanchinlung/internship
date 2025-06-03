@@ -185,10 +185,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3589312015150242288}
   - component: {fileID: 5126971540705983703}
-  - component: {fileID: -354010376780757166}
   - component: {fileID: 1946757761288841471}
   - component: {fileID: 7905160096476244643}
   - component: {fileID: 3447295075171627739}
+  - component: {fileID: 8103021106751668729}
   m_Layer: 0
   m_Name: Mutant Swiping
   m_TagString: Untagged
@@ -236,31 +236,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-354010376780757166
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 914530037171260588}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7a73373afc702f418376f209e189d39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  atking: 0
-  enemylist: 1
-  uimanager: {fileID: 0}
-  Enemies: 2
-  speed: 0
-  leagth: 2
-  target: {fileID: 0}
-  Attack: 0
-  lifebar: {fileID: 0}
-  bulletprefab: {fileID: 0}
-  Damageprefeb: {fileID: 0}
-  Debug_Status: {fileID: 0}
-  Hand: {fileID: 2680056497890171940}
 --- !u!195 &1946757761288841471
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -331,6 +306,32 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1.39, z: 1}
   m_Center: {x: 0, y: 0.74, z: 0}
+--- !u!114 &8103021106751668729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 914530037171260588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95a21a0f9e0e1f24ebb19fc3660a919e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  atking: 0
+  uimanager: {fileID: 0}
+  Enemies: 1
+  speed: 0
+  leagth: 0
+  MaxHp: 0
+  Hp: 0
+  Attack: 0
+  defense: 0
+  lifebar: {fileID: 4969602160855546001}
+  bulletprefab: {fileID: 0}
+  Damageprefeb: {fileID: 0}
+  Debug_Status: {fileID: 0}
+  Hand: {fileID: 0}
 --- !u!1 &947910014983885748
 GameObject:
   m_ObjectHideFlags: 0

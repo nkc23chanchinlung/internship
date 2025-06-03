@@ -42,10 +42,9 @@ public class M4 : Gun
         }
 
     }
-    public override void Shoot()//ŽËŒ‚
+    protected override void Shoot()//ŽËŒ‚
     {
-        uiManager.SetMagazine(Magazine, MaxMagazine);
-        cooldown -= Time.deltaTime;
+        base.Shoot();
 
         if (Input.GetMouseButton(0) &&
             !IsReloading &&
@@ -63,7 +62,7 @@ public class M4 : Gun
 
                 Bullet M4bullet = bullet.GetComponent<Bullet>();
                 M4bullet.damage = Damage;
-                bullet.tag = "PlayerBullet";
+                bullet.tag = "PlayerAtk";
             }
             Magazine--;
             cooldown = MaxCooldown;

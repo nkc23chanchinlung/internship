@@ -42,7 +42,7 @@ public class AK47 : Gun
     {
         if (playerController != null)
         {
-            uiManager.SetMagazine(Magazine, MaxMagazine);
+            
             Shoot();
             if (Input.GetKeyDown(KeyCode.R)&&Magazine!=MaxMagazine)
             {
@@ -50,10 +50,10 @@ public class AK47 : Gun
             }
         }
     }
-    public override void Shoot() //ŽËŒ‚
+    protected override void Shoot() //ŽËŒ‚
     {
-        cooldown -= Time.deltaTime;
 
+        base.Shoot();
         if (Input.GetMouseButton(0) &&
             !IsReloading &&
             cooldown <= 0 &&
@@ -68,7 +68,7 @@ public class AK47 : Gun
 
             Bullet ak47bullet = bullet.GetComponent<Bullet>();
             ak47bullet.damage = Damage;
-            bullet.tag = "PlayerBullet";
+            bullet.tag = "PlayerAtk";
             Magazine--;
             cooldown = MaxCooldown;
 

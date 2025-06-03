@@ -113,6 +113,11 @@ public class UIManager :UIEffect
     {
         panel.SetActive(!panel.activeSelf);
     }
+    /// <summary>
+    /// マガジンのUI
+    /// </summary>
+    /// <param name="Magazine">マガジン</param>
+    /// <param name="MaxMagazine">最大のマガジン</param>
     public void SetMagazine(int Magazine,int MaxMagazine)
     {
        Magazine_Text.text=Magazine.ToString() + "/" + MaxMagazine.ToString();
@@ -123,11 +128,11 @@ public class UIManager :UIEffect
     {
         StorePanel.SetActive(true);
     }
-    void Hpbar()
+    void Hpbar()                                                                          //プレイヤーのHPバー
     {
         Lifebar.fillAmount = (float)playerController.Hp / (float)playerController.MaxHp;
     }
-    void HouseHpbar()
+    void HouseHpbar()                                                                     //家のHPバー
     {
        House_Hpbar.fillAmount = (float)house.Hp / (float)house.MaxHp;
     }
