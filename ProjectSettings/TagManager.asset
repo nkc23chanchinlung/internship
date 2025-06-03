@@ -9,11 +9,12 @@ TagManager:
   - Enemy
   - House
   - CreateMenuButton
-  - PlayerBullet
   - Tree
   - Weapon
   - Powgague
   - GameManager
+  - EnemyAtk
+  - PlayerAtk
   layers:
   - Default
   - TransparentFX
