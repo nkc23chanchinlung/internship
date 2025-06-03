@@ -248,12 +248,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7a73373afc702f418376f209e189d39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 0
+  atking: 0
   enemylist: 1
   uimanager: {fileID: 0}
-  Enemies: 1
+  Enemies: 2
   speed: 0
-  leagth: 0
+  leagth: 2
   target: {fileID: 0}
   Attack: 0
   lifebar: {fileID: 0}
@@ -272,7 +272,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
-  m_Acceleration: 8
+  m_Acceleration: 0.2
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
@@ -636,7 +636,7 @@ GameObject:
   - component: {fileID: 6862901968205868378}
   m_Layer: 0
   m_Name: mixamorig:LeftHand
-  m_TagString: Enemy
+  m_TagString: EnemyAtk
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

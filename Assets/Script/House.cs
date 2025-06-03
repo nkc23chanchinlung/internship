@@ -30,4 +30,11 @@ void Start()
     {
         Hp -= damage;
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "EnemyAtk")
+        {
+            GetDamage(10);
+        }
+    }
 }

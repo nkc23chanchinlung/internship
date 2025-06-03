@@ -30,12 +30,13 @@ public class ObjAnimetor : MonoBehaviour
     public void Animetor(bool iswalkback, float speed, bool inGround, bool Shooting,bool isroll,bool atk,bool reloading)
     {
         
-        anim.SetBool("WalkBack", iswalkback);
-        anim.SetFloat("speed", speed / 5);
+       // anim.SetBool("WalkBack", iswalkback);
+        anim.SetFloat("Speed", speed / 5);
         anim.SetBool("Jump", !inGround);
         anim.SetBool("Shooting",Shooting );
         anim.speed = animSpeed;
         anim.SetBool("IsRoll", isroll);
+        anim.SetBool("Atk", atk);
         anim.SetBool("reloading", reloading);
     }
 }

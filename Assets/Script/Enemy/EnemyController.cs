@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -30,15 +31,19 @@ public class EnemyController : EnemyMovement
     [SerializeField] int speed;
     [SerializeField] int leagth;
    
+
+   
     [SerializeField] Transform target;
     Transform Player;
     Transform House;
 
     [Header("敵のステータス")]
-    [SerializeField] public int MaxHp { get; private set; } = 100; //敵の最大HP
-    [SerializeField]public int Hp { get; set; } = 100;              //敵のHP   
-    [SerializeField] int Attack;
-    
+    protected int MaxHp;   //敵の最大HP
+    public int Hp;      //敵のHP   
+    public int Attack;  //攻撃力
+    public int defense; //防御力
+
+
 
     private const float intervalX = 0.1f;
     private const float intervalY = 0.1f;
@@ -59,6 +64,9 @@ public class EnemyController : EnemyMovement
     [SerializeField] Text Debug_Status;
 
     [SerializeField] GameObject Hand;
+    Rigidbody rb;
+
+    ObjAnimetor enemyAnimetor; //敵のアニメーションを管理するクラス
 
     private void Awake()
     {
@@ -66,8 +74,9 @@ public class EnemyController : EnemyMovement
         Player = GameObject.FindGameObjectWithTag("Player").transform;
         House = GameObject.Find("House").transform;
         lifebar=GetComponentInChildren<Lifebar>().gameObject;
-       
-        
+        enemyAnimetor = new ObjAnimetor(1f, gameObject); //敵のアニメーションを管理するクラスの初期化
+        rb = GetComponent<Rigidbody>();
+
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -102,14 +111,15 @@ public class EnemyController : EnemyMovement
         {
             Destroy(gameObject);
         }
+        
     }
-    private void Debug_text() //*****Debug用のテキスト表示関数*****
+    protected void Debug_text() //*****Debug用のテキスト表示関数*****
     {
         Debug_Status.text = "Status:" + status.ToString() + "\n" +
             "target:" + target.gameObject.name.ToString() + "\n" +
             "anger:" + angervalue.ToString() + "\n";
     }
-    void angerprocess()
+    protected void angerprocess()
     {
         if (angervalue >= 90) target = Player;
         else if(angervalue <= 0) target = House; //怒り値が0の時は家をターゲットにする
@@ -118,7 +128,7 @@ public class EnemyController : EnemyMovement
     /// <summary>
     /// 索敵の関数
     /// </summary>
-    void visibility()
+    protected void visibility()
     {
         for (int i=-Enemies; i< Enemies; i++)
         {
@@ -151,9 +161,11 @@ public class EnemyController : EnemyMovement
     /// <summary>
     /// 行動の関数
     /// </summary>
-    private void movement()
+    protected void movement()
     {
-
+        
+        if(enemylist==enemylist.swordman)
+        enemyAnimetor.Animetor(false, agent.speed*5,false, false, false,atking, false); //アニメーションの実行
         //状態切り替え
         dinstance = Vector3.Distance(target.position, transform.position);
         if (dinstance >= 5) angervalue--;
@@ -183,7 +195,7 @@ public class EnemyController : EnemyMovement
 
             case Status.Attack:            //攻撃制御
                 transform.LookAt(target);
-                if (!cooldown)
+                if (!atking)
                 {
                     agent.isStopped = true;
                     if(enemylist == enemylist.shooter)
@@ -202,11 +214,11 @@ public class EnemyController : EnemyMovement
 
       
     }
-   
+
     // 弾の生成をまとめた関数
 
     //敵対の状態の処理
-    void Hostile(RaycastHit hit)
+    protected void Hostile(RaycastHit hit)
     {
         target = hit.collider.transform;
         status = Status.Hostile;
@@ -225,7 +237,7 @@ public class EnemyController : EnemyMovement
         targetedge = targetsize.magnitude;
     }
 
-    public void GetDamage(int damage,float hidetime)    //敵がダメージを受ける関数
+    protected void GetDamage(int damage,float hidetime)    //敵がダメージを受ける関数
     {
         lifebar.SetActive(true);
         angervalue += 60;
@@ -241,25 +253,12 @@ public class EnemyController : EnemyMovement
         return null;
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "PlayerBullet")
-        {
-            Bullet playerbullet = collision.gameObject.GetComponent<Bullet>();
-            Destroy(collision.gameObject);
-            int damage = playerbullet.damage;
-            GetDamage(damage,2.0f);
 
-        }
-
-    }
-    public void Meleeattack(float cooldowntime)  　　　　　//アニメーションイベントから呼び出される攻撃関数
+    protected void Meleeattack(float cooldowntime)  　　　　　//アニメーションイベントから呼び出される攻撃関数
     {
-        
         BoxCollider col =Hand.GetComponentInChildren<BoxCollider>();
-        
+       
         StartCoroutine(meleeattack(col, cooldowntime));
-
 
     }
 

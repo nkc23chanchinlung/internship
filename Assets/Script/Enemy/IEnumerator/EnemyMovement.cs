@@ -5,7 +5,8 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     //敵の行動関する基底クラス
-    public bool cooldown = false;
+    public bool atking = false;
+    
 
     /// <summary>
     /// 敵の射撃関数
@@ -15,14 +16,14 @@ public class EnemyMovement : MonoBehaviour
     /// <returns></returns>
     public IEnumerator Shoot(GameObject bullet,float cooldowntime)
     {
-        cooldown = true;
+        atking = true;
         Instantiate(
            bullet,
             transform.position + transform.forward,
             transform.rotation
         );
         yield return new WaitForSeconds(cooldowntime);
-        cooldown = false;
+        atking = false;
     }
     /// <summary>
     /// 近接攻撃のコルーチン
@@ -32,10 +33,13 @@ public class EnemyMovement : MonoBehaviour
     /// <returns></returns>
     public IEnumerator meleeattack(BoxCollider col,float cooldowntime)
     {
-        cooldown = true;
+        
+        atking = true;
         col.enabled = true;
         yield return new WaitForSeconds(cooldowntime);
         col.enabled = false;
+        atking = false;
+        
 
     }
 }
