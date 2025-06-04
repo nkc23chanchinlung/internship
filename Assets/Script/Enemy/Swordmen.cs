@@ -5,7 +5,7 @@ public class Swordmen : Enemy
     
     private void Awake()
     {
-        Init();//初期化
+        
 
         
        
@@ -14,26 +14,39 @@ public class Swordmen : Enemy
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Init();//初期化
+        lifebar.SetActive(false);
+        agent.stoppingDistance = 0.5f;
+        status = Status.Hostile; //初期状態を敵対に設定
+        enemyAnimetor = new ObjAnimetor(1f, gameObject); //敵のアニメーションを管理するクラスの初期化
         
+
     }
     protected override void Init()
     {
         base.Init(); //親クラスの初期化を呼び出す
-        enemyAnimetor = new ObjAnimetor(1f, gameObject); //敵のアニメーションを管理するクラスの初期化
+        
         MaxHp = 200; //敵の最大HP
         Hp = MaxHp;
         Attack = 20;
         defense = 10;
         target = Player; //ターゲットをプレイヤーに設定
+        agent.SetDestination(target.position);
 
     }
 
     // Update is called once per frame
     void Update()
     {
+       
         Setlifebar(lifebar, Hp, MaxHp); //ライフバーの更新
-        //movement();
-        enemyAnimetor.Animetor(false, agent.speed * 5, false, false, false, atking, false); //アニメーションの実行
+        movement();
+        visibility();
+        Debug_text();
+
+        Vector3 velocity = agent.velocity; //NavMeshAgentの速度を取得
+        speed = velocity.magnitude; //速度の大きさを取得
+        enemyAnimetor.Animetor(false, speed * 5, false, false, false, atking, false); //アニメーションの実行
     }
     private void OnCollisionEnter(Collision collision)
     {

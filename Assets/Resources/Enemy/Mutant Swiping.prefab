@@ -292,7 +292,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 914530037171260588}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 88da6ff170f113747b7c1732eea59d43, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -320,9 +320,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   atking: 0
   uimanager: {fileID: 0}
-  Enemies: 1
-  speed: 0
-  leagth: 0
+  Enemies: 2
+  leagth: 2
   MaxHp: 0
   Hp: 0
   Attack: 0
@@ -330,8 +329,8 @@ MonoBehaviour:
   lifebar: {fileID: 4969602160855546001}
   bulletprefab: {fileID: 0}
   Damageprefeb: {fileID: 0}
-  Debug_Status: {fileID: 0}
-  Hand: {fileID: 0}
+  Debug_Status: {fileID: 6033357283543400433}
+  Hand: {fileID: 2680056497890171940}
 --- !u!1 &947910014983885748
 GameObject:
   m_ObjectHideFlags: 0

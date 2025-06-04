@@ -21,7 +21,7 @@ public class Enemy : EnemyMovement
     [Tooltip("敵の索敵範囲")]
     [Range(1, 10)]                                                //Inspector上での表示
     [SerializeField] int Enemies;
-    [SerializeField] int speed;
+    protected float speed;
     [SerializeField] int leagth;
    
 
@@ -59,7 +59,7 @@ public class Enemy : EnemyMovement
     [SerializeField] GameObject Hand;
     Rigidbody rb;
 
-    public ObjAnimetor enemyAnimetor; //敵のアニメーションを管理するクラス
+    protected ObjAnimetor enemyAnimetor; //敵のアニメーションを管理するクラス
 
     protected virtual void Init()
     {
@@ -67,46 +67,15 @@ public class Enemy : EnemyMovement
         uimanager = GameObject.Find("-----UIManager-----").GetComponent<UIManager>();
         Player = GameObject.FindGameObjectWithTag("Player").transform;
         House = GameObject.Find("House").transform;
+       
+        agent = GetComponent<NavMeshAgent>();
         
-        
+
         rb = GetComponent<Rigidbody>();
 
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        lifebar.SetActive(false);
-        target = House;
-        agent = GetComponent<NavMeshAgent>();
-        agent.stoppingDistance = 3f;
-
-        //debug用のテキスト表示
-        try
-        {
-            Debug_Status = GetComponentInChildren<Text>();
-        }
-        catch 
-        {
-            Debug_Status = null;
-            Debug.LogError("Debug_Status is not assigned in the inspector.");
-        }
-    }
-
-    // Update is called once per frame
-    //void Update()
-    //{
-    //    if(Debug_Status != null) Debug_text();
-
-    //    angerprocess();
-    //    visibility();
-    //    movement();
-       
-    //    if(Hp <= 0)
-    //    {
-    //        Destroy(gameObject);
-    //    }
-        
-    //}
+    
     protected void Debug_text() //*****Debug用のテキスト表示関数*****
     {
         Debug_Status.text = "Status:" + status.ToString() + "\n" +
@@ -164,46 +133,18 @@ public class Enemy : EnemyMovement
         if (dinstance >= 5) angervalue--;
         angervalue = Mathf.Clamp(angervalue, 0, 100);
 
-        if (dinstance<=targetedge+2) status = Status.Attack;
-        
+        Debug.Log(agent.pathPending);
+        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance&&target==Player)
+        {
+           
+        }
+
+
         if (agent == null || !agent.isOnNavMesh)
         {
             Debug.LogWarning("Agent is not on NavMesh or is missing.");
             return;
         }
-
-        //switch (status)                  //状態による行動の切り替え
-        //{
-        //    case Status.Hostile:
-        //        if (target != null)
-        //        {
-        //            agent.isStopped = false;
-        //            agent.SetDestination(target.position);
-        //        }
-        //        else
-        //        {
-        //            agent.isStopped = true;
-        //        }
-        //        break;
-
-        //    case Status.Attack:            //攻撃制御
-        //        transform.LookAt(target);
-        //        if (!atking)
-        //        {
-        //            agent.isStopped = true;
-        //            if(enemylist == enemylist.shooter)
-        //            {
-        //                StartCoroutine(Shoot(bulletprefab, 0.5f));
-        //            }
-        //            else if (enemylist == enemylist.swordman)
-        //            {
-        //                Meleeattack(1.0f);
-        //            }
-                    
-        //        }
-        //        break;
-          
-        //}
 
       
     }
@@ -258,7 +199,7 @@ public class Enemy : EnemyMovement
     {
         Image hpbar = bar.GetComponent<Image>();
         hpbar.fillAmount = Hp / MaxHp;
-        transform.rotation = Camera.main.transform.rotation;
+        hpbar.transform.rotation = Camera.main.transform.rotation;
     }
 
 }
