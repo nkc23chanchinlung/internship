@@ -16,7 +16,7 @@ public class Swordmen : Enemy
     {
         Init();//初期化
         lifebar.SetActive(false);
-        agent.stoppingDistance = 0.5f;
+        agent.stoppingDistance =1f;
         status = Status.Hostile; //初期状態を敵対に設定
         enemyAnimetor = new ObjAnimetor(1f, gameObject); //敵のアニメーションを管理するクラスの初期化
         
