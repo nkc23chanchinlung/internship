@@ -1,15 +1,17 @@
 
+using Unity.VisualScripting;
 using UnityEngine;
 
 
 public class EnemyRespon : MonoBehaviour
 {
+    [SerializeField] Transform[] erea;
     [SerializeField] int Maxdistance;
     [SerializeField] int Mindistance;
     [SerializeField] int x, z;
     
-    public int maxEnemies = 10;
-    public int size = 50;
+    public int maxEnemies = 3;
+    public int size =3;
     [SerializeField] UnityEngine.GameObject[] Enemyprefeb;
     [SerializeField] UnityEngine.GameObject Target;
     public bool dayupdate { get; set; } = false;
@@ -31,22 +33,31 @@ public class EnemyRespon : MonoBehaviour
 
         }   
     }
-    public void Respon(UnityEngine.GameObject Target)
+    public void Respon(GameObject Target)
     {
-        for (int x = -this.x; x < this.x; x++)
+        //for (int x = -this.x; x < this.x; x++)
+        //{
+        //    for (int z = -this.z; z < this.z; z++)
+        //    {
+        //        if(Target!=null)
+        //        Instantiate(Enemyprefeb[Random.Range(0, Enemyprefeb.Length)], 
+        //            new Vector3(x * Random.Range(Mindistance, Maxdistance),
+        //            0, z * Random.Range(Mindistance, Maxdistance)) + Target.transform.position, Quaternion.identity);
+        //        else Instantiate(Enemyprefeb[Random.Range(0, Enemyprefeb.Length)], 
+        //            new Vector3(x * Random.Range(Mindistance, Maxdistance),
+        //            0, 
+        //            z * Random.Range(Mindistance, Maxdistance)), Quaternion.identity);
+        //    }
+        //}
+        for (int e = 0; e < erea.Length; e++)
         {
-            for (int z = -this.z; z < this.z; z++)
+            for (int i = 0; i < maxEnemies; i++)
             {
-                if(Target!=null)
-                Instantiate(Enemyprefeb[Random.Range(0, Enemyprefeb.Length)], 
-                    new Vector3(x * Random.Range(Mindistance, Maxdistance),
-                    0, z * Random.Range(Mindistance, Maxdistance)) + Target.transform.position, Quaternion.identity);
-                else Instantiate(Enemyprefeb[Random.Range(0, Enemyprefeb.Length)], 
-                    new Vector3(x * Random.Range(Mindistance, Maxdistance),
-                    0, 
-                    z * Random.Range(Mindistance, Maxdistance)), Quaternion.identity);
+                float posx = Mathf.Sin(Mathf.PI * 2 * i / maxEnemies) * size;
+                float posz = Mathf.Cos(Mathf.PI * 2 * i / maxEnemies) * size;
+                Instantiate(Enemyprefeb[Random.Range(0, Enemyprefeb.Length)], new Vector3(posx, 0, posz) + erea[e].transform.position, Quaternion.identity);
+
             }
         }
-       
     }
 }

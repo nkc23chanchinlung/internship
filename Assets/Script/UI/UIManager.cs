@@ -13,6 +13,7 @@ public class UIManager :UIEffect
     [SerializeField] GameObject StorePanel;
     [SerializeField] GameObject WeaponPanel;
     [SerializeField] GameObject StoryPanel;
+    [SerializeField] GameObject MapPanel;
     [SerializeField] GameObject Lead;
     [SerializeField] GameObject Damagevalueprefeb;
     
@@ -76,14 +77,9 @@ public class UIManager :UIEffect
         Hpbar();
         HouseHpbar();
 
-        if (Lead.activeSelf&&Input.GetKeyDown(KeyCode.T))
-        {
-            Lead.SetActive(false);
-        }
-        else if (!Lead.activeSelf && Input.GetKeyDown(KeyCode.T))
-        {
-            Lead.SetActive(true);
-        }
+       
+        PanelControll(Lead, KeyCode.T); //リードのパネルを開くか閉じるか
+        PanelControll(MapPanel, KeyCode.M); //マップのパネルを開くか閉じるか
         if (equipSystem.IsReloading)
         {
             Show_Reloading_text();
@@ -93,11 +89,6 @@ public class UIManager :UIEffect
             Reloading_text.gameObject.SetActive(false);
             
         }
-       
-
-
-
-
 
     }
    public void SearchMagazine()
@@ -163,4 +154,24 @@ public class UIManager :UIEffect
     {
         displayeffect(Fade,nextscene,0.5f);
     }
+    /// <summary>
+    /// パネルの表示と非表示を制御するメソッド
+    /// </summary>
+    /// <param name="Obj">対象のパネル</param>
+    /// <param name="key">表示するボタン</param>
+    bool PanelControll(GameObject Obj,KeyCode key)
+    {
+         if(Obj.activeSelf&& Input.GetKeyDown(key))
+        {
+            Obj.SetActive(false);
+            return true;
+        }
+        else if(!Obj.activeSelf && Input.GetKeyDown(key))
+        {
+            Obj.SetActive(true);
+            return false;
+        }
+        else return false;
+    }
+   
 }

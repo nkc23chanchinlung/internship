@@ -133,11 +133,9 @@ public class Enemy : EnemyMovement
         if (dinstance >= 5) angervalue--;
         angervalue = Mathf.Clamp(angervalue, 0, 100);
 
-        Debug.Log(agent.pathPending);
-        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance&&target==Player)
-        {
-           
-        }
+
+        if (dinstance <= targetedge + 2) status = Status.Attack;
+        else status = Status.Hostile;
 
 
         if (agent == null || !agent.isOnNavMesh)
