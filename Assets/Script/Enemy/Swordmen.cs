@@ -17,9 +17,10 @@ public class Swordmen : Enemy
         Init();//初期化
         lifebar.SetActive(false);
         agent.stoppingDistance =1f;
-        status = Status.Hostile; //初期状態を敵対に設定
+        status = Status.Idle; //初期状態を敵対に設定
         enemyAnimetor = new ObjAnimetor(1f, gameObject); //敵のアニメーションを管理するクラスの初期化
         
+
 
     }
     protected override void Init()
@@ -30,19 +31,26 @@ public class Swordmen : Enemy
         Hp = MaxHp;
         Attack = 20;
         defense = 10;
-        target = Player; //ターゲットをプレイヤーに設定
-        agent.SetDestination(target.position);
+        Sponpoint = transform.position; //スポーン位置を設定
+      
 
     }
 
     // Update is called once per frame
     void Update()
     {
-       
+        if (target != null)
+            agent.SetDestination(target.position);
         Setlifebar(lifebar, Hp, MaxHp); //ライフバーの更新
-        movement();
+        angerprocess();
+
+        if (target != null)
+        {
+            Debug_text();
+            movement();
+        }
         visibility();
-        Debug_text();
+        
 
         Vector3 velocity = agent.velocity; //NavMeshAgentの速度を取得
         speed = velocity.magnitude; //速度の大きさを取得
@@ -89,6 +97,10 @@ public class Swordmen : Enemy
                     
 
                 }
+                break;
+
+             case Status.Idle:
+                Idle(Sponpoint); //スポーン位置に戻る
                 break;
 
         }

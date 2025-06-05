@@ -52,7 +52,8 @@ public class Enemy : EnemyMovement
    
     Collider targetcol;
     Vector3 targetsize;                                              //目標の大きさ
-   
+    protected Vector3 Sponpoint;                                              //スポーン位置
+
 
     [SerializeField] Text Debug_Status;
 
@@ -85,8 +86,13 @@ public class Enemy : EnemyMovement
     protected void angerprocess()
     {
         if (angervalue >= 90) target = Player;
-        else if(angervalue <= 0) target = House; //怒り値が0の時は家をターゲットにする
-        
+        else if(angervalue <= 0) target = null; //怒り値が0の時は家をターゲットにする
+
+        if (target == null) status = Status.Idle; //ターゲットがいない場合はIdle状態にする
+
+
+
+
     }
     /// <summary>
     /// 索敵の関数
@@ -105,6 +111,7 @@ public class Enemy : EnemyMovement
                    
                     if (hit.collider.tag == "Player")
                     {
+                        angervalue = 100;
                        Hostile(hit);
                     }
                     else if (hit.collider.tag == "GameObj")
@@ -147,7 +154,12 @@ public class Enemy : EnemyMovement
       
     }
 
-    // 弾の生成をまとめた関数
+    protected void Idle(Vector3 Sponspace)
+    {
+        agent.SetDestination(Sponspace);
+
+    }
+    
 
     //敵対の状態の処理
     protected void Hostile(RaycastHit hit)
