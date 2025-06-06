@@ -4,7 +4,8 @@ using UnityEngine;
 /// <summary>
 /// e‚ÌŠî’êƒNƒ‰ƒX
 /// </summary>
-public class Gun : Bullet
+public class Gun :  MonoBehaviour
+
 {
     public GameObject bulletprefab;
     public PlayerController playerController;

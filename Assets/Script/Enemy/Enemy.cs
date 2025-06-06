@@ -137,7 +137,7 @@ public class Enemy : EnemyMovement
       
         //ó‘ÔØ‚è‘Ö‚¦
         dinstance = Vector3.Distance(target.position, transform.position);
-        if (dinstance >= 5) angervalue--;
+        if (dinstance >= 10) angervalue--;
         angervalue = Mathf.Clamp(angervalue, 0, 100);
 
 
