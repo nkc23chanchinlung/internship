@@ -79,7 +79,7 @@ public class UIManager :UIEffect
 
        
         PanelControll(Lead, KeyCode.T); //リードのパネルを開くか閉じるか
-        PanelControll(MapPanel, KeyCode.M); //マップのパネルを開くか閉じるか
+        PanelControll(MapPanel, KeyCode.Tab); //マップのパネルを開くか閉じるか
         if (equipSystem.IsReloading)
         {
             Show_Reloading_text();
