@@ -43,7 +43,9 @@ public class UIManager :UIEffect
         house =GameObject.Find("House").GetComponent<House>();
         StorePanel.SetActive(false);
         blinkinge_effect(Reloading_text);
-       
+        MapPanel.transform.localScale = Vector3.zero;
+        MenuPanel.transform.localScale = Vector3.zero;
+        
 
 
     }
