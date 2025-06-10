@@ -86,7 +86,12 @@ public class UIManager :UIEffect
         PanelOpen = PanelControll(MapPanel, KeyCode.Tab, new Vector3(0.5f, 0.7f, 0.7f));                                                        //マップのパネルを開くか閉じるか
         GameManager.GameStop= PanelControll(MenuPanel, KeyCode.Escape, new Vector3(0.3f, 0.5f, 0.5f));                                //メニューのパネルを開くか閉じるか
        
+<<<<<<< HEAD
 
+=======
+        PanelControll(Lead, KeyCode.T); //リードのパネルを開くか閉じるか
+        PanelControll(MapPanel, KeyCode.Tab); //マップのパネルを開くか閉じるか
+>>>>>>> main
         if (equipSystem.IsReloading)
         {
             Show_Reloading_text();

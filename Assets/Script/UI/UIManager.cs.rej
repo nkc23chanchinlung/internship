@@ -1,0 +1,10 @@
+diff a/Assets/Script/UI/UIManager.cs b/Assets/Script/UI/UIManager.cs	(rejected hunks)
+@@ -79,7 +79,7 @@
+ 
+        
+         PanelControll(Lead, KeyCode.T); //���[�h�̃p�l����J�������邩
+-        PanelControll(MapPanel, KeyCode.M); //�}�b�v�̃p�l����J�������邩
++        PanelControll(MapPanel, KeyCode.Tab); //�}�b�v�̃p�l����J�������邩
+         if (equipSystem.IsReloading)
+         {
+             Show_Reloading_text();
