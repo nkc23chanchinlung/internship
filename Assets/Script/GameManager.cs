@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-   static bool GameManagerExist = false;
+    static public bool GameStop = false;  //ÉQÅ[ÉÄÇí‚é~Ç∑ÇÈÇ©Ç«Ç§Ç©
+    static public bool GameManagerExist = false;
     bool IsStarted;
     public int Day { get; set; }
     int Enemyvalue;
@@ -28,7 +29,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.Log(GameStop);
     }
     void CheakGameManagerExist()
     {

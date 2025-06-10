@@ -17,6 +17,7 @@ public class UIManager :UIEffect
     [SerializeField] GameObject MapPanel;
     [SerializeField] GameObject Lead;
     [SerializeField] GameObject Damagevalueprefeb;
+   
     
     [Header("Image")]
     [SerializeField] Image Lifebar;
@@ -78,10 +79,11 @@ public class UIManager :UIEffect
         Hpbar();
         HouseHpbar();
 
+
+        PanelOpen = PanelControll(Lead, KeyCode.T, new Vector3(0.02f, 0.02f, 0.02f));                                                            //リードのパネルを開くか閉じるか
+        PanelOpen = PanelControll(MapPanel, KeyCode.Tab, new Vector3(0.5f, 0.7f, 0.7f));                                                        //マップのパネルを開くか閉じるか
+        GameManager.GameStop= PanelControll(MenuPanel, KeyCode.Escape, new Vector3(0.3f, 0.5f, 0.5f));                                //メニューのパネルを開くか閉じるか
        
-        PanelControll(Lead, KeyCode.T, new Vector3(0.02f, 0.02f, 0.02f));                                                            //リードのパネルを開くか閉じるか
-        PanelControll(MapPanel, KeyCode.Tab, new Vector3(0.5f, 0.7f, 0.7f));                                                        //マップのパネルを開くか閉じるか
-        PanelControll(MenuPanel, KeyCode.Escape, new Vector3(0.3f, 0.5f, 0.5f));                                                        //メニューのパネルを開くか閉じるか
 
         if (equipSystem.IsReloading)
         {
@@ -167,16 +169,14 @@ public class UIManager :UIEffect
          if(Obj.activeSelf&& Input.GetKeyDown(key))
         {
             ereductioneffect(Obj, size);
-            
-            return true;
         }
         else if(!Obj.activeSelf && Input.GetKeyDown(key))
         {
             Obj.SetActive(true);
             expansioneffect(Obj, size);
-            return false;
         }
-        else return false;
+        return Obj.activeSelf;    //パネルが開いているかどうかを返す
+
     }
    
 }

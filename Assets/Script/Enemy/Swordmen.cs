@@ -31,6 +31,8 @@ public class Swordmen : Enemy
     // Update is called once per frame
     void Update()
     {
+        if(GameManager.GameStop) return; //ゲームが停止している場合は処理を中断
+
         if (target != null)
             agent.SetDestination(target.position);
         Setlifebar(lifebar, Hp, MaxHp); //ライフバーの更新

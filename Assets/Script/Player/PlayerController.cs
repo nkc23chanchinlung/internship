@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+      if(GameManager.GameStop) return; //ゲームが停止している場合は処理を中断
     // GameOver();
 
      if (InGround&&!IsRoll) 
