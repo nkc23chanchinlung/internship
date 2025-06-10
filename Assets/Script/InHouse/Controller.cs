@@ -2,6 +2,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+/// <summary>
+/// ストアのコントローラークラス
+/// </summary>
 public class Controller : MonoBehaviour
 {
     [SerializeField]LayerMask layerMask;

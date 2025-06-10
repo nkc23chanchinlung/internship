@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemyRespon : MonoBehaviour
 {
-    [SerializeField] Transform[] erea;
+    [SerializeField] Transform[] area;
     [SerializeField] int Maxdistance;
     [SerializeField] int Mindistance;
     [SerializeField] int x, z;
@@ -49,13 +49,13 @@ public class EnemyRespon : MonoBehaviour
         //            z * Random.Range(Mindistance, Maxdistance)), Quaternion.identity);
         //    }
         //}
-        for (int e = 0; e < erea.Length; e++)
+        for (int area = 0; area < this.area.Length; area++)
         {
             for (int i = 0; i < maxEnemies; i++)
             {
                 float posx = Mathf.Sin(Mathf.PI * 2 * i / maxEnemies) * size;
                 float posz = Mathf.Cos(Mathf.PI * 2 * i / maxEnemies) * size;
-                Instantiate(Enemyprefeb[Random.Range(0, Enemyprefeb.Length)], new Vector3(posx, 0, posz) + erea[e].transform.position, Quaternion.identity);
+                Instantiate(Enemyprefeb[Random.Range(0, Enemyprefeb.Length)], new Vector3(posx, 0, posz) + this.area[area].transform.position, Quaternion.Euler(0,(i+1)*90,0));
 
             }
         }

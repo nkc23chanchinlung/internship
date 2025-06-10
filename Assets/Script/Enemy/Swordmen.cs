@@ -3,14 +3,6 @@ using UnityEngine.UI;
 public class Swordmen : Enemy
 {
     
-    private void Awake()
-    {
-        
-
-        
-       
-
-    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -52,8 +44,8 @@ public class Swordmen : Enemy
         visibility();
         
 
-        Vector3 velocity = agent.velocity; //NavMeshAgentの速度を取得
-        speed = velocity.magnitude; //速度の大きさを取得
+        Vector3 velocity = agent.velocity;                                          //NavMeshAgentの速度を取得
+        speed = velocity.magnitude;                                                  //速度の大きさを取得
         enemyAnimetor.Animetor(false, speed * 5, false, false, false, atking, false); //アニメーションの実行
     }
     private void OnCollisionEnter(Collision collision)
@@ -72,7 +64,7 @@ public class Swordmen : Enemy
     {
         base.movement();
        
-        switch (status)                  //状態による行動の切り替え
+        switch (status)                                                                //状態による行動の切り替え
         {
             case Status.Hostile:
                 if (target != null)
@@ -86,7 +78,7 @@ public class Swordmen : Enemy
                 }
                 break;
 
-            case Status.Attack:            //攻撃制御
+            case Status.Attack:                                                       //攻撃制御
                 transform.LookAt(target);
                 if (!atking)
                 {
@@ -100,7 +92,7 @@ public class Swordmen : Enemy
                 break;
 
              case Status.Idle:
-                Idle(Sponpoint); //スポーン位置に戻る
+                Idle(Sponpoint);                                                      //スポーン位置に戻る
                 break;
 
         }
