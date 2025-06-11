@@ -16262,6 +16262,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 996128b84187f4e4abd200023c71b140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GunDatabase:
+  - WeaponName: Ak47
+    WeaponPower: 0
+    WeaponRepair: 0
 --- !u!4 &950524277
 Transform:
   m_ObjectHideFlags: 0

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class AK47 : Gun
 {
-    DataManager ak47data;
+    WeaponDatabase ak47data;
     private void OnEnable()
     {
         if (playerController != null)
@@ -19,7 +19,7 @@ public class AK47 : Gun
         {
             Debug.LogError("PlayerController not found");
         }
-        ak47data =new DataManager();
+        ak47data =new WeaponDatabase();
 
     }
 

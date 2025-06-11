@@ -1,7 +1,10 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    string weaponName; //•Ší–¼
+    [SerializeField]List<WeaponDatabase> GunDatabase = new List<WeaponDatabase>();
     static public bool GameStop = false;  //ƒQ[ƒ€‚ğ’â~‚·‚é‚©‚Ç‚¤‚©
     static public bool GameManagerExist = false;
     bool IsStarted;
@@ -22,6 +25,7 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(this.gameObject);
         CheakGameManagerExist();
+        weaponName = GunDatabase[0].WeaponName;
         
 
     }
