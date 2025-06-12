@@ -4,6 +4,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks.Triggers;
 
 /// <summary>
 /// Playerの行動を管理するクラス
@@ -36,9 +37,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] EquipSystem equipSystem;
     Rigidbody rigidbody;
     float vec;
+    float forwardDot;
     float maxvec = 5f;
     public float friction = 0.5f;
     bool invincible;
+  
 
 
 
@@ -61,7 +64,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      if(GameManager.GameStop) return; //ゲームが停止している場合は処理を中断
+        cheakdirecion();
+       
+
+
+        if (GameManager.GameStop) return; //ゲームが停止している場合は処理を中断
     // GameOver();
 
      if (InGround&&!IsRoll) 
@@ -71,6 +78,19 @@ public class PlayerController : MonoBehaviour
      CheakGround();
      Cameramethod();
      playerAnimetor.Animetor(IsWalkBack, vec, InGround,IsShooting,IsRoll,false,equipSystem.IsReloading);
+    }
+    void cheakdirecion()
+    {
+        Vector3 velocity = rigidbody.linearVelocity;
+        forwardDot = Vector3.Dot(transform.forward, velocity.normalized);
+        if (forwardDot < 0)
+        {
+            IsWalkBack = true; //後ろに歩いている場合
+        }
+        else
+        {
+            IsWalkBack = false; //前に歩いている場合
+        }
     }
     /// <summary>
     /// 行動処理

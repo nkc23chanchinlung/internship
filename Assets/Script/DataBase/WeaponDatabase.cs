@@ -3,7 +3,7 @@ using UnityEngine;
 
 
 /// <summary>
-/// データ管理クラス
+/// 武器データ管理クラス
 /// </summary>
 [Serializable]
 public class WeaponDatabase 

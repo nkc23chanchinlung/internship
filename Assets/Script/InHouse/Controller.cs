@@ -64,6 +64,7 @@ public class Controller : MonoBehaviour
         ItemName.text = target.name;
         
     }
+    //ItemChoose()はRaycastでアイテムを選択する関数
     GameObject ItemChoose()
     {
         for (int i = 0; i < Weapon.Length; i++)
