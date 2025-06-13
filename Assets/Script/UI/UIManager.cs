@@ -28,9 +28,9 @@ public class UIManager :UIEffect
     [Header("Text")]
     [SerializeField] Text Reloading_text;
     [SerializeField] EquipSystem equipSystem;
-    Text Magazine_Text;
+    [SerializeField] Text Magazine_Text;
     Image Magazine_Image;
-    PlayerController playerController;
+    [SerializeField]PlayerController playerController;
     House house;
     bool PanelOpen = false;
    
