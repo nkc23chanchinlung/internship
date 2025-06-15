@@ -12,7 +12,7 @@ public class MapCreater : MonoBehaviour
     {
         MapData = new int[,]        //マップデータ
         {
-            {2,2,2,2,2,2,2,2,2,1},
+            {3,2,2,2,2,2,2,2,2,3},
             {1,0,0,0,0,0,0,0,0,1},
             {1,0,2,2,2,2,2,0,0,1},
             {1,0,0,0,0,0,1,0,0,1},
@@ -22,9 +22,9 @@ public class MapCreater : MonoBehaviour
             {1,0,0,0,0,0,0,0,0,1},
             {1,2,2,2,0,2,2,2,2,1},
             {1,0,0,0,0,0,0,0,0,1},
-            {2,2,2,2,2,2,2,2,2,2}
+            {3,2,2,2,2,2,2,2,2,3}
         };
-        Instantiate(PlayerPrefab,new Vector3(1,1,1), Quaternion.identity);// プレイヤー生成 
+        
 
 
         for (int x = 0; x < MapSize+1; x++)
@@ -40,6 +40,10 @@ public class MapCreater : MonoBehaviour
                 else if (MapData[x, z] == 2)
                 {
                     Instantiate(MapTiles[1], new Vector3(x * 4, 0, (z +1)* 4), Quaternion.Euler(new Vector3(0, 90, 0)));//90度Wall 生成
+                }
+                else if (MapData[x, z] == 3)
+                {
+                    Instantiate(MapTiles[3], new Vector3(x * 4, 0, (z + 1) * 4), Quaternion.Euler(new Vector3(0, 90, 0)));//90度Wall 生成
                 }
             }
         }
