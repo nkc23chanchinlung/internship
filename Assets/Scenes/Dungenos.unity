@@ -13611,7 +13611,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc758fe246a620e4db0b05f8f365effa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MapSize: 0
+  MapSize: 10
   MapTiles:
   - {fileID: 795165706614100933, guid: c863f656782d099438e2f1ba789301c8, type: 3}
   - {fileID: 3591644860445115680, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
