@@ -4822,6 +4822,7 @@ GameObject:
   m_Component:
   - component: {fileID: 951037527}
   - component: {fileID: 951037526}
+  - component: {fileID: 951037528}
   m_Layer: 0
   m_Name: wfc
   m_TagString: Untagged
@@ -4860,6 +4861,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &951037528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951037525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07d35885dd2ab704cbee1ce86edf75b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomPrefab: {fileID: 7590264923878022304, guid: ba70f6be9a254934d86e974b336810d6, type: 3}
+  roomSpacing: 16
+  maxRooms: 20
 --- !u!114 &958604179 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4423915490904613184, guid: bbfc85054ff234e4f90bf024cbaa67fa, type: 3}
