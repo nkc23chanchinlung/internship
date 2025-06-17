@@ -29,8 +29,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float MouseSpeedX;
     [SerializeField] float MouseSpeedY;
     [SerializeField] GameObject overridesources;
-   
-    
+    [SerializeField] GameObject Pin;
+    [Header("PInの高さ")]
+    [SerializeField]float pinHeight = 50f; //Pinの高さ
+
+
     Plane plane = new Plane();
     float distance = 0;
     bool IsShooting = false;
@@ -65,7 +68,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         cheakdirecion();
-       
+        PlayerMapPin();
 
 
         if (GameManager.GameStop) return; //ゲームが停止している場合は処理を中断
@@ -73,7 +76,7 @@ public class PlayerController : MonoBehaviour
 
      if (InGround&&!IsRoll) 
      movement();
-
+    // PlayerMapPin();
      Jump();
      CheakGround();
      Cameramethod();
@@ -97,6 +100,8 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void movement()
     {
+        
+        
 
         IsShooting = Input.GetMouseButton(0) && !IsCreate ? true : false;
         float movex = Input.GetAxis("Horizontal");
@@ -114,6 +119,16 @@ public class PlayerController : MonoBehaviour
         vec = rigidbody.linearVelocity.magnitude;
         Vector3 vetorvec = rigidbody.linearVelocity;
 
+    }
+    void PlayerMapPin()
+    {
+        Vector3 Pinpos;
+        Pinpos=Pin.transform.position;
+        Pinpos.y = pinHeight; //Pinの高さを設定
+        Pinpos.x = transform.position.x; //PinのX座標をプレイヤーのX座標に合わせる
+        Pinpos.z = transform.position.z; //PinのZ座標をプレイヤーのZ座標に合わせる
+        Pin.transform.position = Pinpos; //Pinの位置を更新
+       
     }
     void Jump()
     {

@@ -40,7 +40,14 @@ public class UIManager :UIEffect
     void Start()
     {
         playerController =GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        house =GameObject.Find("House").GetComponent<House>();
+        try
+        {
+            house = GameObject.Find("House").GetComponent<House>();
+        }
+        catch
+        {
+            house = null;
+        }
         StorePanel.SetActive(false);
         blinkinge_effect(Reloading_text);
         MapPanel.transform.localScale = Vector3.zero;
@@ -72,19 +79,20 @@ public class UIManager :UIEffect
             WeaponPanel.SetActive(false);
         }
 
-        if (WeaponPanel.activeSelf||StorePanel.activeSelf)　　　　　　　　　　　　　　　　　　　　 //パネルが開いているか
+        if (WeaponPanel.activeSelf||StorePanel.activeSelf)　　　　　　　　　　　　　　　　　　　　              //パネルが開いているか
         {
             PanelOpen = true;
         }
         else PanelOpen = false;
 
         Hpbar();
-        HouseHpbar();
+        if (house != null)                                                                                       //家のHPバーがあるか
+            HouseHpbar();
 
 
-        PanelOpen = PanelControll(Lead, KeyCode.T, new Vector3(0.02f, 0.02f, 0.02f));                                                            //リードのパネルを開くか閉じるか
-        PanelOpen = PanelControll(MapPanel, KeyCode.Tab, new Vector3(0.5f, 0.7f, 0.7f));                                                        //マップのパネルを開くか閉じるか
-        GameManager.GameStop= PanelControll(MenuPanel, KeyCode.Escape, new Vector3(0.3f, 0.5f, 0.5f));                                //メニューのパネルを開くか閉じるか
+        PanelOpen = PanelControll(Lead, KeyCode.T, new Vector3(0.02f, 0.02f, 0.02f));                            //リードのパネルを開くか閉じるか
+        PanelOpen = PanelControll(MapPanel, KeyCode.Tab, new Vector3(0.5f, 0.7f, 0.7f));                         //マップのパネルを開くか閉じるか
+        GameManager.GameStop= PanelControll(MenuPanel, KeyCode.Escape, new Vector3(0.3f, 0.5f, 0.5f));           //メニューのパネルを開くか閉じるか
        
 
        
