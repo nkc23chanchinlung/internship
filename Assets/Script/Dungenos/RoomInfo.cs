@@ -1,13 +1,10 @@
 using UnityEngine;
 
-public class MapCreater : MonoBehaviour
+public class RoomInfo : MonoBehaviour
 {
-    
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-     
         
     }
 
@@ -15,10 +12,5 @@ public class MapCreater : MonoBehaviour
     void Update()
     {
         
-    }
-
-    void MapCreator(int MapWide,int MapHieght)
-    {
-
     }
 }
