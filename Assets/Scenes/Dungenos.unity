@@ -10418,12 +10418,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc758fe246a620e4db0b05f8f365effa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MapSize: 4
-  MapTiles:
-  - {fileID: 795165706614100933, guid: c863f656782d099438e2f1ba789301c8, type: 3}
-  - {fileID: 7590264923878022304, guid: dcb2cf5218a213447a9ab8bcffd3bc51, type: 3}
-  PlayerPrefab: {fileID: 7712989914733457495, guid: bbfc85054ff234e4f90bf024cbaa67fa, type: 3}
-  Map: {fileID: 1787285613}
 --- !u!1 &2099957990
 GameObject:
   m_ObjectHideFlags: 0
