@@ -4874,8 +4874,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomPrefab: {fileID: 7590264923878022304, guid: ba70f6be9a254934d86e974b336810d6, type: 3}
-  roomSpacing: 16
-  maxRooms: 20
+  roomSpacing: 20
+  maxRooms: 7
 --- !u!114 &958604179 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4423915490904613184, guid: bbfc85054ff234e4f90bf024cbaa67fa, type: 3}
