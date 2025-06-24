@@ -9,8 +9,9 @@ public class DungeonGenerator : MonoBehaviour
    // public int height = 10;
     public float roomSpacing = 15f;
     public int maxRooms = 20;
+    [SerializeField] LayerMask layermask;
 
-    private HashSet<Vector2Int> roomPositions = new HashSet<Vector2Int>();
+   private HashSet<Vector2Int> roomPositions = new HashSet<Vector2Int>();
 
     void Start()
     {
@@ -23,6 +24,7 @@ public class DungeonGenerator : MonoBehaviour
         Vector2Int currentPos = Vector2Int.zero;
         roomPositions.Add(currentPos);
         PlaceRoom(currentPos);
+        tileCompensation();
 
         for (int i = 0; i < maxRooms - 1; i++)
         {
@@ -82,5 +84,22 @@ public class DungeonGenerator : MonoBehaviour
         };
         Vector3 vector3 = rot[Random.Range(0, rot.Length)];
         return vector3* angle;
+    }
+    void tileCompensation()
+    {
+       foreach(Vector2Int pos in roomPositions)
+        {
+            Vector3 worldPos = new Vector3(pos.x * roomSpacing, 0, pos.y * roomSpacing);
+            Collider[] colliders = Physics.OverlapBox(worldPos, new Vector3(roomSpacing / 2, 1, roomSpacing / 2));
+            foreach (Collider collider in colliders)
+            {
+                if (collider.gameObject != this.gameObject&&collider.gameObject.layer==layermask)
+                {
+                    // d‚È‚Á‚Ä‚¢‚éê‡‚Ìˆ—
+                    Debug.Log("d‚È‚èŒŸo: " + collider.gameObject.name);
+                    Destroy(collider.gameObject);
+                }
+            }
+        }
     }
 }

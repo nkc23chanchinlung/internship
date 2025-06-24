@@ -19,16 +19,19 @@ public class LeadController : MonoBehaviour
     {
         transform.position=Playerpos.position+transform.forward * distance + Playerpos.up * distance;
 
-        Vector3 direction = (homepos.position - transform.position).normalized;
-        
+        if (homepos != null)
+        {
+            Vector3 direction = (homepos.position - transform.position).normalized;
+            if (direction != Vector3.zero)
+            {
+                Quaternion lookRotation = Quaternion.LookRotation(direction);
+                targetRotation = Quaternion.Slerp(transform.rotation, lookRotation * fixedRotationOffset, Time.deltaTime * 2f);
+                transform.rotation = targetRotation;
+            }
+        }
 
         // –Ú•W•ûŒü‚ÉŠî‚Ã‚¢‚½‰ñ“]‚ðŒvŽZ
-        if (direction != Vector3.zero)
-        {
-            Quaternion lookRotation = Quaternion.LookRotation(direction);
-            targetRotation = Quaternion.Slerp(transform.rotation, lookRotation * fixedRotationOffset, Time.deltaTime * 2f);
-            transform.rotation = targetRotation;
-        }
+       
 
         
     }

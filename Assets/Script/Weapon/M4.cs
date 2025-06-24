@@ -8,8 +8,8 @@ public class M4 : Gun
     {
         if (playerController != null)
         {
-            uiManager.SearchMagazine();
-            uiManager.SetMagazine(Magazine, MaxMagazine);
+           // uiManager.SearchMagazine();
+           // uiManager.SetMagazine(Magazine, MaxMagazine);
         }
     }
     
