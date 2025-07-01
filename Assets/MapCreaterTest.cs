@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class MapCreaterTest : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class MapCreaterTest : MonoBehaviour
     int sw, sh;
     int minAera = 10;
     Array2D room;
+   GameObject cube;
+    List<GameObject> cubes = new List<GameObject>();
+    
 
 
 
@@ -15,45 +19,17 @@ public class MapCreaterTest : MonoBehaviour
     private void Awake()
     {
          array2d= new Array2D(w, 0, h, 0);
-         room=new Array2D(10, 0, 10, 0); //部屋のサイズを設定
+         room=new Array2D(minAera, 0, minAera, 0); //部屋のサイズを設定
+        
+        
     }
     void Start()
     {
-        //for(int i = array2d.botton; i < array2d.top; i++) {
-        //    for (int j = array2d.left; j < array2d.right; j++)
-        //    {
-        //        Vector3 pos = new Vector3(i * 9, 0, j * 9);
-        //        GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                
-        //        cube.transform.position = pos;
-        //        cube.transform.localScale = new Vector3(9, 1, 9);
-
-               
-        //    }
-        //}
-        //sw = w;
-        //sw = h;
+       
     }
     private void FixedUpdate()
     {
-        if (sw != w || sh != h)
-        {
-            
-            for (int i = array2d.botton; i < w; i++)
-            {
-                for (int j = array2d.left; j < h; j++)
-                {
-                    Vector3 pos = new Vector3(i * 1, 0, j * 1);
-                    GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                    cube.transform.position = pos;
-                    cube.transform.localScale = new Vector3(1, 1, 1);
-
-
-                }
-            }
-            sw = w;
-            sh = h;
-        }
+        PlayingGround();
     }
     //部屋を作成するメソッド
     void createroom(int roomquanity)
@@ -71,5 +47,32 @@ public class MapCreaterTest : MonoBehaviour
             botton = b;
         }
     }
+    void PlayingGround()
+    {
+        if (sw != w || sh != h)
+        {
+            // 前のキューブを削除
+            foreach (GameObject c in cubes)
+            {
+                Destroy(c); // 生成したキューブを削除
+            }
+            // 新しいキューブを生成
+            for (int i = array2d.botton; i < w; i++)
+            {
+                for (int j = array2d.left; j < h; j++)
+                {
+                    Vector3 pos = new Vector3(i * 1, 0, j * 1);
+                    cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                    cube.transform.position = pos;
+                    cube.transform.localScale = new Vector3(1, 1, 1);
+                    cubes.Add(cube); // 生成したキューブをリストに追加
 
+
+                }
+            }
+            sw = w;
+            sh = h;
+        }
     }
+
+ }
