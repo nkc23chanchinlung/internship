@@ -24,7 +24,8 @@ public class Swordmen : Enemy
         Attack = 20;
         defense = 10;
         Sponpoint = transform.position; //スポーン位置を設定
-      
+        //target=GameObject.Find("House").transform; //初期ターゲットを家に設定
+
 
     }
 
@@ -50,17 +51,17 @@ public class Swordmen : Enemy
         speed = velocity.magnitude;                                                  //速度の大きさを取得
         enemyAnimetor.Animetor(false, speed * 5, false, false, false, atking, false); //アニメーションの実行
     }
-    private void OnCollisionEnter(Collision collision)
+   
+    private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.tag == "PlayerAtk")
         {
             Bullet PlayerAtk = collision.gameObject.GetComponent<Bullet>();
             Destroy(collision.gameObject);
             int damage = PlayerAtk.damage;
-            GetDamage(damage-defense, 2.0f);
+            GetDamage(damage - defense, 2.0f);
 
         }
-
     }
     protected override void movement()
     {

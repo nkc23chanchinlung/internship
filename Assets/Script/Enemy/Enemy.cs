@@ -174,6 +174,8 @@ public class Enemy : EnemyMovement
         else if (hit.collider.tag == "GameObj")
         {
             targetcol = hit.collider.GetComponent<BoxCollider>();
+            
+           
         }
       
         targetsize = targetcol.bounds.size;

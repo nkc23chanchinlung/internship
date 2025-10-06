@@ -8,8 +8,8 @@ public class M4 : Gun
     {
         if (playerController != null)
         {
-           // uiManager.SearchMagazine();
-           // uiManager.SetMagazine(Magazine, MaxMagazine);
+            uiManager.SearchMagazine();
+            uiManager.SetMagazine(Magazine, MaxMagazine);
         }
     }
     
@@ -53,6 +53,7 @@ public class M4 : Gun
             Magazine > 0 &&
             !playerController.IsCreate)
         {
+            Debug.Log("M4");
             //ˆ—  
             for (int i = -range; i < range; i++)
             {

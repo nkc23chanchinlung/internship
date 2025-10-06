@@ -19,6 +19,7 @@ public class EnemyRespon : MonoBehaviour
     void Start()
     {
         Enemyprefeb = Resources.LoadAll<GameObject>("Enemy");
+        
        
     }
 
@@ -35,29 +36,29 @@ public class EnemyRespon : MonoBehaviour
     }
     public void Respon(GameObject Target)
     {
-        //for (int x = -this.x; x < this.x; x++)
-        //{
-        //    for (int z = -this.z; z < this.z; z++)
-        //    {
-        //        if(Target!=null)
-        //        Instantiate(Enemyprefeb[Random.Range(0, Enemyprefeb.Length)], 
-        //            new Vector3(x * Random.Range(Mindistance, Maxdistance),
-        //            0, z * Random.Range(Mindistance, Maxdistance)) + Target.transform.position, Quaternion.identity);
-        //        else Instantiate(Enemyprefeb[Random.Range(0, Enemyprefeb.Length)], 
-        //            new Vector3(x * Random.Range(Mindistance, Maxdistance),
-        //            0, 
-        //            z * Random.Range(Mindistance, Maxdistance)), Quaternion.identity);
-        //    }
-        //}
-        for (int area = 0; area < this.area.Length; area++)
+        for (int x = -this.x; x < this.x; x++)
         {
-            for (int i = 0; i < maxEnemies; i++)
+            for (int z = -this.z; z < this.z; z++)
             {
-                float posx = Mathf.Sin(Mathf.PI * 2 * i / maxEnemies) * size;
-                float posz = Mathf.Cos(Mathf.PI * 2 * i / maxEnemies) * size;
-                Instantiate(Enemyprefeb[Random.Range(0, Enemyprefeb.Length)], new Vector3(posx, 0, posz) + this.area[area].transform.position, Quaternion.Euler(0,(i+1)*90,0));
-
+                if (Target != null)
+                    Instantiate(Enemyprefeb[Random.Range(0, Enemyprefeb.Length)],
+                        new Vector3(x * Random.Range(Mindistance, Maxdistance),
+                        0, z * Random.Range(Mindistance, Maxdistance)) + Target.transform.position, Quaternion.identity);
+                else Instantiate(Enemyprefeb[Random.Range(0, Enemyprefeb.Length)],
+                    new Vector3(x * Random.Range(Mindistance, Maxdistance),
+                    0,
+                    z * Random.Range(Mindistance, Maxdistance)), Quaternion.identity);
             }
         }
+        //for (int area = 0; area < this.area.Length; area++)
+        //{
+        //    for (int i = 0; i < maxEnemies; i++)
+        //    {
+        //        float posx = Mathf.Sin(Mathf.PI * 2 * i / maxEnemies) * size;
+        //        float posz = Mathf.Cos(Mathf.PI * 2 * i / maxEnemies) * size;
+        //        Instantiate(Enemyprefeb[Random.Range(0, Enemyprefeb.Length)], new Vector3(posx, 0, posz) + this.area[area].transform.position, Quaternion.Euler(0,(i+1)*90,0));
+
+        //    }
+        //}
     }
 }

@@ -35,6 +35,7 @@ void Start()
         if (collision.gameObject.tag == "EnemyAtk")
         {
             GetDamage(10);
+            Debug.Log("HouseGetDamage10");
         }
     }
 }
