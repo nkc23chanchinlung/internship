@@ -7,12 +7,15 @@ using UnityEngine;
 public class Coin : MonoBehaviour
 {
     [SerializeField] Transform CoinUI;
-    
+     
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
-   
+
     void Start()
     {
+        AudioSource audioSource = GetComponent<AudioSource>();
+        audioSource.PlayOneShot(audioSource.clip);
         CoinUI =GameObject.Find("Coin_UI").transform;
 
         this.transform.DOMove(CoinUI.position,1f).SetDelay(1f).OnComplete(() =>

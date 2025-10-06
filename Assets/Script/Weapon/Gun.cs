@@ -20,6 +20,7 @@ public class Gun :  MonoBehaviour
     public int Pow;
     public int Repair;
     public int weaponnum;
+    public AudioSource audioSource;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 

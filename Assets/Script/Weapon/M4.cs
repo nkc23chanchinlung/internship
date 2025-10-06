@@ -27,6 +27,7 @@ public class M4 : Gun
         Pow = 5;
         Repair = 1;
         weaponnum = 1; //•Ší”Ô†
+        audioSource = GetComponent<AudioSource>();
 
     }
 
@@ -53,6 +54,9 @@ public class M4 : Gun
             Magazine > 0 &&
             !playerController.IsCreate)
         {
+           
+            audioSource.PlayOneShot(audioSource.clip);
+
             Debug.Log("M4");
             //ˆ—  
             for (int i = -range; i < range; i++)
