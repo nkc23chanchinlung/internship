@@ -34,6 +34,8 @@ public class Swordmen : Enemy
     {
         if(GameManager.GameStop) return; //ゲームが停止している場合は処理を中断
 
+        if (Hp <= 0) Die(); //HPが0以下なら死亡処理
+
         if (target != null)
             agent.SetDestination(target.position);
         Setlifebar(lifebar, Hp, MaxHp); //ライフバーの更新
@@ -51,7 +53,8 @@ public class Swordmen : Enemy
         speed = velocity.magnitude;                                                  //速度の大きさを取得
         enemyAnimetor.Animetor(false, speed * 5, false, false, false, atking, false); //アニメーションの実行
     }
-   
+
+
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.tag == "PlayerAtk")
@@ -63,6 +66,19 @@ public class Swordmen : Enemy
 
         }
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "PlayerAtk")
+        {
+            Bullet PlayerAtk = collision.gameObject.GetComponent<Bullet>();
+            Destroy(collision.gameObject);
+            int damage = PlayerAtk.damage;
+            GetDamage(damage - defense, 2.0f);
+
+        }
+    }
+
+
     protected override void movement()
     {
         base.movement();
@@ -73,6 +89,7 @@ public class Swordmen : Enemy
                 if (target != null)
                 {
                     agent.isStopped = false;
+                    if(agent.isStopped==false)
                     agent.SetDestination(target.position);
                 }
                 else
@@ -82,7 +99,7 @@ public class Swordmen : Enemy
                 break;
 
             case Status.Attack:                                                       //攻撃制御
-                transform.LookAt(target);
+                //transform.LookAt(target);
                 if (!atking)
                 {
                   agent.isStopped = true;
@@ -100,4 +117,5 @@ public class Swordmen : Enemy
 
         }
     }
+  
 }

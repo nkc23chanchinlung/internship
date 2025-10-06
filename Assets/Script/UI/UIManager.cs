@@ -7,6 +7,8 @@ using UnityEngine.UI;
 [System.Serializable]
 public class UIManager :UIEffect
 {
+    
+
     [Header("UI")]
     [Header("GameObject")]
     [SerializeField] GameObject GameCanvas;
@@ -17,6 +19,7 @@ public class UIManager :UIEffect
     [SerializeField] GameObject MapPanel;
     [SerializeField] GameObject Lead;
     [SerializeField] GameObject Damagevalueprefeb;
+    [SerializeField] GameObject Coinprefeb;
    
     
     [Header("Image")]
@@ -29,6 +32,7 @@ public class UIManager :UIEffect
     [SerializeField] Text Reloading_text;
     [SerializeField] EquipSystem equipSystem;
     [SerializeField] Text Magazine_Text;
+    [SerializeField] Text Coin_Text;
     Image Magazine_Image;
     [SerializeField]PlayerController playerController;
     House house;
@@ -94,10 +98,10 @@ public class UIManager :UIEffect
         PanelOpen = PanelControll(MapPanel, KeyCode.Tab, new Vector3(0.5f, 0.7f, 0.7f));                         //マップのパネルを開くか閉じるか
         GameManager.GameStop= PanelControll(MenuPanel, KeyCode.Escape, new Vector3(0.3f, 0.5f, 0.5f));           //メニューのパネルを開くか閉じるか
        
+        SetCoin(GameManager.Coin);                                                                 //コインの数を更新                                 
 
-       
 
-       
+
 
         if (equipSystem.IsReloading)
         {
@@ -168,6 +172,25 @@ public class UIManager :UIEffect
         damageInstance.transform.SetParent(GameCanvas.transform, false);
         DamageEffect(damageInstance);
         
+    }
+    public void Coin(Transform obj)　　　　　　　　　　　　　　　　　　　　//コイン
+    {
+        var center = 0.5f * new Vector3(Screen.width, Screen.height);
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(obj.position) - center;
+
+        GameObject damageInstance = Instantiate(
+        Coinprefeb,
+        screenPos,
+        Quaternion.identity
+        );
+
+        damageInstance.transform.SetParent(GameCanvas.transform, false);
+        DamageEffect(damageInstance);
+
+    }
+    public void SetCoin(int coin)　　　　　　　　　　　　　　　　　　　　//コインの数
+    {
+        Coin_Text.text = coin.ToString("D2");
     }
     public void FadeControl(string nextscene)
     {

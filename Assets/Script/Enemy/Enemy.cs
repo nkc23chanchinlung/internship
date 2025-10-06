@@ -99,6 +99,8 @@ public class Enemy : EnemyMovement
     /// </summary>
     protected void visibility()
     {
+        if(Vector3.Distance(Player.position,transform.position)<=10&&status==Status.Idle) transform.LookAt(Player); //プレイヤーが近くにいる場合はプレイヤーの方を向く
+
         for (int i=-Enemies; i< Enemies; i++)
         {
 
@@ -141,7 +143,7 @@ public class Enemy : EnemyMovement
         angervalue = Mathf.Clamp(angervalue, 0, 100);
 
 
-        if (dinstance <= targetedge + 2) status = Status.Attack;
+        if (dinstance <= targetedge+1) status = Status.Attack;
         else status = Status.Hostile;
 
 
@@ -212,6 +214,11 @@ public class Enemy : EnemyMovement
         Image hpbar = bar.GetComponent<Image>();
         hpbar.fillAmount = Hp / MaxHp;
         hpbar.transform.rotation = Camera.main.transform.rotation;
+    }
+    protected void Die()
+    {
+        Destroy(gameObject);
+        uimanager.Coin(transform);
     }
 
 }

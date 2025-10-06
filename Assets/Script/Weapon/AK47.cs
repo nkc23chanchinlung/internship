@@ -31,7 +31,7 @@ public class AK47 : Gun
         MaxCooldown = 0.2f;
         IsReloading = false;
         ReloadTime = 1f;
-        Damage=10;
+        Damage=20;
         Pow = 2;
         Repair = 1;
         weaponnum = 0; //•Ší”Ô†

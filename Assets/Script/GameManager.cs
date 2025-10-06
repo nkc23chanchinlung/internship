@@ -11,12 +11,14 @@ public class GameManager : MonoBehaviour
     
     bool clear;
 
+    static public int Coin { get; set; } = 0;  //Š‹à
 
 
-    private void Awake()
-    {
-        Application.targetFrameRate = 60;
-    }
+
+    //private void Awake()
+    //{
+    //    Application.targetFrameRate = 60;
+    //}
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
