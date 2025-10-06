@@ -59,6 +59,7 @@ public class Enemy : EnemyMovement
 
     [SerializeField] GameObject Hand;
     Rigidbody rb;
+    public Material mat;
 
     protected ObjAnimetor enemyAnimetor; //敵のアニメーションを管理するクラス
 
@@ -219,6 +220,14 @@ public class Enemy : EnemyMovement
     {
         Destroy(gameObject);
         uimanager.Coin(transform);
+    }
+   public IEnumerator Returnmat(float delay)
+    {
+        Material material = GetComponentInChildren<Renderer>().material;
+       yield return new WaitForSeconds(delay);
+        Debug.Log("Returnmat");
+        material.color = Color.white;
+        yield return null;
     }
 
 }

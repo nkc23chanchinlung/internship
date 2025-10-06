@@ -11,7 +11,8 @@ public class Swordmen : Enemy
         agent.stoppingDistance =1f;
         status = Status.Idle; //初期状態を敵対に設定
         enemyAnimetor = new ObjAnimetor(1f, gameObject); //敵のアニメーションを管理するクラスの初期化
-        
+        mat=GetComponentInChildren<Renderer>().material;
+       
 
 
     }
@@ -25,7 +26,7 @@ public class Swordmen : Enemy
         defense = 10;
         Sponpoint = transform.position; //スポーン位置を設定
         //target=GameObject.Find("House").transform; //初期ターゲットを家に設定
-
+        
 
     }
 
@@ -63,6 +64,11 @@ public class Swordmen : Enemy
             Destroy(collision.gameObject);
             int damage = PlayerAtk.damage;
             GetDamage(damage - defense, 2.0f);
+
+            
+            mat.color = Color.red;
+            StartCoroutine(Returnmat( 0.2f));  //色を元に戻すコルーチンを開始
+
 
         }
     }
