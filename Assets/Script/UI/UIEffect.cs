@@ -52,6 +52,12 @@ public class UIEffect : MonoBehaviour
     public void hideeffect(Image obj,float hidetimer)
          //非表示するエフェクト
     {
+        if(!obj.gameObject.activeSelf)
+        obj.gameObject.SetActive(true);
+        Color c = obj.color;
+        c.a = 1;
+        obj.color = c;
+        
         obj.DOFade(0, hidetimer).OnComplete(() =>
         {
             obj.gameObject.SetActive(false);

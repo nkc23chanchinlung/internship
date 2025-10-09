@@ -216,12 +216,20 @@ public class Enemy : EnemyMovement
         hpbar.fillAmount = Hp / MaxHp;
         hpbar.transform.rotation = Camera.main.transform.rotation;
     }
+    /// <summary>
+    /// 死亡処理
+    /// </summary>
     protected void Die()
     {
         Destroy(gameObject);
         uimanager.Coin(transform);
     }
-   public IEnumerator Returnmat(float delay)
+    /// <summary>
+    /// マテリアルの色を元に戻すコルーチン
+    /// </summary>
+    /// <param name="delay">遅延</param>
+    /// <returns></returns>
+    public IEnumerator Returnmat(float delay) 
     {
         Material material = GetComponentInChildren<Renderer>().material;
        yield return new WaitForSeconds(delay);

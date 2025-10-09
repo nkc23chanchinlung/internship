@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 /// <summary>
 /// UIを管理するクラス
@@ -56,6 +57,8 @@ public class UIManager :UIEffect
         blinkinge_effect(Reloading_text);
         MapPanel.transform.localScale = Vector3.zero;
         MenuPanel.transform.localScale = Vector3.zero;
+
+        hideeffect(Fade, 1f);  　　　　　　　　　　　　　//Fade処理
         
 
 
@@ -173,21 +176,36 @@ public class UIManager :UIEffect
         DamageEffect(damageInstance);
         
     }
+    /// <summary>
+    /// ドロップしたコインの処理
+    /// </summary>
+    /// <param name="obj"></param>
     public void Coin(Transform obj)　　　　　　　　　　　　　　　　　　　　//コイン
     {
         var center = 0.5f * new Vector3(Screen.width, Screen.height);
         Vector3 screenPos = Camera.main.WorldToScreenPoint(obj.position) - center;
 
-        GameObject damageInstance = Instantiate(
+        GameObject CoinInstance = Instantiate(
         Coinprefeb,
         screenPos,
         Quaternion.identity
         );
 
-        damageInstance.transform.SetParent(GameCanvas.transform, false);
-        DamageEffect(damageInstance);
+       //コイン生成した処理
+        CoinInstance.transform.SetParent(GameCanvas.transform, false);
+        AudioSource audioSource =CoinInstance.GetComponent<AudioSource>();
+        audioSource.PlayOneShot(audioSource.clip);
+        DamageEffect(CoinInstance);
+        Transform CoinUI = GameObject.Find("Coin_UI").transform;
+        CoinInstance.transform.DOMove(CoinUI.position, 1f).SetDelay(1f).OnComplete(() =>
+        {
+            Destroy(CoinInstance);
+            GameManager.Coin += 1; //コインを増やす
+
+        });
 
     }
+
     public void SetCoin(int coin)　　　　　　　　　　　　　　　　　　　　//コインの数
     {
         Coin_Text.text = coin.ToString("D2");

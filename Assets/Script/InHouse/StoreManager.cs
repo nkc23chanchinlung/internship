@@ -5,7 +5,7 @@ using UnityEngine.UI;
 /// <summary>
 /// ストアのコントローラークラス
 /// </summary>
-public class Controller : MonoBehaviour
+public class StoreManager : MonoBehaviour
 {
     [SerializeField]LayerMask layerMask;
     [SerializeField] GameObject[] Weapon;
@@ -17,6 +17,13 @@ public class Controller : MonoBehaviour
     GameObject target;
     GameManager gameManager;
     [SerializeField] PreViewController preViewController;
+
+
+    [Header("value")]
+    [SerializeField] int coin;
+
+    [Header("UI")]
+    [SerializeField] Text CoinText;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -30,8 +37,10 @@ public class Controller : MonoBehaviour
             Debug.LogError("GameManager not found: " + e.Message);
         }
         Weapon =GameObject.FindGameObjectsWithTag("Weapon");
-           // Powgague= GameObject.FindGameObjectsWithTag("Powgague");
+        // Powgague= GameObject.FindGameObjectsWithTag("Powgague");
        
+        coin = GameManager.Coin;
+
 
 
     }
@@ -39,7 +48,7 @@ public class Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+        Coin_Text(coin);
 
         for (int i = 0; i < Powgague.Length; i++)
         {
@@ -111,6 +120,10 @@ public class Controller : MonoBehaviour
             Powgague[i].SetActive(true);
             Debug.Log("pow");
         }
+    }
+    void Coin_Text(int coin)
+    {
+        CoinText.text = coin.ToString("D2");
     }
 
     public void Exit()

@@ -57,7 +57,7 @@ public class M4 : Gun
            
             audioSource.PlayOneShot(audioSource.clip);
 
-            Debug.Log("M4");
+           
             //èàóù  
             for (int i = -range; i < range; i++)
             {

@@ -4,7 +4,9 @@ using UnityEngine.UI;
 
 
 
-
+/// <summary>
+/// 武器のプレビューを制御するクラス
+/// </summary>
 public class PreViewController : MonoBehaviour
 {
     [SerializeField] GameObject[] PreviewObj;
