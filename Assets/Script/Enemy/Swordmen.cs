@@ -44,7 +44,7 @@ public class Swordmen : Enemy
 
         if (target != null)
         {
-            Debug_text();
+           //Debug_text ();
             movement();
         }
         visibility();

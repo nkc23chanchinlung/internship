@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7170599311775484125
 RectTransform:
   m_ObjectHideFlags: 0
@@ -246,8 +246,8 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 1
-  m_Speed: 2
-  m_Acceleration: 1
+  m_Speed: 100
+  m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 500
   m_StoppingDistance: 2
@@ -331,6 +331,7 @@ MonoBehaviour:
   Damageprefeb: {fileID: 0}
   Debug_Status: {fileID: 6033357283543400433}
   Hand: {fileID: 2680056497890171940}
+  mat: {fileID: 0}
 --- !u!1 &947910014983885748
 GameObject:
   m_ObjectHideFlags: 0

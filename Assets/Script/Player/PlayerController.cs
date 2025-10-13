@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
 
 
         if (GameManager.GameStop) return; //ゲームが停止している場合は処理を中断
-    // GameOver();
+     GameOver();
 
      if (InGround&&!IsRoll) 
      movement();
