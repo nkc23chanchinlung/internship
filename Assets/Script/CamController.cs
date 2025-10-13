@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UIElements;
 using DG.Tweening;
+using Unity.VisualScripting;
 
 
 //public
@@ -25,6 +26,7 @@ public class CamController : MonoBehaviour
             return distance;
         }
     }
+    
     float Maxdistance = 8f;
     float Mindistance = 2.5f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -37,9 +39,13 @@ public class CamController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Cam(_target);
+       
         //obestcam();
       
+    }
+    private void FixedUpdate()
+    {
+        Cam(_target);
     }
     public void Cam(Transform target)
     {
@@ -47,8 +53,12 @@ public class CamController : MonoBehaviour
         target = _target;
         distance = Mathf.Clamp(distance, Mindistance, Maxdistance);
         var scroll = Input.mouseScrollDelta.y;
-        distance -= scroll * 0.1f;
-        transform.position = _target.position + new Vector3(0, distance, x);
+        distance -= scroll * 0.2f;
+        
+        this.transform.DOMove(_target.position + new Vector3(0, distance, x), 0.5f).SetEase(Ease.OutSine); //カメラプレイや追跡
+        
+       
+       
         if (Input.GetMouseButton(1))
         {
             var mouseX = Input.GetAxis("Mouse X");

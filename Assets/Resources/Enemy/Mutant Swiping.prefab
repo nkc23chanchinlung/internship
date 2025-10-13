@@ -246,8 +246,8 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 1
-  m_Speed: 100
-  m_Acceleration: 20
+  m_Speed: 4
+  m_Acceleration: 1
   avoidancePriority: 50
   m_AngularSpeed: 500
   m_StoppingDistance: 2
@@ -701,6 +701,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7219710275345480075}
   - component: {fileID: 8680466267730545981}
+  - component: {fileID: 5043571269527190536}
   m_Layer: 0
   m_Name: MutantMesh
   m_TagString: Untagged
@@ -816,6 +817,24 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.043347836, y: -0.06721637, z: 0.29740357}
     m_Extent: {x: 0.79164195, y: 0.9437647, z: 0.5753034}
   m_DirtyAABB: 0
+--- !u!114 &5043571269527190536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2749218214520570015}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 0, g: 0, b: 0, a: 1}
+  outlineWidth: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &2935874501830956066
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -74,6 +75,7 @@ public class Enemy : EnemyMovement
         
 
         rb = GetComponent<Rigidbody>();
+        agent.acceleration = 2.0f;
 
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -184,6 +186,13 @@ public class Enemy : EnemyMovement
         targetsize = targetcol.bounds.size;
       
         targetedge = targetsize.magnitude;
+        Vector3 dir = target.position - transform.position;
+        Quaternion targetRot = Quaternion.LookRotation(dir);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * speed);
+
+
+
+
     }
 
     protected void GetDamage(int damage,float hidetime)    //“G‚ªƒ_ƒ[ƒW‚ğó‚¯‚éŠÖ”

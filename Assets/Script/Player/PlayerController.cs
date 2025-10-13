@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject Pin;
     [Header("PInの高さ")]
     [SerializeField]float pinHeight = 50f; //Pinの高さ
+    [SerializeField] float animeionspeed;
 
 
     Plane plane = new Plane();
@@ -53,7 +54,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-     playerAnimetor = new ObjAnimetor(1f,gameObject);
+     playerAnimetor = new ObjAnimetor(animeionspeed, gameObject);
      rigidbody = GetComponent<Rigidbody>();
 
     }
@@ -86,7 +87,8 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 velocity = rigidbody.linearVelocity;
         forwardDot = Vector3.Dot(transform.forward, velocity.normalized);
-        if (forwardDot < 0)
+        //Debug.Log(forwardDot);
+        if (forwardDot < -0.1f)
         {
             IsWalkBack = true; //後ろに歩いている場合
         }
@@ -112,9 +114,17 @@ public class PlayerController : MonoBehaviour
         acceleration = Mathf.Clamp(acceleration, 0, MaxSpeed);
         if(vec<maxvec)//移動速度制限
         rigidbody.AddForce(moveDirection * acceleration, ForceMode.VelocityChange);
-        
-        if(rigidbody.linearVelocity.magnitude<0.1f)
+
+        Debug.Log(rigidbody.linearVelocity.magnitude);
+
+        if (rigidbody.linearVelocity.magnitude < 0.1f)
+        {
             rigidbody.linearVelocity = Vector3.zero;//誤アニメーション防止
+            
+            rigidbody.angularVelocity = Vector3.zero;
+
+
+        }
 
         vec = rigidbody.linearVelocity.magnitude;
         Vector3 vetorvec = rigidbody.linearVelocity;
