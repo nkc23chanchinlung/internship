@@ -26,6 +26,7 @@ public class UIManager :UIEffect
     [Header("Image")]
     [SerializeField] Image House_Hpbar;
     [SerializeField] Image Fade;
+    [SerializeField]Image Lifebar;
 
 
     [Header("Text")]
@@ -147,8 +148,8 @@ public class UIManager :UIEffect
     }
     void Hpbar()                                                                          //プレイヤーのHPバー
     {
-        //Lifebar.fillAmount = (float)playerController.Hp / (float)playerController.MaxHp;
-        Lifebar_Text.text = playerController.Hp.ToString("D2");
+        Lifebar.fillAmount = (float)playerController.Hp / (float)playerController.MaxHp;
+        Lifebar_Text.text = playerController.Hp.ToString("D2")+"%";
     }
     void HouseHpbar()                                                                     //家のHPバー
     {
