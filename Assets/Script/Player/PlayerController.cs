@@ -64,6 +64,11 @@ public class PlayerController : MonoBehaviour
         
 
     }
+    private void FixedUpdate()
+    {
+        if (InGround && !IsRoll)
+            movement();
+    }
 
     // Update is called once per frame
     void Update()
@@ -76,7 +81,7 @@ public class PlayerController : MonoBehaviour
      GameOver();
 
      if (InGround&&!IsRoll) 
-     movement();
+    // movement();
     // PlayerMapPin();
      Jump();
      CheakGround();

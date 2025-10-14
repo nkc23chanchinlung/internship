@@ -55,7 +55,7 @@ public class CamController : MonoBehaviour
         var scroll = Input.mouseScrollDelta.y;
         distance -= scroll * 0.2f;
         
-        this.transform.DOMove(_target.position + new Vector3(0, distance, x), 0.5f).SetEase(Ease.OutSine); //カメラプレイや追跡
+        this.transform.DOMove(_target.position + new Vector3(0, distance, x), 1f).SetEase(Ease.OutSine); //カメラプレイや追跡
         
        
        

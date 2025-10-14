@@ -24,7 +24,6 @@ public class UIManager :UIEffect
    
     
     [Header("Image")]
-    [SerializeField] Image Lifebar;
     [SerializeField] Image House_Hpbar;
     [SerializeField] Image Fade;
 
@@ -34,6 +33,7 @@ public class UIManager :UIEffect
     [SerializeField] EquipSystem equipSystem;
     [SerializeField] Text Magazine_Text;
     [SerializeField] Text Coin_Text;
+    [SerializeField] Text Lifebar_Text;
     Image Magazine_Image;
     [SerializeField]PlayerController playerController;
     House house;
@@ -138,8 +138,8 @@ public class UIManager :UIEffect
     public void SetMagazine(int Magazine,int MaxMagazine)
     {
        Magazine_Text.text=Magazine.ToString() + "/" + MaxMagazine.ToString();
-        Magazine_Image = GameObject.Find("magazinebar").GetComponent<Image>();
-        Magazine_Image.fillAmount = (float)Magazine / (float)MaxMagazine;
+        //Magazine_Image = GameObject.Find("magazinebar").GetComponent<Image>();
+        //Magazine_Image.fillAmount = (float)Magazine / (float)MaxMagazine;
     }
     public void memo()
     {
@@ -147,7 +147,8 @@ public class UIManager :UIEffect
     }
     void Hpbar()                                                                          //プレイヤーのHPバー
     {
-        Lifebar.fillAmount = (float)playerController.Hp / (float)playerController.MaxHp;
+        //Lifebar.fillAmount = (float)playerController.Hp / (float)playerController.MaxHp;
+        Lifebar_Text.text = playerController.Hp.ToString("D2");
     }
     void HouseHpbar()                                                                     //家のHPバー
     {
