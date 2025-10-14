@@ -39,7 +39,7 @@ public class UIManager :UIEffect
     [SerializeField]PlayerController playerController;
     House house;
     bool PanelOpen = false;
-   
+    float displaylife=100;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
@@ -146,10 +146,13 @@ public class UIManager :UIEffect
     {
         StorePanel.SetActive(true);
     }
-    void Hpbar()                                                                          //プレイヤーのHPバー
+    void Hpbar( )                                                                          //プレイヤーのHPバー
     {
+       
         Lifebar.fillAmount = (float)playerController.Hp / (float)playerController.MaxHp;
-        Lifebar_Text.text = playerController.Hp.ToString("D2")+"%";
+        var life = ((float)playerController.Hp / (float)playerController.MaxHp)*100;
+        if (displaylife != life) displaylife--;
+            Lifebar_Text.text = displaylife.ToString("")+"%";
     }
     void HouseHpbar()                                                                     //家のHPバー
     {
