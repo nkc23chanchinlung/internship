@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 全シーンで存在し続けるゲーム全体を管理するクラス
+/// </summary>
 public class GameManager : MonoBehaviour
 {
     static public bool GameStop = false;  //ゲームを停止するかどうか

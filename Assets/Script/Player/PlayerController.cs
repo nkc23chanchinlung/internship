@@ -120,7 +120,7 @@ public class PlayerController : MonoBehaviour
         if(vec<maxvec)//移動速度制限
         rigidbody.AddForce(moveDirection * acceleration, ForceMode.VelocityChange);
 
-        Debug.Log(rigidbody.linearVelocity.magnitude);
+        
 
         if (rigidbody.linearVelocity.magnitude < 0.1f)
         {
