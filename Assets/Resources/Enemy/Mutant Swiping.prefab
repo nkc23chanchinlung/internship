@@ -187,8 +187,8 @@ GameObject:
   - component: {fileID: 5126971540705983703}
   - component: {fileID: 1946757761288841471}
   - component: {fileID: 7905160096476244643}
-  - component: {fileID: 3447295075171627739}
   - component: {fileID: 8103021106751668729}
+  - component: {fileID: 2223481593405811711}
   m_Layer: 0
   m_Name: Mutant Swiping
   m_TagString: Untagged
@@ -285,27 +285,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!65 &3447295075171627739
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 914530037171260588}
-  m_Material: {fileID: 13400000, guid: 88da6ff170f113747b7c1732eea59d43, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1.39, z: 1}
-  m_Center: {x: 0, y: 0.74, z: 0}
 --- !u!114 &8103021106751668729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -332,6 +311,29 @@ MonoBehaviour:
   Debug_Status: {fileID: 6033357283543400433}
   Hand: {fileID: 2680056497890171940}
   mat: {fileID: 0}
+--- !u!136 &2223481593405811711
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 914530037171260588}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2.08
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.86, z: 0}
 --- !u!1 &947910014983885748
 GameObject:
   m_ObjectHideFlags: 0

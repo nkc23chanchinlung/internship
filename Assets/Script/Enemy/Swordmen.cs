@@ -1,11 +1,21 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 public class Swordmen : Enemy
 {
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void OnEnable()
     {
+        GameManager.OnGameStart += OnGameStart;
+    }
+
+    void OnDisable()
+    {
+        GameManager.OnGameStart -= OnGameStart;
+    }
+    
+    void OnGameStart()
+    {
+        
         Init();//初期化
         lifebar.SetActive(false);
         agent.stoppingDistance =1f;
@@ -16,25 +26,44 @@ public class Swordmen : Enemy
 
 
     }
+    private void OnTriggerEnter(Collider other) // updated to Collider from Collision
+    {
+       
+        if (other.gameObject.tag == "PlayerAtk")
+        {
+            Debug.Log("GetHit");
+            Returnmat(0.5f, "MutantMesh");
+            Bullet PlayerAtk = other.gameObject.GetComponent<Bullet>();
+            Destroy(other.gameObject);
+            int damage = PlayerAtk.damage;
+            GetDamage(damage - defense, 2.0f);
+            
+
+        }
+    }
     protected override void Init()
     {
         base.Init(); //親クラスの初期化を呼び出す
         
+        
+       
         MaxHp = 200; //敵の最大HP
         Hp = MaxHp;
-        Attack = 20;
+        Attack = 10;
         defense = 10;
         Sponpoint = transform.position; //スポーン位置を設定
         //target=GameObject.Find("House").transform; //初期ターゲットを家に設定
         
 
     }
+    
 
     // Update is called once per frame
     void Update()
     {
-        if(GameManager.GameStop) return; //ゲームが停止している場合は処理を中断
-
+        
+        if (GameManager.instance.GameStop || GameManager.instance.IsOpenMoviePlaying) return; //ゲームが停止している場合は処理を中断
+        Debug.Log("Swordmen Update");
         if (Hp <= 0) Die(); //HPが0以下なら死亡処理
 
         if (target != null)
@@ -54,36 +83,6 @@ public class Swordmen : Enemy
         speed = velocity.magnitude;                                                  //速度の大きさを取得
         enemyAnimetor.Animetor(false, speed * 5, false, false, false, atking, false); //アニメーションの実行
     }
-
-
-    private void OnTriggerEnter(Collider collision)
-    {
-        if (collision.gameObject.tag == "PlayerAtk")
-        {
-            Bullet PlayerAtk = collision.gameObject.GetComponent<Bullet>();
-            Destroy(collision.gameObject);
-            int damage = PlayerAtk.damage;
-            GetDamage(damage - defense, 2.0f);
-
-            
-            mat.color = Color.red;
-            StartCoroutine(Returnmat( 0.2f));  //色を元に戻すコルーチンを開始
-
-
-        }
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "PlayerAtk")
-        {
-            Bullet PlayerAtk = collision.gameObject.GetComponent<Bullet>();
-            Destroy(collision.gameObject);
-            int damage = PlayerAtk.damage;
-            GetDamage(damage - defense, 2.0f);
-
-        }
-    }
-
 
     protected override void movement()
     {
@@ -123,5 +122,7 @@ public class Swordmen : Enemy
 
         }
     }
-  
+
+   
+
 }

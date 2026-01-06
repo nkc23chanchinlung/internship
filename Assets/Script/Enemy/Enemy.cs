@@ -53,7 +53,9 @@ public class Enemy : EnemyMovement
    
     Collider targetcol;
     Vector3 targetsize;                                              //目標の大きさ
-    protected Vector3 Sponpoint;                                              //スポーン位置
+    protected Vector3 Sponpoint;                                     //スポーン位置
+
+    
 
 
     [SerializeField] Text Debug_Status;
@@ -64,14 +66,16 @@ public class Enemy : EnemyMovement
 
     protected ObjAnimetor enemyAnimetor; //敵のアニメーションを管理するクラス
 
+    //初期化処理
     protected virtual void Init()
     {
         
         uimanager = GameObject.Find("-----UIManager-----").GetComponent<UIManager>();
         Player = GameObject.FindGameObjectWithTag("Player").transform;
-        House = GameObject.Find("House").transform;
+        //House = GameObject.Find("House").transform;
        
         agent = GetComponent<NavMeshAgent>();
+
         
 
         rb = GetComponent<Rigidbody>();
@@ -195,7 +199,8 @@ public class Enemy : EnemyMovement
 
     }
 
-    protected void GetDamage(int damage,float hidetime)    //敵がダメージを受ける関数
+    //敵がダメージを受ける関数
+    protected void GetDamage(int damage,float hidetime)    
     {
         lifebar.SetActive(true);
         angervalue += 60;
@@ -205,14 +210,15 @@ public class Enemy : EnemyMovement
         Invoke("hidelifebar", hidetime);
     }
 
-        IEnumerator hidelifebar()     　　　　　　　//ライフバーを非表示にするコルーチン
+    //ライフバーを非表示にするコルーチン
+    IEnumerator hidelifebar()     　　　　　　　
     {
         uimanager.hideeffect(lifebar.GetComponent<Image>(), 1.0f);
         return null;
     }
 
-
-    protected void Meleeattack(float cooldowntime)  　　　　　//アニメーションイベントから呼び出される攻撃関数
+    //アニメーションイベントから呼び出される攻撃関数
+    protected void Meleeattack(float cooldowntime)  　　　　　
     {
         BoxCollider col =Hand.GetComponentInChildren<BoxCollider>();
        
@@ -238,13 +244,24 @@ public class Enemy : EnemyMovement
     /// </summary>
     /// <param name="delay">遅延</param>
     /// <returns></returns>
-    public IEnumerator Returnmat(float delay) 
+    public IEnumerator Returnmat(float delay,string name) 
     {
-        Material material = GetComponentInChildren<Renderer>().material;
-       yield return new WaitForSeconds(delay);
-        Debug.Log("Returnmat");
-        material.color = Color.white;
-        yield return null;
+        foreach (Transform child in GetComponentInChildren<Transform>(true))
+        {
+            if (child.name == name)
+            {
+                Material material = child.GetComponent<Renderer>().material;
+                yield return new WaitForSeconds(delay);
+                Debug.Log("Returnmat");
+                material.color = Color.red;
+                yield return null;
+            }
+        }
+       // Material material = GetComponentInChildren<Renderer>().material;
+       //yield return new WaitForSeconds(delay);
+       // Debug.Log("Returnmat");
+       // material.color = Color.red;
+       // yield return null;
     }
 
 }

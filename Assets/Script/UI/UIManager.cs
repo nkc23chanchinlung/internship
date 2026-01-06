@@ -42,33 +42,32 @@ public class UIManager :UIEffect
     float displaylife=100;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-
-    void Start()
+    private void OnEnable()
+    {
+        GameManager.OnGameStart += OnGameStart;
+    }
+    private void OnDisable()
+    {
+        GameManager.OnGameStart -= OnGameStart;
+    }
+    void OnGameStart()
     {
         playerController =GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        try
-        {
-            house = GameObject.Find("House").GetComponent<House>();
-        }
-        catch
-        {
-            house = null;
-        }
+        
+
+    }
+    private void Start()
+    {
         StorePanel.SetActive(false);
         blinkinge_effect(Reloading_text);
         MapPanel.transform.localScale = Vector3.zero;
         MenuPanel.transform.localScale = Vector3.zero;
-
         hideeffect(Fade, 1f);  　　　　　　　　　　　　　//Fade処理
-        
-
-
     }
-
     // Update is called once per frame
     void Update()
     {
-       
+       if(playerController == null) return;
         playerController.IsCreate = PanelOpen;
 
         if (Input.GetKeyDown(KeyCode.B)&&!PanelOpen)
@@ -94,13 +93,12 @@ public class UIManager :UIEffect
         else PanelOpen = false;
 
         Hpbar();
-        if (house != null)                                                                                       //家のHPバーがあるか
-            HouseHpbar();
+        
 
 
         PanelOpen = PanelControll(Lead, KeyCode.T, new Vector3(0.02f, 0.02f, 0.02f));                            //リードのパネルを開くか閉じるか
         PanelOpen = PanelControll(MapPanel, KeyCode.Tab, new Vector3(0.5f, 0.7f, 0.7f));                         //マップのパネルを開くか閉じるか
-        GameManager.GameStop= PanelControll(MenuPanel, KeyCode.Escape, new Vector3(0.3f, 0.5f, 0.5f));           //メニューのパネルを開くか閉じるか
+        GameManager.instance.GameStop= PanelControll(MenuPanel, KeyCode.Escape, new Vector3(0.3f, 0.5f, 0.5f));           //メニューのパネルを開くか閉じるか
        
         SetCoin(GameManager.Coin);                                                                 //コインの数を更新                                 
 
@@ -154,10 +152,7 @@ public class UIManager :UIEffect
         if (displaylife != life) displaylife--;
             Lifebar_Text.text = displaylife.ToString("")+"%";
     }
-    void HouseHpbar()                                                                     //家のHPバー
-    {
-       House_Hpbar.fillAmount = (float)house.Hp / (float)house.MaxHp;
-    }
+   
     void Show_Reloading_text()
     {
         Reloading_text.gameObject.SetActive(true);

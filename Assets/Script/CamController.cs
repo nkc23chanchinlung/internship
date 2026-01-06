@@ -30,9 +30,18 @@ public class CamController : MonoBehaviour
     float Maxdistance = 8f;
     float Mindistance = 2.5f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    private void OnEnable()
     {
-        _target = UnityEngine.GameObject.FindWithTag("Player").transform;
+        GameManager.OnGameStart += OnGameStart;
+    }
+    private void OnDisable()
+    {
+        GameManager.OnGameStart -= OnGameStart;
+    }
+    void OnGameStart()
+    {
+        _target = GameObject.FindWithTag("Player").transform;
         y = transform.eulerAngles.y;
     }
 

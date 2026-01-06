@@ -9,7 +9,15 @@ public class LeadController : MonoBehaviour
 
     private Quaternion fixedRotationOffset = Quaternion.Euler(90, 0, 90);
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void OnEnable()
+    {
+        GameManager.OnGameStart += OnGameStart;
+    }
+    private void OnDisable()
+    {
+        GameManager.OnGameStart -= OnGameStart;
+    }
+    void OnGameStart()
     {
         Playerpos = UnityEngine.GameObject.FindGameObjectWithTag("Player").transform;
     }
@@ -17,16 +25,19 @@ public class LeadController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position=Playerpos.position+transform.forward * distance + Playerpos.up * distance;
-
-        if (homepos != null)
+        if (Playerpos != null)
         {
-            Vector3 direction = (homepos.position - transform.position).normalized;
-            if (direction != Vector3.zero)
+            transform.position = Playerpos.position + transform.forward * distance + Playerpos.up * distance;
+
+            if (homepos != null)
             {
-                Quaternion lookRotation = Quaternion.LookRotation(direction);
-                targetRotation = Quaternion.Slerp(transform.rotation, lookRotation * fixedRotationOffset, Time.deltaTime * 2f);
-                transform.rotation = targetRotation;
+                Vector3 direction = (homepos.position - transform.position).normalized;
+                if (direction != Vector3.zero)
+                {
+                    Quaternion lookRotation = Quaternion.LookRotation(direction);
+                    targetRotation = Quaternion.Slerp(transform.rotation, lookRotation * fixedRotationOffset, Time.deltaTime * 2f);
+                    transform.rotation = targetRotation;
+                }
             }
         }
 

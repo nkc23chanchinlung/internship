@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int MaxSpeed, JumpForce;
     [SerializeField]private float acceleration;      //加速度
     [SerializeField]public int MaxHp { get; private set; } = 100; //最大のHP
-    [SerializeField]public int Hp { get; set; } = 100;//敵のHP
+    [SerializeField]public int Hp { get; set; } = 100;//プレイヤーのHP
     [SerializeField] float rayy, raydis;  //Rayの長さ
     Vector3 moveDirection;
     Vector3 lastMoveDirection;  
@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
         PlayerMapPin();
 
 
-        if (GameManager.GameStop) return; //ゲームが停止している場合は処理を中断
+        if (GameManager.instance.GameStop) return; //ゲームが停止している場合は処理を中断
      GameOver();
 
      if (InGround&&!IsRoll) 
@@ -221,10 +221,11 @@ public class PlayerController : MonoBehaviour
         await Task.Delay(TimeSpan.FromSeconds(seconds));
         action();
     }
-    public void GetDamage()
+    //プレイヤーがダメージを受ける処理
+    public void GetDamage(int Dmg)
     {
         if (invincible) return; // 無敵状態ならダメージを受けない
-        Hp -= 10;
+        Hp -= Dmg;
        
     }
     void GameOver()
@@ -243,12 +244,12 @@ public class PlayerController : MonoBehaviour
         IsRoll = false;
         invincible = false;
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("EnemyAtk"))
-        {
-            GetDamage();
-        }
-    }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.CompareTag("EnemyAtk"))
+    //    {
+    //        //GetDamage();
+    //    }
+    //}
 }
 

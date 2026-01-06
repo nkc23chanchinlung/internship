@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,28 +7,39 @@ using UnityEngine;
 /// </summary>
 public class GameManager : MonoBehaviour
 {
-    static public bool GameStop = false;  //ゲームを停止するかどうか
-    static public bool GameManagerExist = false;
+
+    public static event Action OnGameStart; //ゲーム開始時のイベント
+    public bool GameStop = false;  //ゲームを停止するかどうか
+    static public bool GameManagerExist = false;//GameManagerが存在フラグ
+    public bool IsOpenMoviePlaying { get; set; } //ムービー再生中かどうか
+        static public GameManager instance { get; private set; }
     bool IsStarted;
     public int Day { get; set; }
     int Enemyvalue;
     
     bool clear;
 
+    public void StartGame()
+    {
+        GameStop = false;
+        IsOpenMoviePlaying = false;
+        OnGameStart?.Invoke();
+    }
+
     static public int Coin { get; set; } = 0;  //所持金
 
 
 
-    //private void Awake()
-    //{
-    //    Application.targetFrameRate = 60;
-    //}
+    private void Awake()
+    {
+        CheakGameManagerExist();
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
 
         DontDestroyOnLoad(this.gameObject);
-        CheakGameManagerExist();
+       
         
 
     }
@@ -37,22 +49,21 @@ public class GameManager : MonoBehaviour
     {
         
     }
+    //GameManagerの重複を防ぐ
     void CheakGameManagerExist()
     {
-       
-        if (!GameManagerExist)
+       if(instance == null)
         {
-            GameManagerExist = true;
-            //IsStarted = false;
-            //Enemyvalue = 0;
-            //Day = 0;
-            //clear = false;
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
         }
-        else
+        else if (instance != this)
         {
             Destroy(this.gameObject);
         }
     }
+
+   
     void Setdata(int day)
     {
         Day = day;
