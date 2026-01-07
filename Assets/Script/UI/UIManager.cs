@@ -21,6 +21,9 @@ public class UIManager :UIEffect
     [SerializeField] GameObject Lead;
     [SerializeField] GameObject Damagevalueprefeb;
     [SerializeField] GameObject Coinprefeb;
+    [SerializeField] GameObject CoinUI;
+    [SerializeField] GameObject StatusUI;
+    [SerializeField] GameObject MiniMap;
    
     
     [Header("Image")]
@@ -53,7 +56,10 @@ public class UIManager :UIEffect
     void OnGameStart()
     {
         playerController =GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        
+        CoinUI.SetActive(true);
+        StatusUI.SetActive(true);
+        MiniMap.SetActive(true);
+
 
     }
     private void Start()

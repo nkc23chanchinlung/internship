@@ -87,8 +87,8 @@ public class Swordmen : Enemy
     protected override void movement()
     {
         base.movement();
-       
-        switch (status)                                                                //ó‘Ô‚É‚æ‚és“®‚ÌØ‚è‘Ö‚¦
+        //ó‘Ô‚É‚æ‚és“®‚ÌØ‚è‘Ö‚¦
+        switch (status)                                                                
         {
             case Status.Hostile:
                 if (target != null)

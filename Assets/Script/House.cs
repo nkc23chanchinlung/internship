@@ -5,11 +5,17 @@ public class House : MonoBehaviour
 {
     public int MaxHp { get; } = 1000; //‰Æ‚ÌHP‚ÌÅ‘å’l
     public int Hp { get; set; } //‰Æ‚ÌHP
+    [SerializeField] Material housemat;
+    int customQueue = 3001;
    
          // Start is called once before the first execution of Update after the MonoBehaviour is created
 void Start()
     {
         Hp = MaxHp; //‰Æ‚ÌHP‚ğÅ‘å’l‚Å‰Šú‰»
+        if (housemat != null)
+        {
+            housemat.renderQueue = customQueue;
+        }
     }
 
     // Update is called once per frame

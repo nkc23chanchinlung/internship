@@ -6,14 +6,15 @@ public class M4 : Gun
 
     void OnEnable()
     {
-        if (playerController != null)
-        {
-            uiManager.SearchMagazine();
-            uiManager.SetMagazine(Magazine, MaxMagazine);
-        }
+      
+        GameManager.OnGameStart += OnGameStart;
     }
-    
-    void Start()
+    void OnDisable()
+    {
+        GameManager.OnGameStart -= OnGameStart;
+    }
+
+    void OnGameStart()
     {
        
         MaxCooldown = 1f;
@@ -28,6 +29,13 @@ public class M4 : Gun
         Repair = 1;
         weaponnum = 1; //•Ší”Ô†
         audioSource = GetComponent<AudioSource>();
+
+        if (playerController != null)
+        {
+
+            uiManager.SearchMagazine();
+            uiManager.SetMagazine(Magazine, MaxMagazine);
+        }
 
     }
 

@@ -20,10 +20,7 @@ public class MovieController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   
     void OpeningMovie()
     {
         director.Play();
@@ -36,7 +33,7 @@ public class MovieController : MonoBehaviour
     {
         if (aDirector == director)
         {
-            Debug.Log("ムービー終了");
+            
             player.SetActive(true);
             gameManager.IsOpenMoviePlaying = false;
             MoveUIController();
@@ -46,14 +43,14 @@ public class MovieController : MonoBehaviour
         }
     }
     void MoveUIController()
-    {
+    {   
+        //UIを表示させる
         OutLine1.gameObject.SetActive(true);
         OutLine2.gameObject.SetActive(true);
+
+        //UIを上下に移動させる
         OutLine1.DOMoveY(OutLine1.transform.position.y + 100, 1f).SetEase(Ease.InOutSine);
-        
-
         OutLine2.DOMoveY(OutLine2.transform.position.y -100, 1f).SetEase(Ease.InOutSine);
-
 
     }
 }

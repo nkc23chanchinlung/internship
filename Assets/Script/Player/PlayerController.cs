@@ -46,12 +46,6 @@ public class PlayerController : MonoBehaviour
     public float friction = 0.5f;
     bool invincible;
   
-
-
-
-
-
-
     private void Awake()
     {
      playerAnimetor = new ObjAnimetor(animeionspeed, gameObject);
@@ -111,8 +105,8 @@ public class PlayerController : MonoBehaviour
         
 
         IsShooting = Input.GetMouseButton(0) && !IsCreate ? true : false;
-        float movex = Input.GetAxis("Horizontal");
-        float movez = Input.GetAxis("Vertical");
+        float movex = -Input.GetAxis("Horizontal");
+        float movez = -Input.GetAxis("Vertical");
 
         // 入力方向を取得
         Vector3 moveDirection = new Vector3(movex, 0, movez).normalized;

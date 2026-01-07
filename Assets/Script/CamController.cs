@@ -16,6 +16,7 @@ public class CamController : MonoBehaviour
     [SerializeField] float camy;
     [SerializeField] float camsize;
     [SerializeField] Transform playerpos;
+    Vector3 Mousepos;
     bool isobest;
     bool onlyonce;
     private float y;
@@ -48,14 +49,25 @@ public class CamController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
-        //obestcam();
-      
+        Mousepos = Input.mousePosition;
+        Debug.Log(Mousepos);
+
+        //カメラカーソルによる移動
+        if (Mousepos.y > Screen.height - 500) x = -4.0f;
+        else if (Mousepos.y < 300) x = -2.0f;
+        else x = -3.0f; 
+        if (Mousepos.x> Screen.width - 300) y = -0.5f;
+        else if (Mousepos.x < 300) y = 0.5f;
+        else y = 0f;
+
     }
     private void FixedUpdate()
     {
+        if (GameManager.instance.IsOpenMoviePlaying) return;
+        
         Cam(_target);
     }
+    //カメラコントロールメソッド
     public void Cam(Transform target)
     {
 
@@ -63,8 +75,9 @@ public class CamController : MonoBehaviour
         distance = Mathf.Clamp(distance, Mindistance, Maxdistance);
         var scroll = Input.mouseScrollDelta.y;
         distance -= scroll * 0.2f;
-        
-        this.transform.DOMove(_target.position + new Vector3(0, distance, x), 1f).SetEase(Ease.OutSine); //カメラプレイや追跡
+
+        //カメラプレイや追跡
+        this.transform.DOMove(_target.position + new Vector3(y, distance, x+7f), 1f).SetEase(Ease.OutSine); 
         
        
        
@@ -78,63 +91,6 @@ public class CamController : MonoBehaviour
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, y, transform.eulerAngles.z);
         }
     }
-    void obestcam()  //遮蔽物判定(未完成)
-    {
-        RaycastHit hit;
-        Physics.BoxCast(transform.position, new Vector3(camsize, camsize, camsize),transform.forward, out hit, Quaternion.identity,camy);
-
-        if (hit.collider != null)
-        {
-            if (hit.collider.tag == "terrain")
-            {
-               
-                isobest = true;
-               
-            }
-            else isobest = false;
-        }
-        else isobest = false;
-
-
-        if (isobest && !onlyonce)
-        {
-            distance -= 1.5f;
-            gameObject.transform.DOMove(_target.transform.position + new Vector3(0, distance, x), 0.1f);
-            onlyonce = true;
-        }
-        else if (!isobest && onlyonce)
-        {
-            distance += 1.5f;
-            gameObject.transform.DOMove(_target.transform.position + new Vector3(0, distance, x), 0.1f);
-            onlyonce = false;
-        }
-
-
-
-
-    }
-    void OnDrawGizmos()
-    {
-       Vector3 halfExtents = new Vector3(camsize, camsize, camsize);
-        float maxDistance = 5f;
-        Color gizmoColor=Color.red;
-        Vector3 origin = transform.position;
-        Vector3 direction = transform.forward * camy;
-        Quaternion rotation = Quaternion.identity; // 必要なら transform.rotation に変更可能
-
-        Gizmos.color = gizmoColor;
-
-        // 始点のボックス
-        Gizmos.matrix = Matrix4x4.TRS(origin, rotation, Vector3.one);
-        Gizmos.DrawWireCube(Vector3.zero, halfExtents * 2);
-
-        // 終点のボックス（BoxCast の最大距離）
-        Vector3 end = origin + direction * maxDistance;
-        Gizmos.matrix = Matrix4x4.TRS(end, rotation, Vector3.one);
-        Gizmos.DrawWireCube(Vector3.zero, halfExtents * 2);
-
-        // 始点〜終点を結ぶ線
-        Gizmos.matrix = Matrix4x4.identity;
-        Gizmos.DrawLine(origin, end);
-    }
+    
+    
 }
