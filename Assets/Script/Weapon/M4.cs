@@ -3,7 +3,7 @@ using UnityEngine;
 public class M4 : Gun
 {
     [SerializeField]int range;
-
+    [SerializeField] GameObject Weapon;
     void OnEnable()
     {
       
@@ -17,18 +17,12 @@ public class M4 : Gun
     void OnGameStart()
     {
        
-        MaxCooldown = 1f;
-        cooldown = 1f;
-        Magazine = 8;
-        MaxMagazine = 8;
-        ReloadTime = 1f;
+        
         bulletprefab = Resources.Load("bullet") as UnityEngine.GameObject;
         uiManager = GameObject.Find("-----UIManager-----").GetComponent<UIManager>();
-        Damage = 25;
-        Pow = 5;
-        Repair = 1;
-        weaponnum = 1; //ïêäÌî‘çÜ
-        audioSource = GetComponent<AudioSource>();
+       
+        audioSource = Weapon.GetComponent<AudioSource>();
+        
 
         if (playerController != null)
         {
@@ -62,8 +56,9 @@ public class M4 : Gun
             Magazine > 0 &&
             !playerController.IsCreate)
         {
-           
+           audioSource.clip = Resources.Load<AudioClip>("Sound/SE/M4_Shot");
             audioSource.PlayOneShot(audioSource.clip);
+            
 
            
             //èàóù  

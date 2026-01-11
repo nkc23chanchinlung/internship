@@ -6,11 +6,11 @@ public class TitleManager : MonoBehaviour
 {
 
     [SerializeField]Image titleframe;
-    UnityEngine.GameObject titleframe_Obj;
+    GameObject titleframe_Obj;
     [Header("Alpha")]
     [Tooltip("0-100")]
     [Range(0, 100)]
-    [SerializeField]float alpha = 0;
+    [SerializeField]float alpha = 100;
     public bool isStart { get; set; } = false;
     [SerializeField]Loading loadingScript;
     bool once = false;  
@@ -25,6 +25,12 @@ public class TitleManager : MonoBehaviour
     void Update()
     {
         
+        if (alpha >=0&&!isStart)
+        {
+            TitleStart_EF();
+
+        }
+
         titleframe.color = new Color(0, 0, 0, alpha/100);
         if (isStart)
         {
@@ -43,6 +49,18 @@ public class TitleManager : MonoBehaviour
             loadingScript.NextScene();
             once = true;
         }
+        }
+    }
+    void TitleStart_EF()
+    {
+
+        titleframe_Obj.SetActive(true);
+        alpha--;
+        
+        if (alpha <= 0)
+        {
+            alpha = 0;
+            titleframe_Obj.SetActive(false);
         }
     }
 }

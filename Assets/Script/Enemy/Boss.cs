@@ -118,7 +118,8 @@ public class Boss : Enemy
             case BossStatus.Long_range:
                 
                     agent.isStopped = true;
-                    Long_range(3f);
+                shooting = true;
+                Long_range(3f);
                 
                 
 
