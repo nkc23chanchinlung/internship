@@ -29,7 +29,7 @@ public class Enemy : EnemyMovement
    
     protected Transform target;
     protected Transform Player;
-    Transform House;
+    
 
     [Header("敵のステータス")]
     public int MaxHp;   //敵の最大HP
@@ -48,7 +48,7 @@ public class Enemy : EnemyMovement
 
     [SerializeField]protected GameObject lifebar;
     protected NavMeshAgent agent;
-    [SerializeField]GameObject bulletprefab;
+    [SerializeField]public GameObject bulletprefab;
     [SerializeField] GameObject Damageprefeb;
    
     Collider targetcol;
@@ -60,7 +60,7 @@ public class Enemy : EnemyMovement
 
     [SerializeField] Text Debug_Status;
 
-    [SerializeField] GameObject Hand;
+    [SerializeField] protected GameObject Hand;
     Rigidbody rb;
     public Material mat;
 
@@ -123,11 +123,7 @@ public class Enemy : EnemyMovement
                         angervalue = 100;
                        Hostile(hit);
                     }
-                    else if (hit.collider.tag == "GameObj")
-                    {
-                        Hostile(hit);
-
-                    }
+                    
                     
                 }
                 
@@ -180,12 +176,7 @@ public class Enemy : EnemyMovement
             targetcol = hit.collider.GetComponent<CapsuleCollider>();
             angervalue += 5;
         }
-        else if (hit.collider.tag == "GameObj")
-        {
-            targetcol = hit.collider.GetComponent<BoxCollider>();
-            
-           
-        }
+        
       
         targetsize = targetcol.bounds.size;
       
@@ -202,7 +193,8 @@ public class Enemy : EnemyMovement
     //敵がダメージを受ける関数
     protected void GetDamage(int damage,float hidetime)    
     {
-        lifebar.SetActive(true);
+        if(lifebar!=null)
+            lifebar.SetActive(true);
         angervalue += 60;
         uimanager.Damagevalue(transform, damage);
         Hp -= damage;

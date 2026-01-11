@@ -2,12 +2,13 @@ using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
 using DG.Tweening;
+//ムービー制御
 public class MovieController : MonoBehaviour
 {
     GameManager gameManager;
     [SerializeField] PlayableDirector director;
-    [SerializeField]GameObject player;
-    [SerializeField] Transform OutLine1;
+    [SerializeField] GameObject player;
+    [SerializeField] Transform OutLine1; //ムービー再生黒枠
     [SerializeField] Transform OutLine2;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -19,8 +20,6 @@ public class MovieController : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-   
     void OpeningMovie()
     {
         director.Play();

@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -6,7 +7,9 @@ public class EnemyMovement : MonoBehaviour
 {
     //敵の行動関する基底クラス
     public bool atking = false;
-    
+    public bool shooting = false;   
+    public bool meleeing = false;   
+
 
     /// <summary>
     /// 敵の射撃関数
@@ -14,7 +17,7 @@ public class EnemyMovement : MonoBehaviour
     /// <param name="cooldowntime">クールダウン</param>
     /// <param name="bullet">撃つオブジェクト</param>
     /// <returns></returns>
-    public IEnumerator Shoot(GameObject bullet,float cooldowntime)
+    public virtual IEnumerator Shoot(GameObject bullet,float cooldowntime)
     {
         atking = true;
         Instantiate(
@@ -25,6 +28,25 @@ public class EnemyMovement : MonoBehaviour
         yield return new WaitForSeconds(cooldowntime);
         atking = false;
     }
+    //Shootのオーバーロード
+    /// <summary>
+    public IEnumerator Shoot(GameObject bullet, float cooldowntime,GameObject obj,Vector3 pos,string tag)
+    {
+        
+        shooting = true;
+        
+        GameObject bulletpre= 
+          Instantiate(
+           bullet,
+            obj.transform.position + transform.forward + pos,
+            transform.rotation
+        );
+       
+        bulletpre.tag = tag;
+       
+        yield return new WaitForSeconds(cooldowntime);
+        shooting = false;
+    }
     /// <summary>
     /// 近接攻撃のコルーチン
     /// </summary>
@@ -33,13 +55,13 @@ public class EnemyMovement : MonoBehaviour
     /// <returns></returns>
     public IEnumerator meleeattack(BoxCollider col,float cooldowntime)
     {
-        
-        atking = true;
+        meleeing = true;
         col.enabled = true;
         yield return new WaitForSeconds(cooldowntime);
         col.enabled = false;
-        atking = false;
-        
+        meleeing = false;
+        yield return new WaitForSeconds(cooldowntime);
+
 
     }
 }

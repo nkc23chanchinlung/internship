@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Swordmen : Enemy
 {
-    void OnEnable()
+     void OnEnable()
     {
         GameManager.OnGameStart += OnGameStart;
     }
@@ -31,7 +31,6 @@ public class Swordmen : Enemy
        
         if (other.gameObject.tag == "PlayerAtk")
         {
-            Debug.Log("GetHit");
             Returnmat(0.5f, "MutantMesh");
             Bullet PlayerAtk = other.gameObject.GetComponent<Bullet>();
             Destroy(other.gameObject);
@@ -79,9 +78,10 @@ public class Swordmen : Enemy
         visibility();
         
 
-        Vector3 velocity = agent.velocity;                                          //NavMeshAgentの速度を取得
-        speed = velocity.magnitude;                                                  //速度の大きさを取得
-        enemyAnimetor.Animetor(false, speed * 5, false, false, false, atking, false); //アニメーションの実行
+        Vector3 velocity = agent.velocity;  //NavMeshAgentの速度を取得
+        speed = velocity.magnitude;         //速度の大きさを取得
+        //アニメーションの実行
+        enemyAnimetor.Animetor(false, speed * 5, false, false, false, meleeing, false); 
     }
 
     protected override void movement()
@@ -105,7 +105,7 @@ public class Swordmen : Enemy
 
             case Status.Attack:                                                       //攻撃制御
                 //transform.LookAt(target);
-                if (!atking)
+                if (!meleeing)
                 {
                   agent.isStopped = true;
                  

@@ -4,22 +4,21 @@ using DG.Tweening;
 using Unity.VisualScripting;
 
 
-//public
-//value ; _target
+
 
 
 public class CamController : MonoBehaviour
 {
     public Transform _target { get; set; }
-    [SerializeField] float x;
+    private float x=0;
+    private float y=0;
     [SerializeField] float distance = 4f;
     [SerializeField] float camy;
     [SerializeField] float camsize;
     [SerializeField] Transform playerpos;
     Vector3 Mousepos;
-    bool isobest;
-    bool onlyonce;
-    private float y;
+   
+    
     public float _distance
     {
         get
@@ -43,14 +42,14 @@ public class CamController : MonoBehaviour
     void OnGameStart()
     {
         _target = GameObject.FindWithTag("Player").transform;
-        y = transform.eulerAngles.y;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         Mousepos = Input.mousePosition;
-        Debug.Log(Mousepos);
+        
 
         //カメラカーソルによる移動
         if (Mousepos.y > Screen.height - 500) x = -4.0f;

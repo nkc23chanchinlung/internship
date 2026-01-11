@@ -30,9 +30,10 @@ public class GameManager : MonoBehaviour
     static public int Coin { get; set; } = 0;  //Š‹à
 
 
-
+    
     private void Awake()
     {
+        Application.targetFrameRate = 60;
         CheakGameManagerExist();
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
