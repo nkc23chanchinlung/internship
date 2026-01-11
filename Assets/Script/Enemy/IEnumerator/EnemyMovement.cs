@@ -32,9 +32,6 @@ public class EnemyMovement : MonoBehaviour
     /// <summary>
     public IEnumerator Shoot(GameObject bullet, float cooldowntime,GameObject obj,Vector3 pos,string tag)
     {
-        
-        shooting = true;
-        
         GameObject bulletpre= 
           Instantiate(
            bullet,
@@ -45,7 +42,7 @@ public class EnemyMovement : MonoBehaviour
         bulletpre.tag = tag;
        
         yield return new WaitForSeconds(cooldowntime);
-        shooting = false;
+        
     }
     /// <summary>
     /// ‹ßÚUŒ‚‚ÌƒRƒ‹[ƒ`ƒ“

@@ -79,7 +79,7 @@ public class Boss : Enemy
         if(distance>= Atkdistance) bossstatus= BossStatus.Walk;
         else if (waittimer >= waittime&&!meleeing&&!shooting)
         {
-            bossstatus= (BossStatus)Random.Range(0, (int)BossStatus.num);
+            bossstatus= (BossStatus)Random.Range(1, (int)BossStatus.num);
             
             waittimer = 0;
         }
@@ -108,19 +108,18 @@ public class Boss : Enemy
                 Walk();
                 break;
             case BossStatus.Melee:
-                if (!shooting)
-                {
+                
                     agent.isStopped = true;
                     Meleeattack(5f);
-                }
+                
 
 
                 break;
             case BossStatus.Long_range:
-                agent.isStopped = true;
                 
-                
+                    agent.isStopped = true;
                     Long_range(3f);
+                
                 
 
                 break;
@@ -138,6 +137,8 @@ public class Boss : Enemy
     void Walk()
     {
         idle = false;
+        shooting = false;
+        meleeing = false;
         agent.isStopped = false;
         
     }
@@ -164,7 +165,15 @@ public class Boss : Enemy
     {
         hitBox.enabled = false;
     }
+ 
+    public void MelleAtkStart()
+    {
+        meleeing = true;
+    }
+    public void MelleAtkComplete()
+    {
+        meleeing = false;
 
-
+    }
 
 }
