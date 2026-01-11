@@ -6,6 +6,7 @@ public class House : MonoBehaviour
     public int MaxHp { get; } = 1000; //â∆ÇÃHPÇÃç≈ëÂíl
     public int Hp { get; set; } //â∆ÇÃHP
     [SerializeField] Material housemat;
+    [SerializeField] Material Wallmat;
     int customQueue = 3001;
    
          // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -15,6 +16,10 @@ void Start()
         if (housemat != null)
         {
             housemat.renderQueue = customQueue;
+        }
+        if (Wallmat != null)
+        {
+            Wallmat.renderQueue = customQueue;
         }
     }
 

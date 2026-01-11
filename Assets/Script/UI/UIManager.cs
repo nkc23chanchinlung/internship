@@ -27,9 +27,10 @@ public class UIManager :UIEffect
    
     
     [Header("Image")]
-    [SerializeField] Image House_Hpbar;
+    [SerializeField] Image Boss_Hpbar;
     [SerializeField] Image Fade;
     [SerializeField]Image Lifebar;
+    [SerializeField]Image Boss_Frame;
 
 
     [Header("Text")]
@@ -38,8 +39,10 @@ public class UIManager :UIEffect
     [SerializeField] Text Magazine_Text;
     [SerializeField] Text Coin_Text;
     [SerializeField] Text Lifebar_Text;
+    [SerializeField] Text percent;
     Image Magazine_Image;
     [SerializeField]PlayerController playerController;
+    
     House house;
     bool PanelOpen = false;
     float displaylife=100;
@@ -56,6 +59,7 @@ public class UIManager :UIEffect
     void OnGameStart()
     {
         playerController =GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        
         CoinUI.SetActive(true);
         StatusUI.SetActive(true);
         MiniMap.SetActive(true);
@@ -98,7 +102,7 @@ public class UIManager :UIEffect
         }
         else PanelOpen = false;
 
-        Hpbar();
+        Hpbar(playerController.Hp,playerController.MaxHp);
         
 
 
@@ -150,13 +154,27 @@ public class UIManager :UIEffect
     {
         StorePanel.SetActive(true);
     }
-    void Hpbar( )                                                                          //プレイヤーのHPバー
+
+    public void BossHpbar(int Hp,int MaxHp)
+    {
+        if(Boss_Frame.gameObject.activeSelf==false)
+        {
+            Debug.Log("BossHpbarActive");
+            Boss_Frame.gameObject.SetActive(true);
+        }
+        Boss_Hpbar.fillAmount = (float)Hp / (float)MaxHp;
+        var life = ((float)Hp / (float)MaxHp) * 100;
+        percent.text = life.ToString("F0") + "%";
+
+    }
+    void Hpbar(int Hp,int MaxHp)                                                                          //プレイヤーのHPバー
     {
        
-        Lifebar.fillAmount = (float)playerController.Hp / (float)playerController.MaxHp;
-        var life = ((float)playerController.Hp / (float)playerController.MaxHp)*100;
-        if (displaylife != life) displaylife--;
-            Lifebar_Text.text = displaylife.ToString("")+"%";
+        Lifebar.fillAmount = (float)Hp / (float)MaxHp;
+        var life = ((float)Hp / (float)MaxHp) * 100;
+        if (displaylife > life) displaylife--;
+        else if (displaylife <life) displaylife++;
+        Lifebar_Text.text = displaylife.ToString("")+"%";
     }
    
     void Show_Reloading_text()

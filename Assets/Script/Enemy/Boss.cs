@@ -36,6 +36,7 @@ public class Boss : Enemy
     }
     private void OnEnable()
     {
+        
         enemyAnimetor = new ObjAnimetor(1f, gameObject); //敵のアニメーションを管理するクラスの初期化
         Init();
         Isbattle=true;
@@ -55,6 +56,10 @@ public class Boss : Enemy
        
 
         if (target == null) return;
+
+        uimanager.BossHpbar(Hp, MaxHp);
+        
+        if (Hp<=0) Die();                      //HPが0以下なら死亡処理
 
         agent.SetDestination(target.position);
         Vector3 velocity = agent.velocity;      //NavMeshAgentの速度を取得

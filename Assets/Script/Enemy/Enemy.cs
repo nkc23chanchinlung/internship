@@ -15,7 +15,7 @@ public class Enemy : EnemyMovement
 {
    
     
-    [SerializeField]UIManager uimanager;
+    [SerializeField]protected UIManager uimanager;
     protected enum Status { Idle, Doubt, Hostile,Attack, num };            //敵の状態
     protected Status status = Status.Hostile;
     [Header("索敵範囲")]
@@ -55,7 +55,7 @@ public class Enemy : EnemyMovement
     Vector3 targetsize;                                              //目標の大きさ
     protected Vector3 Sponpoint;                                     //スポーン位置
 
-    
+    protected bool isDead = false; //敵が死亡したかどうかのフラグ
 
 
     [SerializeField] Text Debug_Status;
@@ -230,6 +230,7 @@ public class Enemy : EnemyMovement
     {
         Destroy(gameObject);
         uimanager.Coin(transform);
+        isDead= true;
     }
     /// <summary>
     /// マテリアルの色を元に戻すコルーチン

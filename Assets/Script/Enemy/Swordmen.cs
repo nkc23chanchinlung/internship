@@ -60,7 +60,8 @@ public class Swordmen : Enemy
     // Update is called once per frame
     void Update()
     {
-        
+        if (isDead) return; //€–S‚µ‚Ä‚¢‚éê‡‚Íˆ—‚ğ’†’f
+
         if (GameManager.instance.GameStop || GameManager.instance.IsOpenMoviePlaying) return; //ƒQ[ƒ€‚ª’â~‚µ‚Ä‚¢‚éê‡‚Íˆ—‚ğ’†’f
         Debug.Log("Swordmen Update");
         if (Hp <= 0) Die(); //HP‚ª0ˆÈ‰º‚È‚ç€–Sˆ—
