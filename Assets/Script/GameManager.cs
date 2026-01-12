@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public bool IsOpenMoviePlaying { get; set; } //ムービー再生中かどうか
     
     bool IsStarted;
-    public int Day { get; set; }
+    public int Stage { get; set; }
     int Enemyvalue;
     
     bool clear;
@@ -36,21 +36,6 @@ public class GameManager : MonoBehaviour
         Application.targetFrameRate = 60;
         CheakGameManagerExist();
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-
-        DontDestroyOnLoad(this.gameObject);
-       
-        
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     //GameManagerの重複を防ぐ
     void CheakGameManagerExist()
     {
@@ -68,6 +53,6 @@ public class GameManager : MonoBehaviour
    
     void Setdata(int day)
     {
-        Day = day;
+        Stage = day;
     }
 }

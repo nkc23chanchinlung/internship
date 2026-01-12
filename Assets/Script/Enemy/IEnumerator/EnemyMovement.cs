@@ -30,19 +30,18 @@ public class EnemyMovement : MonoBehaviour
     }
     //Shootのオーバーロード
     /// <summary>
-    public IEnumerator Shoot(GameObject bullet, float cooldowntime,GameObject obj,Vector3 pos,string tag)
+    public IEnumerator Shoot(GameObject bullet, float cooldowntime, GameObject obj, Vector3 pos, string tag)
     {
-        GameObject bulletpre= 
+        GameObject bulletpre =
           Instantiate(
            bullet,
-            obj.transform.position + transform.forward + pos,
-            transform.rotation
+           obj.transform.position + transform.forward + pos,
+           transform.rotation
         );
-       
+
         bulletpre.tag = tag;
-       
+
         yield return new WaitForSeconds(cooldowntime);
-        
     }
     /// <summary>
     /// 近接攻撃のコルーチン

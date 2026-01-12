@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//追加コンテンツのイベント管理
 public class EventManager : MonoBehaviour
 {
     float Gametime;
     GameManager gameManager;
-    int Day;
+    bool gamestarted = false;
+    int Stage;
     [SerializeField]Text Day_Text;
     [SerializeField] Text DayMessage_Text;
     int CurrentDay;
@@ -24,11 +26,11 @@ public class EventManager : MonoBehaviour
     [SerializeField] Image Tr_move;
     [SerializeField] Image Tr_shoot;
     [SerializeField] Image Tr_reload;
-    [SerializeField] Image Tr_create;
+    [SerializeField] Image Tr_rolling;
     [SerializeField] Text Tr_move_text;
     [SerializeField] Text Tr_shoot_text;
     [SerializeField] Text Tr_reload_text;
-    [SerializeField] Text Tr_create_text;
+    [SerializeField] Text Tr_rolling_text;
     [SerializeField] Image Tr_change;
     [SerializeField] Text Tr_change_text;
     bool onlyonce = true;
@@ -37,7 +39,7 @@ public class EventManager : MonoBehaviour
     private void Awake()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-        Day = gameManager.Day;
+        Stage = gameManager.Stage;
         DayMessage.SetActive(false);
         foreach (Image image in Tr_Imagesarray)
         {
@@ -45,9 +47,18 @@ public class EventManager : MonoBehaviour
         }
         
     }
+    private void OnEnable()
+    {
+        GameManager.OnGameStart += OnGameStart;
+    }
+    void OnGameStart()
+    {
+        gamestarted = true;
+    }
+
     void Start()
     {
-        CurrentDay = Day;
+        CurrentDay = Stage;
         color = DayMessage_Text.color;
 
         color.a = 0f;
@@ -66,8 +77,9 @@ public class EventManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!gamestarted) return;
         Gametime += Time.deltaTime;
-        Day_Text.text = "Day" + Day.ToString();
+        Day_Text.text = "Stage" + Stage.ToString();
         tutorial();
         ShowDayMessage();
         if ((int)Gametime%10==0&&layer<=6&&onlyonce)
@@ -87,16 +99,16 @@ public class EventManager : MonoBehaviour
     void ShowDayMessage()
     {
         DayMessage_Text.color = color;
-        if (CurrentDay != Day)
+        if (CurrentDay != Stage)
         {
-            DayMessage_Text.text = "Day" + Day.ToString();
+            DayMessage_Text.text = "Stage" + Stage.ToString();
             DayMessage.SetActive(true);
             Timer += Time.deltaTime;
             
             color.a += 0.1f;
             if (Timer >= 2f)
             {
-                CurrentDay = Day;
+                CurrentDay = Stage;
                 Timer = 0f;
             }
         }
@@ -178,20 +190,20 @@ public class EventManager : MonoBehaviour
             case 5:
                 Tr_reload.gameObject.SetActive(false);
                 Tr_reload_text.gameObject.SetActive(false);
-                Tr_create.gameObject.SetActive(true);
-                Tr_create_text.gameObject.SetActive(true);
-                Tr_create.color = new Color(1, 1, 1, Mathf.PingPong(Time.time, 1));
-                Tr_create_text.color = new Color(1, 1, 1, Mathf.PingPong(Time.time, 1));
-                if (Input.GetKeyDown(KeyCode.B))
+                Tr_rolling.gameObject.SetActive(true);
+                Tr_rolling_text.gameObject.SetActive(true);
+                Tr_rolling.color = new Color(1, 1, 1, Mathf.PingPong(Time.time, 1));
+                Tr_rolling_text.color = new Color(1, 1, 1, Mathf.PingPong(Time.time, 1));
+                if (Input.GetKeyDown(KeyCode.LeftShift))
                 {
-                    Tr_create.gameObject.SetActive(false);
-                    Tr_create_text.gameObject.SetActive(false);
+                    Tr_rolling.gameObject.SetActive(false);
+                    Tr_rolling_text.gameObject.SetActive(false);
                     layer = 6;
                 }
                 break;
             case 6:
-                Tr_create.gameObject.SetActive(false);
-                Tr_create_text.gameObject.SetActive(false);
+                Tr_rolling.gameObject.SetActive(false);
+                Tr_rolling_text.gameObject.SetActive(false);
                 layer = 7;
                 break;
 

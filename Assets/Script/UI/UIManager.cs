@@ -31,6 +31,7 @@ public class UIManager :UIEffect
     [SerializeField] Image Fade;
     [SerializeField]Image Lifebar;
     [SerializeField]Image Boss_Frame;
+    [SerializeField]Image Warning_Image;
 
 
     [Header("Text")]
@@ -166,6 +167,20 @@ public class UIManager :UIEffect
         var life = ((float)Hp / (float)MaxHp) * 100;
         percent.text = life.ToString("F0") + "%";
 
+    }
+    public void WarningImg(float duration)
+    {
+        Warning_Image.gameObject.SetActive(true);
+        if(Warning_Image.gameObject.activeSelf)
+        {
+            Warning_Image.DOFade(0, duration).OnComplete(() =>
+            {
+                Warning_Image.gameObject.SetActive(false);
+                Color c = Warning_Image.color;
+                c.a = 1;
+                Warning_Image.color = c;
+            });
+        }
     }
     void Hpbar(int Hp,int MaxHp)                                                                          //プレイヤーのHPバー
     {

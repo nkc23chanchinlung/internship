@@ -12,6 +12,7 @@ namespace Viapix_HealingItem
 
         [SerializeField]
         int healingAmount;
+        [SerializeField] AudioClip healsound;
 
         GameObject playerObj;
 
@@ -30,12 +31,15 @@ namespace Viapix_HealingItem
             if (collision.gameObject.CompareTag("Player"))
             {
                collision.gameObject.GetComponent<PlayerController>().Hp += healingAmount;
-
+                
+                AudioSource audio= collision.gameObject.GetComponent<AudioSource>();
+                audio.PlayOneShot(healsound);
                 Destroy(gameObject);
 
                 print("Player HP: " + collision.gameObject.GetComponent<PlayerController>().Hp);
             }
         }
+
     }
 }
 

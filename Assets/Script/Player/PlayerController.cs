@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float MouseSpeedY;
     [SerializeField] GameObject overridesources;
     [SerializeField] GameObject Pin;
+    [SerializeField] AudioSource Footaudio;
     [Header("PInの高さ")]
     [SerializeField]float pinHeight = 50f; //Pinの高さ
     [SerializeField] float animeionspeed;
@@ -45,7 +46,20 @@ public class PlayerController : MonoBehaviour
     float maxvec = 5f;
     public float friction = 0.5f;
     bool invincible;
-  
+
+    [SerializeField] private float footseInterval=0.5f;   // 何秒ごとにダメージ
+    private float nextFootTime = 0f;
+
+
+    void FootSe()
+    {
+        if (Time.time >= nextFootTime)
+        {
+            Footaudio.PlayOneShot(Footaudio.clip);
+            nextFootTime = Time.time + footseInterval;
+        }
+    }
+
     private void Awake()
     {
      playerAnimetor = new ObjAnimetor(animeionspeed, gameObject);
@@ -69,7 +83,7 @@ public class PlayerController : MonoBehaviour
     {
         cheakdirecion();
         PlayerMapPin();
-
+        
 
         if (GameManager.instance.GameStop) return; //ゲームが停止している場合は処理を中断
      GameOver();
@@ -107,6 +121,11 @@ public class PlayerController : MonoBehaviour
         IsShooting = Input.GetMouseButton(0) && !IsCreate ? true : false;
         float movex = -Input.GetAxis("Horizontal");
         float movez = -Input.GetAxis("Vertical");
+
+        if (movex != 0 || movez != 0)
+        {
+            FootSe();
+        }
 
         // 入力方向を取得
         Vector3 moveDirection = new Vector3(movex, 0, movez).normalized;
@@ -238,12 +257,14 @@ public class PlayerController : MonoBehaviour
         IsRoll = false;
         invincible = false;
     }
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if (collision.gameObject.CompareTag("EnemyAtk"))
-    //    {
-    //        //GetDamage();
-    //    }
-    //}
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("EnemyAtk"))
+        {
+            GetDamage(10);
+            Destroy(other.gameObject);
+        }
+    }
 }
 

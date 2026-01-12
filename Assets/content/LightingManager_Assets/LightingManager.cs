@@ -146,7 +146,7 @@ public class LightingManager : MonoBehaviour
                    
                     ResetEvents();
                     enemyRespon.dayupdate = true;
-                    gamemanager.Day++;
+                    gamemanager.Stage++;
                     Debug.Log("Day completed + reset");
                 }
                 else if(TimeOfDay > ResetEventsTime)
