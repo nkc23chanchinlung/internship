@@ -22817,7 +22817,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.8000488, y: 0.4000244}
+  m_AnchoredPosition: {x: -0.8000488, y: 0.39990234}
   m_SizeDelta: {x: 512, y: 256}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &928647821
@@ -23255,6 +23255,7 @@ GameObject:
   - component: {fileID: 968201194}
   - component: {fileID: 968201193}
   - component: {fileID: 968201192}
+  - component: {fileID: 968201195}
   m_Layer: 5
   m_Name: Warning
   m_TagString: Untagged
@@ -23341,6 +23342,103 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 968201190}
   m_CullTransparentMesh: 1
+--- !u!82 &968201195
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968201190}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: 68eee360a467e60408a128d251681962, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &970032909
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -43138,7 +43236,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3489716240837909951, guid: bbfc85054ff234e4f90bf024cbaa67fa, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 194.19997
+      value: 97.4
       objectReference: {fileID: 0}
     - target: {fileID: 3489716240837909951, guid: bbfc85054ff234e4f90bf024cbaa67fa, type: 3}
       propertyPath: m_LocalRotation.w
@@ -48164,7 +48262,7 @@ MonoBehaviour:
   Enemies: 1
   leagth: 0
   MaxHp: 5000
-  Hp: 5000
+  Hp: 3000
   Attack: 20
   defense: 20
   lifebar: {fileID: 0}
@@ -48182,6 +48280,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a10cbca158f791045b44c9d48718801a, type: 3}
   - {fileID: 8300000, guid: e0af4b3bd01dee14fb224667cf1b9d1c, type: 3}
   - {fileID: 8300000, guid: 4e86bdc902add364781e9c26973e7d51, type: 3}
+  wave2: {fileID: 11400000, guid: 470640c51058f9342b52f7cc0bbe07d8, type: 2}
+  EnemySpawner:
+  - {fileID: 914530037171260588, guid: 11d06119682dd404daf742dec42a6b50, type: 3}
 --- !u!320 &8658632502123715535
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -48205,6 +48306,10 @@ PlayableDirector:
     value: {fileID: 30307009}
   - key: {fileID: 1014674621707133543, guid: 88acca1b2444bec43bb24897f39683e5, type: 2}
     value: {fileID: 8658632502123715536}
+  - key: {fileID: -1375810011244515724, guid: 470640c51058f9342b52f7cc0bbe07d8, type: 2}
+    value: {fileID: 8658632502123715530}
+  - key: {fileID: -1200380310260466106, guid: 470640c51058f9342b52f7cc0bbe07d8, type: 2}
+    value: {fileID: 8658632502123715530}
   m_ExposedReferences:
     m_References: []
 --- !u!82 &8658632502123715536

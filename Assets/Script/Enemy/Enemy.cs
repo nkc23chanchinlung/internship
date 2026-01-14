@@ -27,7 +27,7 @@ public class Enemy : EnemyMovement
    
 
    
-    protected Transform target;
+    public Transform target { get; set; }
     protected Transform Player;
     
 
@@ -67,7 +67,7 @@ public class Enemy : EnemyMovement
     protected ObjAnimetor enemyAnimetor; //敵のアニメーションを管理するクラス
 
     //初期化処理
-    protected virtual void Init()
+    public virtual void Init()
     {
         
         uimanager = GameObject.Find("-----UIManager-----").GetComponent<UIManager>();

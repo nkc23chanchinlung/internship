@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.Playables;
 
 public class Boss : Enemy
 {
@@ -9,6 +10,8 @@ public class Boss : Enemy
     [SerializeField] GameObject Gun;
     bool idle = false;
     public bool hasHit { get; set; }
+
+    bool twowave = false;
 
     BoxCollider hitBox;
     float waittimer = 0f;
@@ -20,12 +23,21 @@ public class Boss : Enemy
     AudioSource audioSource;
 
 
-    enum BossStatus { Walk, Melee, Long_range,LazerAttack ,num };
+    enum BossStatus { Walk, Melee, Long_range,LazerAttack,wave2 ,num };
     BossStatus bossstatus = BossStatus.Walk;
     private BossStatus previousBossStatus = BossStatus.Walk;
     private int lastAttackType = 0; // 0: なし, 1: Melee, 2: Long_range
 
-    protected override void Init()
+    PlayableDirector director;
+    [SerializeField] PlayableAsset wave2;
+    [SerializeField]GameObject[] EnemySpawner;
+    bool wave2ended = true;
+
+    Animator bossani;
+    Animation anim;
+
+
+    public override void Init()
     {
         base.Init();
         target = Player;
@@ -36,6 +48,9 @@ public class Boss : Enemy
         previousBossStatus = BossStatus.Walk;
         lastAttackType = 0;
         audioSource = GetComponent<AudioSource>();
+        director=GetComponent<PlayableDirector>();
+        bossani = GetComponent<Animator>();
+        anim=GetComponent<Animation>();
     }
 
     private void OnEnable()
@@ -57,10 +72,15 @@ public class Boss : Enemy
 
     private void Update()
     {
-       
-       
+
+        Debug.Log(twowave);
 
         if (target == null) return;
+        if (((float)Hp / (float)MaxHp) * 100 <= 50 && !twowave) //50%以下で第2形態へ
+        {
+            bossstatus = BossStatus.wave2;
+
+        }
 
         uimanager.BossHpbar(Hp, MaxHp);
 
@@ -71,7 +91,7 @@ public class Boss : Enemy
         speed = velocity.magnitude;
 
         // 攻撃中（近距離or遠距離）はステータス変更しない
-        if (!meleeing && !shooting)
+        if (!meleeing && !shooting&&!twowave)
         {
             StatusChange(3f);
         }
@@ -82,7 +102,24 @@ public class Boss : Enemy
 
         previousBossStatus = bossstatus; // 次のフレームで進入判定に使用
     }
+     private IEnumerator FinalAttack(GameObject　SpawnObj, Transform pos,int spawmamount)
+    {
+        Debug.Log("wave2");
+        
+        wave2ended = false;
+        twowave = true;
+        director.playableAsset = wave2;
+        director.Play();
+        
+            GameObject moster = Instantiate(SpawnObj, pos.position, pos.rotation);
+            Swordmen enemy = moster.GetComponent<Swordmen>();
+            enemy.target = Player;
+            enemy.Init();
 
+        
+        yield return null;
+
+    }
     void StatusChange(float waittime)
     {
         Debug.Log(bossstatus);
@@ -91,25 +128,28 @@ public class Boss : Enemy
 
         waittimer += Time.deltaTime;
 
+        
+       
         if (distance >= Atkdistance)
         {
             bossstatus = BossStatus.Walk;
             waittimer = 0f; // 離れたら待機タイマーもリセット
         }
-        else if (waittimer >= waittime && !meleeing && !shooting)
+        else if (waittimer >= waittime && !meleeing && !shooting&&wave2ended)
         {
-            int chosen = Random.Range(1, (int)BossStatus.num);
+            int chosen = Random.Range(1, (int)BossStatus.num-1);
 
             // 連続同じ攻撃を回避
             while(lastAttackType != 0 && chosen == lastAttackType)
             {
-                chosen = Random.Range(1, (int)BossStatus.num);
+                chosen = Random.Range(1, (int)BossStatus.num-1);
             }
 
             lastAttackType = chosen;
             bossstatus = (BossStatus)chosen;
             waittimer = 0f;
         }
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -155,6 +195,14 @@ public class Boss : Enemy
                 {
                     StartCoroutine(LazeAttack());
                 }
+                break;
+            case BossStatus.wave2:
+                if (!twowave)
+                {
+                    agent.isStopped = true;
+                    StartCoroutine(FinalAttack(EnemySpawner[0], transform, 5));
+                }
+                
                 break;
         }
     }
@@ -236,7 +284,7 @@ public class Boss : Enemy
     {
         audioSource.PlayOneShot(AttackSE[0]);
     }
-
+    
     // 遠距離攻撃専用コルーチン
     private IEnumerator LongRangeAttackCoroutine()
     {
@@ -268,4 +316,5 @@ public class Boss : Enemy
         shooting = false;
         bossstatus = BossStatus.Walk; // 攻撃終了後は歩きに戻す
     }
+   
 }

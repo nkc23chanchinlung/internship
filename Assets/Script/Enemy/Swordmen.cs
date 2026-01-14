@@ -3,9 +3,13 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Swordmen : Enemy
 {
-     void OnEnable()
+    bool inited = false;
+
+
+    void OnEnable()
     {
         GameManager.OnGameStart += OnGameStart;
+        
     }
 
     void OnDisable()
@@ -17,11 +21,7 @@ public class Swordmen : Enemy
     {
         
         Init();//初期化
-        lifebar.SetActive(false);
-        agent.stoppingDistance =1f;
-        status = Status.Idle; //初期状態を敵対に設定
-        enemyAnimetor = new ObjAnimetor(1f, gameObject); //敵のアニメーションを管理するクラスの初期化
-        mat=GetComponentInChildren<Renderer>().material;
+        
        
 
 
@@ -40,7 +40,7 @@ public class Swordmen : Enemy
 
         }
     }
-    protected override void Init()
+    public override void Init()
     {
         base.Init(); //親クラスの初期化を呼び出す
         
@@ -51,9 +51,13 @@ public class Swordmen : Enemy
         Attack = 10;
         defense = 10;
         Sponpoint = transform.position; //スポーン位置を設定
-        //target=GameObject.Find("House").transform; //初期ターゲットを家に設定
-        
+                                        //target=GameObject.Find("House").transform; //初期ターゲットを家に設定
 
+        lifebar.SetActive(false);
+        agent.stoppingDistance = 1f;
+        status = Status.Idle; //初期状態を敵対に設定
+        enemyAnimetor = new ObjAnimetor(1f, gameObject); //敵のアニメーションを管理するクラスの初期化
+        mat = GetComponentInChildren<Renderer>().material;
     }
     
 
