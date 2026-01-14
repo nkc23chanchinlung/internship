@@ -110,11 +110,14 @@ public class Boss : Enemy
         twowave = true;
         director.playableAsset = wave2;
         director.Play();
-        
+
+        for (int i = 0; i < spawmamount; i++)
+        {
             GameObject moster = Instantiate(SpawnObj, pos.position, pos.rotation);
             Swordmen enemy = moster.GetComponent<Swordmen>();
             enemy.target = Player;
             enemy.Init();
+        }
 
         
         yield return null;
@@ -316,5 +319,8 @@ public class Boss : Enemy
         shooting = false;
         bossstatus = BossStatus.Walk; // UŒ‚I—¹Œã‚Í•à‚«‚É–ß‚·
     }
-   
+   public void wave2erase()
+    {
+        gameObject.SetActive(false);
+    }
 }

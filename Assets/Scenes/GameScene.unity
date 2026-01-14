@@ -48311,6 +48311,8 @@ PlayableDirector:
     value: {fileID: 8658632502123715530}
   - key: {fileID: -1200380310260466106, guid: 470640c51058f9342b52f7cc0bbe07d8, type: 2}
     value: {fileID: 8658632502123715530}
+  - key: {fileID: -2519217304480731233, guid: 470640c51058f9342b52f7cc0bbe07d8, type: 2}
+    value: {fileID: 8658632502123715537}
   m_ExposedReferences:
     m_References: []
 --- !u!82 &8658632502123715536
@@ -48428,13 +48430,13 @@ MonoBehaviour:
     m_Events:
     - m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 440656308947542557}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: 
+        - m_Target: {fileID: 8658632502123715534}
+          m_TargetAssemblyTypeName: Boss, Assembly-CSharp
+          m_MethodName: wave2erase
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: 
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
