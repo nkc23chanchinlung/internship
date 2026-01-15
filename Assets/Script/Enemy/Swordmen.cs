@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class Swordmen : Enemy
 {
     bool inited = false;
+    public BossRoomManager bossRoomManager { get; set; }
 
 
     void OnEnable()
@@ -64,6 +65,8 @@ public class Swordmen : Enemy
     // Update is called once per frame
     void Update()
     {
+        if (bossRoomManager) Debug.Log("bossRoomManager is true");
+
         if (isDead) return; //€–S‚µ‚Ä‚¢‚éê‡‚Íˆ—‚ğ’†’f
 
         if (GameManager.instance.GameStop || GameManager.instance.IsOpenMoviePlaying) return; //ƒQ[ƒ€‚ª’â~‚µ‚Ä‚¢‚éê‡‚Íˆ—‚ğ’†’f
@@ -126,8 +129,18 @@ public class Swordmen : Enemy
                 break;
 
         }
+        
+    }
+    protected override void Die()
+    {
+        base.Die();
+        if (bossRoomManager != null)
+        {
+            bossRoomManager.enemyCount--;
+            
+        }
     }
 
-   
+
 
 }
