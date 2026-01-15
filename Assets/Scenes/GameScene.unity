@@ -14169,6 +14169,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 706879508}
+  - component: {fileID: 706879509}
   m_Layer: 0
   m_Name: Bossroom
   m_TagString: Untagged
@@ -14206,6 +14207,18 @@ Transform:
   - {fileID: 453856796}
   m_Father: {fileID: 2072698537}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &706879509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 706879507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf26722249ef43a4892b3b1a25f7c726, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &710236777 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8982885659256443680, guid: 7d779dfff37dcbf479ae6e5b6f351e93, type: 3}
@@ -48272,18 +48285,19 @@ MonoBehaviour:
   Debug_Status: {fileID: 0}
   Hand: {fileID: 5342890472250248764}
   mat: {fileID: 0}
-  searchArea: {fileID: 0}
-  Gun: {fileID: 7066214006607267209}
   Atkdistance: 12
+  searchArea: {fileID: 0}
+  bossRoomManager: {fileID: 706879509}
   redcircle: {fileID: 3638968613346353563, guid: fdeefb30a48f57d47a7439a8911690df, type: 3}
   Lazer: {fileID: 6894867136076209914, guid: 974d5db1a9903fc478136e297ad0c5ee, type: 3}
+  EnemySpawner:
+  - {fileID: 914530037171260588, guid: 11d06119682dd404daf742dec42a6b50, type: 3}
+  Gun: {fileID: 7066214006607267209}
+  wave2timeline: {fileID: 11400000, guid: 470640c51058f9342b52f7cc0bbe07d8, type: 2}
   AttackSE:
   - {fileID: 8300000, guid: a10cbca158f791045b44c9d48718801a, type: 3}
   - {fileID: 8300000, guid: e0af4b3bd01dee14fb224667cf1b9d1c, type: 3}
   - {fileID: 8300000, guid: 4e86bdc902add364781e9c26973e7d51, type: 3}
-  wave2: {fileID: 11400000, guid: 470640c51058f9342b52f7cc0bbe07d8, type: 2}
-  EnemySpawner:
-  - {fileID: 914530037171260588, guid: 11d06119682dd404daf742dec42a6b50, type: 3}
 --- !u!320 &8658632502123715535
 PlayableDirector:
   m_ObjectHideFlags: 0
