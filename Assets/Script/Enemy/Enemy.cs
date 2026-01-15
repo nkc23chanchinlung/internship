@@ -49,7 +49,7 @@ public class Enemy : EnemyMovement
     [SerializeField]protected GameObject lifebar;
     protected NavMeshAgent agent;
     [SerializeField]public GameObject bulletprefab;
-    [SerializeField] GameObject Damageprefeb;
+    //[SerializeField] GameObject Damageprefeb;
    
     Collider targetcol;
     Vector3 targetsize;                                              //目標の大きさ
@@ -72,8 +72,7 @@ public class Enemy : EnemyMovement
         
         uimanager = GameObject.Find("-----UIManager-----").GetComponent<UIManager>();
         Player = GameObject.FindGameObjectWithTag("Player").transform;
-        //House = GameObject.Find("House").transform;
-       
+        
         agent = GetComponent<NavMeshAgent>();
 
         
@@ -226,11 +225,11 @@ public class Enemy : EnemyMovement
     /// <summary>
     /// 死亡処理
     /// </summary>
-    protected virtual void Die()
+    protected virtual void OnDestory()
     {
         Destroy(gameObject);
         uimanager.Coin(transform);
-        isDead= true;
+        isDead = true;
     }
     /// <summary>
     /// マテリアルの色を元に戻すコルーチン
