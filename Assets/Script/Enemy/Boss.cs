@@ -32,6 +32,7 @@ public class Boss : Enemy
     //Timeline
     PlayableDirector director;
     [SerializeField] PlayableAsset wave2timeline;
+    [SerializeField] PlayableAsset returntimeline;
 
     //Sound Effects
     [SerializeField] AudioClip[] AttackSE;
@@ -128,7 +129,7 @@ public class Boss : Enemy
             GameObject moster = Instantiate(SpawnObj, pos.position, pos.rotation);
             bossRoomManager.enemyCount++;
             Swordmen enemy = moster.GetComponent<Swordmen>();
-            //enemy.bossRoomManager = bossRoomManager;
+            enemy.bossRoomManager = bossRoomManager;
             enemy.Init();
             enemy.target = Player;
 

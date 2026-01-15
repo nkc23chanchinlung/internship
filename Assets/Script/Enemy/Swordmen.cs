@@ -70,8 +70,15 @@ public class Swordmen : Enemy
         if (isDead) return; //€–S‚µ‚Ä‚¢‚éê‡‚Íˆ—‚ğ’†’f
 
         if (GameManager.instance.GameStop || GameManager.instance.IsOpenMoviePlaying) return; //ƒQ[ƒ€‚ª’â~‚µ‚Ä‚¢‚éê‡‚Íˆ—‚ğ’†’f
-        Debug.Log("Swordmen Update");
-        if (Hp <= 0) Die(); //HP‚ª0ˆÈ‰º‚È‚ç€–Sˆ—
+        if (Hp <= 0)
+        {
+            {
+                bossRoomManager.enemyCount--;
+                Debug.Log(bossRoomManager.enemyCount);
+
+            }
+            Die(); //HP‚ª0ˆÈ‰º‚È‚ç€–Sˆ—
+        }
 
         if (target != null)
             agent.SetDestination(target.position);
@@ -131,15 +138,7 @@ public class Swordmen : Enemy
         }
         
     }
-    protected override void Die()
-    {
-        base.Die();
-        if (bossRoomManager != null)
-        {
-            bossRoomManager.enemyCount--;
-            
-        }
-    }
+    
 
 
 

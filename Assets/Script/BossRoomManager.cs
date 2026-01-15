@@ -4,6 +4,12 @@ public class BossRoomManager : MonoBehaviour
 {
     public int enemyCount { get; set; } = 0;
 
+
+    private void Update()
+    {
+        bossreturn();
+    }
+
     void bossreturn()
     {
         if (enemyCount <= 0)
