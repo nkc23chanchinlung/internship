@@ -133,9 +133,6 @@ public class Boss : Enemy
             enemy.Init();
             enemy.target = Player;
 
-
-
-
         }
 
 
