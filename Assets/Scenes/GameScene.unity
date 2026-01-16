@@ -14219,6 +14219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf26722249ef43a4892b3b1a25f7c726, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bossobj: {fileID: 440656308947542557}
 --- !u!1 &710236777 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8982885659256443680, guid: 7d779dfff37dcbf479ae6e5b6f351e93, type: 3}
@@ -38301,6 +38302,7 @@ GameObject:
   - component: {fileID: 8658632502123715535}
   - component: {fileID: 8658632502123715536}
   - component: {fileID: 8658632502123715537}
+  - component: {fileID: 8658632502123715538}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Untagged
@@ -48363,7 +48365,7 @@ MonoBehaviour:
   Enemies: 1
   leagth: 0
   MaxHp: 5000
-  Hp: 3000
+  Hp: 2600
   Attack: 20
   defense: 20
   lifebar: {fileID: 0}
@@ -48381,7 +48383,7 @@ MonoBehaviour:
   - {fileID: 914530037171260588, guid: 11d06119682dd404daf742dec42a6b50, type: 3}
   Gun: {fileID: 7066214006607267209}
   wave2timeline: {fileID: 11400000, guid: 470640c51058f9342b52f7cc0bbe07d8, type: 2}
-  returntimeline: {fileID: 0}
+  returntimeline: {fileID: 11400000, guid: 88acca1b2444bec43bb24897f39683e5, type: 2}
   AttackSE:
   - {fileID: 8300000, guid: a10cbca158f791045b44c9d48718801a, type: 3}
   - {fileID: 8300000, guid: e0af4b3bd01dee14fb224667cf1b9d1c, type: 3}
@@ -48535,6 +48537,36 @@ MonoBehaviour:
         - m_Target: {fileID: 8658632502123715534}
           m_TargetAssemblyTypeName: Boss, Assembly-CSharp
           m_MethodName: wave2erase
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &8658632502123715538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 440656308947542557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: a2650e3d1acf327449dad4b1434f348c, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8658632502123715534}
+          m_TargetAssemblyTypeName: Boss, Assembly-CSharp
+          m_MethodName: TimelinePlayflag
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

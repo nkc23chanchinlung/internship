@@ -709,6 +709,7 @@ MonoBehaviour:
   Repair: 0
   weaponnum: 0
   audioSource: {fileID: 0}
+  Weapon: {fileID: 0}
 --- !u!1 &405763198
 GameObject:
   m_ObjectHideFlags: 0
@@ -5177,6 +5178,7 @@ MonoBehaviour:
   weaponnum: 0
   audioSource: {fileID: 0}
   range: 0
+  Weapon: {fileID: 0}
 --- !u!1 &1917304361
 GameObject:
   m_ObjectHideFlags: 0

@@ -45,9 +45,10 @@ public class Boss : Enemy
     //flag
     bool wave2ended = true;
     bool Isbattle = false;
-    bool twowave = false;
+    bool returned = false;
+    public bool wave2flag { get; private set; } = false;
     bool idle = false;
-    bool wave2clear = false;
+    public bool wave2clear { get; set; }= false;
     public bool hasHit { get; set; }
 
     public override void Init()
@@ -68,10 +69,13 @@ public class Boss : Enemy
 
     private void OnEnable()
     {
-        enemyAnimetor = new ObjAnimetor(1f, gameObject);
-        Init();
-        Isbattle = true;
-        Attack = 30;
+        if (!wave2clear)
+        {
+            enemyAnimetor = new ObjAnimetor(1f, gameObject);
+            Init();
+            Isbattle = true;
+            Attack = 30;
+        }
 
     }
 
@@ -85,28 +89,53 @@ public class Boss : Enemy
 
     private void Update()
     {
+        
 
-        Debug.Log(twowave);
+        Debug.Log("wave2clear:"+wave2clear);
 
         if (target == null) return;
-        if (((float)Hp / (float)MaxHp) * 100 <= 50 && !twowave) //50%以下で第2形態へ
+        if (((float)Hp / (float)MaxHp) * 100 <= 50 && !wave2flag&&!wave2clear) //50%以下で第2形態へ
         {
+            agent.enabled = false; // NavMeshAgentを一時的に無効化
             bossstatus = BossStatus.wave2;
 
         }
+        if (wave2clear&&!returned) StartCoroutine(Wave2Clear());
 
         uimanager.BossHpbar(Hp, MaxHp);
 
         if (Hp <= 0) Die();
-
-        agent.SetDestination(target.position);
+        if (agent.enabled && agent.isOnNavMesh)
+        {
+            agent.SetDestination(target.position);
+        }
         Vector3 velocity = agent.velocity;
         speed = velocity.magnitude;
 
         // 攻撃中（近距離or遠距離）はステータス変更しない
-        if (!meleeing && !shooting && !twowave)
+        if (!meleeing && !shooting && !wave2flag)
         {
-            StatusChange(3f);
+            if (agent.enabled && agent.isOnNavMesh)
+            {
+                StatusChange(3f);
+            }
+        }
+        if (returned)
+        {
+            agent.enabled = true;
+            if (agent.enabled && agent.isOnNavMesh)
+            {
+                
+                agent.isStopped = false;
+                StatusChange(2f); // 第2形態クリア後は少し早めに攻撃
+                
+                Debug.Log("戻り中");
+            }
+           
+
+            
+            
+            
         }
 
         StatusInfo();
@@ -115,13 +144,15 @@ public class Boss : Enemy
 
         previousBossStatus = bossstatus; // 次のフレームで進入判定に使用
     }
-    private IEnumerator FinalAttack(GameObject SpawnObj, Transform pos, int spawmamount)
+    private IEnumerator Wave2(GameObject SpawnObj, Transform pos, int spawmamount)
     {
 
         wave2ended = false;
-        twowave = true;
+        wave2flag = true;
+        agent.isStopped = true;
         director.playableAsset = wave2timeline;
         director.Play();
+       
 
         for (int i = 0; i < spawmamount; i++)
         {
@@ -138,6 +169,13 @@ public class Boss : Enemy
 
         yield return null;
 
+    }
+    IEnumerator  Wave2Clear()
+    {
+        director.playableAsset = returntimeline;
+        director.Play();
+        returned = true;
+        yield return null;
     }
     void StatusChange(float waittime)
     {
@@ -216,10 +254,10 @@ public class Boss : Enemy
                 }
                 break;
             case BossStatus.wave2:
-                if (!twowave)
+                if (!wave2flag)
                 {
                     agent.isStopped = true;
-                    StartCoroutine(FinalAttack(EnemySpawner[0], transform, 5));
+                    StartCoroutine(Wave2(EnemySpawner[0], transform, 2));
                 }
 
                 break;
@@ -238,7 +276,8 @@ public class Boss : Enemy
         idle = false;
         shooting = false;
         meleeing = false;
-        agent.isStopped = false;
+        if (agent.isOnNavMesh) agent.isStopped = false;
+        
     }
     IEnumerator LazeAttack()
     {
@@ -337,6 +376,12 @@ public class Boss : Enemy
     public void wave2erase()
     {
         gameObject.SetActive(false);
+        agent.isStopped = true;
+    }
+
+    public void TimelinePlayflag()
+    {
+        agent.isStopped= false;
     }
 #endif
 
