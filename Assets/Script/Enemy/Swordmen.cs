@@ -72,6 +72,7 @@ public class Swordmen : Enemy
         if (GameManager.instance.GameStop || GameManager.instance.IsOpenMoviePlaying) return; //ƒQ[ƒ€‚ª’â~‚µ‚Ä‚¢‚éê‡‚Íˆ—‚ğ’†’f
         if (Hp <= 0)
         {
+            if(bossRoomManager != null)
             {
                 bossRoomManager.enemyCount--;
                 Debug.Log(bossRoomManager.enemyCount);

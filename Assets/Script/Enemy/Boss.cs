@@ -157,7 +157,7 @@ public class Boss : Enemy
         for (int i = 0; i < spawmamount; i++)
         {
 
-            GameObject moster = Instantiate(SpawnObj, pos.position, pos.rotation);
+            GameObject moster = Instantiate(SpawnObj, pos.position+new Vector3(i,pos.position.y,i), pos.rotation);
             bossRoomManager.enemyCount++;
             Swordmen enemy = moster.GetComponent<Swordmen>();
             enemy.bossRoomManager = bossRoomManager;
@@ -257,7 +257,7 @@ public class Boss : Enemy
                 if (!wave2flag)
                 {
                     agent.isStopped = true;
-                    StartCoroutine(Wave2(EnemySpawner[0], transform, 2));
+                    StartCoroutine(Wave2(EnemySpawner[0], transform, 5));
                 }
 
                 break;

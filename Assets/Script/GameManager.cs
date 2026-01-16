@@ -20,11 +20,15 @@ public class GameManager : MonoBehaviour
     
     bool clear;
 
+    [SerializeField] Texture2D cursorTexture;
+
     public void StartGame()
     {
         GameStop = false;
         IsOpenMoviePlaying = false;
         OnGameStart?.Invoke();
+        Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
+
     }
 
     static public int Coin { get; set; } = 0;  //Š‹à
@@ -34,6 +38,8 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Application.targetFrameRate = 60;
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+
         CheakGameManagerExist();
     }
     //GameManager‚Ìd•¡‚ğ–h‚®
