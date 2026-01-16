@@ -3052,6 +3052,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   housemat: {fileID: 2100000, guid: 6d22247e7ec78ad40ad752d214ffdba7, type: 2}
+  Wallmat: {fileID: 0}
 --- !u!65 &463641967
 BoxCollider:
   m_ObjectHideFlags: 0
