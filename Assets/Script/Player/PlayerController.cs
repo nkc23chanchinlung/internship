@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
 
     public bool IsCreate { get; set; }
 
-    private bool IsRun, IsJumping, InGround, IsWalking,IsWalkBack,IsRoll;//状態構造体
+    private bool IsRun, IsJumping, InGround, IsWalking,IsWalkBack,IsWalkRight,IsRoll;//状態構造体
     [Header("Player")]
     [SerializeField] private int MaxSpeed, JumpForce;
     [SerializeField]private float acceleration;      //加速度
@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody rigidbody;
     float vec;
     float forwardDot;
+    float RightDot;
     float maxvec = 5f;
     public float friction = 0.5f;
     bool invincible;
@@ -94,12 +95,23 @@ public class PlayerController : MonoBehaviour
      Jump();
      CheakGround();
      Cameramethod();
-     playerAnimetor.Animetor(IsWalkBack, vec, InGround,IsShooting,IsRoll,false,equipSystem.IsReloading);
+        
+
+        playerAnimetor.Animetor(IsWalkBack,RightDot, forwardDot, InGround,IsShooting,IsRoll,false,equipSystem.IsReloading);
     }
     void cheakdirecion()
     {
         Vector3 velocity = rigidbody.linearVelocity;
         forwardDot = Vector3.Dot(transform.forward, velocity.normalized);
+        
+        RightDot= Vector3.Dot(transform.right, velocity.normalized);
+       
+        
+
+        
+
+
+
         //Debug.Log(forwardDot);
         if (forwardDot < -0.1f)
         {
@@ -109,6 +121,10 @@ public class PlayerController : MonoBehaviour
         {
             IsWalkBack = false; //前に歩いている場合
         }
+        
+        
+            
+        
     }
     /// <summary>
     /// 行動処理
@@ -122,6 +138,7 @@ public class PlayerController : MonoBehaviour
         float movex = -Input.GetAxis("Horizontal");
         float movez = -Input.GetAxis("Vertical");
 
+       
         if (movex != 0 || movez != 0)
         {
             FootSe();

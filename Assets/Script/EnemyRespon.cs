@@ -20,8 +20,8 @@ public class EnemyRespon : MonoBehaviour
     void Start()
     {
         Enemyprefeb = Resources.LoadAll<GameObject>("Enemy");
-        
-       
+        dayupdate = true;
+
     }
 
     // Update is called once per frame

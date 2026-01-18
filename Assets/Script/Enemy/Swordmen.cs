@@ -97,7 +97,7 @@ public class Swordmen : Enemy
         Vector3 velocity = agent.velocity;  //NavMeshAgentの速度を取得
         speed = velocity.magnitude;         //速度の大きさを取得
         //アニメーションの実行
-        enemyAnimetor.Animetor(false, speed * 5, false, false, false, meleeing, false); 
+        enemyAnimetor.Animetor(false,0, speed * 5, false, false, false, meleeing, false); 
     }
 
     protected override void movement()

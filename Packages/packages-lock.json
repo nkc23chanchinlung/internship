@@ -7,6 +7,20 @@
       "dependencies": {},
       "hash": "33356da2c43fa28397192baee70910c978e3169f"
     },
+    "com.deltation.toon-rp": {
+      "version": "https://github.com/Delt06/toon-rp.git?path=Packages/com.deltation.toon-rp",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.render-pipelines.core": "14.0.9",
+        "com.unity.shadergraph": "14.0.9",
+        "com.unity.modules.uielements": "1.0.0",
+        "com.unity.mathematics": "1.2.6",
+        "com.unity.burst": "1.8.9",
+        "com.unity.collections": "2.1.4"
+      },
+      "hash": "687b7b26747a8bd6b0905299e5248bbca0285a77"
+    },
     "com.jbooth.microsplat.core": {
       "version": "file:com.jbooth.microsplat.core",
       "depth": 0,
@@ -105,12 +119,13 @@
       "dependencies": {}
     },
     "com.unity.film-internal-utilities": {
-      "version": "0.18.4-preview",
+      "version": "0.20.0-preview",
       "depth": 1,
       "source": "registry",
       "dependencies": {
         "com.unity.timeline": "1.2.18",
-        "com.unity.modules.uielements": "1.0.0"
+        "com.unity.modules.uielements": "1.0.0",
+        "com.unity.modules.imageconversion": "1.0.0"
       },
       "url": "https://packages.unity.com"
     },
@@ -285,12 +300,12 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.toonshader": {
-      "version": "0.10.2-preview",
+      "version": "0.13.1-preview",
       "depth": 0,
       "source": "registry",
       "dependencies": {
         "com.unity.render-pipelines.core": "10.0.0",
-        "com.unity.film-internal-utilities": "0.18.4-preview"
+        "com.unity.film-internal-utilities": "0.20.0-preview"
       },
       "url": "https://packages.unity.com"
     },

@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "com.coffee.unmask": "https://github.com/mob-sakai/UnmaskForUGUI.git",
+    "com.deltation.toon-rp": "https://github.com/Delt06/toon-rp.git?path=Packages/com.deltation.toon-rp",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.2d.tilemap.extras": "4.1.0",
     "com.unity.ai.navigation": "2.0.9",
@@ -21,7 +22,7 @@
     "com.unity.shadergraph": "17.0.4",
     "com.unity.test-framework": "1.5.1",
     "com.unity.timeline": "1.8.10",
-    "com.unity.toonshader": "0.10.2-preview",
+    "com.unity.toonshader": "0.13.1-preview",
     "com.unity.ugui": "2.0.0",
     "com.unity.visualeffectgraph": "17.0.4",
     "com.unity.visualscripting": "1.9.7",
