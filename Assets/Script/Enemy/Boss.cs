@@ -27,6 +27,7 @@ public class Boss : Enemy
     [SerializeField] GameObject Lazer;
     [SerializeField] GameObject[] EnemySpawner;
     [SerializeField] GameObject Gun;
+    [SerializeField] GameObject SparklesEffect;
 
 
     //Timeline
@@ -36,6 +37,7 @@ public class Boss : Enemy
 
     //Sound Effects
     [SerializeField] AudioClip[] AttackSE;
+    [SerializeField] AudioClip struckSE;
     AudioSource audioSource;
 
     //Animation
@@ -120,6 +122,7 @@ public class Boss : Enemy
                 StatusChange(3f);
             }
         }
+        // ëÊ2å`ë‘ÉNÉäÉAå„ÇÃñﬂÇËèàóù
         if (returned)
         {
             agent.enabled = true;
@@ -132,10 +135,6 @@ public class Boss : Enemy
                 Debug.Log("ñﬂÇËíÜ");
             }
            
-
-            
-            
-            
         }
 
         StatusInfo();
@@ -175,6 +174,7 @@ public class Boss : Enemy
         director.playableAsset = returntimeline;
         director.Play();
         returned = true;
+        wave2ended = true;
         yield return null;
     }
     void StatusChange(float waittime)
@@ -214,9 +214,12 @@ public class Boss : Enemy
         if (other.gameObject.tag == "PlayerAtk")
         {
             Bullet PlayerAtk = other.gameObject.GetComponent<Bullet>();
+            Instantiate(SparklesEffect, other.transform.position,other.transform.rotation* Quaternion.Euler(90, 0, 0));
+            audioSource.PlayOneShot(struckSE);
             Destroy(other.gameObject);
             int damage = PlayerAtk.damage;
             GetDamage(damage - defense, 2.0f);
+           
         }
     }
 

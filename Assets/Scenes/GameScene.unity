@@ -43923,7 +43923,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3489716240837909951, guid: bbfc85054ff234e4f90bf024cbaa67fa, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 194.19997
+      value: 94.7
       objectReference: {fileID: 0}
     - target: {fileID: 3489716240837909951, guid: bbfc85054ff234e4f90bf024cbaa67fa, type: 3}
       propertyPath: m_LocalRotation.w
@@ -48966,12 +48966,14 @@ MonoBehaviour:
   EnemySpawner:
   - {fileID: 914530037171260588, guid: 11d06119682dd404daf742dec42a6b50, type: 3}
   Gun: {fileID: 7066214006607267209}
+  SparklesEffect: {fileID: 8567683338291978446, guid: af5e8af6c11af34479d2a5f3708a2f0d, type: 3}
   wave2timeline: {fileID: 11400000, guid: 470640c51058f9342b52f7cc0bbe07d8, type: 2}
   returntimeline: {fileID: 11400000, guid: 88acca1b2444bec43bb24897f39683e5, type: 2}
   AttackSE:
   - {fileID: 8300000, guid: a10cbca158f791045b44c9d48718801a, type: 3}
   - {fileID: 8300000, guid: e0af4b3bd01dee14fb224667cf1b9d1c, type: 3}
   - {fileID: 8300000, guid: 4e86bdc902add364781e9c26973e7d51, type: 3}
+  struckSE: {fileID: 8300000, guid: 09aeb3f410743cb46b43e7abe231b08e, type: 3}
 --- !u!320 &8658632502123715535
 PlayableDirector:
   m_ObjectHideFlags: 0
