@@ -25,12 +25,15 @@ public class Enemytriggeratk : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if(swordmen.hasHit) return;
         if (other.tag == "Player")
         {
+            swordmen.hasHit = true;
             PlayerController player = other.GetComponent<PlayerController>();
             player.GetDamage(Atk); // プレイヤーにAtkのダメージを与える
             BoxCollider collider = GetComponent<BoxCollider>();
-            collider.enabled = false; // 攻撃が当たった後、コライダーを無効にする
+            //collider.enabled = false; // 攻撃が当たった後、コライダーを無効にする
+
         }
     }
 }

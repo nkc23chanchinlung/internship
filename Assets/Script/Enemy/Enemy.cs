@@ -193,13 +193,19 @@ public class Enemy : EnemyMovement
     //敵がダメージを受ける関数
     protected void GetDamage(int damage,float hidetime)    
     {
-        if(lifebar!=null)
+        if (lifebar != null)
+        {
             lifebar.SetActive(true);
-        angervalue += 60;
+            uimanager.displayeffect(lifebar.GetComponent<Image>(), null, 1.0f);
+            Invoke("hidelifebar", hidetime);
+        }
+            angervalue += 60;
         uimanager.Damagevalue(transform, damage);
         Hp -= damage;
-        uimanager.displayeffect(lifebar.GetComponent<Image>(), null, 1.0f);
-        Invoke("hidelifebar", hidetime);
+
+        
+        
+        
     }
 
     //ライフバーを非表示にするコルーチン
@@ -256,6 +262,7 @@ public class Enemy : EnemyMovement
        // material.color = Color.red;
        // yield return null;
     }
+    
 
 }
     

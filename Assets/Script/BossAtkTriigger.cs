@@ -18,7 +18,6 @@ public class BossAtkTriigger : MonoBehaviour
             boss.hasHit = true;
             PlayerController player = other.GetComponent<PlayerController>();
             player.GetDamage(Atk); // プレイヤーにAtkのダメージを与える
-            Debug.Log("BossAtkCol Hit Player");
             BoxCollider collider = GetComponent<BoxCollider>();
 
             collider.enabled = false; // 攻撃が当たった後、コライダーを無効にする

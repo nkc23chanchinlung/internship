@@ -298,6 +298,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   atking: 0
+  shooting: 0
+  meleeing: 0
   uimanager: {fileID: 0}
   Enemies: 2
   leagth: 8
@@ -311,6 +313,7 @@ MonoBehaviour:
   Debug_Status: {fileID: 6033357283543400433}
   Hand: {fileID: 2680056497890171940}
   mat: {fileID: 0}
+  hitBox: {fileID: 0}
 --- !u!136 &2223481593405811711
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -636,8 +639,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3103203058921620641}
-  - component: {fileID: 6862901968205868378}
   - component: {fileID: 247160101863120859}
+  - component: {fileID: 5206289967731196317}
+  - component: {fileID: 2461239924113931862}
   m_Layer: 0
   m_Name: mixamorig:LeftHand
   m_TagString: EnemyAtk
@@ -660,7 +664,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3665638142781918635}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &6862901968205868378
+--- !u!114 &247160101863120859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2680056497890171940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9d59821d3615a641a4d59b58e8bd4f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &5206289967731196317
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -677,22 +693,37 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.7, y: 0.7, z: 0.7}
-  m_Center: {x: 0.12, y: 0.4, z: 0}
---- !u!114 &247160101863120859
-MonoBehaviour:
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &2461239924113931862
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2680056497890171940}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9d59821d3615a641a4d59b58e8bd4f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &2749218214520570015
 GameObject:
   m_ObjectHideFlags: 0

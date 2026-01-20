@@ -1,9 +1,14 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 public class Swordmen : Enemy
 {
     bool inited = false;
+
+    public bool hasHit { get; set; }
+    [SerializeField] BoxCollider hitBox;
     public BossRoomManager bossRoomManager { get; set; }
 
 
@@ -34,6 +39,7 @@ public class Swordmen : Enemy
         {
             Returnmat(0.5f, "MutantMesh");
             Bullet PlayerAtk = other.gameObject.GetComponent<Bullet>();
+            hitBox=Hand.GameObject().GetComponent<BoxCollider>();
             Destroy(other.gameObject);
             int damage = PlayerAtk.damage;
             GetDamage(damage - defense, 2.0f);
@@ -124,9 +130,12 @@ public class Swordmen : Enemy
                 if (!meleeing)
                 {
                   agent.isStopped = true;
-                 
-                    
-                  Meleeattack(1.0f);
+
+                    BoxCollider col = Hand.GetComponentInChildren<BoxCollider>();
+
+                    StartCoroutine(test(col, 1));
+
+                   
                     
 
                 }
@@ -139,7 +148,28 @@ public class Swordmen : Enemy
         }
         
     }
-    
+    public void HitOn()
+    {
+        //hasHit = false;
+        //hitBox.enabled = true;
+    }
+
+    public void HitOff()
+    {
+       // hitBox.enabled = false;
+    }
+
+    public IEnumerator test(BoxCollider col, float cooldowntime)
+    {
+        meleeing = true;
+        //col.enabled = true;
+        yield return new WaitForSeconds(cooldowntime);
+        //if (col.enabled == true)
+        //    col.enabled = false;
+        meleeing = false;
+        yield return new WaitForSeconds(cooldowntime);
+    }
+
 
 
 
