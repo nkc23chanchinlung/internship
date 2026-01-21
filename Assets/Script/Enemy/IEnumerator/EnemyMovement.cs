@@ -53,14 +53,11 @@ public class EnemyMovement : MonoBehaviour
     {
         meleeing = true;
         col.enabled = true;
-        //yield return new WaitForSeconds(cooldowntime);
-        yield return null;
-        //if(col.enabled== true)
-        //col.enabled = false;
-        //meleeing = false;
-        //yield return null;
-
-        //yield return new WaitForSeconds(cooldowntime);
+        yield return new WaitForSeconds(cooldowntime);
+        if (col.enabled == true)
+            col.enabled = false;
+        meleeing = false;
+        yield return new WaitForSeconds(cooldowntime);
 
 
     }

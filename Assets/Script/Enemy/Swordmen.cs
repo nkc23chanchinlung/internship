@@ -136,11 +136,12 @@ public class Swordmen : Enemy
                   agent.isStopped = true;
 
                     BoxCollider col = Hand.GetComponentInChildren<BoxCollider>();
-                    StartCoroutine(meleeattack(col, 1));
-                    //Debug.Log(Hand.GameObject().);
-                    if (col != null)
-                    meleeing = true;
-                    col.enabled = true;
+
+                    //StartCoroutine();
+                    Meleeattack(1f);
+
+
+
 
 
                 }

@@ -280,7 +280,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("EnemyAtk"))
         {
             GetDamage(10);
-            Destroy(other.gameObject);
+            
         }
     }
 }

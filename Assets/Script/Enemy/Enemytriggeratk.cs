@@ -39,4 +39,8 @@ public class Enemytriggeratk : MonoBehaviour
 
         }
     }
+    private void OnDestroy()
+    {
+        Debug.Log("Enemy Attack Trigger Destroyed");
+    }
 }
