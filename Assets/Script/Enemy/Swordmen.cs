@@ -65,6 +65,10 @@ public class Swordmen : Enemy
         status = Status.Idle; //初期状態を敵対に設定
         enemyAnimetor = new ObjAnimetor(1f, gameObject); //敵のアニメーションを管理するクラスの初期化
         mat = GetComponentInChildren<Renderer>().material;
+
+        
+      
+        
     }
     
 
@@ -132,11 +136,12 @@ public class Swordmen : Enemy
                   agent.isStopped = true;
 
                     BoxCollider col = Hand.GetComponentInChildren<BoxCollider>();
+                    StartCoroutine(meleeattack(col, 1));
+                    //Debug.Log(Hand.GameObject().);
+                    if (col != null)
+                    meleeing = true;
+                    col.enabled = true;
 
-                    StartCoroutine(test(col, 1));
-
-                   
-                    
 
                 }
                 break;
