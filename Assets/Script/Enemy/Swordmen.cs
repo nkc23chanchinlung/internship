@@ -165,17 +165,7 @@ public class Swordmen : Enemy
        // hitBox.enabled = false;
     }
 
-    public IEnumerator test(BoxCollider col, float cooldowntime)
-    {
-        meleeing = true;
-        //col.enabled = true;
-        yield return new WaitForSeconds(cooldowntime);
-        //if (col.enabled == true)
-        //    col.enabled = false;
-        meleeing = false;
-        yield return new WaitForSeconds(cooldowntime);
-    }
-
+   
 
 
 
