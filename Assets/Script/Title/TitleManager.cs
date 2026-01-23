@@ -13,7 +13,17 @@ public class TitleManager : MonoBehaviour
     [SerializeField]float alpha = 100;
     public bool isStart { get; set; } = false;
     [SerializeField]Loading loadingScript;
-    bool once = false;  
+    bool once = false;
+
+    [SerializeField]
+    GameObject[] button = { };
+    [SerializeField]
+    Text[] buttontext = { };
+    [SerializeField]
+    Image[] buttonimg = { };
+
+    int butnum = 1;
+    int imgsize = 250;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -24,7 +34,8 @@ public class TitleManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        TitleMos();
+        Debug.Log(butnum);
         if (alpha >=0&&!isStart)
         {
             TitleStart_EF();
@@ -62,5 +73,31 @@ public class TitleManager : MonoBehaviour
             alpha = 0;
             titleframe_Obj.SetActive(false);
         }
+    }
+
+
+    /// <summary>
+    /// É}ÉEÉXÇ≈ëÄçÏÇ∑ÇÈÇ∆Ç´ÇÃä÷êî
+    /// </summary>
+    public void TitleMos()
+    {
+        Vector3 mousepos = Input.mousePosition;
+        for (int i = 0; i < button.Length; i++)
+        {
+
+            var buttonpos = button[i].transform.position;
+            if (mousepos.x > buttonpos.x - imgsize / 2 && mousepos.x < buttonpos.x + imgsize / 2 && mousepos.y > buttonpos.y - imgsize / 2f && mousepos.y < buttonpos.y + imgsize / 2)
+            {
+
+                if (butnum != i + 1)
+                {
+                    //seaudio.PlayOneShot(seclip);
+                    butnum = i + 1;
+                }
+
+
+            }
+        }
+
     }
 }

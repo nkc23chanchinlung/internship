@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
 using DG.Tweening;
+using Unity.VisualScripting;
 //ムービー制御
 public class MovieController : MonoBehaviour
 {
@@ -18,6 +19,14 @@ public class MovieController : MonoBehaviour
         OpeningMovie();
         
 
+    }
+    private void Update()
+    {
+        //ムービースキップ
+        if (Input.GetMouseButtonDown(0))
+        {
+            director.Stop();
+        }
     }
 
     void OpeningMovie()
@@ -38,7 +47,8 @@ public class MovieController : MonoBehaviour
             MoveUIController();
             gameManager.StartGame();
             director.gameObject.SetActive(false);
-            
+            Destroy(this.gameObject);
+
         }
     }
     void MoveUIController()

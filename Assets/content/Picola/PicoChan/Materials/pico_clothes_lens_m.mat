@@ -22,14 +22,16 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: pico_clothes_lens_m
   m_Shader: {fileID: 4800000, guid: be891319084e9d147b09d89e80ce60e0, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _EMISSIVE_SIMPLE
-  - _IS_ANGELRING_OFF
   - _IS_OUTLINE_CLIPPING_YES
   - _IS_TRANSCLIPPING_ON
   - _OUTLINE_NML
   - _SHADINGGRADEMAP
-  m_InvalidKeywords: []
+  m_InvalidKeywords:
+  - _IS_ANGELRING_OFF
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -38,6 +40,7 @@ Material:
     IgnoreProjection: true
     RenderType: Transparent
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -245,7 +248,8 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    m_Ints: []
+    m_Ints:
+    - _ToonMaterialVersion: 0
     m_Floats:
     - _1st2nd_Shades_Feather: 0.0001
     - _1st_ShadeColor_Feather: 0.06
@@ -557,3 +561,4 @@ Material:
     - _ViewShift: {r: 0, g: 0, b: 0, a: 1}
     - emissive: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1

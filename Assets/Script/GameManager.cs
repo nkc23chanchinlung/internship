@@ -13,12 +13,15 @@ public class GameManager : MonoBehaviour
     public bool GameStop = false;  //ゲームを停止するかどうか
     static public bool GameManagerExist = false;//GameManagerが存在フラグ
     public bool IsOpenMoviePlaying { get; set; } //ムービー再生中かどうか
+
+
     
     bool IsStarted;
     public int Stage { get; set; }
     int Enemyvalue;
     
     bool clear;
+    int savepoint;
 
     [SerializeField] Texture2D cursorTexture;
 
@@ -60,5 +63,10 @@ public class GameManager : MonoBehaviour
     void Setdata(int day)
     {
         Stage = day;
+    }
+
+    void Savepoint(int savepoint)
+    {
+        
     }
 }
