@@ -83,6 +83,8 @@ public class Boss : Enemy
 
     private void FixedUpdate()
     {
+        if (GameManager.instance.GameStop) return;
+
         if (!Isbattle) return;
 
         Vector3 velocity = agent.velocity;
@@ -91,7 +93,7 @@ public class Boss : Enemy
 
     private void Update()
     {
-        
+        if(GameManager.instance.GameStop) return;
 
         Debug.Log("wave2clear:"+wave2clear);
 

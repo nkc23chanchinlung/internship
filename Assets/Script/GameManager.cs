@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     static public GameManager instance { get; private set; }
 
     public static event Action OnGameStart; //ゲーム開始時のイベント
-    public bool GameStop = false;  //ゲームを停止するかどうか
+    public bool GameStop { get; set; } = false;  //ゲームを停止するかどうか
     static public bool GameManagerExist = false;//GameManagerが存在フラグ
     public bool IsOpenMoviePlaying { get; set; } //ムービー再生中かどうか
 

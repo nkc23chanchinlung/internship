@@ -45,6 +45,7 @@ public class UIManager :UIEffect
     [SerializeField]PlayerController playerController;
     
     House house;
+    GameManager gameManager;
     bool PanelOpen = false;
     float displaylife=100;
 
@@ -74,6 +75,7 @@ public class UIManager :UIEffect
         MapPanel.transform.localScale = Vector3.zero;
         MenuPanel.transform.localScale = Vector3.zero;
         hideeffect(Fade, 1f);  　　　　　　　　　　　　　//Fade処理
+        gameManager = GameManager.instance;
     }
     // Update is called once per frame
     void Update()
@@ -107,13 +109,21 @@ public class UIManager :UIEffect
         
 
 
-        PanelOpen = PanelControll(Lead, KeyCode.T, new Vector3(0.02f, 0.02f, 0.02f));                            //リードのパネルを開くか閉じるか
-        PanelOpen = PanelControll(MapPanel, KeyCode.Tab, new Vector3(0.5f, 0.7f, 0.7f));                         //マップのパネルを開くか閉じるか
-        GameManager.instance.GameStop= PanelControll(MenuPanel, KeyCode.Escape, new Vector3(0.3f, 0.5f, 0.5f));           //メニューのパネルを開くか閉じるか
+        PanelOpen = ZoomPanel(Lead, KeyCode.T, new Vector3(0.02f, 0.02f, 0.02f));                            //リードのパネルを開くか閉じるか
+        PanelOpen = ZoomPanel(MapPanel, KeyCode.Tab, new Vector3(0.5f, 0.7f, 0.7f));                         //マップのパネルを開くか閉じるか
+        gameManager.GameStop= ZoomPanel(MenuPanel, KeyCode.Escape, new Vector3(0.3f, 0.5f, 0.5f));           //メニューのパネルを開くか閉じるか
        
         SetCoin(GameManager.Coin);                                                                 //コインの数を更新                                 
 
-
+        //メニューが開いているときの処理
+        if (MenuPanel.activeSelf)
+        {
+            gameManager.GameStop = true;　　　　　　　　　　　　　　　　　　　　//メニューを開いているときは時間を止める
+        }
+        else
+        {
+            gameManager.GameStop = false;　　　　　　　　　　　　　　　　　　　　//メニューを開いているときは時間を止める
+        }
 
 
         if (equipSystem.IsReloading)
@@ -258,7 +268,7 @@ public class UIManager :UIEffect
     /// </summary>
     /// <param name="Obj">対象のパネル</param>
     /// <param name="key">表示するボタン</param>
-    bool PanelControll(GameObject Obj,KeyCode key,Vector3 size)
+    bool ZoomPanel(GameObject Obj,KeyCode key,Vector3 size)
     {
          if(Obj.activeSelf&& Input.GetKeyDown(key))
         {

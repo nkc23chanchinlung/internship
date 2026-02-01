@@ -6,6 +6,7 @@ using static UnityEngine.Rendering.DebugUI;
 public class Swordmen : Enemy
 {
     bool inited = false;
+    bool gethit = false;
 
     public bool hasHit { get; set; }
     [SerializeField] BoxCollider hitBox;
@@ -43,7 +44,8 @@ public class Swordmen : Enemy
             Destroy(other.gameObject);
             int damage = PlayerAtk.damage;
             GetDamage(damage - defense, 2.0f);
-            
+            //gethit = true;
+
 
         }
     }
@@ -75,7 +77,10 @@ public class Swordmen : Enemy
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.instance.GameStop) return;
+
         if (bossRoomManager) Debug.Log("bossRoomManager is true");
+        gethit = false;
 
         if (isDead) return; //死亡している場合は処理を中断
 
@@ -107,7 +112,7 @@ public class Swordmen : Enemy
         Vector3 velocity = agent.velocity;  //NavMeshAgentの速度を取得
         speed = velocity.magnitude;         //速度の大きさを取得
         //アニメーションの実行
-        enemyAnimetor.Animetor(false,0, speed * 5, false, false, false, meleeing, false); 
+        enemyAnimetor.Animetor(false,0, speed * 5, false, false, false, meleeing, false, gethit); 
     }
 
     protected override void movement()

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TitleManager : MonoBehaviour
@@ -21,12 +20,20 @@ public class TitleManager : MonoBehaviour
     Text[] buttontext = { };
     [SerializeField]
     Image[] buttonimg = { };
+    [SerializeField]
+    GameObject[] selectionimg = { };
 
-    int butnum = 1;
-    int imgsize = 250;
+    [SerializeField] Texture2D cursor;
+    [SerializeField] AudioClip seclip;
+    AudioSource seaudio;
+
+    int butnum = 0;
+    int imgsizeX = 300;
+    int imgsizeY = 60;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        seaudio = GetComponent<AudioSource>();
         titleframe_Obj = titleframe.gameObject;
         titleframe_Obj.SetActive(false);
     }
@@ -36,6 +43,7 @@ public class TitleManager : MonoBehaviour
     {
         TitleMos();
         Debug.Log(butnum);
+
         if (alpha >=0&&!isStart)
         {
             TitleStart_EF();
@@ -57,7 +65,7 @@ public class TitleManager : MonoBehaviour
         if (alpha >= 100)
         {
             if (!once) { 
-            loadingScript.NextScene();
+            loadingScript.NextScene("GameScene");
             once = true;
         }
         }
@@ -74,7 +82,7 @@ public class TitleManager : MonoBehaviour
             titleframe_Obj.SetActive(false);
         }
     }
-
+  
 
     /// <summary>
     /// É}ÉEÉXÇ≈ëÄçÏÇ∑ÇÈÇ∆Ç´ÇÃä÷êî
@@ -82,21 +90,37 @@ public class TitleManager : MonoBehaviour
     public void TitleMos()
     {
         Vector3 mousepos = Input.mousePosition;
+        selectionimg[butnum].SetActive(true);
         for (int i = 0; i < button.Length; i++)
         {
-
+            if (i != butnum) selectionimg[i].SetActive(false);
             var buttonpos = button[i].transform.position;
-            if (mousepos.x > buttonpos.x - imgsize / 2 && mousepos.x < buttonpos.x + imgsize / 2 && mousepos.y > buttonpos.y - imgsize / 2f && mousepos.y < buttonpos.y + imgsize / 2)
+            if (mousepos.x > buttonpos.x - imgsizeX / 2 
+                && mousepos.x < buttonpos.x + imgsizeX / 2
+                && mousepos.y > buttonpos.y - imgsizeY / 2
+                && mousepos.y < buttonpos.y + imgsizeY / 2)
             {
 
-                if (butnum != i + 1)
+                
+
+                if (butnum != i)
                 {
-                    //seaudio.PlayOneShot(seclip);
-                    butnum = i + 1;
+                    
+                    Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
+                    seaudio.PlayOneShot(seclip);
+                    butnum = i;
                 }
+                
+               
 
 
             }
+            else
+            {
+                Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+            }
+
+
         }
 
     }

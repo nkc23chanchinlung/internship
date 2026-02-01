@@ -27,7 +27,7 @@ public class ObjAnimetor : MonoBehaviour
     /// <param name="iswalkback"></param>
     /// <param name="speed"></param>
     /// <param name="inGround"></param>
-    public virtual void Animetor(bool iswalkback,float iswalkright, float speed, bool inGround, bool Shooting,bool isroll,bool atk,bool reloading)
+    public virtual void Animetor(bool iswalkback,float iswalkright, float speed, bool inGround, bool Shooting,bool isroll,bool atk,bool reloading,bool gethit)
     {
         
         anim.SetBool("WalkBack", iswalkback);
@@ -39,6 +39,7 @@ public class ObjAnimetor : MonoBehaviour
         anim.SetBool("IsRoll", isroll);
         anim.SetBool("Atk", atk);
         anim.SetBool("reloading", reloading);
+        anim.SetBool("GetHit", gethit);
     }
     /// <summary>
     /// アニメーション制御オーバーロード

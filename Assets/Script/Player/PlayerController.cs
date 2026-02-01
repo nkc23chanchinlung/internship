@@ -48,7 +48,10 @@ public class PlayerController : MonoBehaviour
     public float friction = 0.5f;
     bool invincible;
 
-    [SerializeField] private float footseInterval=0.5f;   // 何秒ごとにダメージ
+    [SerializeField] private float footseInterval=0.5f;   // 何秒ごとに音出す
+
+    //[SerializeField] Material[] playermat;
+    //[SerializeField] Renderer playerrenderer;
     private float nextFootTime = 0f;
 
 
@@ -75,6 +78,7 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if (GameManager.instance.GameStop) return;
         if (InGround && !IsRoll)
             movement();
     }
@@ -82,6 +86,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.instance.GameStop) return;
         cheakdirecion();
         PlayerMapPin();
         
@@ -97,7 +102,7 @@ public class PlayerController : MonoBehaviour
      Cameramethod();
         
 
-        playerAnimetor.Animetor(IsWalkBack,RightDot, forwardDot, InGround,IsShooting,IsRoll,false,equipSystem.IsReloading);
+        playerAnimetor.Animetor(IsWalkBack,RightDot, forwardDot, InGround,IsShooting,IsRoll,false,equipSystem.IsReloading,false);
     }
     void cheakdirecion()
     {
@@ -280,7 +285,8 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("EnemyAtk"))
         {
             GetDamage(10);
-            
+            //playerrenderer.material.SetColor("BaseMap", Color.red);
+
         }
     }
 }

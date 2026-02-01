@@ -48,6 +48,8 @@ public class CamController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.instance.GameStop) return;
+
         Mousepos = Input.mousePosition;
         
 
