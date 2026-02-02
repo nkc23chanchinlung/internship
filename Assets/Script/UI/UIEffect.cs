@@ -63,11 +63,11 @@ public class UIEffect : MonoBehaviour
             obj.gameObject.SetActive(false);
         });
     }
-    protected void expansioneffect(GameObject obj,Vector3 size)   //拡大エフェクト
+    public void expansioneffect(GameObject obj,Vector3 size)   //拡大エフェクト
     {
         obj.transform.DOScale(size *1f, 0.2f).SetEase(Ease.InElastic);
     }
-    protected void ereductioneffect(GameObject obj, Vector3 size)　//縮小エフェクト 
+    public void ereductioneffect(GameObject obj, Vector3 size)　//縮小エフェクト 
 
     {
         obj.transform.DOScale(size * 0f, 0.2f).OnComplete(() =>

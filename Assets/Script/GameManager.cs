@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// 全シーンで存在し続けるゲーム全体を管理するクラス
@@ -14,8 +15,12 @@ public class GameManager : MonoBehaviour
     static public bool GameManagerExist = false;//GameManagerが存在フラグ
     public bool IsOpenMoviePlaying { get; set; } //ムービー再生中かどうか
 
-
     
+
+    public float BgmVolue { get; set; }
+    public float SeVolue { get; set; }
+
+
     bool IsStarted;
     public int Stage { get; set; }
     int Enemyvalue;

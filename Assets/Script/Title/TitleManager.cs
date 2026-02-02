@@ -13,6 +13,12 @@ public class TitleManager : MonoBehaviour
     public bool isStart { get; set; } = false;
     [SerializeField]Loading loadingScript;
     bool once = false;
+    GameManager gameManager;
+
+    [SerializeField] Text BgmvolueText;
+    [SerializeField] Text SEvolueText;
+    [SerializeField] Slider BgmvolueSilder;
+    [SerializeField] Slider SEvolueSilder;
 
     [SerializeField]
     GameObject[] button = { };
@@ -26,6 +32,7 @@ public class TitleManager : MonoBehaviour
     [SerializeField] Texture2D cursor;
     [SerializeField] AudioClip seclip;
     AudioSource seaudio;
+   [SerializeField] AudioSource bgmaudio;
 
     int butnum = 0;
     int imgsizeX = 300;
@@ -36,13 +43,19 @@ public class TitleManager : MonoBehaviour
         seaudio = GetComponent<AudioSource>();
         titleframe_Obj = titleframe.gameObject;
         titleframe_Obj.SetActive(false);
+        gameManager = GameManager.instance;
     }
 
     // Update is called once per frame
     void Update()
     {
         TitleMos();
+        SoundControl();
         Debug.Log(butnum);
+
+        
+
+        
 
         if (alpha >=0&&!isStart)
         {
@@ -58,10 +71,19 @@ public class TitleManager : MonoBehaviour
 
 
     }
+    void SoundControl()
+    {
+        gameManager.BgmVolue = BgmvolueSilder.value;
+        gameManager.SeVolue = SEvolueSilder.value;
+        bgmaudio.volume = gameManager.BgmVolue;
+        seaudio.volume = gameManager.SeVolue;
+        BgmvolueText.text = ((int)(gameManager.BgmVolue * 100)).ToString();
+        SEvolueText.text = ((int)(gameManager.SeVolue * 100)).ToString();
+    }
     void GameStart_EF()
     {
         titleframe_Obj.SetActive(true);
-        alpha++;
+        alpha+=2;
         if (alpha >= 100)
         {
             if (!once) { 
@@ -74,9 +96,9 @@ public class TitleManager : MonoBehaviour
     {
 
         titleframe_Obj.SetActive(true);
-        alpha--;
+        alpha-=2;
         
-        if (alpha <= 0)
+        if (alpha <= 30)
         {
             alpha = 0;
             titleframe_Obj.SetActive(false);

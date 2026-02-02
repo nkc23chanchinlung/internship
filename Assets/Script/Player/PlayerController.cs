@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour
     float maxvec = 5f;
     public float friction = 0.5f;
     bool invincible;
+    bool Gethit;
 
     [SerializeField] private float footseInterval=0.5f;   // 何秒ごとに音出す
 
@@ -86,6 +87,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+
         if (GameManager.instance.GameStop) return;
         cheakdirecion();
         PlayerMapPin();
@@ -102,7 +105,7 @@ public class PlayerController : MonoBehaviour
      Cameramethod();
         
 
-        playerAnimetor.Animetor(IsWalkBack,RightDot, forwardDot, InGround,IsShooting,IsRoll,false,equipSystem.IsReloading,false);
+        playerAnimetor.Animetor(IsWalkBack,RightDot, forwardDot, InGround,IsShooting,IsRoll,false,equipSystem.IsReloading,Gethit);
     }
     void cheakdirecion()
     {
@@ -157,8 +160,9 @@ public class PlayerController : MonoBehaviour
 
         
 
-        if (rigidbody.linearVelocity.magnitude < 0.1f)
+        if (rigidbody.linearVelocity.magnitude < 0.1f&&!Input.anyKey)
         {
+            Debug.Log("停止");
             rigidbody.linearVelocity = Vector3.zero;//誤アニメーション防止
             
             rigidbody.angularVelocity = Vector3.zero;
@@ -261,7 +265,12 @@ public class PlayerController : MonoBehaviour
     {
         if (invincible) return; // 無敵状態ならダメージを受けない
         Hp -= Dmg;
-       
+        Gethit = true;
+        if (Gethit)
+        {
+            _ = WaitForAsync(0.2f, () => Gethit = false);
+        }
+
     }
     void GameOver()
     {
@@ -282,9 +291,12 @@ public class PlayerController : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
+        
         if (other.gameObject.CompareTag("EnemyAtk"))
         {
             GetDamage(10);
+            
+            
             //playerrenderer.material.SetColor("BaseMap", Color.red);
 
         }
