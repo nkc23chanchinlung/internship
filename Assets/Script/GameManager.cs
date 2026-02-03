@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     static public GameManager instance { get; private set; }
 
     public static event Action OnGameStart; //ゲーム開始時のイベント
+    public static event Action OnGameStop;
+    public static event Action OnContinue;
     public bool GameStop { get; set; } = false;  //ゲームを停止するかどうか
     static public bool GameManagerExist = false;//GameManagerが存在フラグ
     public bool IsOpenMoviePlaying { get; set; } //ムービー再生中かどうか
@@ -37,6 +39,21 @@ public class GameManager : MonoBehaviour
         OnGameStart?.Invoke();
         Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
 
+    }
+    public void StopGame()
+    {
+     GameStop = true;
+     OnGameStop?.Invoke();
+     Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+     
+
+    }
+    public void ContinueGame()
+    {
+        GameStop = false;
+        OnContinue?.Invoke();
+        Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
+        
     }
 
     static public int Coin { get; set; } = 0;  //所持金

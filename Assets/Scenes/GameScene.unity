@@ -2619,7 +2619,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Setting
+  m_Text: "\u8A2D\u5B9A"
 --- !u!222 &209877057
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6079,7 +6079,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.87316895, y: -0.69207764}
+  m_AnchoredPosition: {x: 0.8730469, y: -0.6920166}
   m_SizeDelta: {x: 300.96118, y: 215.66162}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &409836027
@@ -22064,6 +22064,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mutant Swiping
       objectReference: {fileID: 0}
+    - target: {fileID: 914530037171260588, guid: 11d06119682dd404daf742dec42a6b50, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1042608504258351732, guid: 11d06119682dd404daf742dec42a6b50, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.9999447
@@ -23677,7 +23681,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Exit
+  m_Text: "\u9000\u51FA"
 --- !u!222 &878140040
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -27714,6 +27718,7 @@ MonoBehaviour:
   CoinUI: {fileID: 2014047512}
   StatusUI: {fileID: 928647819}
   MiniMap: {fileID: 1694370267}
+  GlobalVolume: {fileID: 832575518}
   Boss_Hpbar: {fileID: 630526049}
   Fade: {fileID: 241309879}
   Lifebar: {fileID: 2047632907}
@@ -32204,10 +32209,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 300
+    m_FontSize: 250
     m_FontStyle: 1
     m_BestFit: 0
-    m_MinSize: 3
+    m_MinSize: 0
     m_MaxSize: 300
     m_Alignment: 1
     m_AlignByGeometry: 0
@@ -32215,7 +32220,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Menu
+  m_Text: "\u30E1\u30CB\u30E5\u30FC"
 --- !u!222 &1483584466
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -32888,7 +32893,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -26.054321, y: -35.2063}
+  m_AnchoredPosition: {x: -26.0542, y: -35.2063}
   m_SizeDelta: {x: -300.96118, y: 139.89917}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1558256656

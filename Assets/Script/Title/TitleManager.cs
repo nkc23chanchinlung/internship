@@ -31,12 +31,15 @@ public class TitleManager : MonoBehaviour
 
     [SerializeField] Texture2D cursor;
     [SerializeField] AudioClip seclip;
+
     AudioSource seaudio;
    [SerializeField] AudioSource bgmaudio;
 
     [SerializeField] Sprite Mute;
     [SerializeField] Sprite UnMute;
     [SerializeField] Image[] VolueImg;
+
+
 
     int butnum = 0;
     int imgsizeX = 300;
@@ -48,6 +51,9 @@ public class TitleManager : MonoBehaviour
         titleframe_Obj = titleframe.gameObject;
         titleframe_Obj.SetActive(false);
         gameManager = GameManager.instance;
+        bgmaudio = GameObject.FindGameObjectWithTag("BGMPlayer").GetComponent<AudioSource>();
+      
+            
     }
 
     // Update is called once per frame
@@ -55,7 +61,7 @@ public class TitleManager : MonoBehaviour
     {
         TitleMos();
         SoundControl();
-        Debug.Log(butnum);
+        Debug.Log(isStart);
 
         
 
@@ -143,7 +149,8 @@ public class TitleManager : MonoBehaviour
                 {
                     
                     Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
-                    seaudio.PlayOneShot(seclip);
+                    AudioManager.instance.PlaySE(seclip);
+                    //seaudio.PlayOneShot(seclip);
                     butnum = i;
                 }
                 

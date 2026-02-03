@@ -16,6 +16,8 @@ TagManager:
   - EnemyAtk
   - PlayerAtk
   - CoinUI
+  - BGMPlayer
+  - SEPlayer
   layers:
   - Default
   - TransparentFX

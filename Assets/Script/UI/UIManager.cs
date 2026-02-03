@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal; // URP用
 
 /// <summary>
 /// UIを管理するクラス
@@ -24,8 +26,11 @@ public class UIManager :UIEffect
     [SerializeField] GameObject CoinUI;
     [SerializeField] GameObject StatusUI;
     [SerializeField] GameObject MiniMap;
-   
-    
+
+
+    [SerializeField]Volume GlobalVolume;
+    private ColorAdjustments colorAdjustments;
+
     [Header("Image")]
     [SerializeField] Image Boss_Hpbar;
     [SerializeField] Image Fade;
@@ -81,6 +86,7 @@ public class UIManager :UIEffect
     void Update()
     {
        if(playerController == null) return;
+        GameStop();
         playerController.IsCreate = PanelOpen;
 
         if (Input.GetKeyDown(KeyCode.B)&&!PanelOpen)
@@ -111,18 +117,20 @@ public class UIManager :UIEffect
 
         PanelOpen = ZoomPanel(Lead, KeyCode.T, new Vector3(0.02f, 0.02f, 0.02f));                            //リードのパネルを開くか閉じるか
         PanelOpen = ZoomPanel(MapPanel, KeyCode.Tab, new Vector3(0.5f, 0.7f, 0.7f));                         //マップのパネルを開くか閉じるか
-        gameManager.GameStop= ZoomPanel(MenuPanel, KeyCode.Escape, new Vector3(0.3f, 0.5f, 0.5f));           //メニューのパネルを開くか閉じるか
+        gameManager.GameStop= ZoomPanel(MenuPanel, KeyCode.Escape, new Vector3(0.5f, 1.3f, 0.5f));           //メニューのパネルを開くか閉じるか
        
         SetCoin(GameManager.Coin);                                                                 //コインの数を更新                                 
 
         //メニューが開いているときの処理
         if (MenuPanel.activeSelf)
         {
-            gameManager.GameStop = true;　　　　　　　　　　　　　　　　　　　　//メニューを開いているときは時間を止める
+            GameStop();
+            GameManager.instance.StopGame();
+            
         }
         else
         {
-            gameManager.GameStop = false;　　　　　　　　　　　　　　　　　　　　//メニューを開いているときは時間を止める
+            GameManager.instance.ContinueGame();　　　　//メニューを開いているときは時間を止める
         }
 
 
@@ -281,6 +289,14 @@ public class UIManager :UIEffect
         }
         return Obj.activeSelf;    //パネルが開いているかどうかを返す
 
+    }
+    //ゲーム停止処理
+    void GameStop()
+    {
+        if (GlobalVolume.profile.TryGet<ColorAdjustments>(out colorAdjustments))
+        {
+            colorAdjustments.saturation.value=gameManager.GameStop? -100:100;
+        }
     }
    
 }

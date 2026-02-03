@@ -71,12 +71,6 @@ public class PlayerController : MonoBehaviour
      rigidbody = GetComponent<Rigidbody>();
 
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-
-    }
     private void FixedUpdate()
     {
         if (GameManager.instance.GameStop) return;
@@ -87,12 +81,26 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
 
-        if (GameManager.instance.GameStop) return;
-        cheakdirecion();
-        PlayerMapPin();
+
+        if (GameManager.instance.GameStop)
+        {
+            GameStop();
+            rigidbody.linearVelocity = Vector3.zero;
+
+            rigidbody.angularVelocity = Vector3.zero;
+            Debug.Log("ゲーム停止中");
+            return;
+        }
+        else
+        {
+            GameContinue();
         
+        }
+            cheakdirecion();
+        PlayerMapPin();
+       
+
 
         if (GameManager.instance.GameStop) return; //ゲームが停止している場合は処理を中断
      GameOver();
@@ -112,11 +120,6 @@ public class PlayerController : MonoBehaviour
         
         RightDot= Vector3.Dot(transform.right, velocity.normalized);
        
-        
-
-        
-
-
 
         //Debug.Log(forwardDot);
         if (forwardDot < -0.1f)
@@ -127,9 +130,6 @@ public class PlayerController : MonoBehaviour
         {
             IsWalkBack = false; //前に歩いている場合
         }
-        
-        
-            
         
     }
     /// <summary>
@@ -298,6 +298,18 @@ public class PlayerController : MonoBehaviour
             //playerrenderer.material.SetColor("BaseMap", Color.red);
 
         }
+    }
+    void GameStop()
+    {
+       Animator animator = GetComponent<Animator>();
+        animator.speed = 0f;
+
+
+    }
+    void GameContinue()
+    {
+        Animator animator = GetComponent<Animator>();
+        animator.speed = 1f;
     }
 }
 
