@@ -97,9 +97,7 @@ public class PlayerController : MonoBehaviour
         if (GameManager.instance.GameStop) return; //ゲームが停止している場合は処理を中断
      GameOver();
 
-     if (InGround&&!IsRoll) 
-    // movement();
-    // PlayerMapPin();
+
      Jump();
      CheakGround();
      Cameramethod();
@@ -158,12 +156,12 @@ public class PlayerController : MonoBehaviour
         if(vec<maxvec)//移動速度制限
         rigidbody.AddForce(moveDirection * acceleration, ForceMode.VelocityChange);
 
-        
 
+        //誤アニメーション防止
         if (rigidbody.linearVelocity.magnitude < 0.1f&&!Input.anyKey)
         {
-            Debug.Log("停止");
-            rigidbody.linearVelocity = Vector3.zero;//誤アニメーション防止
+           
+            rigidbody.linearVelocity = Vector3.zero;
             
             rigidbody.angularVelocity = Vector3.zero;
 

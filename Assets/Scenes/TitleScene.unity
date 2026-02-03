@@ -2565,7 +2565,7 @@ GameObject:
   - component: {fileID: 325426001}
   - component: {fileID: 325426000}
   m_Layer: 5
-  m_Name: Setting
+  m_Name: SettingPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3003,6 +3003,11 @@ MonoBehaviour:
   cursor: {fileID: 2800000, guid: 7ccc278511017194c8027097cc80652a, type: 3}
   seclip: {fileID: 8300000, guid: a32f15b61320c7943b601be0413d7195, type: 3}
   bgmaudio: {fileID: 1666238272}
+  Mute: {fileID: 21300000, guid: c3ee59f9a1c139846953ff331472f11d, type: 3}
+  UnMute: {fileID: 21300000, guid: d6c1989e7b4b12647b81176921234e99, type: 3}
+  VolueImg:
+  - {fileID: 2139505392}
+  - {fileID: 971770359}
 --- !u!4 &429031089
 Transform:
   m_ObjectHideFlags: 0
@@ -6105,8 +6110,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1251162259}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -8919,7 +8924,7 @@ RectTransform:
   m_Father: {fileID: 2010050350}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -10421,7 +10426,7 @@ RectTransform:
   m_Father: {fileID: 14362075}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -10562,8 +10567,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 55724910}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

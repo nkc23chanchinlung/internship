@@ -34,6 +34,10 @@ public class TitleManager : MonoBehaviour
     AudioSource seaudio;
    [SerializeField] AudioSource bgmaudio;
 
+    [SerializeField] Sprite Mute;
+    [SerializeField] Sprite UnMute;
+    [SerializeField] Image[] VolueImg;
+
     int butnum = 0;
     int imgsizeX = 300;
     int imgsizeY = 60;
@@ -71,6 +75,7 @@ public class TitleManager : MonoBehaviour
 
 
     }
+    //音量処理メソッド
     void SoundControl()
     {
         gameManager.BgmVolue = BgmvolueSilder.value;
@@ -79,6 +84,13 @@ public class TitleManager : MonoBehaviour
         seaudio.volume = gameManager.SeVolue;
         BgmvolueText.text = ((int)(gameManager.BgmVolue * 100)).ToString();
         SEvolueText.text = ((int)(gameManager.SeVolue * 100)).ToString();
+
+
+
+        //音量Imgを切り替え
+        VolueImg[0].sprite = gameManager.BgmVolue <= 0 ? Mute : UnMute;
+        VolueImg[1].sprite = gameManager.SeVolue <= 0 ? Mute : UnMute;
+
     }
     void GameStart_EF()
     {
@@ -113,6 +125,8 @@ public class TitleManager : MonoBehaviour
     {
         Vector3 mousepos = Input.mousePosition;
         selectionimg[butnum].SetActive(true);
+
+        //ボタンの当たり判定
         for (int i = 0; i < button.Length; i++)
         {
             if (i != butnum) selectionimg[i].SetActive(false);
