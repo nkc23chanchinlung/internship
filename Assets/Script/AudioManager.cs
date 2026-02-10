@@ -21,7 +21,7 @@ public class AudioManager : MonoBehaviour
     }
     public void PlaySE(AudioClip Clip)
     {
-      
+        BGMPlayer = GameObject.FindGameObjectWithTag("BGMPlayer").GetComponent<AudioSource>();
         SEPlayer.PlayOneShot(Clip);
     }
     void CheakGameManagerExist()

@@ -149,7 +149,7 @@ public class TitleManager : MonoBehaviour
                 {
                     
                     Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
-                    AudioManager.instance.PlaySE(seclip);
+                    //AudioManager.instance.PlaySE(seclip);
                     //seaudio.PlayOneShot(seclip);
                     butnum = i;
                 }
