@@ -31,4 +31,5 @@ public class BottonManager : MonoBehaviour
             uIEffect.ereductioneffect(SettingPanel, new Vector3(1, 1, 1));
         }
     }
+   
 }

@@ -42,6 +42,7 @@ public class TitleManager : MonoBehaviour
 
 
     int butnum = 0;
+    // ボタンの当たり判定用画像サイズ
     int imgsizeX = 300;
     int imgsizeY = 60;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -76,7 +77,7 @@ public class TitleManager : MonoBehaviour
         titleframe.color = new Color(0, 0, 0, alpha/100);
         if (isStart)
         {
-            GameStart_EF();
+            GameStart_EF("GameScene");
         }
 
 
@@ -98,14 +99,15 @@ public class TitleManager : MonoBehaviour
         VolueImg[1].sprite = gameManager.SeVolue <= 0 ? Mute : UnMute;
 
     }
-    void GameStart_EF()
+    public void GameStart_EF(string SceneName)
     {
+        
         titleframe_Obj.SetActive(true);
         alpha+=2;
         if (alpha >= 100)
         {
             if (!once) { 
-            loadingScript.NextScene("GameScene");
+            loadingScript.NextScene(SceneName);
             once = true;
         }
         }
@@ -149,8 +151,9 @@ public class TitleManager : MonoBehaviour
                 {
                     
                     Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
-                    //AudioManager.instance.PlaySE(seclip);
-                    //seaudio.PlayOneShot(seclip);
+                    
+                    AudioManager.instance.PlaySE(seclip);
+                    seaudio.PlayOneShot(seclip);
                     butnum = i;
                 }
                 

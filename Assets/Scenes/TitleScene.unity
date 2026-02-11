@@ -5305,8 +5305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7a0458a3e682514f9de8538e2b04a92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BGMPlayer: {fileID: 1666238272}
-  SEPlayer: {fileID: 0}
+  BGMCliplist: []
 --- !u!4 &735532559
 Transform:
   m_ObjectHideFlags: 0
@@ -9341,7 +9340,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -534, y: -300}
+  m_AnchoredPosition: {x: -534, y: -302}
   m_SizeDelta: {x: 300, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1323969615
