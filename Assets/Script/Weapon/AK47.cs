@@ -15,6 +15,15 @@ public class AK47 : Gun
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {
+        cooldown = 0.2f;
+        Magazine = 30;
+        MaxMagazine = 30;
+        MaxCooldown = 0.2f;
+
+        Damage = 40;
+        Pow = 2;
+        Repair = 1;
+        weaponnum = 0; //ïêäÌî‘çÜ
         try
         {
             playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
@@ -29,20 +38,14 @@ public class AK47 : Gun
 
     void Start()
     {
-        //cooldown = 0.2f;
-        //Magazine = 30;
-        //MaxMagazine = 30;
-        //MaxCooldown = 0.2f;
+       
+
         //IsReloading = false;
         //ReloadTime = 1f;
-        //Damage=20;
-        //Pow = 2;
-        //Repair = 1;
-        //weaponnum = 0; //ïêäÌî‘çÜ
-        
-        
+
+
     }
-   
+
     // Update is called once per frame
     void Update()
     {

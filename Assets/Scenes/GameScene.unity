@@ -4894,7 +4894,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
@@ -24581,6 +24581,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 996128b84187f4e4abd200023c71b140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioManager: {fileID: 0}
+  GameBGM: {fileID: 0}
   cursorTexture: {fileID: 2800000, guid: 584c52ead886dda4cbbff46dd9839ce3, type: 3}
 --- !u!4 &950524277
 Transform:

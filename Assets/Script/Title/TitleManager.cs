@@ -53,7 +53,7 @@ public class TitleManager : MonoBehaviour
         titleframe_Obj = titleframe.gameObject;
         titleframe_Obj.SetActive(false);
         gameManager = GameManager.instance;
-        audioManager.PlayBGM(TitleBGM);
+        audioManager.PlayBGM("TitleScene");
         bgmaudio = GameObject.FindGameObjectWithTag("BGMPlayer").GetComponent<AudioSource>();
       
             
@@ -87,18 +87,18 @@ public class TitleManager : MonoBehaviour
     //âπó èàóùÉÅÉ\ÉbÉh
     void SoundControl()
     {
-        audioManager.BgmVolue = BgmvolueSilder.value;
-        audioManager.SeVolue = SEvolueSilder.value;
-        bgmaudio.volume = audioManager.BgmVolue;
-        seaudio.volume = audioManager.SeVolue;
-        BgmvolueText.text = ((int)(audioManager.BgmVolue * 100)).ToString();
-        SEvolueText.text = ((int)(audioManager.SeVolue * 100)).ToString();
+        audioManager.bgmVolume = BgmvolueSilder.value;
+        audioManager.seVolume = SEvolueSilder.value;
+        bgmaudio.volume = audioManager.bgmVolume;
+        seaudio.volume = audioManager.seVolume;
+        BgmvolueText.text = ((int)(audioManager.bgmVolume * 100)).ToString();
+        SEvolueText.text = ((int)(audioManager.seVolume * 100)).ToString();
 
 
 
         //âπó ImgÇêÿÇËë÷Ç¶
-        VolueImg[0].sprite = audioManager.BgmVolue <= 0 ? Mute : UnMute;
-        VolueImg[1].sprite = audioManager.SeVolue <= 0 ? Mute : UnMute;
+        VolueImg[0].sprite = audioManager.bgmVolume <= 0 ? Mute : UnMute;
+        VolueImg[1].sprite = audioManager.seVolume <= 0 ? Mute : UnMute;
 
     }
     public void GameStart_EF(string SceneName)
@@ -153,8 +153,8 @@ public class TitleManager : MonoBehaviour
                 {
                     
                     Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
-                    
-                    AudioManager.instance.AddSE(seclip);
+
+                    AudioManager.Instance.PlaySE(seclip);
                     seaudio.PlayOneShot(seclip);
                     butnum = i;
                 }

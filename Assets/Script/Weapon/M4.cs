@@ -13,11 +13,22 @@ public class M4 : Gun
     {
         GameManager.OnGameStart -= OnGameStart;
     }
+    private void Awake()
+    {
+        cooldown = 1f;
+        Magazine = 8;
+        MaxMagazine = 8;
+        MaxCooldown = 1;
 
+        Damage = 50;
+        Pow = 5;
+        Repair = 1;
+        weaponnum = 1; //ïêäÌî‘çÜ
+    }
     void OnGameStart()
     {
        
-        
+
         bulletprefab = Resources.Load("bullet") as UnityEngine.GameObject;
         uiManager = GameObject.Find("-----UIManager-----").GetComponent<UIManager>();
        

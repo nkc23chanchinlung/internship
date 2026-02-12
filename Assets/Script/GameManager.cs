@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
         IsOpenMoviePlaying = false;
         OnGameStart?.Invoke();
         Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
-        audioManager.PlayBGM(GameBGM);
+        audioManager.PlayBGM("GameScene");
 
     }
     public void StopGame()

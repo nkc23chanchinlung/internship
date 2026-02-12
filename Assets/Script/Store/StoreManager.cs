@@ -17,6 +17,7 @@ public class StoreManager : MonoBehaviour
     GameObject target;
     GameManager gameManager;
     [SerializeField] PreViewController preViewController;
+    [SerializeField] GameObject skillPanel;
 
 
     [Header("value")]
@@ -57,7 +58,7 @@ public class StoreManager : MonoBehaviour
 
         if (!preViewController.IsPreviewing)
         {
-            if (ItemChoose() != null)
+            if (ItemChoose() != null&&ItemChoose().gameObject.name!= "Magic Book")
             {
                 ItemInfo(ItemChoose());
                 ItemInfoPanel.SetActive(true);
@@ -102,15 +103,24 @@ public class StoreManager : MonoBehaviour
     }
     void GetInfo(GameObject target)
     {
-        Gun Guninfo=target.GetComponent(typeof(Gun))as Gun;
-       
-        InfoValuegague(Guninfo.Pow,Guninfo.Repair);
-        if (Guninfo != null && Input.GetMouseButtonDown(0))
+       Debug.Log(target.name);
+        if (Input.GetMouseButtonDown(0))
         {
-          
-            preViewController.Showpreview(Guninfo.weaponnum,target.name);
-        }
+            if (target.name == "Magic Book" && Input.GetMouseButtonDown(0))
+            {
+                skillPanel.SetActive(true);
+            }
+            else
+            {
 
+                Gun Guninfo = target.GetComponent(typeof(Gun)) as Gun;
+
+                if (Guninfo != null)
+                    InfoValuegague(Guninfo.Pow, Guninfo.Repair);
+                preViewController.Showpreview(Guninfo.weaponnum, target.name);
+            }
+        }
+       
     }
     
     void InfoValuegague(int pow,int repair)

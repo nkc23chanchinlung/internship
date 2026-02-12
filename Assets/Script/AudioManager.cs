@@ -1,171 +1,97 @@
-using System.Linq;
-using UnityEditor.SceneManagement;
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.SceneManagement;
-using Unity.VisualScripting;
-//音声関連管理クラス
+
 public class AudioManager : MonoBehaviour
 {
-    static public AudioManager instance;
+    public static AudioManager Instance { get; private set; }
 
-    [SerializeField]public AudioSource BGMPlayer { get;private set; }
-    [SerializeField]public AudioSource SEPlayer { get;private set; }
+    [Header("Players")]
+    [SerializeField] private AudioSource bgmSource;
+    [SerializeField] private AudioSource seSourcePrefab;   // ← これをプレハブ化推奨
 
+    private List<AudioSource> activeOneShotSources = new List<AudioSource>();
 
-    public float BgmVolue { get; set; }
-    public float SeVolue { get; set; }
+    [Header("Volumes")]
+    [Range(0f, 1f)] public float bgmVolume = 0.7f;
+    [Range(0f, 1f)] public float seVolume = 0.8f;
 
-    
-    [SerializeField] AudioSource[] TitleSEPlayerarray = { };
-    [SerializeField] AudioSource[] GaneSEPlayerarray = { };
+    [Header("Clips")]
+    public AudioClip titleBGM;
+    public AudioClip gameBGM;
+    // 必要ならもっと追加
 
-    List<AudioSource> SEPlayerlist = new List<AudioSource>();
-
-    int SceneNum;
-
-
-    [SerializeField] AudioClip[] BGMCliplist = { };
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-
-
-    void Start()
+    void Awake()
     {
-        CheakGameManagerExist();
-        TitleSEPlayerarray = Object
-    .FindObjectsByType<AudioSource>(FindObjectsSortMode.None);
-
-//        SEPlayerlarray = Object
-//.FindObjectsByType<AudioSource>(FindObjectsSortMode.None)
-//.Where(a => a.gameObject.tag != "BGMPlayer")
-//.ToArray();
-    }
-    void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-    
-    private void FixedUpdate()
-    {
-       
-        VolueControll();
-        
- 
-
-
-
-        //SEPlayer = GameObject.FindGameObjectWithTag("SEPlayer").GetComponent<AudioSource>();
-    }
-    public void PlayBGM(AudioClip Clip)
-    {
-        BGMPlayer = GameObject.FindGameObjectWithTag("BGMPlayer").GetComponent<AudioSource>();
-        BGMPlayer = GameObject
-    .FindGameObjectWithTag("BGMPlayer")
-    ?.GetComponent<AudioSource>();
-
-    }
-    public void AddSE(AudioClip Clip)
-    {
-        SEPlayer = GameObject.FindGameObjectWithTag("SEPlayer").GetComponent<AudioSource>();
-        
-        SEPlayer.PlayOneShot(Clip);
-    }
-   
-   private void CheakGameManagerExist()
-    {
-        if (instance == null)
+        if (Instance != null && Instance != this)
         {
-            instance = this;
-            DontDestroyOnLoad(this.gameObject);
+            Destroy(gameObject);
+            return;
         }
-        else if (instance != this)
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+
+        // 最初にAudioSourceがなければ作る
+        if (bgmSource == null)
         {
-            Destroy(this.gameObject);
+            var go = new GameObject("BGMPlayer");
+            go.transform.SetParent(transform);
+            bgmSource = go.AddComponent<AudioSource>();
+            bgmSource.loop = true;
         }
     }
 
-    //    void BGMChanger()
-    //    {
-    //        if(SceneManager.GetActiveScene().name=="TitleScene"&&SceneNum!=1)
-    //        {
-    //            Debug.Log("BGMChange");
-    //            SEPlayerarray = Object
-    //.FindObjectsByType<AudioSource>(FindObjectsSortMode.None)
-    //.Where(a => a.gameObject.tag != "BGMPlayer")
-    //.ToArray();
-    //            SceneNum = 1;
-    //            SEPlayerlist.Clear();
-
-    //            BGMPlayer.clip = BGMCliplist[0];
-    //            SEPlayerlist.AddRange(SEPlayerarray);
-    //        }
-    //        else if (SceneManager.GetActiveScene().name == "GameScene" && SceneNum != 2)
-    //        {
-    //            Debug.Log("BGMChange");
-    //            SEPlayerarray = Object
-    //.FindObjectsByType<AudioSource>(FindObjectsSortMode.None)
-    //.Where(a => a.gameObject.tag != "BGMPlayer")
-    //.ToArray();
-    //            SceneNum = 2;
-    //            SEPlayerlist.Clear();
-    //            BGMPlayer.clip = BGMCliplist[1];
-    //            SEPlayerlist.AddRange(SEPlayerarray);
-    //        }
-    //    }
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    void Update()
     {
-        Debug.Log("BGMChange");
-
-        TitleSEPlayerarray = Object
-     .FindObjectsByType<AudioSource>(FindObjectsSortMode.None)
-     .Where(a =>
-         a.gameObject.tag != "BGMPlayer" &&
-         a.gameObject.scene == scene
-     )
-     .ToArray();
-
-
-        SEPlayerlist.Clear();
-       
-
-        if (scene.name == "TitleScene")
-        {
-            TitleSEPlayerarray = Object
-    .FindObjectsByType<AudioSource>(FindObjectsSortMode.None)
-    .Where(a => a.gameObject.tag != "BGMPlayer")
-    .ToArray();
-            SceneNum = 1;
-            SEPlayerlist.AddRange(TitleSEPlayerarray);
-            BGMPlayer.clip = BGMCliplist[0];
-
-        }
-        else if (scene.name == "GameScene")
-        {
-            GaneSEPlayerarray = Object
-    .FindObjectsByType<AudioSource>(FindObjectsSortMode.None);
-            SceneNum = 2;
-            SEPlayerlist.AddRange(GaneSEPlayerarray);
-            BGMPlayer.clip = BGMCliplist[1];
-        }
-    }
-    void VolueControll()
-    {
-       
-            BGMPlayer.volume = BgmVolue;
-        
-        for (int i = 0; i < SEPlayerlist.Count; i++)
-        {
-           
-
-            SEPlayerlist[i].volume = SeVolue;
-        }
+        if (bgmSource.volume != bgmVolume) bgmSource.volume = bgmVolume;
     }
 
+    public void PlayBGM(string sceneName)
+    {
+        AudioClip target = null;
 
+        if (sceneName.Contains("Title")) target = titleBGM;
+        else if (sceneName.Contains("Game")) target = gameBGM;
+        // else ... 他のシーン用
+
+        if (target == null || bgmSource.clip == target) return;
+
+        bgmSource.Stop();
+        bgmSource.clip = target;
+        bgmSource.volume = bgmVolume;
+        bgmSource.Play();
+    }
+
+    public void PlaySE(AudioClip clip, float pitch = 1f, float volumeScale = 1f)
+    {
+        if (clip == null) return;
+
+        // プール方式が理想だが、とりあえず毎回InstantiateでもOK（軽いSEなら）
+        var source = Instantiate(seSourcePrefab, transform);
+        source.clip = clip;
+        source.volume = seVolume * volumeScale;
+        source.pitch = pitch;
+        source.Play();
+
+        activeOneShotSources.Add(source);
+
+        // 終わったら自動削除（コルーチンでも可）
+        StartCoroutine(DestroyWhenFinished(source));
+    }
+
+    private System.Collections.IEnumerator DestroyWhenFinished(AudioSource src)
+    {
+        yield return new WaitWhile(() => src && src.isPlaying);
+        if (src) Destroy(src.gameObject);
+        activeOneShotSources.Remove(src);
+    }
+
+    // シーン読み込み時にBGM切り替え
+    void OnEnable() => SceneManager.sceneLoaded += OnSceneLoad;
+    void OnDisable() => SceneManager.sceneLoaded -= OnSceneLoad;
+
+    private void OnSceneLoad(Scene scene, LoadSceneMode mode)
+    {
+        PlayBGM(scene.name);
+    }
 }
