@@ -17,10 +17,9 @@ public class GameManager : MonoBehaviour
     static public bool GameManagerExist = false;//GameManagerが存在フラグ
     public bool IsOpenMoviePlaying { get; set; } //ムービー再生中かどうか
 
+    [SerializeField]AudioManager audioManager;
+    [SerializeField] AudioClip GameBGM;
     
-
-    public float BgmVolue { get; set; }
-    public float SeVolue { get; set; }
 
 
     bool IsStarted;
@@ -38,6 +37,7 @@ public class GameManager : MonoBehaviour
         IsOpenMoviePlaying = false;
         OnGameStart?.Invoke();
         Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
+        audioManager.PlayBGM(GameBGM);
 
     }
     public void StopGame()

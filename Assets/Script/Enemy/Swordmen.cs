@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using static UnityEngine.Rendering.DebugUI;
 public class Swordmen : Enemy
 {
-    bool inited = false;
+    bool inited = false;//初期化フラグ
     bool gethit = false;
 
     public bool hasHit { get; set; }
@@ -67,17 +67,29 @@ public class Swordmen : Enemy
         status = Status.Idle; //初期状態を敵対に設定
         enemyAnimetor = new ObjAnimetor(1f, gameObject); //敵のアニメーションを管理するクラスの初期化
         mat = GetComponentInChildren<Renderer>().material;
+        inited = true;
 
-        
-      
-        
+
+
+
     }
     
 
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.instance.GameStop) return;
+        if(inited==false) return;
+        if (GameManager.instance.GameStop)
+        {
+            agent.isStopped = true;
+            GameStop();
+            return;
+
+        }
+        else
+        {
+            agent.isStopped = false;
+        }
 
         if (bossRoomManager) Debug.Log("bossRoomManager is true");
         gethit = false;

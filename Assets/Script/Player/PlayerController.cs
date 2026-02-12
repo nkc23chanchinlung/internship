@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     [Header("PInの高さ")]
     [SerializeField]float pinHeight = 50f; //Pinの高さ
     [SerializeField] float animeionspeed;
-
+    [SerializeField]UIManager uimanager;
 
     Plane plane = new Plane();
     float distance = 0;
@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
     float vec;
     float forwardDot;
     float RightDot;
-    float maxvec = 5f;
+    float maxvec;
     public float friction = 0.5f;
     bool invincible;
     bool Gethit;
@@ -76,6 +76,7 @@ public class PlayerController : MonoBehaviour
         if (GameManager.instance.GameStop) return;
         if (InGround && !IsRoll)
             movement();
+        Cameramethod();
     }
 
     // Update is called once per frame
@@ -108,7 +109,7 @@ public class PlayerController : MonoBehaviour
 
      Jump();
      CheakGround();
-     Cameramethod();
+     
         
 
         playerAnimetor.Animetor(IsWalkBack,RightDot, forwardDot, InGround,IsShooting,IsRoll,false,equipSystem.IsReloading,Gethit);
@@ -119,9 +120,16 @@ public class PlayerController : MonoBehaviour
         forwardDot = Vector3.Dot(transform.forward, velocity.normalized);
         
         RightDot= Vector3.Dot(transform.right, velocity.normalized);
-       
+        if (rigidbody.linearVelocity.magnitude < 0.1f)
+        {
 
-        //Debug.Log(forwardDot);
+            forwardDot=0f;
+            RightDot =0f;
+
+
+        }
+
+        //誤アニメーション防止
         if (forwardDot < -0.1f)
         {
             IsWalkBack = true; //後ろに歩いている場合
@@ -156,17 +164,12 @@ public class PlayerController : MonoBehaviour
         if(vec<maxvec)//移動速度制限
         rigidbody.AddForce(moveDirection * acceleration, ForceMode.VelocityChange);
 
-
-        //誤アニメーション防止
-        if (rigidbody.linearVelocity.magnitude < 0.1f&&!Input.anyKey)
-        {
-           
-            rigidbody.linearVelocity = Vector3.zero;
-            
-            rigidbody.angularVelocity = Vector3.zero;
+        //後ろ移動したら速度制限を下げる
+        maxvec = IsWalkBack==true? 2f:5f;
 
 
-        }
+       
+
 
         vec = rigidbody.linearVelocity.magnitude;
         Vector3 vetorvec = rigidbody.linearVelocity;
@@ -198,7 +201,8 @@ public class PlayerController : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.LeftShift) && InGround&&!IsRoll)
         {
-           StartCoroutine(Roll());
+            
+            StartCoroutine(Roll());
 
 
         }
@@ -208,7 +212,7 @@ public class PlayerController : MonoBehaviour
     {
         RaycastHit hit;
         if (Physics.Raycast(transform.position +
-            new Vector3(0, rayy, 0), 
+              new Vector3(0, rayy, 0), 
             Vector3.down, 
             out hit, raydis))
         {
@@ -240,14 +244,14 @@ public class PlayerController : MonoBehaviour
             var absrot = overridesources.transform.rotation.y - transform.rotation.y;
 
             if (IsShooting) overridesources.transform.rotation = transform.rotation * Quaternion.Euler(0, 45, 0);  //射撃中マウスの向きに合わせる
-            
-            else  if (!IsShooting)
-                overridesources.transform.LookAt(lookPoint);
-           
-            _=WaitForAsync(0.1f,()=>transform.LookAt(lookPoint)); // 0.1秒後にプレイヤーの向きを更新する
-            
 
-            
+            else if (!IsShooting)
+                overridesources.transform.LookAt(lookPoint);
+
+            //  _=WaitForAsync(0.1f,()=>transform.LookAt(lookPoint)); // 0.1秒後にプレイヤーの向きを更新する
+
+            transform.LookAt(lookPoint);
+
 
 
         }
@@ -263,6 +267,8 @@ public class PlayerController : MonoBehaviour
     {
         if (invincible) return; // 無敵状態ならダメージを受けない
         Hp -= Dmg;
+        uimanager.Damagevalue(transform, Dmg,Color.red);
+
         Gethit = true;
         if (Gethit)
         {
@@ -299,7 +305,7 @@ public class PlayerController : MonoBehaviour
 
         }
     }
-    void GameStop()
+     void GameStop()
     {
        Animator animator = GetComponent<Animator>();
         animator.speed = 0f;

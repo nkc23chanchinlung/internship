@@ -14,6 +14,7 @@ public class TitleManager : MonoBehaviour
     [SerializeField]Loading loadingScript;
     bool once = false;
     GameManager gameManager;
+    [SerializeField]AudioManager audioManager;
 
     [SerializeField] Text BgmvolueText;
     [SerializeField] Text SEvolueText;
@@ -39,7 +40,7 @@ public class TitleManager : MonoBehaviour
     [SerializeField] Sprite UnMute;
     [SerializeField] Image[] VolueImg;
 
-
+    [SerializeField] AudioClip TitleBGM;
 
     int butnum = 0;
     // ボタンの当たり判定用画像サイズ
@@ -52,6 +53,7 @@ public class TitleManager : MonoBehaviour
         titleframe_Obj = titleframe.gameObject;
         titleframe_Obj.SetActive(false);
         gameManager = GameManager.instance;
+        audioManager.PlayBGM(TitleBGM);
         bgmaudio = GameObject.FindGameObjectWithTag("BGMPlayer").GetComponent<AudioSource>();
       
             
@@ -85,18 +87,18 @@ public class TitleManager : MonoBehaviour
     //音量処理メソッド
     void SoundControl()
     {
-        gameManager.BgmVolue = BgmvolueSilder.value;
-        gameManager.SeVolue = SEvolueSilder.value;
-        bgmaudio.volume = gameManager.BgmVolue;
-        seaudio.volume = gameManager.SeVolue;
-        BgmvolueText.text = ((int)(gameManager.BgmVolue * 100)).ToString();
-        SEvolueText.text = ((int)(gameManager.SeVolue * 100)).ToString();
+        audioManager.BgmVolue = BgmvolueSilder.value;
+        audioManager.SeVolue = SEvolueSilder.value;
+        bgmaudio.volume = audioManager.BgmVolue;
+        seaudio.volume = audioManager.SeVolue;
+        BgmvolueText.text = ((int)(audioManager.BgmVolue * 100)).ToString();
+        SEvolueText.text = ((int)(audioManager.SeVolue * 100)).ToString();
 
 
 
         //音量Imgを切り替え
-        VolueImg[0].sprite = gameManager.BgmVolue <= 0 ? Mute : UnMute;
-        VolueImg[1].sprite = gameManager.SeVolue <= 0 ? Mute : UnMute;
+        VolueImg[0].sprite = audioManager.BgmVolue <= 0 ? Mute : UnMute;
+        VolueImg[1].sprite = audioManager.SeVolue <= 0 ? Mute : UnMute;
 
     }
     public void GameStart_EF(string SceneName)
@@ -152,7 +154,7 @@ public class TitleManager : MonoBehaviour
                     
                     Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
                     
-                    AudioManager.instance.PlaySE(seclip);
+                    AudioManager.instance.AddSE(seclip);
                     seaudio.PlayOneShot(seclip);
                     butnum = i;
                 }

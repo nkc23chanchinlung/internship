@@ -115,7 +115,7 @@ public class UIManager :UIEffect
         
 
 
-        PanelOpen = ZoomPanel(Lead, KeyCode.T, new Vector3(0.02f, 0.02f, 0.02f));                            //リードのパネルを開くか閉じるか
+       // PanelOpen = ZoomPanel(Lead, KeyCode.T, new Vector3(0.02f, 0.02f, 0.02f));                            //リードのパネルを開くか閉じるか
         PanelOpen = ZoomPanel(MapPanel, KeyCode.Tab, new Vector3(0.5f, 0.7f, 0.7f));                         //マップのパネルを開くか閉じるか
         gameManager.GameStop= ZoomPanel(MenuPanel, KeyCode.Escape, new Vector3(0.5f, 1.3f, 0.5f));           //メニューのパネルを開くか閉じるか
        
@@ -202,12 +202,16 @@ public class UIManager :UIEffect
     }
     void Hpbar(int Hp,int MaxHp)                                                                          //プレイヤーのHPバー
     {
-       
+       Animator animator= Lifebar.GetComponentInParent<Animator>();
         Lifebar.fillAmount = (float)Hp / (float)MaxHp;
         var life = ((float)Hp / (float)MaxHp) * 100;
         if (displaylife > life) displaylife--;
         else if (displaylife <life) displaylife++;
         Lifebar_Text.text = displaylife.ToString("")+"%";
+        if (life <= 70) animator.speed = 1.2f;
+        else if(life<50) animator.speed = 1.5f;
+        else if(life<30) animator.speed = 2f;
+        else animator.speed = 1f;
     }
    
     void Show_Reloading_text()
@@ -216,10 +220,11 @@ public class UIManager :UIEffect
         Reloading_text.text = "Reloading...";
         
     }
-    public void Damagevalue( Transform obj,int damage)　　　　　　　　　　　　　　　　　　　　//ダメージ表記
+    public void Damagevalue( Transform obj,int damage,Color color)　　　　　　　　　　　　　　　　　　　　//ダメージ表記
     {
         Text Damage_text = Damagevalueprefeb.GetComponent<Text>();
         Damage_text.text = damage.ToString();
+        Damage_text.color = color;
         var center = 0.5f * new Vector3(Screen.width, Screen.height);
         Vector3 screenPos = Camera.main.WorldToScreenPoint(obj.position)-center;
 

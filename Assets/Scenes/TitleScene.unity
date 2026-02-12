@@ -2980,6 +2980,7 @@ MonoBehaviour:
   titleframe: {fileID: 1350555289}
   alpha: 100
   loadingScript: {fileID: 1246491662}
+  audioManager: {fileID: 735532558}
   BgmvolueText: {fileID: 640001683}
   SEvolueText: {fileID: 1406239698}
   BgmvolueSilder: {fileID: 1308657246}
@@ -3008,6 +3009,7 @@ MonoBehaviour:
   VolueImg:
   - {fileID: 2139505392}
   - {fileID: 971770359}
+  TitleBGM: {fileID: 8300000, guid: 5cf6a9ab075fcba489347f9f6fe24c8b, type: 3}
 --- !u!4 &429031089
 Transform:
   m_ObjectHideFlags: 0
@@ -5305,7 +5307,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7a0458a3e682514f9de8538e2b04a92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BGMCliplist: []
+  TitleSEPlayerarray: []
+  GaneSEPlayerarray: []
+  BGMCliplist:
+  - {fileID: 8300000, guid: 5cf6a9ab075fcba489347f9f6fe24c8b, type: 3}
+  - {fileID: 8300000, guid: 9f5e8f68b2783cb4287b6d1909e4ce93, type: 3}
 --- !u!4 &735532559
 Transform:
   m_ObjectHideFlags: 0
@@ -8716,6 +8722,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 996128b84187f4e4abd200023c71b140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioManager: {fileID: 735532558}
+  GameBGM: {fileID: 8300000, guid: 9f5e8f68b2783cb4287b6d1909e4ce93, type: 3}
   cursorTexture: {fileID: 2800000, guid: 584c52ead886dda4cbbff46dd9839ce3, type: 3}
 --- !u!4 &1240981297
 Transform:

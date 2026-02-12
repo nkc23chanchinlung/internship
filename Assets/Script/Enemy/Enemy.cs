@@ -16,6 +16,8 @@ public class Enemy : EnemyMovement
    
     
     [SerializeField]protected UIManager uimanager;
+   
+    
     protected enum Status { Idle, Doubt, Hostile,Attack, num };            //敵の状態
     protected Status status = Status.Hostile;
     [Header("索敵範囲")]
@@ -200,7 +202,7 @@ public class Enemy : EnemyMovement
             Invoke("hidelifebar", hidetime);
         }
             angervalue += 60;
-        uimanager.Damagevalue(transform, damage);
+        uimanager.Damagevalue(transform, damage,Color.white);
         Hp -= damage;
 
         
@@ -234,9 +236,11 @@ public class Enemy : EnemyMovement
     /// </summary>
     protected virtual void Die()
     {
+        agent.isStopped = false;
         Destroy(gameObject);
         uimanager.Coin(transform);
         isDead= true;
+       
     }
     /// <summary>
     /// マテリアルの色を元に戻すコルーチン
@@ -262,7 +266,16 @@ public class Enemy : EnemyMovement
        // material.color = Color.red;
        // yield return null;
     }
-    
+
+    public void GameStop()
+    {
+        agent.isStopped = true;
+        Animator animator = GetComponent<Animator>();
+        animator.speed = 0f;
+
+
+    }
+
 
 }
     
