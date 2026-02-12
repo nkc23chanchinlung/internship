@@ -140,5 +140,12 @@ public class StoreManager : MonoBehaviour
     {
         SceneManager.LoadScene("GameScene");
     }
+    public void SkillPanelExit()
+    {
+        if (skillPanel.activeSelf)
+        {
+            skillPanel.SetActive(false);
+        }
+    }
    
 }
