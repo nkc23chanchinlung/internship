@@ -13,12 +13,13 @@ public class GameManager : MonoBehaviour
     public static event Action OnGameStart; //ゲーム開始時のイベント
     public static event Action OnGameStop;
     public static event Action OnContinue;
-    public bool GameStop { get; set; } = false;  //ゲームを停止するかどうか
-    static public bool GameManagerExist = false;//GameManagerが存在フラグ
-    public bool IsOpenMoviePlaying { get; set; } //ムービー再生中かどうか
+    public bool gameStop { get; set; } = false;  //ゲームを停止するかどうか
+    static public bool gameManagerExist = false;//GameManagerが存在フラグ
+    public bool isOpenMoviePlaying { get; set; } //ムービー再生中かどうか
 
     [SerializeField]AudioManager audioManager;
-    [SerializeField] AudioClip GameBGM;
+    [SerializeField] AudioClip gameBGM;
+    public int enterShop { get; set; } = 0;
     
 
 
@@ -33,16 +34,16 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        GameStop = false;
-        IsOpenMoviePlaying = false;
+        gameStop = false;
+        isOpenMoviePlaying = false;
         OnGameStart?.Invoke();
         Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
-        audioManager.PlayBGM("GameScene");
+       // audioManager.PlayBGM("GameScene");
 
     }
     public void StopGame()
     {
-     GameStop = true;
+     gameStop = true;
      OnGameStop?.Invoke();
      Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
      
@@ -50,13 +51,13 @@ public class GameManager : MonoBehaviour
     }
     public void ContinueGame()
     {
-        GameStop = false;
+        gameStop = false;
         OnContinue?.Invoke();
         Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
         
     }
 
-    static public int Coin { get; set; } = 0;  //所持金
+    static public int Coin { get; set; }  //所持金
 
 
     

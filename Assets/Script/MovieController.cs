@@ -11,6 +11,7 @@ public class MovieController : MonoBehaviour
     [SerializeField] GameObject player;
     [SerializeField] Transform OutLine1; //ムービー再生黒枠
     [SerializeField] Transform OutLine2;
+    [SerializeField] GameObject[] shopExitpos;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -22,6 +23,10 @@ public class MovieController : MonoBehaviour
     }
     private void Update()
     {
+        if (gameManager.enterShop != 0)
+        {
+            director.Stop();
+        }
         //ムービースキップ
         if (Input.GetMouseButtonDown(0))
         {
@@ -33,7 +38,7 @@ public class MovieController : MonoBehaviour
     {
         director.Play();
         director.stopped += OnTimelineStopped;
-        gameManager.IsOpenMoviePlaying = true;
+        gameManager.isOpenMoviePlaying = true;
 
 
     }
@@ -41,15 +46,26 @@ public class MovieController : MonoBehaviour
     {
         if (aDirector == director)
         {
+           
             
             player.SetActive(true);
-            gameManager.IsOpenMoviePlaying = false;
+            //ショップから出るキャラの出現場所が変更処理
+            if (gameManager.enterShop == 1)
+            {
+                player.transform.position = shopExitpos[0].transform.position;
+            }
+            else if (gameManager.enterShop == 2)
+            {
+                player.transform.position = shopExitpos[1].transform.position;
+            }
+                gameManager.isOpenMoviePlaying = false;
             MoveUIController();
             gameManager.StartGame();
             director.gameObject.SetActive(false);
             Destroy(this.gameObject);
 
         }
+        
     }
     void MoveUIController()
     {   

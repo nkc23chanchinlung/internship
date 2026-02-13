@@ -32,15 +32,13 @@ public class Enemytriggeratk : MonoBehaviour
         {
             Debug.Log("Enemy Attack Hit Player");
             //swordmen.hasHit = true;
-            //PlayerController player = other.GetComponent<PlayerController>();
-            //player.GetDamage(Atk); // プレイヤーにAtkのダメージを与える
-            //BoxCollider collider = GetComponent<BoxCollider>();
-            //collider.enabled = false; // 攻撃が当たった後、コライダーを無効にする
+
+            PlayerController player = other.GetComponent<PlayerController>();
+            player.GetDamage(Atk); // プレイヤーにAtkのダメージを与える
+            BoxCollider collider = GetComponent<BoxCollider>();
+            collider.enabled = false; // 攻撃が当たった後、コライダーを無効にする
 
         }
     }
-    private void OnDestroy()
-    {
-        Debug.Log("Enemy Attack Trigger Destroyed");
-    }
+ 
 }

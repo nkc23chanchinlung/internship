@@ -49,7 +49,7 @@ public class AK47 : Gun
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.instance.GameStop) return;
+        if (GameManager.instance.gameStop) return;
 
         if (playerController != null)
         {

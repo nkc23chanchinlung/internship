@@ -117,7 +117,7 @@ public class UIManager :UIEffect
 
        // PanelOpen = ZoomPanel(Lead, KeyCode.T, new Vector3(0.02f, 0.02f, 0.02f));                            //リードのパネルを開くか閉じるか
         PanelOpen = ZoomPanel(MapPanel, KeyCode.Tab, new Vector3(0.5f, 0.7f, 0.7f));                         //マップのパネルを開くか閉じるか
-        gameManager.GameStop= ZoomPanel(MenuPanel, KeyCode.Escape, new Vector3(0.5f, 1.3f, 0.5f));           //メニューのパネルを開くか閉じるか
+        gameManager.gameStop= ZoomPanel(MenuPanel, KeyCode.Escape, new Vector3(0.5f, 1.3f, 0.5f));           //メニューのパネルを開くか閉じるか
        
         SetCoin(GameManager.Coin);                                                                 //コインの数を更新                                 
 
@@ -300,7 +300,7 @@ public class UIManager :UIEffect
     {
         if (GlobalVolume.profile.TryGet<ColorAdjustments>(out colorAdjustments))
         {
-            colorAdjustments.saturation.value=gameManager.GameStop? -100:100;
+            colorAdjustments.saturation.value=gameManager.gameStop? -100:100;
         }
     }
    

@@ -15,8 +15,14 @@ class Door : MonoBehaviour
     {
         if (isIndoor)
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E)&&this.gameObject.name== "Door1")
             {
+                GameManager.instance.enterShop = 1;
+                uIManager.FadeControl("ShopScene");
+            }
+            else if(Input.GetKeyDown(KeyCode.E) && this.gameObject.name == "Door2")
+            {
+                GameManager.instance.enterShop = 2;
                 uIManager.FadeControl("ShopScene");
             }
         }

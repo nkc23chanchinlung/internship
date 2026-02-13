@@ -52,10 +52,10 @@ public class EnemyMovement : MonoBehaviour
     public IEnumerator meleeattack(BoxCollider col,float cooldowntime)
     {
         meleeing = true;
-        col.enabled = true;
+        //col.enabled = true;
         yield return new WaitForSeconds(cooldowntime);
-        if (col.enabled == true)
-            col.enabled = false;
+        //if (col.enabled == true)
+        //    col.enabled = false;
         meleeing = false;
         yield return new WaitForSeconds(cooldowntime);
 

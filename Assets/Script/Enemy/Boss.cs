@@ -83,7 +83,7 @@ public class Boss : Enemy
 
     private void FixedUpdate()
     {
-        if (GameManager.instance.GameStop) return;
+        if (GameManager.instance.gameStop) return;
 
         if (!Isbattle) return;
 
@@ -93,7 +93,7 @@ public class Boss : Enemy
 
     private void Update()
     {
-        if(GameManager.instance.GameStop) return;
+        if(GameManager.instance.gameStop) return;
 
         Debug.Log("wave2clear:"+wave2clear);
 
@@ -300,7 +300,7 @@ public class Boss : Enemy
 
             // ターゲット（プレイヤー）の現在位置に追従させつつ、Yは6固定
             Vector3 targetPos = target.transform.position;
-            targetPos.y = 6f;  // ← これが重要！
+            targetPos.y = 6f;  
 
             red.transform.position = targetPos;
 

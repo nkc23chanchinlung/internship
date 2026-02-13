@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]float pinHeight = 50f; //Pinの高さ
     [SerializeField] float animeionspeed;
     [SerializeField]UIManager uimanager;
+    [SerializeField] GameObject hitEffect;
 
     Plane plane = new Plane();
     float distance = 0;
@@ -73,7 +74,7 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (GameManager.instance.GameStop) return;
+        if (GameManager.instance.gameStop) return;
         if (InGround && !IsRoll)
             movement();
         Cameramethod();
@@ -84,7 +85,7 @@ public class PlayerController : MonoBehaviour
     {
 
 
-        if (GameManager.instance.GameStop)
+        if (GameManager.instance.gameStop)
         {
             GameStop();
             rigidbody.linearVelocity = Vector3.zero;
@@ -103,7 +104,7 @@ public class PlayerController : MonoBehaviour
        
 
 
-        if (GameManager.instance.GameStop) return; //ゲームが停止している場合は処理を中断
+        if (GameManager.instance.gameStop) return; //ゲームが停止している場合は処理を中断
      GameOver();
 
 
@@ -270,6 +271,7 @@ public class PlayerController : MonoBehaviour
         uimanager.Damagevalue(transform, Dmg,Color.red);
 
         Gethit = true;
+
         if (Gethit)
         {
             _ = WaitForAsync(0.2f, () => Gethit = false);
@@ -298,9 +300,10 @@ public class PlayerController : MonoBehaviour
         
         if (other.gameObject.CompareTag("EnemyAtk"))
         {
-            GetDamage(10);
-            
-            
+
+            Instantiate(hitEffect, other.transform.position, other.transform.rotation * Quaternion.Euler(90, 0, 0));
+
+
             //playerrenderer.material.SetColor("BaseMap", Color.red);
 
         }

@@ -40,7 +40,7 @@ public class Swordmen : Enemy
         {
             Returnmat(0.5f, "MutantMesh");
             Bullet PlayerAtk = other.gameObject.GetComponent<Bullet>();
-            hitBox=Hand.GameObject().GetComponent<BoxCollider>();
+           
             Destroy(other.gameObject);
             int damage = PlayerAtk.damage;
             GetDamage(damage - defense, 2.0f);
@@ -52,9 +52,9 @@ public class Swordmen : Enemy
     public override void Init()
     {
         base.Init(); //eƒNƒ‰ƒX‚Ì‰Šú‰»‚ğŒÄ‚Ño‚·
-        
-        
-       
+
+
+        hitBox = Hand.GameObject().GetComponent<BoxCollider>();
         MaxHp = 200; //“G‚ÌÅ‘åHP
         Hp = MaxHp;
         Attack = 10;
@@ -79,7 +79,7 @@ public class Swordmen : Enemy
     void Update()
     {
         if(inited==false) return;
-        if (GameManager.instance.GameStop)
+        if (GameManager.instance.gameStop)
         {
             agent.isStopped = true;
             GameStop();
@@ -96,7 +96,7 @@ public class Swordmen : Enemy
 
         if (isDead) return; //€–S‚µ‚Ä‚¢‚éê‡‚Íˆ—‚ğ’†’f
 
-        if (GameManager.instance.GameStop || GameManager.instance.IsOpenMoviePlaying) return; //ƒQ[ƒ€‚ª’â~‚µ‚Ä‚¢‚éê‡‚Íˆ—‚ğ’†’f
+        if (GameManager.instance.gameStop || GameManager.instance.isOpenMoviePlaying) return; //ƒQ[ƒ€‚ª’â~‚µ‚Ä‚¢‚éê‡‚Íˆ—‚ğ’†’f
         if (Hp <= 0)
         {
             if(bossRoomManager != null)
@@ -115,7 +115,7 @@ public class Swordmen : Enemy
 
         if (target != null)
         {
-           //Debug_text ();
+           
             movement();
         }
         visibility();
@@ -174,12 +174,17 @@ public class Swordmen : Enemy
     public void HitOn()
     {
         //hasHit = false;
-        //hitBox.enabled = true;
+        Debug.Log("Hiton");
+        if (hitBox == null) Debug.LogError("hitbox is null");
+        Debug.Log(hitBox.gameObject);
+            hitBox.enabled = true;
     }
 
     public void HitOff()
     {
-       // hitBox.enabled = false;
+        Debug.Log("hitoff");
+        if(hitBox != null&&hitBox.enabled)
+        hitBox.enabled = false;
     }
 
    
