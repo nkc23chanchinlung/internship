@@ -1,3 +1,5 @@
+using Cysharp.Threading.Tasks.Triggers;
+using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,9 +11,18 @@ public class Loading : MonoBehaviour
 {
     AsyncOperation async;
     [SerializeField]GameObject loadingUI;
-    [SerializeField] Image loadingbar;
+    
     [SerializeField] GameObject _anyKey_Text;
+    
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    void Start()
+    {
+       Text _anyKey=_anyKey_Text.GetComponent<Text>();
+        _anyKey.DOFade(endValue: 0f, duration: 1f).SetLoops(-1,LoopType.Yoyo);
+    }
    
     public void NextScene(string SceneName)
     {
@@ -30,7 +41,7 @@ public class Loading : MonoBehaviour
         
         while (!async.isDone)
         {
-            loadingbar.fillAmount = async.progress;
+            
             if (async.progress >= 0.9f)
             {
                 _anyKey_Text.SetActive(true);
