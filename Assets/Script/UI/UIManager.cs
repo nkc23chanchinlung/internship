@@ -26,6 +26,7 @@ public class UIManager :UIEffect
     [SerializeField] GameObject CoinUI;
     [SerializeField] GameObject StatusUI;
     [SerializeField] GameObject MiniMap;
+    [SerializeField] GameObject _minMapUi;
 
 
     [SerializeField]Volume GlobalVolume;
@@ -81,6 +82,7 @@ public class UIManager :UIEffect
         MenuPanel.transform.localScale = Vector3.zero;
         hideeffect(Fade, 1f);  　　　　　　　　　　　　　//Fade処理
         gameManager = GameManager.instance;
+        _minMapUi.transform.DORotate(Vector3.forward * 30, 1f).SetEase(Ease.Linear).SetLoops(-1,LoopType.Incremental);
     }
     // Update is called once per frame
     void Update()
