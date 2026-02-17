@@ -213,7 +213,7 @@ public class UIManager :UIEffect
         if (life <= 70) animator.speed = 1.2f;
         else if(life<50) animator.speed = 1.5f;
         else if(life<30) animator.speed = 2f;
-        else animator.speed = 1f;
+        //else animator.speed = 1f;
     }
    
     void Show_Reloading_text()

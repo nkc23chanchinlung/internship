@@ -64,7 +64,7 @@ public class TitleManager : MonoBehaviour
     {
         TitleMos();
         SoundControl();
-        Debug.Log(isStart);
+        
 
         
 
