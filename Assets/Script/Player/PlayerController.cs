@@ -20,8 +20,8 @@ public class PlayerController : MonoBehaviour
     [Header("Player")]
     [SerializeField] private int MaxSpeed, JumpForce;
     [SerializeField]private float acceleration;      //加速度
-    [SerializeField]public int MaxHp { get; private set; } = 100; //最大のHP
-    [SerializeField]public int Hp { get; set; } = 100;//プレイヤーのHP
+    public int MaxHp { get; private set; } = 100; //最大のHP
+    public int Hp { get; set; } = 100;//プレイヤーのHP
     [SerializeField] float rayy, raydis;  //Rayの長さ
     Vector3 moveDirection;
     Vector3 lastMoveDirection;  
