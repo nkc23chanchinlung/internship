@@ -13,6 +13,8 @@ public class Loading : MonoBehaviour
     [SerializeField]GameObject loadingUI;
     
     [SerializeField] GameObject _anyKey_Text;
+
+    [SerializeField] GameObject effect;
     
 
 
@@ -22,6 +24,8 @@ public class Loading : MonoBehaviour
     {
        Text _anyKey=_anyKey_Text.GetComponent<Text>();
         _anyKey.DOFade(endValue: 0f, duration: 1f).SetLoops(-1,LoopType.Yoyo);
+
+        effect.transform.DOMoveX(2000,4).SetLoops(-1,LoopType.Restart);
     }
    
     public void NextScene(string SceneName)
@@ -35,7 +39,7 @@ public class Loading : MonoBehaviour
     IEnumerator LoadScene(string SceneName)
     {
         async=SceneManager.LoadSceneAsync(SceneName);
-        async.allowSceneActivation = false;
+        
         
 
         
@@ -44,6 +48,7 @@ public class Loading : MonoBehaviour
             
             if (async.progress >= 0.9f)
             {
+                async.allowSceneActivation = false;
                 _anyKey_Text.SetActive(true);
                 if(Input.anyKey)
                     async.allowSceneActivation= true;
