@@ -10,14 +10,20 @@ public class BottonManager : MonoBehaviour
     [SerializeField]UIEffect uIEffect;
     [SerializeField] GameObject SettingPanel;
     [SerializeField] PlayableDirector director;
+    [SerializeField] AudioSource _audioSource;
+    [SerializeField] AudioClip _SelectSe;
 
+
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void GameStart()
     {
-       Debug.Log("GameStart");
         
+      
+        _audioSource.PlayOneShot(_SelectSe);
         director.Play();
         director.stopped += gamestart;
+        
         
 
 
@@ -35,6 +41,7 @@ public class BottonManager : MonoBehaviour
     }
     public void Setting()
     {
+        _audioSource.PlayOneShot(_SelectSe);
         SettingPanel.SetActive(true);
         uIEffect.expansioneffect(SettingPanel, new Vector3(1, 1, 1));
     }
