@@ -41,9 +41,10 @@ public class TitleManager : MonoBehaviour
     [SerializeField] Image[] VolueImg;
 
     [SerializeField] AudioClip TitleBGM;
+    
 
     int butnum = 0;
-    // ボタンの当たり判定用画像サイズ
+    // ?{?^???????????p???T?C?Y
     int imgsizeX = 300;
     int imgsizeY = 60;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -55,6 +56,8 @@ public class TitleManager : MonoBehaviour
         gameManager = GameManager.instance;
         audioManager.PlayBGM("TitleScene");
         bgmaudio = GameObject.FindGameObjectWithTag("BGMPlayer").GetComponent<AudioSource>();
+        
+        
       
             
     }
@@ -84,7 +87,11 @@ public class TitleManager : MonoBehaviour
 
 
     }
-    //音量処理メソッド
+    //??????????\?b?h
+  
+
+
+   
     void SoundControl()
     {
         audioManager.bgmVolume = BgmvolueSilder.value;
@@ -96,7 +103,7 @@ public class TitleManager : MonoBehaviour
 
 
 
-        //音量Imgを切り替え
+        //????Img??????
         VolueImg[0].sprite = audioManager.bgmVolume <= 0 ? Mute : UnMute;
         VolueImg[1].sprite = audioManager.seVolume <= 0 ? Mute : UnMute;
 
@@ -129,14 +136,14 @@ public class TitleManager : MonoBehaviour
   
 
     /// <summary>
-    /// マウスで操作するときの関数
+    /// ?}?E?X?????????????
     /// </summary>
     public void TitleMos()
     {
         Vector3 mousepos = Input.mousePosition;
         selectionimg[butnum].SetActive(true);
 
-        //ボタンの当たり判定
+        //?{?^???????????
         for (int i = 0; i < button.Length; i++)
         {
             if (i != butnum) selectionimg[i].SetActive(false);

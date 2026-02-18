@@ -6,7 +6,7 @@ using UnityEngine.Playables;
 public class Boss : Enemy
 {
     //’l
-    float waittimer = 0f;
+    float waittimer =    0f;
     [SerializeField] float Atkdistance;
 
     //Collider
