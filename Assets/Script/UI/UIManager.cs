@@ -10,12 +10,9 @@ using UnityEngine.Rendering.Universal; // URP用
 [System.Serializable]
 public class UIManager :UIEffect
 {
-    
-
     [Header("UI")]
     [Header("GameObject")]
     [SerializeField] GameObject _gameCanvas;
-   
     [SerializeField] GameObject _menuPanel;
     [SerializeField] GameObject _storyPanel;
     [SerializeField] GameObject _mapPanel;
@@ -38,7 +35,6 @@ public class UIManager :UIEffect
     [SerializeField]Image _bossFrame;
     [SerializeField]Image _warningImage;
 
-
     [Header("Text")]
     [SerializeField] Text _reloadingText;
     [SerializeField] EquipSystem _equipSystem;
@@ -49,10 +45,9 @@ public class UIManager :UIEffect
     Image Magazine_Image;
     [SerializeField]PlayerController _playerController;
     
-    House house;
-    GameManager gameManager;
-    bool PanelOpen = false;
-    float displaylife=100;
+    GameManager _gameManager;
+    bool _isPanelOpen = false;
+    float _displayLife=100;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void OnEnable()
@@ -66,12 +61,9 @@ public class UIManager :UIEffect
     void OnGameStart()
     {
         _playerController =GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        
         _coinUI.SetActive(true);
         _statusUI.SetActive(true);
         _miniMap.SetActive(true);
-
-
     }
     private void Start()
     {
@@ -80,7 +72,7 @@ public class UIManager :UIEffect
         _mapPanel.transform.localScale = Vector3.zero;
         _menuPanel.transform.localScale = Vector3.zero;
         hideeffect(_fade, 1f);  　　　　　　　　　　　　　//Fade処理
-        gameManager = GameManager.instance;
+        _gameManager = GameManager.instance;
         _minMapUi.transform.DORotate(Vector3.forward * 30, 1f).SetEase(Ease.Linear).SetLoops(-1,LoopType.Incremental);
     }
     // Update is called once per frame
@@ -88,9 +80,9 @@ public class UIManager :UIEffect
     {
        if(_playerController == null) return;
         GameStop();
-        _playerController.IsCreate = PanelOpen;
+        _playerController.IsCreate = _isPanelOpen;
 
-        if (Input.GetKeyDown(KeyCode.B)&&!PanelOpen)
+        if (Input.GetKeyDown(KeyCode.B)&&!_isPanelOpen)
         {
 
             Panel_Open(StorePanel);
@@ -100,7 +92,7 @@ public class UIManager :UIEffect
                 WeaponPanel.SetActive(false);
             }
         }
-        else if (PanelOpen && Input.GetKeyDown(KeyCode.B))
+        else if (_isPanelOpen && Input.GetKeyDown(KeyCode.B))
         {
             StorePanel.SetActive(false);
             WeaponPanel.SetActive(false);
@@ -108,17 +100,15 @@ public class UIManager :UIEffect
 
         if (WeaponPanel.activeSelf||StorePanel.activeSelf)　　　　　　　　　　　　　　　　　　　　              //パネルが開いているか
         {
-            PanelOpen = true;
+            _isPanelOpen = true;
         }
-        else PanelOpen = false;
+        else _isPanelOpen = false;
 
         Hpbar(_playerController.Hp,_playerController.MaxHp);
         
-
-
        // PanelOpen = ZoomPanel(Lead, KeyCode.T, new Vector3(0.02f, 0.02f, 0.02f));                            //リードのパネルを開くか閉じるか
-        PanelOpen = ZoomPanel(_mapPanel, KeyCode.Tab, new Vector3(0.5f, 0.7f, 0.7f));                         //マップのパネルを開くか閉じるか
-        gameManager.gameStop= ZoomPanel(_menuPanel, KeyCode.Escape, new Vector3(0.5f, 1.3f, 0.5f));           //メニューのパネルを開くか閉じるか
+        _isPanelOpen = ZoomPanel(_mapPanel, KeyCode.Tab, new Vector3(0.5f, 0.7f, 0.7f));                         //マップのパネルを開くか閉じるか
+        _gameManager.gameStop= ZoomPanel(_menuPanel, KeyCode.Escape, new Vector3(0.5f, 1.3f, 0.5f));           //メニューのパネルを開くか閉じるか
        
         SetCoin(GameManager.Coin);                                                                 //コインの数を更新                                 
 
@@ -142,9 +132,7 @@ public class UIManager :UIEffect
         else
         {
             _reloadingText.gameObject.SetActive(false);
-            
         }
-
     }
    public void SearchMagazine()
     {
@@ -159,6 +147,7 @@ public class UIManager :UIEffect
     {
         panel.SetActive(!panel.activeSelf);
     }
+
     /// <summary>
     /// マガジンのUI
     /// </summary>
@@ -170,6 +159,7 @@ public class UIManager :UIEffect
         //Magazine_Image = GameObject.Find("magazinebar").GetComponent<Image>();
         //Magazine_Image.fillAmount = (float)Magazine / (float)MaxMagazine;
     }
+
     public void memo()
     {
         StorePanel.SetActive(true);
@@ -187,6 +177,7 @@ public class UIManager :UIEffect
         _percent.text = life.ToString("F0") + "%";
 
     }
+
     public void WarningImg(float duration)
     {
         _warningImage.gameObject.SetActive(true);
@@ -206,9 +197,9 @@ public class UIManager :UIEffect
        Animator animator= _lifeBar.GetComponentInParent<Animator>();
         _lifeBar.fillAmount = (float)Hp / (float)MaxHp;
         var life = ((float)Hp / (float)MaxHp) * 100;
-        if (displaylife > life) displaylife--;
-        else if (displaylife <life) displaylife++;
-        _lifeBarText.text = displaylife.ToString("")+"%";
+        if (_displayLife > life) _displayLife--;
+        else if (_displayLife <life) _displayLife++;
+        _lifeBarText.text = _displayLife.ToString("")+"%";
         if (life <= 70) animator.speed = 1.2f;
         else if(life<50) animator.speed = 1.5f;
         else if(life<30) animator.speed = 2f;
@@ -219,7 +210,6 @@ public class UIManager :UIEffect
     {
         _reloadingText.gameObject.SetActive(true);
         _reloadingText.text = "Reloading...";
-        
     }
     public void Damagevalue( Transform obj,int damage,Color color)　　　　　　　　　　　　　　　　　　　　//ダメージ表記
     {
@@ -237,7 +227,6 @@ public class UIManager :UIEffect
        
         damageInstance.transform.SetParent(_gameCanvas.transform, false);
         DamageEffect(damageInstance);
-        
     }
     /// <summary>
     /// ドロップしたコインの処理
@@ -264,9 +253,7 @@ public class UIManager :UIEffect
         {
             Destroy(CoinInstance);
             GameManager.Coin += 1; //コインを増やす
-
         });
-
     }
 
     public void SetCoin(int coin)　　　　　　　　　　　　　　　　　　　　//コインの数
@@ -301,7 +288,7 @@ public class UIManager :UIEffect
     {
         if (GlobalVolume.profile.TryGet<ColorAdjustments>(out colorAdjustments))
         {
-            colorAdjustments.saturation.value=gameManager.gameStop? -100:100;
+            colorAdjustments.saturation.value=_gameManager.gameStop? -100:100;
         }
     }
    
