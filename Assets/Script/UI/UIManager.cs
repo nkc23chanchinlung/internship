@@ -14,41 +14,40 @@ public class UIManager :UIEffect
 
     [Header("UI")]
     [Header("GameObject")]
-    [SerializeField] GameObject GameCanvas;
+    [SerializeField] GameObject _gameCanvas;
+   
+    [SerializeField] GameObject _menuPanel;
+    [SerializeField] GameObject _storyPanel;
+    [SerializeField] GameObject _mapPanel;
+    [SerializeField] GameObject _damageValuePrefeb;
+    [SerializeField] GameObject _coinPrefeb;
+    [SerializeField] GameObject _coinUI;
+    [SerializeField] GameObject _statusUI;
+    [SerializeField] GameObject _miniMap;
+    [SerializeField] GameObject _minMapUi;
+    //使わない
     [SerializeField] GameObject StorePanel;
     [SerializeField] GameObject WeaponPanel;
-    [SerializeField] GameObject MenuPanel;
-    [SerializeField] GameObject StoryPanel;
-    [SerializeField] GameObject MapPanel;
-    [SerializeField] GameObject Lead;
-    [SerializeField] GameObject Damagevalueprefeb;
-    [SerializeField] GameObject Coinprefeb;
-    [SerializeField] GameObject CoinUI;
-    [SerializeField] GameObject StatusUI;
-    [SerializeField] GameObject MiniMap;
-    [SerializeField] GameObject _minMapUi;
-
-
     [SerializeField]Volume GlobalVolume;
     private ColorAdjustments colorAdjustments;
 
     [Header("Image")]
-    [SerializeField] Image Boss_Hpbar;
-    [SerializeField] Image Fade;
-    [SerializeField]Image Lifebar;
-    [SerializeField]Image Boss_Frame;
-    [SerializeField]Image Warning_Image;
+    [SerializeField] Image _bossHpBar;
+    [SerializeField] Image _fade;
+    [SerializeField]Image _lifeBar;
+    [SerializeField]Image _bossFrame;
+    [SerializeField]Image _warningImage;
 
 
     [Header("Text")]
-    [SerializeField] Text Reloading_text;
-    [SerializeField] EquipSystem equipSystem;
-    [SerializeField] Text Magazine_Text;
-    [SerializeField] Text Coin_Text;
-    [SerializeField] Text Lifebar_Text;
-    [SerializeField] Text percent;
+    [SerializeField] Text _reloadingText;
+    [SerializeField] EquipSystem _equipSystem;
+    [SerializeField] Text _magazineText;
+    [SerializeField] Text _coinText;
+    [SerializeField] Text _lifeBarText;
+    [SerializeField] Text _percent;
     Image Magazine_Image;
-    [SerializeField]PlayerController playerController;
+    [SerializeField]PlayerController _playerController;
     
     House house;
     GameManager gameManager;
@@ -66,30 +65,30 @@ public class UIManager :UIEffect
     }
     void OnGameStart()
     {
-        playerController =GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        _playerController =GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         
-        CoinUI.SetActive(true);
-        StatusUI.SetActive(true);
-        MiniMap.SetActive(true);
+        _coinUI.SetActive(true);
+        _statusUI.SetActive(true);
+        _miniMap.SetActive(true);
 
 
     }
     private void Start()
     {
         StorePanel.SetActive(false);
-        blinkinge_effect(Reloading_text);
-        MapPanel.transform.localScale = Vector3.zero;
-        MenuPanel.transform.localScale = Vector3.zero;
-        hideeffect(Fade, 1f);  　　　　　　　　　　　　　//Fade処理
+        blinkinge_effect(_reloadingText);
+        _mapPanel.transform.localScale = Vector3.zero;
+        _menuPanel.transform.localScale = Vector3.zero;
+        hideeffect(_fade, 1f);  　　　　　　　　　　　　　//Fade処理
         gameManager = GameManager.instance;
         _minMapUi.transform.DORotate(Vector3.forward * 30, 1f).SetEase(Ease.Linear).SetLoops(-1,LoopType.Incremental);
     }
     // Update is called once per frame
     void Update()
     {
-       if(playerController == null) return;
+       if(_playerController == null) return;
         GameStop();
-        playerController.IsCreate = PanelOpen;
+        _playerController.IsCreate = PanelOpen;
 
         if (Input.GetKeyDown(KeyCode.B)&&!PanelOpen)
         {
@@ -113,18 +112,18 @@ public class UIManager :UIEffect
         }
         else PanelOpen = false;
 
-        Hpbar(playerController.Hp,playerController.MaxHp);
+        Hpbar(_playerController.Hp,_playerController.MaxHp);
         
 
 
        // PanelOpen = ZoomPanel(Lead, KeyCode.T, new Vector3(0.02f, 0.02f, 0.02f));                            //リードのパネルを開くか閉じるか
-        PanelOpen = ZoomPanel(MapPanel, KeyCode.Tab, new Vector3(0.5f, 0.7f, 0.7f));                         //マップのパネルを開くか閉じるか
-        gameManager.gameStop= ZoomPanel(MenuPanel, KeyCode.Escape, new Vector3(0.5f, 1.3f, 0.5f));           //メニューのパネルを開くか閉じるか
+        PanelOpen = ZoomPanel(_mapPanel, KeyCode.Tab, new Vector3(0.5f, 0.7f, 0.7f));                         //マップのパネルを開くか閉じるか
+        gameManager.gameStop= ZoomPanel(_menuPanel, KeyCode.Escape, new Vector3(0.5f, 1.3f, 0.5f));           //メニューのパネルを開くか閉じるか
        
         SetCoin(GameManager.Coin);                                                                 //コインの数を更新                                 
 
         //メニューが開いているときの処理
-        if (MenuPanel.activeSelf)
+        if (_menuPanel.activeSelf)
         {
             GameStop();
             GameManager.instance.StopGame();
@@ -136,20 +135,20 @@ public class UIManager :UIEffect
         }
 
 
-        if (equipSystem.IsReloading)
+        if (_equipSystem.IsReloading)
         {
             Show_Reloading_text();
         }
         else
         {
-            Reloading_text.gameObject.SetActive(false);
+            _reloadingText.gameObject.SetActive(false);
             
         }
 
     }
    public void SearchMagazine()
     {
-        Magazine_Text = GameObject.Find("magazine").GetComponent<Text>();
+        _magazineText = GameObject.Find("magazine").GetComponent<Text>();
     }
    
     /// <summary>
@@ -167,7 +166,7 @@ public class UIManager :UIEffect
     /// <param name="MaxMagazine">最大のマガジン</param>
     public void SetMagazine(int Magazine,int MaxMagazine)
     {
-       Magazine_Text.text=Magazine.ToString() + "/" + MaxMagazine.ToString();
+       _magazineText.text=Magazine.ToString() + "/" + MaxMagazine.ToString();
         //Magazine_Image = GameObject.Find("magazinebar").GetComponent<Image>();
         //Magazine_Image.fillAmount = (float)Magazine / (float)MaxMagazine;
     }
@@ -178,38 +177,38 @@ public class UIManager :UIEffect
 
     public void BossHpbar(int Hp,int MaxHp)
     {
-        if(Boss_Frame.gameObject.activeSelf==false)
+        if(_bossFrame.gameObject.activeSelf==false)
         {
             Debug.Log("BossHpbarActive");
-            Boss_Frame.gameObject.SetActive(true);
+            _bossFrame.gameObject.SetActive(true);
         }
-        Boss_Hpbar.fillAmount = (float)Hp / (float)MaxHp;
+        _bossHpBar.fillAmount = (float)Hp / (float)MaxHp;
         var life = ((float)Hp / (float)MaxHp) * 100;
-        percent.text = life.ToString("F0") + "%";
+        _percent.text = life.ToString("F0") + "%";
 
     }
     public void WarningImg(float duration)
     {
-        Warning_Image.gameObject.SetActive(true);
-        if(Warning_Image.gameObject.activeSelf)
+        _warningImage.gameObject.SetActive(true);
+        if(_warningImage.gameObject.activeSelf)
         {
-            Warning_Image.DOFade(0, duration).OnComplete(() =>
+            _warningImage.DOFade(0, duration).OnComplete(() =>
             {
-                Warning_Image.gameObject.SetActive(false);
-                Color c = Warning_Image.color;
+                _warningImage.gameObject.SetActive(false);
+                Color c = _warningImage.color;
                 c.a = 1;
-                Warning_Image.color = c;
+                _warningImage.color = c;
             });
         }
     }
     void Hpbar(int Hp,int MaxHp)                                                                          //プレイヤーのHPバー
     {
-       Animator animator= Lifebar.GetComponentInParent<Animator>();
-        Lifebar.fillAmount = (float)Hp / (float)MaxHp;
+       Animator animator= _lifeBar.GetComponentInParent<Animator>();
+        _lifeBar.fillAmount = (float)Hp / (float)MaxHp;
         var life = ((float)Hp / (float)MaxHp) * 100;
         if (displaylife > life) displaylife--;
         else if (displaylife <life) displaylife++;
-        Lifebar_Text.text = displaylife.ToString("")+"%";
+        _lifeBarText.text = displaylife.ToString("")+"%";
         if (life <= 70) animator.speed = 1.2f;
         else if(life<50) animator.speed = 1.5f;
         else if(life<30) animator.speed = 2f;
@@ -218,25 +217,25 @@ public class UIManager :UIEffect
    
     void Show_Reloading_text()
     {
-        Reloading_text.gameObject.SetActive(true);
-        Reloading_text.text = "Reloading...";
+        _reloadingText.gameObject.SetActive(true);
+        _reloadingText.text = "Reloading...";
         
     }
     public void Damagevalue( Transform obj,int damage,Color color)　　　　　　　　　　　　　　　　　　　　//ダメージ表記
     {
-        Text Damage_text = Damagevalueprefeb.GetComponent<Text>();
+        Text Damage_text = _damageValuePrefeb.GetComponent<Text>();
         Damage_text.text = damage.ToString();
         Damage_text.color = color;
         var center = 0.5f * new Vector3(Screen.width, Screen.height);
         Vector3 screenPos = Camera.main.WorldToScreenPoint(obj.position)-center;
 
         GameObject damageInstance = Instantiate(
-        Damagevalueprefeb,
+        _damageValuePrefeb,
         screenPos,
         Quaternion.identity
         );
        
-        damageInstance.transform.SetParent(GameCanvas.transform, false);
+        damageInstance.transform.SetParent(_gameCanvas.transform, false);
         DamageEffect(damageInstance);
         
     }
@@ -250,13 +249,13 @@ public class UIManager :UIEffect
         Vector3 screenPos = Camera.main.WorldToScreenPoint(obj.position) - center;
 
         GameObject CoinInstance = Instantiate(
-        Coinprefeb,
+        _coinPrefeb,
         screenPos,
         Quaternion.identity
         );
 
        //コイン生成した処理
-        CoinInstance.transform.SetParent(GameCanvas.transform, false);
+        CoinInstance.transform.SetParent(_gameCanvas.transform, false);
         AudioSource audioSource =CoinInstance.GetComponent<AudioSource>();
         audioSource.PlayOneShot(audioSource.clip);
         DamageEffect(CoinInstance);
@@ -272,11 +271,11 @@ public class UIManager :UIEffect
 
     public void SetCoin(int coin)　　　　　　　　　　　　　　　　　　　　//コインの数
     {
-        Coin_Text.text = coin.ToString("D2");
+        _coinText.text = coin.ToString("D2");
     }
     public void FadeControl(string nextscene)
     {
-        displayeffect(Fade,nextscene,0.5f);
+        displayeffect(_fade,nextscene,0.5f);
     }
     /// <summary>
     /// パネルの表示と非表示を制御するメソッド

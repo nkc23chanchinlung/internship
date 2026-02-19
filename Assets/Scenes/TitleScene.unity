@@ -3225,23 +3225,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 315ea48c061049b4d88d29d0f84d7cd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  titleframe: {fileID: 1350555289}
+  _titleFrame: {fileID: 1350555289}
   alpha: 100
-  loadingScript: {fileID: 1246491662}
-  audioManager: {fileID: 735532558}
-  BgmvolueText: {fileID: 640001683}
-  SEvolueText: {fileID: 1406239698}
-  BgmvolueSilder: {fileID: 1308657246}
-  SEvolueSilder: {fileID: 1181699010}
-  button:
+  _loadingScript: {fileID: 1246491662}
+  _buttonList:
   - {fileID: 1335224470}
   - {fileID: 1323969613}
   - {fileID: 60205046}
-  buttontext:
+  _buttonTextList:
   - {fileID: 871452609}
   - {fileID: 617916349}
   - {fileID: 1594578613}
-  buttonimg:
+  _buttonImageList:
   - {fileID: 1335224473}
   - {fileID: 1323969616}
   - {fileID: 60205049}
@@ -3250,14 +3245,19 @@ MonoBehaviour:
   - {fileID: 1081337107}
   - {fileID: 1666690011}
   cursor: {fileID: 2800000, guid: 7ccc278511017194c8027097cc80652a, type: 3}
-  seclip: {fileID: 8300000, guid: a32f15b61320c7943b601be0413d7195, type: 3}
-  bgmaudio: {fileID: 1666238272}
-  Mute: {fileID: 21300000, guid: c3ee59f9a1c139846953ff331472f11d, type: 3}
-  UnMute: {fileID: 21300000, guid: d6c1989e7b4b12647b81176921234e99, type: 3}
-  VolueImg:
+  _audioManager: {fileID: 735532558}
+  _bgmAudio: {fileID: 1666238272}
+  _titleBGM: {fileID: 8300000, guid: 5cf6a9ab075fcba489347f9f6fe24c8b, type: 3}
+  _seClip: {fileID: 8300000, guid: a32f15b61320c7943b601be0413d7195, type: 3}
+  _bgmVolueText: {fileID: 640001683}
+  _seVolueText: {fileID: 1406239698}
+  _bgmVolueSilder: {fileID: 1308657246}
+  _seVolueSilder: {fileID: 1181699010}
+  _mute: {fileID: 21300000, guid: c3ee59f9a1c139846953ff331472f11d, type: 3}
+  _unMute: {fileID: 21300000, guid: d6c1989e7b4b12647b81176921234e99, type: 3}
+  _volueImageList:
   - {fileID: 2139505392}
   - {fileID: 971770359}
-  TitleBGM: {fileID: 8300000, guid: 5cf6a9ab075fcba489347f9f6fe24c8b, type: 3}
 --- !u!4 &429031089
 Transform:
   m_ObjectHideFlags: 0
