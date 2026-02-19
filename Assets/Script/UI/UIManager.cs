@@ -34,6 +34,7 @@ public class UIManager :UIEffect
     [SerializeField]Image _lifeBar;
     [SerializeField]Image _bossFrame;
     [SerializeField]Image _warningImage;
+    [SerializeField] Image _reloadingImage;
 
     [Header("Text")]
     [SerializeField] Text _reloadingText;
@@ -68,11 +69,13 @@ public class UIManager :UIEffect
     private void Start()
     {
         StorePanel.SetActive(false);
-        blinkinge_effect(_reloadingText);
+        Blinkinge_Effect(_reloadingImage);
+        Blinkinge_Effect(_reloadingText);
+        _reloadingImage.transform.DORotate(Vector3.forward * 30, 1f).SetEase(Ease.Linear).SetLoops(-1, LoopType.Incremental);
         _mapPanel.transform.localScale = Vector3.zero;
         _menuPanel.transform.localScale = Vector3.zero;
         hideeffect(_fade, 1f);  　　　　　　　　　　　　　//Fade処理
-        _gameManager = GameManager.instance;
+        _gameManager = GameManager.Instance;
         _minMapUi.transform.DORotate(Vector3.forward * 30, 1f).SetEase(Ease.Linear).SetLoops(-1,LoopType.Incremental);
     }
     // Update is called once per frame
@@ -108,7 +111,7 @@ public class UIManager :UIEffect
         
        // PanelOpen = ZoomPanel(Lead, KeyCode.T, new Vector3(0.02f, 0.02f, 0.02f));                            //リードのパネルを開くか閉じるか
         _isPanelOpen = ZoomPanel(_mapPanel, KeyCode.Tab, new Vector3(0.5f, 0.7f, 0.7f));                         //マップのパネルを開くか閉じるか
-        _gameManager.gameStop= ZoomPanel(_menuPanel, KeyCode.Escape, new Vector3(0.5f, 1.3f, 0.5f));           //メニューのパネルを開くか閉じるか
+        _gameManager.GameStop= ZoomPanel(_menuPanel, KeyCode.Escape, new Vector3(0.5f, 1.3f, 0.5f));           //メニューのパネルを開くか閉じるか
        
         SetCoin(GameManager.Coin);                                                                 //コインの数を更新                                 
 
@@ -116,12 +119,12 @@ public class UIManager :UIEffect
         if (_menuPanel.activeSelf)
         {
             GameStop();
-            GameManager.instance.StopGame();
+            GameManager.Instance.StopGame();
             
         }
         else
         {
-            GameManager.instance.ContinueGame();　　　　//メニューを開いているときは時間を止める
+            GameManager.Instance.ContinueGame();　　　　//メニューを開いているときは時間を止める
         }
 
 
@@ -132,6 +135,7 @@ public class UIManager :UIEffect
         else
         {
             _reloadingText.gameObject.SetActive(false);
+            _reloadingImage.gameObject.SetActive(false);
         }
     }
    public void SearchMagazine()
@@ -208,6 +212,7 @@ public class UIManager :UIEffect
    
     void ShowReloadingText()
     {
+        _reloadingImage.gameObject.SetActive(true);
         _reloadingText.gameObject.SetActive(true);
         _reloadingText.text = "Reloading...";
     }
@@ -288,7 +293,7 @@ public class UIManager :UIEffect
     {
         if (GlobalVolume.profile.TryGet<ColorAdjustments>(out colorAdjustments))
         {
-            colorAdjustments.saturation.value=_gameManager.gameStop? -100:100;
+            colorAdjustments.saturation.value=_gameManager.GameStop? -100:100;
         }
     }
    

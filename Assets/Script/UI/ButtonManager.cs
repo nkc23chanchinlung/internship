@@ -16,13 +16,13 @@ public class ButtonManager : UIEffect
     public void Exit()
     {
         AccaptPanel.SetActive(true);
-        GameManager.instance.enterShop = 0;//キャラの出現場所をリセット
+        GameManager.Instance.enterShop = 0;//キャラの出現場所をリセット
         expansioneffect(AccaptPanel, new Vector3(0.3f, 0.3f, 0.3f));
         
     }
     public void Yes()                                     //Exitの確認YESボタン
     {
-        GameManager.instance.gameStop = false;
+        GameManager.Instance.GameStop = false;
         SceneManager.LoadScene("TitleScene", LoadSceneMode.Single);
     }
     public void No()　　　　　　　　　　　　　　　　　　　//Exitの確認NOボタン

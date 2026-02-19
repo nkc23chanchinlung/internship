@@ -21,35 +21,35 @@ public class PlayerController : MonoBehaviour
     [SerializeField]private float _acceleration;      //加速度
     public int MaxHp { get; private set; } = 100; //最大のHP
     public int Hp { get; set; } = 100;//プレイヤーのHP
-    [SerializeField] float rayy, raydis;  //Rayの長さ
-    Vector3 moveDirection;
-    Vector3 lastMoveDirection;  
-    Vector3 roteuler;
-    [SerializeField] float MouseSpeedX;
-    [SerializeField] float MouseSpeedY;
-    [SerializeField] GameObject overridesources;
-    [SerializeField] GameObject Pin;
-    [SerializeField] AudioSource Footaudio;
+    [SerializeField] float _rayY, _rayDis;  //Rayの長さ
+    Vector3 _moveDirection;
+    Vector3 _lastMoveDirection;  
+    Vector3 _roteuler;
+    [SerializeField] float _mouseSpeedX;
+    [SerializeField] float _mouseSpeedY;
+    [SerializeField] GameObject _overrideSources;
+    [SerializeField] GameObject _pin;
+    [SerializeField] AudioSource _footAudio;
     [Header("PInの高さ")]
-    [SerializeField]float pinHeight = 50f; //Pinの高さ
-    [SerializeField] float animeionspeed;
-    [SerializeField]UIManager uimanager;
-    [SerializeField] GameObject hitEffect;
+    [SerializeField]float _pinHeight = 50f; //Pinの高さ
+    [SerializeField] float _animeionSpeed;
+    [SerializeField]UIManager _uiManager;
+    [SerializeField] GameObject _hitEffect;
 
-    Plane plane = new Plane();
-    float distance = 0;
-    bool IsShooting = false;
-    [SerializeField] EquipSystem equipSystem;
-    Rigidbody rigidbody;
-    float vec;
-    float forwardDot;
-    float RightDot;
-    float maxvec;
-    public float friction = 0.5f;
-    bool invincible;
-    bool Gethit;
+    Plane _plane = new Plane();
+    float _distance = 0;
+    bool _isShooting = false;
+    [SerializeField] EquipSystem _equipSystem;
+    Rigidbody _rigidBody;
+    float _vec;
+    float _forwardDot;
+    float _rightDot;
+    float _maxVec;
+    public float Friction = 0.5f;
+    bool _invincible;
+    bool _getHit;
 
-    [SerializeField] private float footseInterval=0.5f;   // 何秒ごとに音出す
+    [SerializeField] private float _footseInterval=0.5f;   // 何秒ごとに音出す
 
     //[SerializeField] Material[] playermat;
     //[SerializeField] Renderer playerrenderer;
@@ -60,20 +60,20 @@ public class PlayerController : MonoBehaviour
     {
         if (Time.time >= nextFootTime)
         {
-            Footaudio.PlayOneShot(Footaudio.clip);
-            nextFootTime = Time.time + footseInterval;
+            _footAudio.PlayOneShot(_footAudio.clip);
+            nextFootTime = Time.time + _footseInterval;
         }
     }
 
     private void Awake()
     {
-     _playerAnimetor = new ObjAnimetor(animeionspeed, gameObject);
-     rigidbody = GetComponent<Rigidbody>();
+     _playerAnimetor = new ObjAnimetor(_animeionSpeed, gameObject);
+     _rigidBody = GetComponent<Rigidbody>();
 
     }
     private void FixedUpdate()
     {
-        if (GameManager.instance.gameStop) return;
+        if (GameManager.Instance.GameStop) return;
         if (_isGround && !_isRoll)
             movement();
         Cameramethod();
@@ -84,12 +84,12 @@ public class PlayerController : MonoBehaviour
     {
 
 
-        if (GameManager.instance.gameStop)
+        if (GameManager.Instance.GameStop)
         {
             GameStop();
-            rigidbody.linearVelocity = Vector3.zero;
+            _rigidBody.linearVelocity = Vector3.zero;
 
-            rigidbody.angularVelocity = Vector3.zero;
+            _rigidBody.angularVelocity = Vector3.zero;
             Debug.Log("ゲーム停止中");
             return;
         }
@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour
        
 
 
-        if (GameManager.instance.gameStop) return; //ゲームが停止している場合は処理を中断
+        if (GameManager.Instance.GameStop) return; //ゲームが停止している場合は処理を中断
      GameOver();
 
 
@@ -112,25 +112,25 @@ public class PlayerController : MonoBehaviour
      
         
 
-        _playerAnimetor.Animetor(_isWalkBack,RightDot, forwardDot, _isGround,IsShooting,_isRoll,false,equipSystem.IsReloading,Gethit);
+        _playerAnimetor.Animetor(_isWalkBack,_rightDot, _forwardDot, _isGround,_isShooting,_isRoll,false,_equipSystem.IsReloading,_getHit);
     }
     void cheakdirecion()
     {
-        Vector3 velocity = rigidbody.linearVelocity;
-        forwardDot = Vector3.Dot(transform.forward, velocity.normalized);
+        Vector3 velocity = _rigidBody.linearVelocity;
+        _forwardDot = Vector3.Dot(transform.forward, velocity.normalized);
         
-        RightDot= Vector3.Dot(transform.right, velocity.normalized);
-        if (rigidbody.linearVelocity.magnitude < 0.1f)
+        _rightDot= Vector3.Dot(transform.right, velocity.normalized);
+        if (_rigidBody.linearVelocity.magnitude < 0.1f)
         {
 
-            forwardDot=0f;
-            RightDot =0f;
+            _forwardDot=0f;
+            _rightDot =0f;
 
 
         }
 
         //誤アニメーション防止
-        if (forwardDot < -0.1f)
+        if (_forwardDot < -0.1f)
         {
             _isWalkBack = true; //後ろに歩いている場合
         }
@@ -148,7 +148,7 @@ public class PlayerController : MonoBehaviour
         
         
 
-        IsShooting = Input.GetMouseButton(0) && !IsCreate ? true : false;
+        _isShooting = Input.GetMouseButton(0) && !IsCreate ? true : false;
         float movex = -Input.GetAxis("Horizontal");
         float movez = -Input.GetAxis("Vertical");
 
@@ -161,42 +161,42 @@ public class PlayerController : MonoBehaviour
         // 入力方向を取得
         Vector3 moveDirection = new Vector3(movex, 0, movez).normalized;
         _acceleration = Mathf.Clamp(_acceleration, 0, MAX_SPEED);
-        if(vec<maxvec)//移動速度制限
-        rigidbody.AddForce(moveDirection * _acceleration, ForceMode.VelocityChange);
+        if(_vec<_maxVec)//移動速度制限
+        _rigidBody.AddForce(moveDirection * _acceleration, ForceMode.VelocityChange);
 
         //後ろ移動したら速度制限を下げる
-        maxvec = _isWalkBack==true? 2f:5f;
+        _maxVec = _isWalkBack==true? 2f:5f;
 
 
        
 
 
-        vec = rigidbody.linearVelocity.magnitude;
-        Vector3 vetorvec = rigidbody.linearVelocity;
+        _vec = _rigidBody.linearVelocity.magnitude;
+        Vector3 vetorvec = _rigidBody.linearVelocity;
 
     }
     void PlayerMapPin()
     {
         Vector3 Pinpos;
-        Pinpos=Pin.transform.position;
-        Pinpos.y = pinHeight; //Pinの高さを設定
+        Pinpos=_pin.transform.position;
+        Pinpos.y = _pinHeight; //Pinの高さを設定
         Pinpos.x = transform.position.x; //PinのX座標をプレイヤーのX座標に合わせる
         Pinpos.z = transform.position.z; //PinのZ座標をプレイヤーのZ座標に合わせる
-        Pin.transform.position = Pinpos; //Pinの位置を更新
+        _pin.transform.position = Pinpos; //Pinの位置を更新
        
     }
     void Jump()
     {
-        if (moveDirection.magnitude > 0)
+        if (_moveDirection.magnitude > 0)
         {
-          lastMoveDirection =transform.forward* moveDirection.z;
-          lastMoveDirection += transform.right * moveDirection.x;
+          _lastMoveDirection =transform.forward* _moveDirection.z;
+          _lastMoveDirection += transform.right * _moveDirection.x;
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && _isGround)
         {
           GetComponent<Rigidbody>().AddForce(Vector3.up * _JUMPFORCE, ForceMode.Impulse);
-          GetComponent<Rigidbody>().AddForce(lastMoveDirection * _acceleration, ForceMode.Impulse);
+          GetComponent<Rigidbody>().AddForce(_lastMoveDirection * _acceleration, ForceMode.Impulse);
           _isGround = false;
         }
         if(Input.GetKeyDown(KeyCode.LeftShift) && _isGround&&!_isRoll)
@@ -212,9 +212,9 @@ public class PlayerController : MonoBehaviour
     {
         RaycastHit hit;
         if (Physics.Raycast(transform.position +
-              new Vector3(0, rayy, 0), 
+              new Vector3(0, _rayY, 0), 
             Vector3.down, 
-            out hit, raydis))
+            out hit, _rayDis))
         {
           _isGround = true;
         }
@@ -223,8 +223,8 @@ public class PlayerController : MonoBehaviour
           _isGround = false;
         }
         Debug.DrawRay(transform.position +
-            new Vector3(0, rayy, 0), 
-            Vector3.down * raydis,
+            new Vector3(0, _rayY, 0), 
+            Vector3.down * _rayDis,
             Color.red);
 
     }
@@ -234,19 +234,19 @@ public class PlayerController : MonoBehaviour
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         // プレイヤーの高さにPlaneを更新して、カメラの情報を元に地面判定して距離を取得
-        plane.SetNormalAndPosition(Vector3.up, transform.localPosition);
-        if (plane.Raycast(ray, out distance))
+        _plane.SetNormalAndPosition(Vector3.up, transform.localPosition);
+        if (_plane.Raycast(ray, out _distance))
         {
            
             // 距離を元に交点を算出して、交点の方を向く
-            var lookPoint = ray.GetPoint(distance);
+            var lookPoint = ray.GetPoint(_distance);
             
-            var absrot = overridesources.transform.rotation.y - transform.rotation.y;
+            var absrot = _overrideSources.transform.rotation.y - transform.rotation.y;
 
-            if (IsShooting) overridesources.transform.rotation = transform.rotation * Quaternion.Euler(0, 45, 0);  //射撃中マウスの向きに合わせる
+            if (_isShooting) _overrideSources.transform.rotation = transform.rotation * Quaternion.Euler(0, 45, 0);  //射撃中マウスの向きに合わせる
 
-            else if (!IsShooting)
-                overridesources.transform.LookAt(lookPoint);
+            else if (!_isShooting)
+                _overrideSources.transform.LookAt(lookPoint);
 
             //  _=WaitForAsync(0.1f,()=>transform.LookAt(lookPoint)); // 0.1秒後にプレイヤーの向きを更新する
 
@@ -265,15 +265,15 @@ public class PlayerController : MonoBehaviour
     //プレイヤーがダメージを受ける処理
     public void GetDamage(int Dmg)
     {
-        if (invincible) return; // 無敵状態ならダメージを受けない
+        if (_invincible) return; // 無敵状態ならダメージを受けない
         Hp -= Dmg;
-        uimanager.DamageValue(transform, Dmg,Color.red);
+        _uiManager.DamageValue(transform, Dmg,Color.red);
 
-        Gethit = true;
+        _getHit = true;
 
-        if (Gethit)
+        if (_getHit)
         {
-            _ = WaitForAsync(0.2f, () => Gethit = false);
+            _ = WaitForAsync(0.2f, () => _getHit = false);
         }
 
     }
@@ -287,11 +287,11 @@ public class PlayerController : MonoBehaviour
     IEnumerator Roll()
     {
         _isRoll = true;
-        invincible = true;
-        GetComponent<Rigidbody>().AddForce(lastMoveDirection, ForceMode.Impulse);
+        _invincible = true;
+        GetComponent<Rigidbody>().AddForce(_lastMoveDirection, ForceMode.Impulse);
         yield return new WaitForSeconds(0.5f);
         _isRoll = false;
-        invincible = false;
+        _invincible = false;
     }
     
     private void OnTriggerEnter(Collider other)
@@ -300,7 +300,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("EnemyAtk"))
         {
 
-            Instantiate(hitEffect, other.transform.position, other.transform.rotation * Quaternion.Euler(90, 0, 0));
+            Instantiate(_hitEffect, other.transform.position, other.transform.rotation * Quaternion.Euler(90, 0, 0));
 
 
             //playerrenderer.material.SetColor("BaseMap", Color.red);

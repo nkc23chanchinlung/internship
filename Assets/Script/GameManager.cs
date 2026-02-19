@@ -8,14 +8,14 @@ using UnityEngine.UI;
 /// </summary>
 public class GameManager : MonoBehaviour
 {
-    static public GameManager instance { get; private set; }
+    static public GameManager Instance { get; private set; }
 
     public static event Action OnGameStart; //ゲーム開始時のイベント
     public static event Action OnGameStop;
     public static event Action OnContinue;
-    public bool gameStop { get; set; } = false;  //ゲームを停止するかどうか
-    static public bool gameManagerExist = false;//GameManagerが存在フラグ
-    public bool isOpenMoviePlaying { get; set; } //ムービー再生中かどうか
+    public bool GameStop { get; set; } = false;  //ゲームを停止するかどうか
+    static public bool GameManagerExist = false;//GameManagerが存在フラグ
+    public bool IsOpenMoviePlaying { get; set; } //ムービー再生中かどうか
 
     [SerializeField]AudioManager audioManager;
     [SerializeField] AudioClip gameBGM;
@@ -23,19 +23,19 @@ public class GameManager : MonoBehaviour
     
 
 
-    bool IsStarted;
+    bool _isStarted;
     public int Stage { get; set; }
-    int Enemyvalue;
+    int _enemyValue;
     
-    bool clear;
-    int savepoint;
+    bool _clear;
+    int _savePoint;
 
     [SerializeField] Texture2D cursorTexture;
 
     public void StartGame()
     {
-        gameStop = false;
-        isOpenMoviePlaying = false;
+        GameStop = false;
+        IsOpenMoviePlaying = false;
         OnGameStart?.Invoke();
         Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
        // audioManager.PlayBGM("GameScene");
@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
     }
     public void StopGame()
     {
-     gameStop = true;
+     GameStop = true;
      OnGameStop?.Invoke();
      Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
      
@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
     }
     public void ContinueGame()
     {
-        gameStop = false;
+        GameStop = false;
         OnContinue?.Invoke();
         Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
         
@@ -71,12 +71,12 @@ public class GameManager : MonoBehaviour
     //GameManagerの重複を防ぐ
     void CheakGameManagerExist()
     {
-       if(instance == null)
+       if(Instance == null)
         {
-            instance = this;
+            Instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
-        else if (instance != this)
+        else if (Instance != this)
         {
             Destroy(this.gameObject);
         }

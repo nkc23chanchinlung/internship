@@ -27,9 +27,17 @@ public class UIEffect : MonoBehaviour
 
     }
 
-    public void blinkinge_effect(Text text)　　　　//点滅エフェクト
+    public  void Blinkinge_Effect(Image image)　　　　//点滅エフェクト
+    {
+        image.DOFade(0, 0.5f).SetLoops(-1, LoopType.Yoyo);
+    }
+    public void Blinkinge_Effect(Text text)      　//点滅エフェクトオーバーロード
     {
         text.DOFade(0, 0.5f).SetLoops(-1, LoopType.Yoyo);
+    }
+    public void RotateEffect()
+    {
+
     }
 
     /// <summary>

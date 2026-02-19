@@ -55,7 +55,7 @@ public class TitleManager : MonoBehaviour
         _seAudio = GetComponent<AudioSource>();
         titleFrameObj = _titleFrame.gameObject;
         titleFrameObj.SetActive(false);
-        _gameManager = GameManager.instance;
+        _gameManager = GameManager.Instance;
         _audioManager.PlayBGM("TitleScene");
         _bgmAudio = GameObject.FindGameObjectWithTag("BGMPlayer").GetComponent<AudioSource>();
       
@@ -65,7 +65,7 @@ public class TitleManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        TitleMos();
+        ButtonCollision();
         SoundControl();
 
         _titleFrame.color = new Color(0, 0, 0, alpha / 100);
@@ -129,9 +129,9 @@ public class TitleManager : MonoBehaviour
     }
 
     /// <summary>
-    /// マウスで操作するときの関数
+    /// ボタンの触り判定メソッド
     /// </summary>
-    public void TitleMos()
+    public void ButtonCollision()
     {
         Vector3 mousepos = Input.mousePosition;
         selectionimg[_butNum].SetActive(true);

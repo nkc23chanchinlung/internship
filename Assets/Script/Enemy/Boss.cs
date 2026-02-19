@@ -83,7 +83,7 @@ public class Boss : Enemy
 
     private void FixedUpdate()
     {
-        if (GameManager.instance.gameStop) return;
+        if (GameManager.Instance.GameStop) return;
 
         if (!Isbattle) return;
 
@@ -93,7 +93,7 @@ public class Boss : Enemy
 
     private void Update()
     {
-        if(GameManager.instance.gameStop) return;
+        if(GameManager.Instance.GameStop) return;
 
         Debug.Log("wave2clear:"+wave2clear);
 

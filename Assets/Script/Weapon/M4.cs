@@ -47,7 +47,7 @@ public class M4 : Gun
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.instance.gameStop) return;
+        if (GameManager.Instance.GameStop) return;
 
         if (playerController != null)
         {

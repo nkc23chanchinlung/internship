@@ -16,7 +16,7 @@ public class MovieController : MonoBehaviour
     void Start()
     {
         
-        gameManager = GameManager.instance;
+        gameManager = GameManager.Instance;
         OpeningMovie();
         
 
@@ -38,7 +38,7 @@ public class MovieController : MonoBehaviour
     {
         director.Play();
         director.stopped += OnTimelineStopped;
-        gameManager.isOpenMoviePlaying = true;
+        gameManager.IsOpenMoviePlaying = true;
 
 
     }
@@ -58,7 +58,7 @@ public class MovieController : MonoBehaviour
             {
                 player.transform.position = shopExitpos[1].transform.position;
             }
-                gameManager.isOpenMoviePlaying = false;
+                gameManager.IsOpenMoviePlaying = false;
             MoveUIController();
             gameManager.StartGame();
             director.gameObject.SetActive(false);

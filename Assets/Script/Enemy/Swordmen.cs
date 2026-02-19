@@ -79,7 +79,7 @@ public class Swordmen : Enemy
     void Update()
     {
         if(inited==false) return;
-        if (GameManager.instance.gameStop)
+        if (GameManager.Instance.GameStop)
         {
             agent.isStopped = true;
             GameStop();
@@ -96,7 +96,7 @@ public class Swordmen : Enemy
 
         if (isDead) return; //€–S‚µ‚Ä‚¢‚éê‡‚Íˆ—‚ğ’†’f
 
-        if (GameManager.instance.gameStop || GameManager.instance.isOpenMoviePlaying) return; //ƒQ[ƒ€‚ª’â~‚µ‚Ä‚¢‚éê‡‚Íˆ—‚ğ’†’f
+        if (GameManager.Instance.GameStop || GameManager.Instance.IsOpenMoviePlaying) return; //ƒQ[ƒ€‚ª’â~‚µ‚Ä‚¢‚éê‡‚Íˆ—‚ğ’†’f
         if (Hp <= 0)
         {
             if(bossRoomManager != null)
