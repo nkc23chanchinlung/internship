@@ -32,7 +32,7 @@ public class BottonManager : MonoBehaviour
     {
         if (aDirector == director)
         {
-            titleManager.isStart = true;
+            titleManager._IsStart = true;
         }
     }
     public void GameExit()
