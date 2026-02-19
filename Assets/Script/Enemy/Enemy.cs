@@ -202,7 +202,7 @@ public class Enemy : EnemyMovement
             Invoke("hidelifebar", hidetime);
         }
             angervalue += 60;
-        uimanager.Damagevalue(transform, damage,Color.white);
+        uimanager.DamageValue(transform, damage,Color.white);
         Hp -= damage;
 
         

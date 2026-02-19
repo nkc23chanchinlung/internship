@@ -106,7 +106,7 @@ public class Boss : Enemy
         }
         if (wave2clear&&!returned) StartCoroutine(Wave2Clear());
 
-        uimanager.BossHpbar(Hp, MaxHp);
+        uimanager.BossHpBar(Hp, MaxHp);
 
         if (Hp <= 0) Die();
         if (agent.enabled && agent.isOnNavMesh)

@@ -85,7 +85,7 @@ public class UIManager :UIEffect
         if (Input.GetKeyDown(KeyCode.B)&&!_isPanelOpen)
         {
 
-            Panel_Open(StorePanel);
+            PanelOpen(StorePanel);
 
             if (WeaponPanel.activeSelf)
             {
@@ -104,7 +104,7 @@ public class UIManager :UIEffect
         }
         else _isPanelOpen = false;
 
-        Hpbar(_playerController.Hp,_playerController.MaxHp);
+        HpBar(_playerController.Hp,_playerController.MaxHp);
         
        // PanelOpen = ZoomPanel(Lead, KeyCode.T, new Vector3(0.02f, 0.02f, 0.02f));                            //リードのパネルを開くか閉じるか
         _isPanelOpen = ZoomPanel(_mapPanel, KeyCode.Tab, new Vector3(0.5f, 0.7f, 0.7f));                         //マップのパネルを開くか閉じるか
@@ -127,7 +127,7 @@ public class UIManager :UIEffect
 
         if (_equipSystem.IsReloading)
         {
-            Show_Reloading_text();
+            ShowReloadingText();
         }
         else
         {
@@ -143,7 +143,7 @@ public class UIManager :UIEffect
     /// パネルを開くと消す
     /// </summary>
     /// <param name="panel">パネル</param>
-    public void Panel_Open(GameObject panel)
+    public void PanelOpen(GameObject panel)
     {
         panel.SetActive(!panel.activeSelf);
     }
@@ -165,7 +165,7 @@ public class UIManager :UIEffect
         StorePanel.SetActive(true);
     }
 
-    public void BossHpbar(int Hp,int MaxHp)
+    public void BossHpBar(int Hp,int MaxHp)
     {
         if(_bossFrame.gameObject.activeSelf==false)
         {
@@ -192,7 +192,7 @@ public class UIManager :UIEffect
             });
         }
     }
-    void Hpbar(int Hp,int MaxHp)                                                                          //プレイヤーのHPバー
+    void HpBar(int Hp,int MaxHp)                                                                          //プレイヤーのHPバー
     {
        Animator animator= _lifeBar.GetComponentInParent<Animator>();
         _lifeBar.fillAmount = (float)Hp / (float)MaxHp;
@@ -206,12 +206,12 @@ public class UIManager :UIEffect
         //else animator.speed = 1f;
     }
    
-    void Show_Reloading_text()
+    void ShowReloadingText()
     {
         _reloadingText.gameObject.SetActive(true);
         _reloadingText.text = "Reloading...";
     }
-    public void Damagevalue( Transform obj,int damage,Color color)　　　　　　　　　　　　　　　　　　　　//ダメージ表記
+    public void DamageValue( Transform obj,int damage,Color color)　　　　　　　　　　　　　　　　　　　　//ダメージ表記
     {
         Text Damage_text = _damageValuePrefeb.GetComponent<Text>();
         Damage_text.text = damage.ToString();

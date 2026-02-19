@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections;
 using UnityEngine;
@@ -11,15 +10,15 @@ using Cysharp.Threading.Tasks.Triggers;
 /// </summary>
 public class PlayerController : MonoBehaviour
 {
-    ObjAnimetor playerAnimetor;
-    float movex, movez;
+    ObjAnimetor _playerAnimetor;
+    float moveX, moveZ;
 
     public bool IsCreate { get; set; }
 
-    private bool IsRun, IsJumping, InGround, IsWalking,IsWalkBack,IsWalkRight,IsRoll;//状態構造体
+    private bool _isRun, _isJumping, _isGround, _isWalking,_isWalkBack,_isWalkRight,_isRoll;//アニメション用フラグ
     [Header("Player")]
-    [SerializeField] private int MaxSpeed, JumpForce;
-    [SerializeField]private float acceleration;      //加速度
+    [SerializeField] private int MAX_SPEED, _JUMPFORCE;
+    [SerializeField]private float _acceleration;      //加速度
     public int MaxHp { get; private set; } = 100; //最大のHP
     public int Hp { get; set; } = 100;//プレイヤーのHP
     [SerializeField] float rayy, raydis;  //Rayの長さ
@@ -68,14 +67,14 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-     playerAnimetor = new ObjAnimetor(animeionspeed, gameObject);
+     _playerAnimetor = new ObjAnimetor(animeionspeed, gameObject);
      rigidbody = GetComponent<Rigidbody>();
 
     }
     private void FixedUpdate()
     {
         if (GameManager.instance.gameStop) return;
-        if (InGround && !IsRoll)
+        if (_isGround && !_isRoll)
             movement();
         Cameramethod();
     }
@@ -113,7 +112,7 @@ public class PlayerController : MonoBehaviour
      
         
 
-        playerAnimetor.Animetor(IsWalkBack,RightDot, forwardDot, InGround,IsShooting,IsRoll,false,equipSystem.IsReloading,Gethit);
+        _playerAnimetor.Animetor(_isWalkBack,RightDot, forwardDot, _isGround,IsShooting,_isRoll,false,equipSystem.IsReloading,Gethit);
     }
     void cheakdirecion()
     {
@@ -133,11 +132,11 @@ public class PlayerController : MonoBehaviour
         //誤アニメーション防止
         if (forwardDot < -0.1f)
         {
-            IsWalkBack = true; //後ろに歩いている場合
+            _isWalkBack = true; //後ろに歩いている場合
         }
         else
         {
-            IsWalkBack = false; //前に歩いている場合
+            _isWalkBack = false; //前に歩いている場合
         }
         
     }
@@ -161,12 +160,12 @@ public class PlayerController : MonoBehaviour
 
         // 入力方向を取得
         Vector3 moveDirection = new Vector3(movex, 0, movez).normalized;
-        acceleration = Mathf.Clamp(acceleration, 0, MaxSpeed);
+        _acceleration = Mathf.Clamp(_acceleration, 0, MAX_SPEED);
         if(vec<maxvec)//移動速度制限
-        rigidbody.AddForce(moveDirection * acceleration, ForceMode.VelocityChange);
+        rigidbody.AddForce(moveDirection * _acceleration, ForceMode.VelocityChange);
 
         //後ろ移動したら速度制限を下げる
-        maxvec = IsWalkBack==true? 2f:5f;
+        maxvec = _isWalkBack==true? 2f:5f;
 
 
        
@@ -194,13 +193,13 @@ public class PlayerController : MonoBehaviour
           lastMoveDirection += transform.right * moveDirection.x;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && InGround)
+        if (Input.GetKeyDown(KeyCode.Space) && _isGround)
         {
-          GetComponent<Rigidbody>().AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
-          GetComponent<Rigidbody>().AddForce(lastMoveDirection * acceleration, ForceMode.Impulse);
-          InGround = false;
+          GetComponent<Rigidbody>().AddForce(Vector3.up * _JUMPFORCE, ForceMode.Impulse);
+          GetComponent<Rigidbody>().AddForce(lastMoveDirection * _acceleration, ForceMode.Impulse);
+          _isGround = false;
         }
-        if(Input.GetKeyDown(KeyCode.LeftShift) && InGround&&!IsRoll)
+        if(Input.GetKeyDown(KeyCode.LeftShift) && _isGround&&!_isRoll)
         {
             
             StartCoroutine(Roll());
@@ -217,11 +216,11 @@ public class PlayerController : MonoBehaviour
             Vector3.down, 
             out hit, raydis))
         {
-          InGround = true;
+          _isGround = true;
         }
         else
         {
-          InGround = false;
+          _isGround = false;
         }
         Debug.DrawRay(transform.position +
             new Vector3(0, rayy, 0), 
@@ -268,7 +267,7 @@ public class PlayerController : MonoBehaviour
     {
         if (invincible) return; // 無敵状態ならダメージを受けない
         Hp -= Dmg;
-        uimanager.Damagevalue(transform, Dmg,Color.red);
+        uimanager.DamageValue(transform, Dmg,Color.red);
 
         Gethit = true;
 
@@ -287,11 +286,11 @@ public class PlayerController : MonoBehaviour
     }
     IEnumerator Roll()
     {
-        IsRoll = true;
+        _isRoll = true;
         invincible = true;
         GetComponent<Rigidbody>().AddForce(lastMoveDirection, ForceMode.Impulse);
         yield return new WaitForSeconds(0.5f);
-        IsRoll = false;
+        _isRoll = false;
         invincible = false;
     }
     
