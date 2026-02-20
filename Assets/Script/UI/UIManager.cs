@@ -131,11 +131,13 @@ public class UIManager :UIEffect
         if (_equipSystem.IsReloading)
         {
             ShowReloadingText();
+            _magazineText.gameObject.SetActive(false);
         }
         else
         {
             _reloadingText.gameObject.SetActive(false);
             _reloadingImage.gameObject.SetActive(false);
+            _magazineText.gameObject.SetActive(true);
         }
     }
    public void SearchMagazine()

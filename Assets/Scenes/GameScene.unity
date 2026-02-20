@@ -14704,7 +14704,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 20.411, y: -240}
+  m_AnchoredPosition: {x: -77.7, y: -240}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &650170324
@@ -22673,11 +22673,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4673736585398150859, guid: 31bc31c0a9fc7f0489ea5d29d58e8ebc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 85
+      value: 93.63
       objectReference: {fileID: 0}
     - target: {fileID: 4673736585398150859, guid: 31bc31c0a9fc7f0489ea5d29d58e8ebc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -434
+      value: 74
       objectReference: {fileID: 0}
     - target: {fileID: 4673736585398150859, guid: 31bc31c0a9fc7f0489ea5d29d58e8ebc, type: 3}
       propertyPath: m_LocalRotation.w
@@ -23254,6 +23254,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6718912976635191824, guid: 98c5ce036f68d8941922e7541fb70887, type: 3}
+      propertyPath: SubModule.subEmitters.Array.data[0].emitter
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6718912976635191824, guid: 98c5ce036f68d8941922e7541fb70887, type: 3}
       propertyPath: ColorModule.gradient.maxGradient.m_ColorSpace
       value: 0
       objectReference: {fileID: 0}
@@ -23494,7 +23498,8 @@ PrefabInstance:
       value: VFX_Fire_01_Medium
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1932411756463893127, guid: 98c5ce036f68d8941922e7541fb70887, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98c5ce036f68d8941922e7541fb70887, type: 3}
@@ -26977,7 +26982,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 10, y: 111}
+  m_AnchoredPosition: {x: 56.8, y: 111}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1103764072
@@ -37697,7 +37702,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 69.1, y: 0}
+  m_AnchoredPosition: {x: 86.1, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1925186666
@@ -37733,7 +37738,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u5165\u308B"
+  m_Text: "xxxxx\u5165\u308B"
 --- !u!222 &1925186667
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -38398,7 +38403,7 @@ Light:
   serializedVersion: 12
   m_Type: 0
   m_Color: {r: 1, g: 0.9027638, b: 0, a: 1}
-  m_Intensity: 5000
+  m_Intensity: 1000
   m_Range: 27
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -40044,7 +40049,7 @@ Light:
   serializedVersion: 12
   m_Type: 0
   m_Color: {r: 1, g: 0.9027638, b: 0, a: 1}
-  m_Intensity: 5000
+  m_Intensity: 2000
   m_Range: 27
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208

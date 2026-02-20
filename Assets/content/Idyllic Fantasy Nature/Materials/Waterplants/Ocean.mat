@@ -124,7 +124,7 @@ Material:
     - _Cull: 2
     - _Cutoff: 0.5
     - _Depth: 2.97
-    - _Depth_Distance: 0.25
+    - _Depth_Distance: 0.154
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _Displacement: 1.2
@@ -153,7 +153,7 @@ Material:
     - _Metallicness: 0.1
     - _Noise: 10
     - _NormalStrength: 1.56
-    - _Normal_Strength: 0.2
+    - _Normal_Strength: 1
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
@@ -162,7 +162,7 @@ Material:
     - _RefractionAmount: 0.05
     - _RefractionSpeed: 2
     - _RefractionStrength: 0.13
-    - _Refraction_Strength: 0.177
+    - _Refraction_Strength: 1
     - _RimRize: 1
     - _RimTiling: -0.21
     - _RippleDensity: 1
@@ -173,7 +173,7 @@ Material:
     - _Ripple_Distance: 5.01
     - _Ripple_Fade: 5.2
     - _Ripple_Slimness: 9.7
-    - _Smoothness: 0.7
+    - _Smoothness: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -206,7 +206,7 @@ Material:
     - _RippleScale: {r: 50, g: 200, b: 0, a: 0}
     - _Ripple_Color: {r: 1, g: 1, b: 1, a: 1}
     - _Ripple_Scale: {r: 1000, g: 1000, b: 0, a: 0}
-    - _Shallow_Color: {r: 0.30980393, g: 0.6745098, b: 0.8117647, a: 0.6862745}
+    - _Shallow_Color: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     - _SurfaceColor: {r: 0.47405657, g: 0.6287414, b: 0.6320754, a: 0.70980394}
     - _Surface_Color: {r: 0.3812745, g: 0.61567825, b: 0.6792453, a: 0.5254902}
