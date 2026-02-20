@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public bool GameStop { get; set; } = false;  //ゲームを停止するかどうか
     static public bool GameManagerExist = false;//GameManagerが存在フラグ
     public bool IsOpenMoviePlaying { get; set; } //ムービー再生中かどうか
+    public bool IsGameClear { get; set; }
 
     [SerializeField]AudioManager audioManager;
     [SerializeField] AudioClip gameBGM;

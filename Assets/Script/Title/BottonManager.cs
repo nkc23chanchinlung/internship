@@ -1,4 +1,5 @@
-using DG.Tweening.Core.Easing;
+using DG.Tweening;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
@@ -12,9 +13,35 @@ public class BottonManager : MonoBehaviour
     [SerializeField] PlayableDirector director;
     [SerializeField] AudioSource _audioSource;
     [SerializeField] AudioClip _SelectSe;
+    [SerializeField] Transform TitlePanel;
+    [SerializeField] GameObject _titleImage;
+   
+
+    private void Awake()
+    {
+
+            StartCoroutine(TitleImg_EF());
+          
+        
+    }
+    IEnumerator TitleImg_EF()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            GameObject titleimg = Instantiate(_titleImage, TitlePanel);
+            titleimg.transform.position = new Vector3(500, 0, 0); // ŠJŽnˆÊ’u‚ðŒÅ’è
+
+            titleimg.transform.DOMoveY(1300, 100)
+                .SetSpeedBased()
+                .SetEase(Ease.Linear)
+                .SetLoops(-1, LoopType.Restart);
+
+            yield return new WaitForSeconds(3f); // 1•bŠÔŠu‚ÅŽŸ‚Ì‰æ‘œ‚ð¶¬
+
+        }
+    }
 
 
-    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void GameStart()
     {
