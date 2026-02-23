@@ -26,15 +26,17 @@ public class BottonManager : MonoBehaviour
     }
     IEnumerator TitleImg_EF()
     {
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 5; i++)
         {
             GameObject titleimg = Instantiate(_titleImage, TitlePanel);
-            titleimg.transform.position = new Vector3(500, 0, 0); // 開始位置を固定
+            titleimg.transform.position = new Vector3(500, -200, 0); // 開始位置を固定
 
             titleimg.transform.DOMoveY(1300, 100)
                 .SetSpeedBased()
                 .SetEase(Ease.Linear)
                 .SetLoops(-1, LoopType.Restart);
+
+           
 
             yield return new WaitForSeconds(3f); // 1秒間隔で次の画像を生成
 

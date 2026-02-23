@@ -1,4 +1,4 @@
-Shader "Custom/Toon"
+Shader "Custom/Toon1"
 {
    Properties
     {
@@ -89,10 +89,10 @@ Shader "Custom/Toon"
                 o.normalWS = normal.normalWS;
                 return o;
             }
-            
 
             float4 _Color;
             float4 _MainTex;
+            //TEXTURE2D(_MainTex);
             float4 frag (v2f i) : SV_Target
             {                
                 Light lt = GetMainLight();//光を取得
@@ -110,7 +110,10 @@ Shader "Custom/Toon"
                 {
                     strength = 1;
                 }
+               
+
                 float4 lightColor = float4(lt.color, 1);//光の色
+                //half4 color = SAMPLE_TEXTURE2D(_MainTex, sampler_BaseMap, IN.uv) * _Color*lightColor;
                 return col* lightColor*strength;//最終的な色の計算
             }
             ENDHLSL
