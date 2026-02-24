@@ -1,11 +1,15 @@
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class TitleManager : MonoBehaviour
 {
     GameManager _gameManager;
     [SerializeField]Image _titleFrame;
     GameObject titleFrameObj;
+    [SerializeField]GameObject _titleFrameObj;
+    [SerializeField] GameObject frameMask;
+   
     [Header("Alpha")]
     [Tooltip("0-100")]
     [Range(0, 100)]
@@ -103,16 +107,25 @@ public class TitleManager : MonoBehaviour
     //ゲーム開始のエフェクト
     public void GameStart_EF(string SceneName)
     {
-        titleFrameObj.SetActive(true);
-        alpha += 2;
-        if (alpha >= 100)
+        //titleFrameObj.SetActive(true);
+        //alpha += 2;
+        //if (alpha >= 100)
+        //{
+      
+        if (!_isOnce)
         {
-            if (!_isOnce)
+            _isOnce = true;
+            _titleFrameObj.SetActive(true);
+           
+            frameMask.transform.DOScale(new Vector3(0, 0, 0), 1f).SetEase(Ease.OutCirc).OnComplete(() =>
             {
+                _titleFrameObj.SetActive(false);
                 _loadingScript.NextScene(SceneName);
-                _isOnce = true;
+                
+            }); 
+                
             }
-        }
+      //  }
     }
 
     //タイトル画面入るエフェクト
