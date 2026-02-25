@@ -3318,7 +3318,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _titleFrame: {fileID: 1350555289}
   _titleFrameObj: {fileID: 143972729}
-  frameMask: {fileID: 1392473509}
+  _unMask: {fileID: 1392473509}
   alpha: 100
   _loadingScript: {fileID: 1246491662}
   _buttonList:

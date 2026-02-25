@@ -5,8 +5,8 @@ using UnityEngine.UI;
 using static UnityEngine.Rendering.DebugUI;
 public class Swordmen : Enemy
 {
-    bool inited = false;//初期化フラグ
-    bool gethit = false;
+    bool _isInit = false;//初期化フラグ
+    bool _isHit = false;
 
     public bool hasHit { get; set; }
     [SerializeField] BoxCollider hitBox;
@@ -25,13 +25,8 @@ public class Swordmen : Enemy
     }
     
     void OnGameStart()
-    {
-        
+    {        
         Init();//初期化
-        
-       
-
-
     }
     private void OnTriggerEnter(Collider other) // updated to Collider from Collision
     {
@@ -67,7 +62,7 @@ public class Swordmen : Enemy
         status = Status.Idle; //初期状態を敵対に設定
         enemyAnimetor = new ObjAnimetor(1f, gameObject); //敵のアニメーションを管理するクラスの初期化
         mat = GetComponentInChildren<Renderer>().material;
-        inited = true;
+        _isInit = true;
 
 
 
@@ -78,7 +73,7 @@ public class Swordmen : Enemy
     // Update is called once per frame
     void Update()
     {
-        if(inited==false) return;
+        if(_isInit==false) return;
         if (GameManager.Instance.GameStop)
         {
             agent.isStopped = true;
@@ -92,14 +87,15 @@ public class Swordmen : Enemy
         }
 
         if (bossRoomManager) Debug.Log("bossRoomManager is true");
-        gethit = false;
+        _isHit = false;
 
         if (isDead) return; //死亡している場合は処理を中断
 
         if (GameManager.Instance.GameStop || GameManager.Instance.IsOpenMoviePlaying) return; //ゲームが停止している場合は処理を中断
         if (Hp <= 0)
         {
-            if(bossRoomManager != null)
+            //ボスルームマネージャーが存在する場合、敵のカウントを減らす
+            if (bossRoomManager != null)
             {
                 bossRoomManager.enemyCount--;
                 Debug.Log(bossRoomManager.enemyCount);
@@ -116,7 +112,7 @@ public class Swordmen : Enemy
         if (target != null)
         {
            
-            movement();
+            Movement(1);
         }
         visibility();
         
@@ -124,12 +120,12 @@ public class Swordmen : Enemy
         Vector3 velocity = agent.velocity;  //NavMeshAgentの速度を取得
         speed = velocity.magnitude;         //速度の大きさを取得
         //アニメーションの実行
-        enemyAnimetor.Animetor(false,0, speed * 5, false, false, false, meleeing, false, gethit); 
+        enemyAnimetor.Animetor(false,0, speed * 5, false, false, false, meleeing, false, _isHit); 
     }
 
-    protected override void movement()
+    protected override void Movement(float threshold)
     {
-        base.movement();
+        base.Movement(1);
         //状態による行動の切り替え
         switch (status)                                                                
         {
@@ -174,9 +170,8 @@ public class Swordmen : Enemy
     public void HitOn()
     {
         //hasHit = false;
-        Debug.Log("Hiton");
         if (hitBox == null) Debug.LogError("hitbox is null");
-        Debug.Log(hitBox.gameObject);
+        
             hitBox.enabled = true;
     }
 

@@ -6,9 +6,9 @@ public class TitleManager : MonoBehaviour
 {
     GameManager _gameManager;
     [SerializeField]Image _titleFrame;
-    GameObject titleFrameObj;
+    GameObject titleFrame;
     [SerializeField]GameObject _titleFrameObj;
-    [SerializeField] GameObject frameMask;
+    [SerializeField] GameObject _unMask;
    
     [Header("Alpha")]
     [Tooltip("0-100")]
@@ -57,8 +57,8 @@ public class TitleManager : MonoBehaviour
     void Start()
     {
         _seAudio = GetComponent<AudioSource>();
-        titleFrameObj = _titleFrame.gameObject;
-        titleFrameObj.SetActive(false);
+        titleFrame = _titleFrame.gameObject;
+        titleFrame.SetActive(false);
         _gameManager = GameManager.Instance;
         _audioManager.PlayBGM("TitleScene");
         _bgmAudio = GameObject.FindGameObjectWithTag("BGMPlayer").GetComponent<AudioSource>();
@@ -117,7 +117,7 @@ public class TitleManager : MonoBehaviour
             _isOnce = true;
             _titleFrameObj.SetActive(true);
            
-            frameMask.transform.DOScale(new Vector3(0, 0, 0), 1f).SetEase(Ease.OutCirc).OnComplete(() =>
+            _unMask.transform.DOScale(new Vector3(0, 0, 0), 1f).SetEase(Ease.OutCirc).OnComplete(() =>
             {
                 _titleFrameObj.SetActive(false);
                 _loadingScript.NextScene(SceneName);
@@ -131,13 +131,13 @@ public class TitleManager : MonoBehaviour
     //タイトル画面入るエフェクト
     void TitleStart_EF()
     {
-        titleFrameObj.SetActive(true);
+        titleFrame.SetActive(true);
         alpha -= 2;
 
         if (alpha <= 30)
         {
             alpha = 0;
-            titleFrameObj.SetActive(false);
+            titleFrame.SetActive(false);
         }
     }
 

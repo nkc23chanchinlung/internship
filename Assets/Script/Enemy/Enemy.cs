@@ -95,7 +95,7 @@ public class Enemy : EnemyMovement
     protected void angerprocess()
     {
         if (angervalue >= 90) target = Player;
-        else if(angervalue <= 0) target = null; //怒り値が0の時は家をターゲットにする
+        else if(angervalue <= 0) target = null; 
 
         if (target == null) status = Status.Idle; //ターゲットがいない場合はIdle状態にする
 
@@ -138,7 +138,7 @@ public class Enemy : EnemyMovement
     /// <summary>
     /// 行動の関数
     /// </summary>
-    protected  virtual void movement()
+    protected  virtual void Movement(float threshold)
     {
 
       
@@ -148,7 +148,7 @@ public class Enemy : EnemyMovement
         angervalue = Mathf.Clamp(angervalue, 0, 100);
 
 
-        if (dinstance <= targetedge+1) status = Status.Attack;
+        if (dinstance <= targetedge+ threshold) status = Status.Attack;
         else status = Status.Hostile;
 
 

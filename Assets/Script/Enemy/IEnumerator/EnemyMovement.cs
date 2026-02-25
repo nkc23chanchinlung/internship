@@ -7,8 +7,8 @@ public class EnemyMovement : MonoBehaviour
 {
     //敵の行動関する基底クラス
     public bool atking = false;
-    public bool shooting = false;   
-    public bool meleeing = false;   
+    public bool shooting = false;   //遠距離攻撃敵が使う
+    public bool meleeing = false;   //近距離攻撃敵が使う
 
 
     /// <summary>
@@ -17,16 +17,23 @@ public class EnemyMovement : MonoBehaviour
     /// <param name="cooldowntime">クールダウン</param>
     /// <param name="bullet">撃つオブジェクト</param>
     /// <returns></returns>
-    public virtual IEnumerator Shoot(GameObject bullet,float cooldowntime)
+    public virtual IEnumerator Shoot(GameObject bullet,float cooldowntime,Vector3 PosAdjust,AudioSource Se)
     {
-        atking = true;
-        Instantiate(
+        if (!shooting)
+        {
+            shooting = true;
+            Debug.Log("Shoot");
+           var bulletPre =Instantiate(
            bullet,
-            transform.position + transform.forward,
-            transform.rotation
+            transform.position + (transform.forward * 2) + PosAdjust, transform.rotation
         );
-        yield return new WaitForSeconds(cooldowntime);
-        atking = false;
+            bullet.gameObject.tag = "EnemyAtk";
+            Se.PlayOneShot(Se.clip);
+
+
+            yield return new WaitForSeconds(cooldowntime);
+            shooting = false;
+        }
     }
     //Shootのオーバーロード
     /// <summary>
