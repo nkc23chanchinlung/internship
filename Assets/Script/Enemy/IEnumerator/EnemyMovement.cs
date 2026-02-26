@@ -17,7 +17,7 @@ public class EnemyMovement : MonoBehaviour
     /// <param name="cooldowntime">クールダウン</param>
     /// <param name="bullet">撃つオブジェクト</param>
     /// <returns></returns>
-    public virtual IEnumerator Shoot(GameObject bullet,float cooldowntime,Vector3 PosAdjust,AudioSource Se)
+    public virtual IEnumerator Shoot(GameObject bullet,int Damage,float cooldowntime,Vector3 PosAdjust,AudioSource Se)
     {
         if (!shooting)
         {
@@ -27,7 +27,9 @@ public class EnemyMovement : MonoBehaviour
            bullet,
             transform.position + (transform.forward * 2) + PosAdjust, transform.rotation
         );
-            bullet.gameObject.tag = "EnemyAtk";
+          bulletPre.GetComponent<Bullet>().damage = Damage;
+            bulletPre.gameObject.tag = "EnemyAtk";
+
             Se.PlayOneShot(Se.clip);
 
 

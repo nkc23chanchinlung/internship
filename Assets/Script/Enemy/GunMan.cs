@@ -39,8 +39,8 @@ public class GunMan : Enemy
         _audioSource = GetComponent<AudioSource>();
         MaxHp = 200; //敵の最大HP
         Hp = MaxHp;
-        Attack = 10;
-        defense = 10;
+        //Attack = 10;
+        //defense = 10;
         Sponpoint = transform.position; //スポーン位置を設定
                                         //target=GameObject.Find("House").transform; //初期ターゲットを家に設定
 
@@ -152,9 +152,8 @@ public class GunMan : Enemy
 
                 if (!shooting)
                 {
-                    Debug.Log("Gunman:" + "isattack");
-
-                    StartCoroutine(Shoot(bulletprefab, 0.1f,  new Vector3(0, 1.5f, 0),_audioSource));
+                    //弾を撃つ処理
+                    StartCoroutine(Shoot(bulletprefab,Attack, 0.3f,  new Vector3(0, 1.5f, 0),_audioSource));
                    
                 }
                 break;

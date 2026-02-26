@@ -296,16 +296,35 @@ public class PlayerController : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        
-        if (other.gameObject.CompareTag("EnemyAtk"))
+
+        if (other.gameObject.tag == "EnemyAtk")
         {
-
             Instantiate(_hitEffect, other.transform.position, other.transform.rotation * Quaternion.Euler(90, 0, 0));
+            Bullet _bullet = other.gameObject.GetComponent<Bullet>();
 
+            if (_bullet != null)
+            {
+                int damage = _bullet.damage;
 
-            //playerrenderer.material.SetColor("BaseMap", Color.red);
+                GetDamage(damage);
+                Destroy(other.gameObject);
+                
+               
+            }
+            //gethit = true;
+
 
         }
+
+        //if (other.gameObject.CompareTag("EnemyAtk"))
+        //{
+
+        //    Instantiate(_hitEffect, other.transform.position, other.transform.rotation * Quaternion.Euler(90, 0, 0));
+
+
+        //    //playerrenderer.material.SetColor("BaseMap", Color.red);
+
+        //}
     }
      void GameStop()
     {

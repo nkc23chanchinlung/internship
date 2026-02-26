@@ -18,6 +18,7 @@ TagManager:
   - CoinUI
   - BGMPlayer
   - SEPlayer
+  - Obstacles
   layers:
   - Default
   - TransparentFX
@@ -36,7 +37,7 @@ TagManager:
   - Rendering Layers 1
   - Map
   - VFX
-  - 
+  - Obstacles
   - 
   - 
   - 
