@@ -30,16 +30,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject _overrideSources;
     [SerializeField] GameObject _pin;
     [SerializeField] AudioSource _footAudio;
+    AudioManager _audioManager;
     [Header("PInの高さ")]
     [SerializeField]float _pinHeight = 50f; //Pinの高さ
     [SerializeField] float _animeionSpeed;
     [SerializeField]UIManager _uiManager;
     [SerializeField] GameObject _hitEffect;
 
+    [SerializeField] AudioClip _damageSe;
     Plane _plane = new Plane();
     float _distance = 0;
     bool _isShooting = false;
     [SerializeField] EquipSystem _equipSystem;
+    [SerializeField] Shake _shake;
     Rigidbody _rigidBody;
     float _vec;
     float _forwardDot;
@@ -69,6 +72,7 @@ public class PlayerController : MonoBehaviour
     {
      _playerAnimetor = new ObjAnimetor(_animeionSpeed, gameObject);
      _rigidBody = GetComponent<Rigidbody>();
+        _audioManager = AudioManager.Instance;
 
     }
     private void FixedUpdate()
@@ -82,6 +86,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+
 
 
         if (GameManager.Instance.GameStop)
@@ -273,6 +279,8 @@ public class PlayerController : MonoBehaviour
 
         if (_getHit)
         {
+            StartCoroutine(_shake.Shakeing(Camera.main));
+            _audioManager.PlaySE(_damageSe);
             _ = WaitForAsync(0.2f, () => _getHit = false);
         }
 
@@ -299,7 +307,7 @@ public class PlayerController : MonoBehaviour
 
         if (other.gameObject.tag == "EnemyAtk")
         {
-            Instantiate(_hitEffect, other.transform.position, other.transform.rotation * Quaternion.Euler(90, 0, 0));
+            Instantiate(_hitEffect, other.transform.position, other.transform.rotation * Quaternion.identity);
             Bullet _bullet = other.gameObject.GetComponent<Bullet>();
 
             if (_bullet != null)

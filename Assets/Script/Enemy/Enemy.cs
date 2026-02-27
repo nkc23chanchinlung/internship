@@ -275,6 +275,12 @@ public class Enemy : EnemyMovement
 
 
     }
+    public  void GameContinue()
+    {
+        agent.isStopped = false;
+        Animator animator = GetComponent<Animator>();
+        animator.speed = 1f;
+    }
 
 
 }

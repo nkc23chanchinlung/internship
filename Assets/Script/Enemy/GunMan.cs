@@ -73,14 +73,17 @@ public class GunMan : Enemy
         if (_isInit == false) return;
         if (GameManager.Instance.GameStop)
         {
-            agent.isStopped = true;
+            
             GameStop();
             return;
 
         }
         else
         {
-            agent.isStopped = false;
+            
+            GameContinue();
+
+
         }
 
         //if (bossRoomManager) Debug.Log("bossRoomManager is true");
