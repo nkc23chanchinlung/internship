@@ -10,20 +10,7 @@ public class Shake : MonoBehaviour
     public float angleduration = 1f;
     public bool _getdamage {  get; set; }
   
-    void Update()
-    {
-        //if (_Shakestart)
-        //{
-        //    _Shakestart = false;
-        //    StartCoroutine(Shakeing());
-        //}
-        //if (_playerController.GetDamage==true)
-        //{
-        //    _playerController._GetDamage = false;
-        //    StartCoroutine(Getdam());
-        //}
-       
-    }
+    
     public IEnumerator Shakeing(Camera MainCam)
     {
        
@@ -39,18 +26,5 @@ public class Shake : MonoBehaviour
         }
         transform.position = startPos;
     }
-    IEnumerator Getdam()
-    {
-        Vector3 startrot=transform.eulerAngles;
-        float elapsedTimer = 0f;
-        while (elapsedTimer < angleduration)
-        {
-            elapsedTimer += Time.deltaTime;
-            transform.eulerAngles += new Vector3(-1.5f, 0, 0);
-            yield return null;
-        }
-        transform.eulerAngles = startrot;
-
-    }
-   
+  
 }
