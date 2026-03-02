@@ -3561,6 +3561,7 @@ GameObject:
   - component: {fileID: 243734362}
   - component: {fileID: 243734361}
   - component: {fileID: 243734364}
+  - component: {fileID: 243734365}
   m_Layer: 7
   m_Name: wall
   m_TagString: Obstacles
@@ -3688,6 +3689,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &243734365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 243734359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93c59d04c750a9b4e8081367f31a6908, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Wall
+  _playerPos: {fileID: 1327674205561883352}
 --- !u!1001 &246948826
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6056,6 +6070,7 @@ GameObject:
   - component: {fileID: 344907620}
   - component: {fileID: 344907619}
   - component: {fileID: 344907622}
+  - component: {fileID: 344907623}
   m_Layer: 7
   m_Name: wall
   m_TagString: Obstacles
@@ -6183,6 +6198,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &344907623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 344907617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93c59d04c750a9b4e8081367f31a6908, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Wall
+  _playerPos: {fileID: 1327674205561883352}
 --- !u!4 &349071500 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 607fa0a0a8b6097479348b4480edc606, type: 3}
@@ -8701,6 +8729,7 @@ GameObject:
   - component: {fileID: 516956691}
   - component: {fileID: 516956690}
   - component: {fileID: 516956693}
+  - component: {fileID: 516956694}
   m_Layer: 7
   m_Name: wall
   m_TagString: Obstacles
@@ -8828,6 +8857,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &516956694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 516956688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93c59d04c750a9b4e8081367f31a6908, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Wall
+  _playerPos: {fileID: 1327674205561883352}
 --- !u!1 &525051183 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3132234098542801829, guid: acc591f3f3af45842beb61b22a2ee1c0, type: 3}
@@ -16512,6 +16554,7 @@ GameObject:
   - component: {fileID: 685482805}
   - component: {fileID: 685482804}
   - component: {fileID: 685482807}
+  - component: {fileID: 685482808}
   m_Layer: 7
   m_Name: wall
   m_TagString: Obstacles
@@ -16639,6 +16682,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &685482808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 685482802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93c59d04c750a9b4e8081367f31a6908, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Wall
+  _playerPos: {fileID: 1327674205561883352}
 --- !u!1 &694002716
 GameObject:
   m_ObjectHideFlags: 0
@@ -22648,6 +22704,7 @@ GameObject:
   - component: {fileID: 764172032}
   - component: {fileID: 764172031}
   - component: {fileID: 764172034}
+  - component: {fileID: 764172035}
   m_Layer: 7
   m_Name: wall
   m_TagString: Obstacles
@@ -22775,6 +22832,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &764172035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 764172029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93c59d04c750a9b4e8081367f31a6908, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Wall
+  _playerPos: {fileID: 1327674205561883352}
 --- !u!1001 &786816799
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23527,6 +23597,7 @@ GameObject:
   - component: {fileID: 814315678}
   - component: {fileID: 814315677}
   - component: {fileID: 814315676}
+  - component: {fileID: 814315680}
   m_Layer: 7
   m_Name: Cube (5)
   m_TagString: Untagged
@@ -23627,6 +23698,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 706879508}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &814315680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 814315675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93c59d04c750a9b4e8081367f31a6908, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  _playerPos: {fileID: 1327674205561883352}
 --- !u!1001 &817947124
 PrefabInstance:
   m_ObjectHideFlags: 0
