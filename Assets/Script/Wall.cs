@@ -18,7 +18,7 @@ public class Wall : MonoBehaviour
         
         float alpha;
         float distance = Vector3.Distance(transform.position, _playerPos.position);
-        Debug.Log(distance);
+        
         alpha = Mathf.Clamp(distance, 125, 255); // ‹——£‚É‰ž‚¶‚Ä“§–¾“x‚ðŒvŽZ
         if (distance <= 15) alpha-=0.5f;
         else alpha+=0.5f;

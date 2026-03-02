@@ -1,3 +1,4 @@
+using System.Collections;
 using System.ComponentModel;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -12,6 +13,9 @@ public class GunMan : Enemy
     bool _isAtk = false;
     bool _isReload = false;
     bool _isFireAccpt = false;
+    [Header("弾数")]
+    [SerializeField]int _magazine;
+    [SerializeField]int _maxMagazine;
     [SerializeField] Transform _gun;
     AudioSource _audioSource;
 
@@ -120,7 +124,7 @@ public class GunMan : Enemy
         Vector3 velocity = agent.velocity;  //NavMeshAgentの速度を取得
         speed = velocity.magnitude;         //速度の大きさを取得
         //アニメーションの実行
-        enemyAnimetor.Animetor(_isAtk, _isAim,false,speed);
+        enemyAnimetor.Animetor(_isAtk, _isAim,false,speed,_isReload);
     }
     /// <summary>
     /// 行動関数
@@ -155,9 +159,17 @@ public class GunMan : Enemy
 
                 if (!shooting)
                 {
-                    //弾を撃つ処理
-                    StartCoroutine(Shoot(bulletprefab,Attack, 0.3f,  new Vector3(0, 1.5f, 0),_audioSource));
-                   
+                    if (!_isReload)
+                    {
+                        //弾を撃つ処理
+                        StartCoroutine(Shoot(bulletprefab, Attack, 0.3f, new Vector3(0, 1.5f, 0), _audioSource));
+                        _magazine--;
+                    }
+                    if (_magazine <= 0)
+                    {
+                        _isReload = true;
+                        StartCoroutine(Reload(2.0f)); //リロード処理を開始
+                    }
                 }
                 break;
 
@@ -169,7 +181,13 @@ public class GunMan : Enemy
         }
 
     }
-   
+   IEnumerator  Reload(float reloadTime)
+    {
+        if (!_isReload) yield break; //リロード中でない場合は処理を中断
+        yield return new WaitForSeconds(reloadTime); //リロード時間待機
+        _magazine = _maxMagazine; //弾倉を満タンにする
+        _isReload = false; //リロード完了
+    }
 
     public void GetFireAccpt()
     {

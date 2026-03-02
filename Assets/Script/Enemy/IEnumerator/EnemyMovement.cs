@@ -31,7 +31,7 @@ public class EnemyMovement : MonoBehaviour
             bulletPre.gameObject.tag = "EnemyAtk";
 
             Se.PlayOneShot(Se.clip);
-
+            
 
             yield return new WaitForSeconds(cooldowntime);
             shooting = false;

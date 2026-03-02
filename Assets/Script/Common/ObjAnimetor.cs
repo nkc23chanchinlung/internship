@@ -60,10 +60,11 @@ public class ObjAnimetor : MonoBehaviour
         anim.SetBool("Atk", atk);
         
     }
-    public void Animetor( bool shooting, bool aim, bool idle, float speed)
+    public void Animetor( bool shooting, bool aim, bool idle, float speed,bool reloading)
     {
         anim.SetBool("Shooting", shooting);
         anim.SetBool("Aim", aim);
         anim.SetFloat("Speed", speed / 5);
+        anim.SetBool("Reload", reloading);
     }
 }

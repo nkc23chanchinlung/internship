@@ -1053,6 +1053,8 @@ MonoBehaviour:
   Debug_Status: {fileID: 0}
   Hand: {fileID: 0}
   mat: {fileID: 0}
+  _magazine: 6
+  _maxMagazine: 6
   _gun: {fileID: 7427223814882668495}
 --- !u!136 &8990280493892703827
 CapsuleCollider:
