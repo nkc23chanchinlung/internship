@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class M4 : Gun
 {
@@ -15,41 +16,42 @@ public class M4 : Gun
     }
     private void Awake()
     {
-        cooldown = 1f;
+        CoolDown = 1f;
         Magazine = 8;
         MaxMagazine = 8;
         MaxCooldown = 1;
-
+        Se = Resources.Load<AudioClip>("Sound/SE/M4_Shot");
         Damage = 50;
         Pow = 5;
         Repair = 1;
         weaponnum = 1; //ïêäÌî‘çÜ
     }
-    void OnGameStart()
-    {
-       
+    //void OnGameStart()
+    //{
 
-        bulletprefab = Resources.Load("bullet") as UnityEngine.GameObject;
-        uiManager = GameObject.Find("-----UIManager-----").GetComponent<UIManager>();
-       
-        audioSource = Weapon.GetComponent<AudioSource>();
-        
 
-        if (playerController != null)
-        {
+    //    bulletprefab = Resources.Load("bullet") as UnityEngine.GameObject;
+    //    uiManager = GameObject.Find("-----UIManager-----").GetComponent<UIManager>();
 
-            uiManager.SearchMagazine();
-            uiManager.SetMagazine(Magazine, MaxMagazine);
-        }
+    //    audioSource = Weapon.GetComponent<AudioSource>();
 
-    }
+
+    //    if (playerController != null)
+    //    {
+
+    //        uiManager.SearchMagazine();
+    //        uiManager.SetMagazine(Magazine, MaxMagazine);
+    //    }
+
+    //}
+   
 
     // Update is called once per frame
     void Update()
     {
         if (GameManager.Instance.GameStop) return;
 
-        if (playerController != null)
+        if (PlayerController != null)
         {
             Shoot();
             if (Input.GetKeyDown(KeyCode.R) && Magazine != MaxMagazine)
@@ -65,20 +67,20 @@ public class M4 : Gun
 
         if (Input.GetMouseButton(0) &&
             !IsReloading &&
-            cooldown <= 0 && 
+            CoolDown <= 0 && 
             Magazine > 0 &&
-            !playerController.IsCreate)
+            !PlayerController.IsCreate)
         {
-           audioSource.clip = Resources.Load<AudioClip>("Sound/SE/M4_Shot");
-            audioSource.PlayOneShot(audioSource.clip);
-            
+          
+            AudioManager.Instance.PlaySE(Se);
 
-           
+
+
             //èàóù  
             for (int i = -range; i < range; i++)
             {
 
-                GameObject bullet = Instantiate(bulletprefab, 
+                GameObject bullet = Instantiate(BulletPrefab, 
                     transform.position + (-transform.forward)+transform.right*(i*0.2f),
                     transform.rotation * Quaternion.Euler(0, 180-(15*i), 0));
 
@@ -87,7 +89,7 @@ public class M4 : Gun
                 bullet.tag = "PlayerAtk";
             }
             Magazine--;
-            cooldown = MaxCooldown;
+            CoolDown = MaxCooldown;
 
         }
     }

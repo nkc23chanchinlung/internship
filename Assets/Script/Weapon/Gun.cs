@@ -7,27 +7,51 @@ using UnityEngine;
 public class Gun :  MonoBehaviour
 
 {
-    public GameObject bulletprefab;
-    public PlayerController playerController;
-    public UIManager uiManager;
-    public float cooldown;
-    public int Magazine;
-    public int MaxMagazine;
-    public float MaxCooldown;
-    public bool IsReloading;
-    public float ReloadTime;
+    [Header("銃ステータス")]
+    public GameObject BulletPrefab;
+    public PlayerController PlayerController;
+    public UIManager UiManager;
+    public int weaponnum;
     public int Damage;
     public int Pow;
     public int Repair;
-    public int weaponnum;
-    public AudioSource audioSource;
+
+    [Header("弾")]
+    public int Magazine;
+    public int MaxMagazine;
+    public float ReloadTime;
+    public float MaxCooldown;
+    public float CoolDown;
+    public bool IsReloading;
+
+    [Header("効果音")]
+    public AudioClip Se;
+    //public AudioSource audioSource;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public  void OnGameStart()
+    {
 
+
+        BulletPrefab = Resources.Load("bullet") as UnityEngine.GameObject;
+        UiManager = GameObject.Find("-----UIManager-----").GetComponent<UIManager>();
+
+        //audioSource = GetComponent<AudioSource>();
+
+
+        if (PlayerController != null)
+        {
+
+            UiManager.SearchMagazine();
+            UiManager.SetMagazine(Magazine, MaxMagazine);
+            Debug.Log("Magazine: " + Magazine + "/" + MaxMagazine);
+        }
+
+    }
     protected virtual void Shoot()
     {
-        uiManager.SetMagazine(Magazine, MaxMagazine);
-        cooldown -= Time.deltaTime;
+        UiManager.SetMagazine(Magazine, MaxMagazine);
+        CoolDown -= Time.deltaTime;
         
         }
 

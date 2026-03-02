@@ -8729,7 +8729,6 @@ GameObject:
   - component: {fileID: 516956691}
   - component: {fileID: 516956690}
   - component: {fileID: 516956693}
-  - component: {fileID: 516956694}
   m_Layer: 7
   m_Name: wall
   m_TagString: Obstacles
@@ -8857,19 +8856,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &516956694
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 516956688}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93c59d04c750a9b4e8081367f31a6908, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Wall
-  _playerPos: {fileID: 1327674205561883352}
 --- !u!1 &525051183 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3132234098542801829, guid: acc591f3f3af45842beb61b22a2ee1c0, type: 3}
@@ -16554,7 +16540,6 @@ GameObject:
   - component: {fileID: 685482805}
   - component: {fileID: 685482804}
   - component: {fileID: 685482807}
-  - component: {fileID: 685482808}
   m_Layer: 7
   m_Name: wall
   m_TagString: Obstacles
@@ -16682,19 +16667,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &685482808
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 685482802}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93c59d04c750a9b4e8081367f31a6908, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Wall
-  _playerPos: {fileID: 1327674205561883352}
 --- !u!1 &694002716
 GameObject:
   m_ObjectHideFlags: 0
@@ -22704,7 +22676,6 @@ GameObject:
   - component: {fileID: 764172032}
   - component: {fileID: 764172031}
   - component: {fileID: 764172034}
-  - component: {fileID: 764172035}
   m_Layer: 7
   m_Name: wall
   m_TagString: Obstacles
@@ -22832,19 +22803,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &764172035
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 764172029}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93c59d04c750a9b4e8081367f31a6908, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Wall
-  _playerPos: {fileID: 1327674205561883352}
 --- !u!1001 &786816799
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36787,8 +36745,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponsPrefabs:
-  - {fileID: 174959219}
   - {fileID: 1967708514071543142}
+  - {fileID: 174959219}
 --- !u!1 &1639120727
 GameObject:
   m_ObjectHideFlags: 0
@@ -45818,6 +45776,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1748293511}
     - target: {fileID: 2253348651883222612, guid: bbfc85054ff234e4f90bf024cbaa67fa, type: 3}
+      propertyPath: CoolDown
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2253348651883222612, guid: bbfc85054ff234e4f90bf024cbaa67fa, type: 3}
       propertyPath: Magazine
       value: 8
       objectReference: {fileID: 0}
@@ -45825,6 +45787,10 @@ PrefabInstance:
       propertyPath: cooldown
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2253348651883222612, guid: bbfc85054ff234e4f90bf024cbaa67fa, type: 3}
+      propertyPath: UiManager
+      value: 
+      objectReference: {fileID: 1170817730}
     - target: {fileID: 2253348651883222612, guid: bbfc85054ff234e4f90bf024cbaa67fa, type: 3}
       propertyPath: uiManager
       value: 
@@ -45846,9 +45812,17 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2253348651883222612, guid: bbfc85054ff234e4f90bf024cbaa67fa, type: 3}
+      propertyPath: BulletPrefab
+      value: 
+      objectReference: {fileID: 813729092485830864, guid: 7be6f0fc053b6bf49a809dcd192f5006, type: 3}
+    - target: {fileID: 2253348651883222612, guid: bbfc85054ff234e4f90bf024cbaa67fa, type: 3}
       propertyPath: bulletprefab
       value: 
       objectReference: {fileID: 813729092485830864, guid: 7be6f0fc053b6bf49a809dcd192f5006, type: 3}
+    - target: {fileID: 2253348651883222612, guid: bbfc85054ff234e4f90bf024cbaa67fa, type: 3}
+      propertyPath: PlayerController
+      value: 
+      objectReference: {fileID: 1327674205561883365}
     - target: {fileID: 2650510830714382911, guid: bbfc85054ff234e4f90bf024cbaa67fa, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.3613572
@@ -46078,6 +46052,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1748293511}
     - target: {fileID: 7380385101527809956, guid: bbfc85054ff234e4f90bf024cbaa67fa, type: 3}
+      propertyPath: CoolDown
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380385101527809956, guid: bbfc85054ff234e4f90bf024cbaa67fa, type: 3}
+      propertyPath: UiManager
+      value: 
+      objectReference: {fileID: 1170817730}
+    - target: {fileID: 7380385101527809956, guid: bbfc85054ff234e4f90bf024cbaa67fa, type: 3}
       propertyPath: uiManager
       value: 
       objectReference: {fileID: 1170817730}
@@ -46089,6 +46071,14 @@ PrefabInstance:
       propertyPath: MaxCooldown
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 7380385101527809956, guid: bbfc85054ff234e4f90bf024cbaa67fa, type: 3}
+      propertyPath: BulletPrefab
+      value: 
+      objectReference: {fileID: 813729092485830864, guid: 7be6f0fc053b6bf49a809dcd192f5006, type: 3}
+    - target: {fileID: 7380385101527809956, guid: bbfc85054ff234e4f90bf024cbaa67fa, type: 3}
+      propertyPath: PlayerController
+      value: 
+      objectReference: {fileID: 1327674205561883365}
     - target: {fileID: 7509470210532045826, guid: bbfc85054ff234e4f90bf024cbaa67fa, type: 3}
       propertyPath: m_CollisionDetection
       value: 0

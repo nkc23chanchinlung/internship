@@ -4,18 +4,27 @@ public class AK47 : Gun
 {
     WeaponDatabase ak47data;
     [SerializeField] GameObject Weapon;
-    private void OnEnable()
-    {
-        if (playerController != null)
-            uiManager.SearchMagazine();
-
-        audioSource = Weapon.GetComponent<AudioSource>();
-        audioSource.clip = Resources.Load<AudioClip>("Sound/SE/AK47_Shot");
-    }
+   
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void OnEnable()
+    {
+
+        GameManager.OnGameStart += OnGameStart;
+        if (PlayerController != null)
+            UiManager.SearchMagazine();
+
+        //audioSource = GetComponent<AudioSource>();
+       
+    }
+    void OnDisable()
+    {
+        GameManager.OnGameStart -= OnGameStart;
+    }
+   
     private void Awake()
     {
-        cooldown = 0.2f;
+        Se = Resources.Load<AudioClip>("Sound/SE/AK47_Shot");
+        CoolDown = 0.2f;
         Magazine = 30;
         MaxMagazine = 30;
         MaxCooldown = 0.2f;
@@ -26,7 +35,7 @@ public class AK47 : Gun
         weaponnum = 0; //ïêäÌî‘çÜ
         try
         {
-            playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+            PlayerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         }
         catch
         {
@@ -51,7 +60,7 @@ public class AK47 : Gun
     {
         if (GameManager.Instance.GameStop) return;
 
-        if (playerController != null)
+        if (PlayerController != null)
         {
             
             Shoot();
@@ -67,23 +76,24 @@ public class AK47 : Gun
         base.Shoot();
         if (Input.GetMouseButton(0) &&
             !IsReloading &&
-            cooldown <= 0 &&
+            CoolDown <= 0 &&
             Magazine > 0 && 
-            !playerController.IsCreate)
+            !PlayerController.IsCreate)
         {
             //èàóù
-            GameObject bullet= Instantiate(bulletprefab, 
+            GameObject bullet= Instantiate(BulletPrefab, 
                 transform.position + (-transform.forward), 
                 transform.rotation * Quaternion.Euler(0, 180, 0));
 
-            audioSource.PlayOneShot(audioSource.clip);
+            //audioSource.PlayOneShot(audioSource.clip);
+            AudioManager.Instance.PlaySE(Se);
 
 
             Bullet ak47bullet = bullet.GetComponent<Bullet>();
             ak47bullet.damage = Damage;
             bullet.tag = "PlayerAtk";
             Magazine--;
-            cooldown = MaxCooldown;
+            CoolDown = MaxCooldown;
 
         }
     }
