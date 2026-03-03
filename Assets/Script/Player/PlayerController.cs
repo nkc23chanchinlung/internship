@@ -58,7 +58,6 @@ public class PlayerController : MonoBehaviour
     //[SerializeField] Renderer playerrenderer;
     private float nextFootTime = 0f;
 
-
     void FootSe()
     {
         if (Time.time >= nextFootTime)
@@ -86,10 +85,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-
-
-
         if (GameManager.Instance.GameStop)
         {
             GameStop();
@@ -107,8 +102,6 @@ public class PlayerController : MonoBehaviour
             cheakdirecion();
         PlayerMapPin();
        
-
-
         if (GameManager.Instance.GameStop) return; //ゲームが停止している場合は処理を中断
      GameOver();
 
@@ -116,8 +109,6 @@ public class PlayerController : MonoBehaviour
      Jump();
      CheakGround();
      
-        
-
         _playerAnimetor.Animetor(_isWalkBack,_rightDot, _forwardDot, _isGround,_isShooting,_isRoll,false,_equipSystem.IsReloading,_getHit);
     }
     void cheakdirecion()
@@ -128,11 +119,8 @@ public class PlayerController : MonoBehaviour
         _rightDot= Vector3.Dot(transform.right, velocity.normalized);
         if (_rigidBody.linearVelocity.magnitude < 0.1f)
         {
-
             _forwardDot=0f;
             _rightDot =0f;
-
-
         }
 
         //誤アニメーション防止
@@ -151,13 +139,9 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void movement()
     {
-        
-        
-
         _isShooting = Input.GetMouseButton(0) && !IsCreate ? true : false;
         float movex = -Input.GetAxis("Horizontal");
         float movez = -Input.GetAxis("Vertical");
-
        
         if (movex != 0 || movez != 0)
         {
@@ -173,10 +157,6 @@ public class PlayerController : MonoBehaviour
         //後ろ移動したら速度制限を下げる
         _maxVec = _isWalkBack==true? 2f:5f;
 
-
-       
-
-
         _vec = _rigidBody.linearVelocity.magnitude;
         Vector3 vetorvec = _rigidBody.linearVelocity;
 
@@ -189,7 +169,6 @@ public class PlayerController : MonoBehaviour
         Pinpos.x = transform.position.x; //PinのX座標をプレイヤーのX座標に合わせる
         Pinpos.z = transform.position.z; //PinのZ座標をプレイヤーのZ座標に合わせる
         _pin.transform.position = Pinpos; //Pinの位置を更新
-       
     }
     void Jump()
     {
@@ -205,12 +184,10 @@ public class PlayerController : MonoBehaviour
           GetComponent<Rigidbody>().AddForce(_lastMoveDirection * _acceleration, ForceMode.Impulse);
           _isGround = false;
         }
+
         if(Input.GetKeyDown(KeyCode.LeftShift) && _isGround&&!_isRoll)
         {
-            
             StartCoroutine(Roll());
-
-
         }
        
     }
@@ -257,9 +234,6 @@ public class PlayerController : MonoBehaviour
             //  _=WaitForAsync(0.1f,()=>transform.LookAt(lookPoint)); // 0.1秒後にプレイヤーの向きを更新する
 
             transform.LookAt(lookPoint);
-
-
-
         }
     }
     
@@ -316,30 +290,14 @@ public class PlayerController : MonoBehaviour
 
                 GetDamage(damage);
                 Destroy(other.gameObject);
-                
-               
             }
-            //gethit = true;
-
-
         }
-
-        //if (other.gameObject.CompareTag("EnemyAtk"))
-        //{
-
-        //    Instantiate(_hitEffect, other.transform.position, other.transform.rotation * Quaternion.Euler(90, 0, 0));
-
-
-        //    //playerrenderer.material.SetColor("BaseMap", Color.red);
-
-        //}
     }
-     void GameStop()
+    //ゲーム停止と再開の処理
+    void GameStop()
     {
        Animator animator = GetComponent<Animator>();
         animator.speed = 0f;
-
-
     }
     void GameContinue()
     {

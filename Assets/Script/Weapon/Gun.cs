@@ -37,7 +37,8 @@ public class Gun :  MonoBehaviour
         UiManager = GameObject.Find("-----UIManager-----").GetComponent<UIManager>();
 
         //audioSource = GetComponent<AudioSource>();
-
+        if (PlayerController != null)
+            UiManager.SearchMagazine();
 
         if (PlayerController != null)
         {

@@ -10,8 +10,8 @@ public class AK47 : Gun
     {
 
         GameManager.OnGameStart += OnGameStart;
-        if (PlayerController != null)
-            UiManager.SearchMagazine();
+        //if (PlayerController != null)
+        //    UiManager.SearchMagazine();
 
         //audioSource = GetComponent<AudioSource>();
        

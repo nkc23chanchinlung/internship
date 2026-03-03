@@ -4,18 +4,28 @@ public class Wall : MonoBehaviour
 {
    [SerializeField] Transform _playerPos;
     Material _wallMat;
+    void OnEnable()
+    {
+
+        GameManager.OnGameStart += OnGameStart;
+    }
+    void OnDisable()
+    {
+        GameManager.OnGameStart -= OnGameStart;
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void OnGameStart()
     {
          _wallMat =gameObject. GetComponent<Renderer>().material;
         _playerPos = GameObject.FindGameObjectWithTag("Player").transform;
 
     }
+    
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(_playerPos == null) return;
         float alpha;
         float distance = Vector3.Distance(transform.position, _playerPos.position);
         

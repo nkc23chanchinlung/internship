@@ -12,7 +12,6 @@ public class GunMan : Enemy
     bool _isShoot = false;
     bool _isAtk = false;
     bool _isReload = false;
-    bool _isFireAccpt = false;
     [Header("’e”")]
     [SerializeField]int _magazine;
     [SerializeField]int _maxMagazine;
@@ -189,10 +188,7 @@ public class GunMan : Enemy
         _isReload = false; //ƒŠƒ[ƒhŠ®—¹
     }
 
-    public void GetFireAccpt()
-    {
-
-    }
+   
 
 
 }
