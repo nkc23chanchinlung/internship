@@ -32,7 +32,7 @@ public class StoreManager : MonoBehaviour
     [SerializeField] Text CoinText;
 
     [SerializeField] GameObject _msgPanel;
-
+    [SerializeField] Text _msgText;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -200,7 +200,7 @@ public class StoreManager : MonoBehaviour
         if (guninfo.Pow >= 7)
         {
             _msgPanel.SetActive(true);
-
+            _msgText.text= "‚±‚êˆÈã‹­‰»‚Å‚«‚Ü‚¹‚ñ";
 
             _ = WaitForAsync(0.5f, () =>
             {
@@ -218,6 +218,31 @@ public class StoreManager : MonoBehaviour
             
         }
        
+    }
+    public void HpHeal()
+    {
+        if (coin >= 5)
+        {
+            DataManager.Instance.PlayerHp = 100;
+            coin -= 5;
+            _msgPanel.SetActive(true);
+            _msgText.text = "‘S‰ñ•œ‚µ‚Ü‚µ‚½";
+            _ = WaitForAsync(0.5f, () =>
+            {
+                _msgPanel.SetActive(false);
+            });
+        }
+        else
+        {
+            _msgPanel.SetActive(true);
+            _msgText.text = "ƒRƒCƒ“‚ª‘«‚è‚Ü‚¹‚ñ";
+             _ = WaitForAsync(0.5f, () =>
+            {
+                _msgPanel.SetActive(false);
+            });
+
+        }
+        
     }
 
     private async Task WaitForAsync(float seconds, Action action)

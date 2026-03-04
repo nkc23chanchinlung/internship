@@ -12,9 +12,21 @@ public class DataManager : MonoBehaviour
     public int PlayerHp=100;
     public int MaxPlayerHp=100;
 
+  
+
+    void OnDisable()
+    {
+        GameManager.OnGameStart -= OnGameStart;
+    }
+    void OnGameStart()
+    {
+        MaxPlayerHp = 100;
+        PlayerHp = 100;
+    }
     private void Awake()
     {
         CheakGameManagerExist();
+        GameManager.OnGameStart += OnGameStart;
     }
     
     //GameManagerの重複を防ぐ

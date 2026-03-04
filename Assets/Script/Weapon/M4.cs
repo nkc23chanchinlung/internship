@@ -27,26 +27,6 @@ public class M4 : Gun
         weaponnum = 1; //•Ší”Ô†
         Pow = DataManager.Instance.GunDatabase[weaponnum].WeaponPower;
     }
-    //void OnGameStart()
-    //{
-
-
-    //    bulletprefab = Resources.Load("bullet") as UnityEngine.GameObject;
-    //    uiManager = GameObject.Find("-----UIManager-----").GetComponent<UIManager>();
-
-    //    audioSource = Weapon.GetComponent<AudioSource>();
-
-
-    //    if (playerController != null)
-    //    {
-
-    //        uiManager.SearchMagazine();
-    //        uiManager.SetMagazine(Magazine, MaxMagazine);
-    //    }
-
-    //}
-   
-
     // Update is called once per frame
     void Update()
     {
