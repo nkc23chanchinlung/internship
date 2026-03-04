@@ -9,6 +9,7 @@ class Door : MonoBehaviour
     Accapt accaptscript;
     [SerializeField]UIManager uIManager;
     bool isIndoor = false;
+    [SerializeField]PlayerController _player;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     private void FixedUpdate()
@@ -19,11 +20,13 @@ class Door : MonoBehaviour
             {
                 GameManager.Instance.enterShop = 1;
                 uIManager.FadeControl("ShopScene");
+                DataManager.Instance.SavePlayerData(_player);
             }
             else if(Input.GetKeyDown(KeyCode.E) && this.gameObject.name == "Door2")
             {
                 GameManager.Instance.enterShop = 2;
                 uIManager.FadeControl("ShopScene");
+                DataManager.Instance.SavePlayerData(_player);
             }
         }
 

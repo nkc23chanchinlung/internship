@@ -1,6 +1,9 @@
+using System;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
 
 /// <summary>
 /// ストアのコントローラークラス
@@ -11,20 +14,26 @@ public class StoreManager : MonoBehaviour
     [SerializeField] GameObject[] Weapon;
     [SerializeField] GameObject ItemInfoPanel;
     [SerializeField]
-    GameObject[] Powgague;
+    GameObject[] _powGague;
+    [SerializeField]
+    GameObject[] _weaponreveiw_PowGague;
     [SerializeField] Text ItemName;
     [SerializeField] Text Info;
     GameObject target;
     GameManager gameManager;
     [SerializeField] PreViewController preViewController;
     [SerializeField] GameObject skillPanel;
-
+    GameObject _chooseGun;
 
     [Header("value")]
     [SerializeField] int coin;
 
     [Header("UI")]
     [SerializeField] Text CoinText;
+
+    [SerializeField] GameObject _msgPanel;
+
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -37,11 +46,11 @@ public class StoreManager : MonoBehaviour
         {
             Debug.LogError("GameManager not found: " + e.Message);
         }
-        Weapon =GameObject.FindGameObjectsWithTag("Weapon");
+       // Weapon =GameObject.FindGameObjectsWithTag("Weapon");
         // Powgague= GameObject.FindGameObjectsWithTag("Powgague");
        
         coin = GameManager.Coin;
-
+        Reset();
 
 
     }
@@ -49,11 +58,14 @@ public class StoreManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         Coin_Text(coin);
 
-        for (int i = 0; i < Powgague.Length; i++)
+        for (int i = 0; i < _powGague.Length; i++)
         {
-            Powgague[i].SetActive(false);
+            _powGague[i].SetActive(false);
+            
+            
         }
 
         if (!preViewController.IsPreviewing)
@@ -101,9 +113,11 @@ public class StoreManager : MonoBehaviour
             return null;
         }
     }
+    //GetInfo()は選択したアイテムの情報を表示する関数
     void GetInfo(GameObject target)
     {
        Debug.Log(target.name);
+        Gun Guninfo = target.GetComponent(typeof(Gun)) as Gun;
         if (Input.GetMouseButtonDown(0))
         {
             if (target.name == "Magic Book" && Input.GetMouseButtonDown(0))
@@ -112,23 +126,36 @@ public class StoreManager : MonoBehaviour
             }
             else
             {
-
-                Gun Guninfo = target.GetComponent(typeof(Gun)) as Gun;
-
-                if (Guninfo != null)
-                    InfoValuegague(Guninfo.Pow, Guninfo.Repair);
                 preViewController.Showpreview(Guninfo.weaponnum, target.name);
+                
+                int pow = Guninfo.Pow;
+                _chooseGun = target;
+                Debug.Log("_chooseGun: " + _chooseGun.name);
+                Debug.Log("pow: " + pow);
+                for (int i = 0; i < pow; i++)
+                {
+                    _weaponreveiw_PowGague[i].SetActive(true);
+                }
+
             }
         }
-       
+        else
+        {
+            if (Guninfo != null)
+                InfoValuegague(Guninfo.Pow, Guninfo.Repair);
+        }
+
     }
-    
+    //InfoValuegague()は選択したアイテムのPowとRepairをゲージで表示する関数
     void InfoValuegague(int pow,int repair)
     {
-        for(int i = 0; i < pow; i++)
+        
+        Debug.Log("pow: " + pow + " repair: " + repair);
+        for (int i = 0; i < pow; i++)
         {
-            Powgague[i].SetActive(true);
-            Debug.Log("pow");
+           _powGague[i].SetActive(true);
+            
+            Debug.Log(pow);
         }
     }
     void Coin_Text(int coin)
@@ -138,6 +165,16 @@ public class StoreManager : MonoBehaviour
 
     public void Exit()
     {
+        for (int i = 0; i < Weapon.Length; i++)
+        {
+            if (Weapon[i].GetComponent<Gun>() != null) {
+                Gun info = Weapon[i].GetComponent(typeof(Gun)) as Gun;
+                DataManager.Instance.GunDatabase[i].WeaponPower = info.Pow;
+                Debug.Log("Saving Gun " + i + ": Pow = " + info.Pow);
+            }
+            
+          
+        }
         SceneManager.LoadScene("GameScene");
     }
     public void SkillPanelExit()
@@ -147,5 +184,45 @@ public class StoreManager : MonoBehaviour
             skillPanel.SetActive(false);
         }
     }
-   
+    //パネルを閉じる時にゲージをリセットする関数
+    public void Reset()
+    {
+        for (int i = 0; i < _weaponreveiw_PowGague.Length; i++)
+        {
+            _weaponreveiw_PowGague [i].SetActive(false);
+        }
+    }
+  
+    //強化する関数
+    public void reinforce()
+    {
+        Gun guninfo = _chooseGun.GetComponent(typeof(Gun)) as Gun;
+        if (guninfo.Pow >= 7)
+        {
+            _msgPanel.SetActive(true);
+
+
+            _ = WaitForAsync(0.5f, () =>
+            {
+                _msgPanel.SetActive(false);
+            });
+
+        }
+        else
+        {
+            guninfo.Pow += 1;
+        }
+        for (int i = 0; i < guninfo.Pow; i++)
+        {
+            _weaponreveiw_PowGague[i].SetActive(true);
+            
+        }
+       
+    }
+
+    private async Task WaitForAsync(float seconds, Action action)
+    {
+        await Task.Delay(TimeSpan.FromSeconds(seconds));
+        action();
+    }
 }

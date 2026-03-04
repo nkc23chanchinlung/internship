@@ -22,9 +22,10 @@ public class M4 : Gun
         MaxCooldown = 1;
         Se = Resources.Load<AudioClip>("Sound/SE/M4_Shot");
         Damage = 50;
-        Pow = 5;
+       
         Repair = 1;
         weaponnum = 1; //•Ší”Ô†
+        Pow = DataManager.Instance.GunDatabase[weaponnum].WeaponPower;
     }
     //void OnGameStart()
     //{

@@ -30,9 +30,10 @@ public class AK47 : Gun
         MaxCooldown = 0.2f;
 
         Damage = 40;
-        Pow = 2;
+        
         Repair = 1;
         weaponnum = 0; //ïêäÌî‘çÜ
+        Pow = DataManager.Instance.GunDatabase[weaponnum].WeaponPower;
         try
         {
             PlayerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
@@ -90,7 +91,7 @@ public class AK47 : Gun
 
 
             Bullet ak47bullet = bullet.GetComponent<Bullet>();
-            ak47bullet.damage = Damage;
+            ak47bullet.damage = (float)Damage*((float)Pow*0.7f);
             bullet.tag = "PlayerAtk";
             Magazine--;
             CoolDown = MaxCooldown;

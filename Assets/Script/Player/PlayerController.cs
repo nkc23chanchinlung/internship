@@ -19,8 +19,8 @@ public class PlayerController : MonoBehaviour
     [Header("Player")]
     [SerializeField] private int MAX_SPEED, _JUMPFORCE;
     [SerializeField]private float _acceleration;      //加速度
-    public int MaxHp { get; private set; } = 100; //最大のHP
-    public int Hp { get; set; } = 100;//プレイヤーのHP
+    public int MaxHp { get; set; }  //最大のHP
+    public int Hp { get; set; } //プレイヤーのHP
     [SerializeField] float _rayY, _rayDis;  //Rayの長さ
     Vector3 _moveDirection;
     Vector3 _lastMoveDirection;  
@@ -72,6 +72,7 @@ public class PlayerController : MonoBehaviour
      _playerAnimetor = new ObjAnimetor(_animeionSpeed, gameObject);
      _rigidBody = GetComponent<Rigidbody>();
         _audioManager = AudioManager.Instance;
+        DataManager.Instance.LoadPlayerData(this);
 
     }
     private void FixedUpdate()
@@ -243,10 +244,10 @@ public class PlayerController : MonoBehaviour
         action();
     }
     //プレイヤーがダメージを受ける処理
-    public void GetDamage(int Dmg)
+    public void GetDamage(float Dmg)
     {
         if (_invincible) return; // 無敵状態ならダメージを受けない
-        Hp -= Dmg;
+        Hp -= (int)Dmg;
         _uiManager.DamageValue(transform, Dmg,Color.red);
 
         _getHit = true;
@@ -286,7 +287,7 @@ public class PlayerController : MonoBehaviour
 
             if (_bullet != null)
             {
-                int damage = _bullet.damage;
+                float damage = _bullet.damage;
 
                 GetDamage(damage);
                 Destroy(other.gameObject);

@@ -37,7 +37,7 @@ public class Swordmen : Enemy
             Bullet PlayerAtk = other.gameObject.GetComponent<Bullet>();
            
             Destroy(other.gameObject);
-            int damage = PlayerAtk.damage;
+            int damage =(int) PlayerAtk.damage;
             GetDamage(damage - defense, 2.0f);
             //gethit = true;
 

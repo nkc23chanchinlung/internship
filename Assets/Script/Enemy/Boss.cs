@@ -219,7 +219,7 @@ public class Boss : Enemy
             Instantiate(SparklesEffect, other.transform.position,other.transform.rotation* Quaternion.Euler(90, 0, 0));
             audioSource.PlayOneShot(struckSE);
             Destroy(other.gameObject);
-            int damage = PlayerAtk.damage;
+            int damage = (int)PlayerAtk.damage;
             GetDamage(damage - defense, 2.0f);
            
         }

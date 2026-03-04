@@ -6,7 +6,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     int speed=20;
-    public int damage { get; set; }
+    public float damage { get; set; }
     [SerializeField] GameObject _vfx;
     [SerializeField] AudioClip _struckSE;
 

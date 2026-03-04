@@ -27984,6 +27984,7 @@ MonoBehaviour:
   accapt: {fileID: 650170322}
   accapt_text: {fileID: 1925186666}
   uIManager: {fileID: 1170817730}
+  _player: {fileID: 1327674205561883365}
 --- !u!65 &1013371725
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -30964,6 +30965,7 @@ MonoBehaviour:
   accapt: {fileID: 650170322}
   accapt_text: {fileID: 1925186666}
   uIManager: {fileID: 1170817730}
+  _player: {fileID: 1327674205561883365}
 --- !u!65 &1258461669
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -42041,6 +42043,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 358c6adb0703bed47bc790ea2344ab73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GunDatabase:
+  - WeaponName: AK47
+    WeaponPower: 1
+    WeaponRepair: 1
+  - WeaponName: M4
+    WeaponPower: 1
+    WeaponRepair: 1
+  PlayerHp: 100
+  MaxPlayerHp: 100
 --- !u!4 &1971555881
 Transform:
   m_ObjectHideFlags: 0
@@ -46194,6 +46205,7 @@ SceneRoots:
   - {fileID: 628948696}
   - {fileID: 642262153}
   - {fileID: 1170817729}
+  - {fileID: 1971555881}
   - {fileID: 305471382}
   - {fileID: 219476804}
   - {fileID: 950524277}
@@ -46217,5 +46229,4 @@ SceneRoots:
   - {fileID: 1071403865}
   - {fileID: 1964602099}
   - {fileID: 1875754089}
-  - {fileID: 1971555881}
   - {fileID: 1285620842}

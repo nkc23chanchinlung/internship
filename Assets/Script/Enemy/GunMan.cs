@@ -63,8 +63,8 @@ public class GunMan : Enemy
             Bullet PlayerAtk = other.gameObject.GetComponent<Bullet>();
 
             Destroy(other.gameObject);
-            int damage = PlayerAtk.damage;
-            GetDamage(damage - defense, 2.0f);
+            float damage = PlayerAtk.damage;
+            GetDamage(damage - (float)defense, 2.0f);
             //gethit = true;
 
 

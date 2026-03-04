@@ -193,7 +193,7 @@ public class Enemy : EnemyMovement
     }
 
     //“G‚ªƒ_ƒ[ƒW‚ğó‚¯‚éŠÖ”
-    protected void GetDamage(int damage,float hidetime)    
+    protected void GetDamage(float damage,float hidetime)    
     {
         if (lifebar != null)
         {
@@ -203,7 +203,7 @@ public class Enemy : EnemyMovement
         }
             angervalue += 60;
         uimanager.DamageValue(transform, damage,Color.white);
-        Hp -= damage;
+        Hp -= (int)damage;
 
         
         

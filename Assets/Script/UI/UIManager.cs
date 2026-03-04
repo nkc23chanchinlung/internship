@@ -218,7 +218,7 @@ public class UIManager :UIEffect
         _reloadingText.gameObject.SetActive(true);
         _reloadingText.text = "Reloading...";
     }
-    public void DamageValue( Transform obj,int damage,Color color)　　　　　　　　　　　　　　　　　　　　//ダメージ表記
+    public void DamageValue( Transform obj,float damage,Color color)　　　　　　　　　　　　　　　　　　　　//ダメージ表記
     {
         Text Damage_text = _damageValuePrefeb.GetComponent<Text>();
         Damage_text.text = damage.ToString();
