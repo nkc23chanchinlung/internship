@@ -12,6 +12,8 @@ public class DataManager : MonoBehaviour
     public int PlayerHp=100;
     public int MaxPlayerHp=100;
 
+    SaveManager SaveManager = new SaveManager();
+
   
 
     void OnDisable()
@@ -46,6 +48,8 @@ public class DataManager : MonoBehaviour
     {
         PlayerHp=player.Hp;
         MaxPlayerHp=player.MaxHp;
+
+        SaveManager.Save(player.Hp.ToString());
     }
     public void LoadPlayerData(PlayerController player)
     {
