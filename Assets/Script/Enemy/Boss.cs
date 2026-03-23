@@ -53,6 +53,9 @@ public class Boss : Enemy
     public bool wave2clear { get; set; }= false;
     public bool hasHit { get; set; }
 
+    //UI
+    [SerializeField] GameObject _GameClearPanel;
+
     public override void Init()
     {
         base.Init();
@@ -320,7 +323,9 @@ public class Boss : Enemy
     protected override void Die()
     {
         base.Die();
-        SceneManager.LoadScene("GameClearScene");
+        _GameClearPanel.SetActive(true);
+
+        //SceneManager.LoadScene("GameClearScene");
     }
     // 遠距離攻撃専用コルーチン
     private IEnumerator LongRangeAttackCoroutine()

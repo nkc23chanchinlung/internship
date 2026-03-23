@@ -21,7 +21,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]AudioManager audioManager;
     [SerializeField] AudioClip gameBGM;
     public int enterShop { get; set; } = 0;
-    
+    public float GameTime {  get;private set; }
+
 
 
     bool _isStarted;
@@ -39,8 +40,13 @@ public class GameManager : MonoBehaviour
         IsOpenMoviePlaying = false;
         OnGameStart?.Invoke();
         Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
+      
        // audioManager.PlayBGM("GameScene");
 
+    }
+    public float GetTime()
+    {
+      return  GameTime = Time.time;
     }
     public void StopGame()
     {

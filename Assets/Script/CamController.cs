@@ -82,15 +82,7 @@ public class CamController : MonoBehaviour
         
        
        
-        //if (Input.GetMouseButton(1))
-        //{
-        //    var mouseX = Input.GetAxis("Mouse X");
-        //    transform.RotateAround(_target.position, Vector3.up, mouseX * 2);
-        //}
-        //else if (Input.GetMouseButtonUp(1))
-        //{
-        //    transform.eulerAngles = new Vector3(transform.eulerAngles.x, y, transform.eulerAngles.z);
-        //}
+        
     }
     
     
