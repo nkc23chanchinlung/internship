@@ -264,6 +264,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Hp <= 0)
         {
+            GameManager.Instance.DeathCount++;
             SceneManager.LoadScene("TitleScene");
         }
     }

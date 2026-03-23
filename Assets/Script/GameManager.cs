@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]AudioManager audioManager;
     [SerializeField] AudioClip gameBGM;
     public int enterShop { get; set; } = 0;
+    public int DeathCount { get; set; } = 0;
     public float GameTime {  get;private set; }
 
 
